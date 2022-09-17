@@ -2,6 +2,7 @@ package com.finpay.sdk
 
 import android.os.Build
 import android.os.Bundle
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testing.Signature
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var textTokenId = findViewById(R.id.tokenId) as TextView
 
         val tokenID = FinPaySDK().getToken(
             userName = Constant().userName,
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
             transNumber = "TRX1234567890"
         )
 
-        print(tokenID)
+        println("Token ID yang di print di MainActivity")
+        println(tokenID)
+        textTokenId.text = tokenID
     }
 }

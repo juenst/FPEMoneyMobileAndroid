@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">FinPaySDK</string>
-
-    <string name="loading">Loading</string>
-    <string name="please_wait">Please Wait</string>
-</resources>

@@ -1,17 +1,25 @@
 package lib.finpay.sdk.model
-//
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-data class TokenModel(
 
+class TokenModel {
     @SerializedName("statusCode")
-    val statusCode: String?,
+    @Expose
+    var statusCode: String? = null
 
     @SerializedName("statusDesc")
-    val statusDesc: String?,
+    @Expose
+    var statusDesc: String? = null
 
     @SerializedName("tokenID")
-    val tokenID: String?,
+    @Expose
+    var tokenID: String? = null
 
     @SerializedName("tokenExpiry")
-    val tokenExpiry: String?,
-)
+    @Expose
+    var tokenExpiry: String? = null
+
+    @SerializedName("processingTime")
+    @Expose
+    var processingTime: Double? = null
+}

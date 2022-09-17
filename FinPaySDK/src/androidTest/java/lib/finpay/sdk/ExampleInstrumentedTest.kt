@@ -28,6 +28,6 @@ class ExampleInstrumentedTest {
             phoneNumber = "083815613839",
             transNumber = "TRX1234567890"
         )
-        assertEquals("test", tokenID)
+        assertEquals("247AB172B166D5B1FEF0C5DB985DCDBC73BFF6898E6A7D30F3463A4F568C418E", tokenID)
     }
 }

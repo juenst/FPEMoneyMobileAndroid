@@ -1,6 +1,7 @@
 package lib.finpay.sdk
 
 import com.example.testing.Signature
+import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.TokenRequestModel
 import lib.finpay.sdk.service.ApiInterface
 import lib.finpay.sdk.service.RetrofitInstance
@@ -38,19 +39,26 @@ class FinPaySDK {
             reqDtime = currentDate,
             transNumber = transNumber
         )
-        retIn.getToken(requestInfo).enqueue(object : Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+        var tokenID = ""
+        retIn.getToken(requestInfo).enqueue(object : Callback<TokenModel> {
+            override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+                println("response failure")
                 println(t.message)
+                tokenID = "failed"//t.message.toString()
             }
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+            override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
                 if (response.code() == 200) {
-                    println(response)
+                    println("response ok")
+                    println(response.body()?.tokenID)
+                    println(response.raw())
+                    tokenID = response.body()?.tokenID.toString()
                 } else {
+                    println("response code bukan 200")
                     print(response)
+                    tokenID = "else"//response.toString()
                 }
             }
         })
-        val tokenID = ""
         return tokenID
     }
 }
