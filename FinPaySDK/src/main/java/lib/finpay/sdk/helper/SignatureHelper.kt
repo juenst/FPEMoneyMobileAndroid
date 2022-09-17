@@ -4,12 +4,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SignatureHelper {
-    public fun createSignature(): String {
-        val sorted = param().toSortedMap()
+    fun createSignature(): String {
+        val sorted = param().toList().sortedBy { (key, _) -> key}.toMap()
+        val joinedSorted =sorted.values.joinToString("").uppercase()
         return sorted.toString();
     }
 
-    public fun param(): Map<String, Any> {
+    fun param(): Map<String, Any> {
         val sdf = SimpleDateFormat("yyyyMdhhmmss")
         val currentDate = sdf.format(Date())
         val mapJson = mapOf(
