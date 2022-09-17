@@ -7,6 +7,10 @@ class TokenModel {
     @Expose
     var statusCode: String? = null
 
+    @SerializedName("validSIgnature")
+    @Expose
+    var validSIgnature: String? = null
+
     @SerializedName("statusDesc")
     @Expose
     var statusDesc: String? = null

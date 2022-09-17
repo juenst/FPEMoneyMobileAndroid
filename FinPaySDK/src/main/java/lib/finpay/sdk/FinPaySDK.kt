@@ -4,7 +4,7 @@ import com.example.testing.Signature
 import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.TokenRequestModel
 import lib.finpay.sdk.service.ApiInterface
-import lib.finpay.sdk.service.RetrofitInstance
+import lib.finpay.sdk.service.BaseService
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,17 +22,17 @@ class FinPaySDK {
         phoneNumber: String,
         transNumber: String
     ) : String {
-        val sdf = SimpleDateFormat("yyyyMdHHmmss")
+        val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
+        print(currentDate)
         val mapJson = mapOf(
             "requestType" to "getToken",
-            "phoneNumber" to phoneNumber,
             "reqDtime" to currentDate,
             "transNumber" to transNumber
         )
         signature = Signature()
         val signatureID = signature.createSignature(secretKey, mapJson)
-        val retIn = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
+        val retIn = BaseService.getRetrofitInstance().create(ApiInterface::class.java)
         val requestInfo = TokenRequestModel(
             requestType = "getToken",
             signature = signatureID,
@@ -40,22 +40,21 @@ class FinPaySDK {
             transNumber = transNumber
         )
         var tokenID = ""
-        retIn.getToken(requestInfo).enqueue(object : Callback<TokenModel> {
-            override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+        retIn.getToken(requestInfo).enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 println("response failure")
                 println(t.message)
-                tokenID = "failed"//t.message.toString()
+                tokenID = t.message.toString()
             }
-            override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.code() == 200) {
                     println("response ok")
-                    println(response.body()?.tokenID)
-                    println(response.raw())
-                    tokenID = response.body()?.tokenID.toString()
+                    println(response.body()?.string())
+                    tokenID = ""
                 } else {
                     println("response code bukan 200")
                     print(response)
-                    tokenID = "else"//response.toString()
+                    tokenID = ""//response.body()?.validSIgnature.toString()
                 }
             }
         })
