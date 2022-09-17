@@ -2,6 +2,8 @@ package com.finpay.sdk
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.finpay.sdk.constant.Constant
+import lib.finpay.sdk.FinPaySDK
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +20,16 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.finpay.sdk", appContext.packageName)
+//        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+//        assertEquals("com.finpay.sdk", appContext.packageName)
+
+        val tokenID = FinPaySDK().getToken(
+            userName = Constant().userName,
+            password = Constant().password,
+            secretKey = Constant().secretKey,
+            phoneNumber = "083815613839",
+            transNumber = "TRX1234567890"
+        )
+        assertEquals("test", tokenID)
     }
 }

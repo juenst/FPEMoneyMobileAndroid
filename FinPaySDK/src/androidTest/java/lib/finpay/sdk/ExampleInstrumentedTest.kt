@@ -18,7 +18,16 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("lib.finpay.sdk.test", appContext.packageName)
+//        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+//        assertEquals("lib.finpay.sdk.test", appContext.packageName)
+
+        val tokenID = FinPaySDK().getToken(
+            userName = "MT77764DKM83N",
+            password = "YJV3AM0y",
+            secretKey = "daYumnMb",
+            phoneNumber = "083815613839",
+            transNumber = "TRX1234567890"
+        )
+        assertEquals("test", tokenID)
     }
 }

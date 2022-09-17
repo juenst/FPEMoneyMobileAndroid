@@ -1,6 +1,6 @@
 package com.finpay.sdk
 
-import com.example.testing.SignatureHelper
+import com.example.testing.Signature
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.text.SimpleDateFormat
@@ -12,7 +12,7 @@ import java.util.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-    private lateinit var signature: SignatureHelper
+    private lateinit var signature: Signature
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
@@ -20,7 +20,7 @@ class ExampleUnitTest {
 
     @Test
     fun checkSignature() {
-        signature = SignatureHelper()
+        signature = Signature()
         val sdf = SimpleDateFormat("yyyyMdHHmmss")
         val currentDate = sdf.format(Date())
         val mapJson = mapOf(
