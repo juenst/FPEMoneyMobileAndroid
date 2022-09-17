@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="primaryText">#898989</color>
+    <color name="fullWhite">#FFFFFF</color>
+    <color name="true_green">#00a00c</color>
+    <color name="cherry_red">#ec1c24</color>
+    <color name="light_pink">#ffedee</color>
+    <color name="black">#2e2e2e</color>
+    <color name="greenish_teal">#30c670</color>
+    <color name="very_light_pink">#e4e4e4</color>
+    <color name="brownish_grey">#717171</color>
+    <color name="brown_grey">#b4b4b4</color>
+    <color name="greyish_brown">#4c4c4c</color>
+    <color name="bright_orange">#f76b00</color>
+    <color name="purplish_brown">#363435</color>
+    <color name="bluey_grey">#9393aa</color>
+    <color name="watermelon">#fa4169</color>
+    <color name="white">#efefef</color>
+    <color name="warm_grey">#a2a2a2</color>
+    <color name="tomato">#ea4444</color>
+    <color name="very_light_blue">#ddf5ff</color>
+    <color name="duck_egg_blue">#def8e9</color>
+    <color name="teal_green">#22ac5d</color>
+    <color name="cornflower_blue">#3c70d3</color>
+    <color name="pale">#ffedce</color>
+    <color name="tangerine">#ff8900</color>
+    <color name="pale_sky_blue">#ade7ff</color>
+    <color name="shamrock">#00ab49</color>
+    <color name="greyish">#a5a5a5</color>
+    <color name="black_26">#42000000</color>
+    <color name="white_three">#f1f1f1</color>
+
+    <color name="transparent">#00ffffff</color>
+    <color name="border">#ebebeb</color>
+    <color name="bluish_green">#16b359</color>
+
+    <color name="unselected_tab">#23000000</color>
+    <color name="lingt_pink_two">#ffe7ed</color>
+</resources>
