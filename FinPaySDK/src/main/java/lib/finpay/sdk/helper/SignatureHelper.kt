@@ -10,7 +10,6 @@ import javax.xml.bind.DatatypeConverter
 
 
 class SignatureHelper {
-
     fun createSignature(): String {
         val sorted = param().toList().sortedBy { (key, _) -> key}.toMap()
         val joinedSorted =sorted.values.joinToString("")
