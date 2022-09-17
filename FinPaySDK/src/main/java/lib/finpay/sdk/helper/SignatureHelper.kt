@@ -13,13 +13,12 @@ class SignatureHelper {
     fun createSignature(): String {
         val sorted = param().toList().sortedBy { (key, _) -> key}.toMap()
         val joinedSorted =sorted.values.joinToString("")
-        print(joinedSorted+""+sorted+"\n")
+        println(joinedSorted+""+sorted)
         val key = "daYumnMb"
         var key2 = bin2hex(key.toByteArray())
-        print("key : $key2")
+        println("key : $key2")
         val signature = digest(joinedSorted, key2)
-        print("\n")
-        print(signature.uppercase() + "\n")
+        println(signature.uppercase())
 
         return signature.uppercase();
     }
