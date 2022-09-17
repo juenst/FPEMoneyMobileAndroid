@@ -1,48 +1,70 @@
-package lib.finpay.sdk.helper
+package com.example.testing
 
-//import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.codec.binary.Hex
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-//import org.apache.commons.codec.binary.Hex
+import javax.xml.bind.DatatypeConverter
 
 
 class SignatureHelper {
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun createSignature(): String {
         val sorted = param().toList().sortedBy { (key, _) -> key}.toMap()
-        val joinedSorted =sorted.values.joinToString("").uppercase()
+        val joinedSorted =sorted.values.joinToString("")
+        print(joinedSorted+""+sorted+"\n")
         val key = "daYumnMb"
-        val signature = createSignatures(joinedSorted, key)
-        print(joinedSorted)
-        print(signature)
-        return signature;
+        var key2 = bin2hex(key.toByteArray())
+        print("key : $key2")
+        val signature = digest(joinedSorted, key2)
+        print("\n")
+        print(signature.uppercase() + "\n")
+
+        return signature.uppercase();
     }
 
     fun param(): Map<String, Any> {
-        val sdf = SimpleDateFormat("yyyyMdhhmmss")
+        val sdf = SimpleDateFormat("yyyyMdHHmmss")
         val currentDate = sdf.format(Date())
+//        08381561383920220917231022getToken20220917231022
         val mapJson = mapOf(
-            "requestType" to "getToken",
-            "phoneNumber" to "083815613839",
-            "reqDtime" to currentDate,
-            "transNumber" to currentDate
+                "requestType" to "getToken",
+                "phoneNumber" to "083815613839",
+//            "reqDtime" to currentDate,
+                "reqDtime" to "20220917231022",
+                "transNumber" to "20220917231022"
         )
         return mapJson;
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun createSignatures(data: String, key: String): String {
-        val sha256Hmac = Mac.getInstance("HmacSHA256")
-        val secretKey = SecretKeySpec(key.toByteArray(), "HmacSHA256")
-        sha256Hmac.init(secretKey)
+    fun digest(
+            data: String,
+            key: String,
+            alg: String = "HmacSHA256"
+    ): String {
+        val signingKey = SecretKeySpec(key.toByteArray(), alg)
+        val mac = Mac.getInstance(alg)
+        mac.init(signingKey)
 
-//        return Hex.encodeHexString(sha256Hmac.doFinal(data.toByteArray()))
-
-        // For base64
-         return Base64.getEncoder().encodeToString(sha256Hmac.doFinal(data.toByteArray()))
+        val bytes = mac.doFinal(data.toByteArray())
+        return format(bytes)
     }
+
+    private fun format(bytes: ByteArray): String {
+        val formatter = Formatter()
+        bytes.forEach { formatter.format("%02x", it) }
+        return formatter.toString()
+    }
+
+
+    fun bin2hex(byteArray: ByteArray): String {
+        return DatatypeConverter.printHexBinary(byteArray);
+    }
+
+    fun hex2bin(binary: String): ByteArray {
+        return DatatypeConverter.parseHexBinary(binary)
+    }
+
 }
