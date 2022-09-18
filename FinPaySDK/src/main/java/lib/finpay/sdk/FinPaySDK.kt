@@ -1,48 +1,45 @@
 package lib.finpay.sdk
 
-import android.content.SharedPreferences
 import com.example.testing.Signature
 import lib.finpay.sdk.model.TokenModel
-import lib.finpay.sdk.model.TokenRequestModel
-import lib.finpay.sdk.service.Api
 import lib.finpay.sdk.service.BaseService
-import okhttp3.ResponseBody
+import lib.finpay.sdk.service.network.Api
+import lib.finpay.sdk.service.network.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FinPaySDK {
+
+class FinPaySDK{
+    var service: ApiService? = null
     private lateinit var signature: Signature
-    private lateinit var sharedPreferences: SharedPreferences
 
     fun getToken(
-        secretKey: String,
-        userName: String,
-        password: String,
-        phoneNumber: String,
+        merchantUsername: String,
+        merchantPassword: String,
+        merchantSecretKey: String,
         transNumber: String
-    ) : String {
+    ) : String? {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
-        print(currentDate)
         val mapJson = mapOf(
             "requestType" to "getToken",
             "reqDtime" to currentDate,
             "transNumber" to transNumber
         )
         signature = Signature()
-        val signatureID = signature.createSignature(secretKey, mapJson)
+        val signatureID = signature.createSignature(merchantSecretKey, mapJson)
         val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
-        val requestInfo = TokenRequestModel(
-            requestType = "getToken",
-            signature = signatureID,
-            reqDtime = currentDate,
-            transNumber = transNumber
-        )
-        var tokenID = ""
-        retIn.getToken(requestInfo).enqueue(object : Callback<TokenModel> {
+        val requestBody : HashMap<String, String>  = hashMapOf()
+        requestBody["requestType"] = "getToken"
+        requestBody["signature"] = signatureID
+        requestBody["reqDtime"] = currentDate
+        requestBody["transNumber"] = transNumber
+
+        var tokenID: String? = ""
+        retIn.getToken(requestBody).enqueue(object : Callback<TokenModel> {
             override fun onFailure(call: Call<TokenModel>, t: Throwable) {
                 println("response failure")
                 println(t.message)
@@ -56,7 +53,7 @@ class FinPaySDK {
                         tokenID = response.body()?.getTokenID().toString()
                     } else {
                         println("statusCode != 200")
-                        print(response.body()?.getStatusDesc())
+                        println(response.body()?.getStatusDesc())
                         tokenID = ""
                     }
                 } else {
@@ -66,6 +63,7 @@ class FinPaySDK {
                 }
             }
         })
+        println("tokenID => " + tokenID)
         return tokenID
     }
 }
