@@ -1,6 +1,6 @@
 package lib.finpay.sdk.service.network
 
-import ApiResponse
+import lib.finpay.sdk.model.ApiResponse
 import io.reactivex.Single
 import lib.finpay.sdk.model.TokenModel
 import javax.inject.Inject

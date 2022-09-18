@@ -1,8 +1,8 @@
-
+package lib.finpay.sdk.model
 import com.google.gson.annotations.SerializedName
 
 
-class ApiResponse<T>(
+data class ApiResponse<T>(
     @field:SerializedName("statusCode")
     var statusCode: String,
 
