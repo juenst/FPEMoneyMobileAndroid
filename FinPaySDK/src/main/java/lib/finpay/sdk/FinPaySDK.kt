@@ -1,9 +1,10 @@
 package lib.finpay.sdk
 
+import android.content.SharedPreferences
 import com.example.testing.Signature
 import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.TokenRequestModel
-import lib.finpay.sdk.service.ApiInterface
+import lib.finpay.sdk.service.Api
 import lib.finpay.sdk.service.BaseService
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -14,6 +15,7 @@ import java.util.*
 
 class FinPaySDK {
     private lateinit var signature: Signature
+    private lateinit var sharedPreferences: SharedPreferences
 
     fun getToken(
         secretKey: String,
@@ -32,7 +34,7 @@ class FinPaySDK {
         )
         signature = Signature()
         val signatureID = signature.createSignature(secretKey, mapJson)
-        val retIn = BaseService.getRetrofitInstance().create(ApiInterface::class.java)
+        val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
         val requestInfo = TokenRequestModel(
             requestType = "getToken",
             signature = signatureID,
@@ -40,21 +42,27 @@ class FinPaySDK {
             transNumber = transNumber
         )
         var tokenID = ""
-        retIn.getToken(requestInfo).enqueue(object : Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+        retIn.getToken(requestInfo).enqueue(object : Callback<TokenModel> {
+            override fun onFailure(call: Call<TokenModel>, t: Throwable) {
                 println("response failure")
                 println(t.message)
-                tokenID = t.message.toString()
+                tokenID = ""
             }
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+            override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
                 if (response.code() == 200) {
-                    println("response ok")
-                    println(response.body()?.string())
-                    tokenID = ""
+                    if(response.body()?.getStatusCode() == "000") {
+                        println("response ok")
+                        println(response.body()?.getTokenID())
+                        tokenID = response.body()?.getTokenID().toString()
+                    } else {
+                        println("statusCode != 200")
+                        print(response.body()?.getStatusDesc())
+                        tokenID = ""
+                    }
                 } else {
-                    println("response code bukan 200")
-                    print(response)
-                    tokenID = ""//response.body()?.validSIgnature.toString()
+                    println("response code != 200")
+                    print(response.body()?.getStatusDesc())
+                    tokenID = ""
                 }
             }
         })

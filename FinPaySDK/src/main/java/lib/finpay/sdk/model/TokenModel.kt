@@ -4,26 +4,58 @@ import com.google.gson.annotations.SerializedName
 
 class TokenModel {
     @SerializedName("statusCode")
-    @Expose
-    var statusCode: String? = null
-
-    @SerializedName("validSIgnature")
-    @Expose
-    var validSIgnature: String? = null
+    private var statusCode: String? = null
 
     @SerializedName("statusDesc")
-    @Expose
-    var statusDesc: String? = null
+    private var statusDesc: String? = null
 
     @SerializedName("tokenID")
-    @Expose
-    var tokenID: String? = null
+    private var tokenID: String? = null
 
     @SerializedName("tokenExpiry")
-    @Expose
-    var tokenExpiry: String? = null
+    private var tokenExpiry: String? = null
 
-    @SerializedName("processingTime")
-    @Expose
-    var processingTime: Double? = null
+    fun TokenModel(
+        statusCode: String?,
+        statusDesc: String?,
+        tokenID: String?,
+        tokenExpiry: String?,
+    ) {
+        this.statusCode = statusCode
+        this.statusDesc = statusDesc
+        this.tokenID = tokenID
+        this.tokenExpiry = tokenExpiry
+    }
+
+    fun getStatusCode(): String? {
+        return statusCode
+    }
+
+    fun setStatusCode(statusCode: String?) {
+        this.statusCode = statusCode
+    }
+
+    fun getStatusDesc(): String? {
+        return statusDesc
+    }
+
+    fun setStatusDesc(statusDesc: String?) {
+        this.statusDesc = statusDesc
+    }
+
+    fun getTokenID(): String? {
+        return tokenID
+    }
+
+    fun setTokenID(tokenID: String?) {
+        this.tokenID = tokenID
+    }
+
+    fun getTokenExpiry(): String? {
+        return tokenExpiry
+    }
+
+    fun setTokenExpiry(tokenExpiry: String?) {
+        this.tokenExpiry = tokenExpiry
+    }
 }
