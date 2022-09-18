@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var textTokenId = findViewById(R.id.tokenId) as TextView
 
-        lateinit var sdk: FinPaySDK
+//        lateinit var sdk: FinPaySDK
 
-        val tokenID = sdk.getToken(
+        val tokenID = FinPaySDK().getToken(
             Constant().userName,
             Constant().password,
             Constant().secretKey,

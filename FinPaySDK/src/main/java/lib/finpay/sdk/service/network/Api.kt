@@ -3,7 +3,6 @@ package lib.finpay.sdk.service.network
 import ApiResponse
 import io.reactivex.Single
 import lib.finpay.sdk.model.TokenModel
-import lib.finpay.sdk.model.TokenRequestModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.HeaderMap

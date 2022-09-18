@@ -3,7 +3,6 @@ package lib.finpay.sdk.service.network
 import ApiResponse
 import io.reactivex.Single
 import lib.finpay.sdk.model.TokenModel
-import lib.finpay.sdk.model.TokenRequestModel
 import javax.inject.Inject
 
 

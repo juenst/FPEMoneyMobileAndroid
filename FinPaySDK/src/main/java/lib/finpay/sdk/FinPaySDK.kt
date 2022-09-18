@@ -32,6 +32,7 @@ class FinPaySDK{
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
         val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
+
         val requestBody : HashMap<String, String>  = hashMapOf()
         requestBody["requestType"] = "getToken"
         requestBody["signature"] = signatureID
