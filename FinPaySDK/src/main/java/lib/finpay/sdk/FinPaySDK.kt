@@ -1,15 +1,6 @@
 package lib.finpay.sdk
 
-import android.content.SharedPreferences
 import com.example.testing.Signature
-import lib.finpay.sdk.model.TokenModel
-import lib.finpay.sdk.model.UserBallanceModel
-import lib.finpay.sdk.service.BaseService
-import lib.finpay.sdk.service.network.Api
-import lib.finpay.sdk.service.network.ApiService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,49 +23,13 @@ class FinPaySDK{
         )
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
-        val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
-
         val requestBody : HashMap<String, String>  = hashMapOf()
         requestBody["requestType"] = "getToken"
         requestBody["signature"] = signatureID
         requestBody["reqDtime"] = currentDate
         requestBody["transNumber"] = transNumber
-
         var tokenID: String? = ""
-        retIn.getToken(requestBody).enqueue(object : Callback<TokenModel> {
-            override fun onFailure(call: Call<TokenModel>, t: Throwable) {
-                println("response failure")
-                println(t.message)
-                tokenID = ""
-            }
-            override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
-                if (response.code() == 200) {
-                    if(response.body()?.getStatusCode() == "000") {
-                        println("response ok")
-                        println(response.body()?.getTokenID())
-                        saveToken(response.body()!!)
-                        tokenID = response.body()?.getTokenID().toString()
-                    } else {
-                        println("statusCode != 200")
-                        println(response.body()?.getStatusDesc())
-                        tokenID = ""
-                    }
-                } else {
-                    println("response code != 200")
-                    print(response.body()?.getStatusDesc())
-                    tokenID = ""
-                }
-            }
-        })
-        println("tokenID => " + tokenID)
         return tokenID
-    }
-
-    private fun saveToken(tokenModel: TokenModel) {
-//        val editor: SharedPreferences.Editor = preferences!!.edit()
-//        editor.putString("tokenID", tokenModel.getTokenID())
-//        editor.putString("tokenExpiry", tokenModel.getTokenExpiry())
-//        editor.apply()
     }
 
     fun getBalance(
@@ -95,8 +50,6 @@ class FinPaySDK{
         )
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
-        val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
-
         val requestBody : HashMap<String, String>  = hashMapOf()
         requestBody["requestType"] = "getToken"
         requestBody["signature"] = signatureID
@@ -104,26 +57,5 @@ class FinPaySDK{
         requestBody["transNumber"] = transNumber
         requestBody["phoneNumber"] = phoneNumber
         requestBody["tokenID"] = transNumber
-
-        retIn.getBalance(requestBody).enqueue(object : Callback<UserBallanceModel> {
-            override fun onFailure(call: Call<UserBallanceModel>, t: Throwable) {
-                println("response failure")
-                println(t.message)
-            }
-            override fun onResponse(call: Call<UserBallanceModel>, response: Response<UserBallanceModel>) {
-                if (response.code() == 200) {
-                    if(response.body()?.getStatusCode() == "000") {
-                        println("response ok")
-                        println(response.body()?.getCustBalance())
-                    } else {
-                        println("statusCode != 200")
-                        println(response.body()?.getStatusDesc())
-                    }
-                } else {
-                    println("response code != 200")
-                    print(response.body()?.getStatusDesc())
-                }
-            }
-        })
     }
 }
