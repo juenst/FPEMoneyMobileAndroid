@@ -13,6 +13,9 @@
         <entry key="FinPayWallet/src/main/res/drawable-v24/shape_spiner_search_item.xml" value="0.2085" />
         <entry key="FinPayWallet/src/main/res/drawable-v24/shape_text_input.xml" value="0.2085" />
         <entry key="FinPayWallet/src/main/res/drawable-v24/shape_three.xml" value="0.2085" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_home.xml" value="0.19610507246376813" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_profile.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/custom_alert_dialog.xml" value="0.298661800486618" />
         <entry key="FinPayWallet/src/main/res/layout/dialog_alert_button_with_image.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/dialog_loading.xml" value="0.19610507246376813" />
