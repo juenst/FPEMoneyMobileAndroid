@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FinPaySDK</string>
+    <string name="profil_profil"><b>Profil</b></string>
+    <string name="standar_profil">STANDAR</string>
+    <string name="nama_profil">Widiyanto Ramadhan</string>
+    <string name="noHp_profil">+6283815613839</string>
 </resources>
