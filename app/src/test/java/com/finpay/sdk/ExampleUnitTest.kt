@@ -1,6 +1,6 @@
 package com.finpay.sdk
 
-import com.example.testing.Signature
+import lib.finpay.sdk.helper.Signature
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.text.SimpleDateFormat
