@@ -3,12 +3,12 @@ import com.google.gson.annotations.SerializedName
 
 
 data class ApiResponse<T>(
-    @field:SerializedName("statusCode")
+    @SerializedName("statusCode")
     var statusCode: String,
 
-    @field:SerializedName("statusDesc")
+    @SerializedName("statusDesc")
     var statusDesc: String,
 
-    @field:SerializedName("data")
+    @SerializedName("data")
     val content: T
 )

@@ -5,7 +5,6 @@ import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.UserBallanceModel
 import lib.finpay.sdk.service.BaseService
 import lib.finpay.sdk.service.network.Api
-import lib.finpay.sdk.service.network.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,15 +13,15 @@ import java.util.*
 
 
 class FinPaySDK{
-    var service: ApiService? = null
+    //    var service: ApiService? = null
     private lateinit var signature: Signature
 
-    fun getToken(
+    suspend fun getToken(
         merchantUsername: String,
         merchantPassword: String,
         merchantSecretKey: String,
         transNumber: String
-    ) : String? {
+    ): String? {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
         val mapJson = mapOf(
@@ -34,7 +33,7 @@ class FinPaySDK{
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
         val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
 
-        val requestBody : HashMap<String, String>  = hashMapOf()
+        val requestBody: HashMap<String, String> = hashMapOf()
         requestBody["requestType"] = "getToken"
         requestBody["signature"] = signatureID
         requestBody["reqDtime"] = currentDate
@@ -47,25 +46,29 @@ class FinPaySDK{
                 println(t.message)
                 tokenID = ""
             }
-            override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
+
+            override fun onResponse(
+                call: Call<TokenModel>,
+                response: Response<TokenModel>
+            ) {
                 if (response.code() == 200) {
-                    if(response.body()?.getStatusCode() == "000") {
+                    if (response.body()?.statusCode == "000") {
                         println("response ok")
-                        println(response.body()?.getTokenID())
-                        tokenID = response.body()?.getTokenID().toString()
+                        println("Response Body Get Token => TokenId : ${response.body()?.tokenID}")
+                        tokenID = response.body()?.tokenID
                     } else {
                         println("statusCode != 200")
-                        println(response.body()?.getStatusDesc())
+                        println(response.body()?.statusDesc)
                         tokenID = ""
                     }
                 } else {
                     println("response code != 200")
-                    print(response.body()?.getStatusDesc())
+                    print(response.body()?.statusDesc)
                     tokenID = ""
                 }
             }
         })
-        println("tokenID => " + tokenID)
+        println("tokenID => $tokenID")
         return tokenID
     }
 
@@ -85,11 +88,12 @@ class FinPaySDK{
             "phoneNumber" to phoneNumber,
             "tokenID" to ""
         )
+
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
         val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
 
-        val requestBody : HashMap<String, String>  = hashMapOf()
+        val requestBody: HashMap<String, String> = hashMapOf()
         requestBody["requestType"] = "getToken"
         requestBody["signature"] = signatureID
         requestBody["reqDtime"] = currentDate
@@ -102,18 +106,22 @@ class FinPaySDK{
                 println("response failure")
                 println(t.message)
             }
-            override fun onResponse(call: Call<UserBallanceModel>, response: Response<UserBallanceModel>) {
+
+            override fun onResponse(
+                call: Call<UserBallanceModel>,
+                response: Response<UserBallanceModel>
+            ) {
                 if (response.code() == 200) {
-                    if(response.body()?.getStatusCode() == "000") {
+                    if (response.body()?.statusCode == "000") {
                         println("response ok")
-                        println(response.body()?.getCustBalance())
+                        println(response.body()?.custBalance)
                     } else {
                         println("statusCode != 200")
-                        println(response.body()?.getStatusDesc())
+                        println(response.body()?.statusDesc)
                     }
                 } else {
                     println("response code != 200")
-                    print(response.body()?.getStatusDesc())
+                    print(response.body()?.statusDesc)
                 }
             }
         })

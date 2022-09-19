@@ -1,105 +1,41 @@
 package lib.finpay.sdk.model
+import android.os.Parcelable
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-class UserBallanceModel {
+@Parcelize
+class UserBallanceModel(
+    @Expose
     @SerializedName("statusCode")
-    private var statusCode: String? = null
+    var statusCode: String?,
 
-    @SerializedName("validSIgnature")
-    private var validSIgnature: String? = null
-
+    @Expose
     @SerializedName("statusDesc")
-    private var statusDesc: String? = null
+    var statusDesc: String?,
 
+    @Expose
+    @SerializedName("validSIgnature")
+    var validSIgnature: String?,
+
+
+    @Expose
     @SerializedName("custName")
-    private var custName: String? = null
+    var custName: String?,
 
+    @Expose
     @SerializedName("custType")
-    private var custType: String? = null
+    var custType: String?,
 
+    @Expose
     @SerializedName("custBalance")
-    private var custBalance: String? = null
+    var custBalance: String?,
 
+    @Expose
     @SerializedName("listCard")
-    private var listCard: String? = null
+    var listCard: String?,
 
+    @Expose
     @SerializedName("tokenization")
-    private var tokenization: String? = null
-
-    fun UserBallanceModel(
-        statusCode: String?,
-        validSIgnature: String?,
-        statusDesc: String?,
-        custName: String?,
-        custBalance: String?,
-        custType: String?,
-        listCard: String?,
-        tokenization: String?
-    ) {
-        this.statusCode = statusCode
-        this.validSIgnature = validSIgnature
-        this.statusDesc = statusDesc
-        this.custName = custName
-        this.custBalance = custBalance
-        this.custType = custType
-        this.listCard = listCard
-        this.tokenization = tokenization
-    }
-
-    fun getStatusCode(): String? {
-        return statusCode
-    }
-
-    fun setStatusCode(statusCode: String?) {
-        this.statusCode = statusCode
-    }
-
-    fun getStatusDesc(): String? {
-        return statusDesc
-    }
-
-    fun setStatusDesc(statusDesc: String?) {
-        this.statusDesc = statusDesc
-    }
-
-    fun getCustName(): String? {
-        return custName
-    }
-
-    fun setCustName(custName: String?) {
-        this.custName = custName
-    }
-
-    fun getCustBalance(): String? {
-        return custBalance
-    }
-
-    fun setCustBalance(custBalance: String?) {
-        this.custBalance = custBalance
-    }
-
-    fun getCustType(): String? {
-        return custType
-    }
-
-    fun setCustType(custType: String) {
-        this.custType = custType
-    }
-
-    fun getListCard(): String? {
-        return listCard
-    }
-
-    fun setListCard(listCard: String?) {
-        this.listCard = listCard
-    }
-
-    fun getTokenization(): String? {
-        return tokenization
-    }
-
-    fun setTokenization(tokenization: String?) {
-        this.tokenization = tokenization
-    }
-
-}
+    var tokenization: String?
+) : Parcelable
