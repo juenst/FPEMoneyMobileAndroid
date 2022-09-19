@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 open class BaseViewModel : ViewModel(), HasAndroidInjector{
 
-    @Inject
+//    @Inject
 //    lateinit var api: Api
     private val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     fun setLoading(state: Boolean){
