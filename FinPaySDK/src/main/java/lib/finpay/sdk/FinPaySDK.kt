@@ -1,19 +1,34 @@
 package lib.finpay.sdk
 
 import com.example.testing.Signature
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import lib.finpay.sdk.di.component.SdkComponent
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
-class FinPaySDK{
+class FinPaySDK : HasAndroidInjector {
+    @Inject
+    lateinit var dispactchingActivityInjector: DispatchingAndroidInjector<Any>
+
     private lateinit var signature: Signature
+    private lateinit var sdkComponent: SdkComponent
 
-     fun getToken(
+    override fun androidInjector(): AndroidInjector<Any> = dispactchingActivityInjector
+
+    fun initSDK() {
+        sdkComponent.inject(this)
+    }
+
+    fun getToken(
         merchantUsername: String,
         merchantPassword: String,
         merchantSecretKey: String,
         transNumber: String
-    ) : String? {
+    ): String? {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
         val mapJson = mapOf(
@@ -23,7 +38,7 @@ class FinPaySDK{
         )
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
-        val requestBody : HashMap<String, String>  = hashMapOf()
+        val requestBody: HashMap<String, String> = hashMapOf()
         requestBody["requestType"] = "getToken"
         requestBody["signature"] = signatureID
         requestBody["reqDtime"] = currentDate
