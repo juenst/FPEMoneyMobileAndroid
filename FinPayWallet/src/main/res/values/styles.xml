@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:textSize">14dp</item>
+        <item name="buttonStyle">?android:attr/borderlessButtonStyle</item>
+    </style>
+
+    <style name="AppThemeChihp" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/colorPrimary</item>
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="chipTextCheckAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="chipTextUncheckAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="OtpWidget" />
+
+    <style name="OtpWidget.OtpView" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Edittext.Yotani" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/bg_shape_edittext</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="textLabel" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">#000000</item>
+    </style>
+
+    <style name="Widget.AppCompat.Button.myColllored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/shape_two</item>
+    </style>
+
+    <style name="ActionBar.SemiTransp" parent="Base.Widget.AppCompat.ActionBar">
+        <item name="displayOptions">showHome</item>
+        <item name="background">@color/md_white_1000</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+</resources>
