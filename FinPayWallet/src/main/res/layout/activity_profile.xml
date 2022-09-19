@@ -31,9 +31,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:paddingVertical="3dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="10dp"
+                    android:paddingVertical="5dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="16dp"
                     android:background="@drawable/corner_radius_horizontal_left_large"
                     android:layout_height="wrap_content">
                     <ImageView
@@ -48,6 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12dp"
+                        android:textColor="@color/black"
                         android:text="@string/standar_profil" />
                 </LinearLayout>
             </RelativeLayout>
