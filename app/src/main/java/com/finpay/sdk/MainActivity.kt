@@ -27,9 +27,6 @@ class MainActivity : AppCompatActivity() {
             "TRX1234567890"
         )
 
-
-
-
         println("Token ID yang di print di MainActivity => "+tokenID)
         textTokenId.text = tokenID
     }

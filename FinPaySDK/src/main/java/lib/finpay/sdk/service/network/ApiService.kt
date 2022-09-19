@@ -3,6 +3,7 @@ package lib.finpay.sdk.service.network
 import ApiResponse
 import io.reactivex.Single
 import lib.finpay.sdk.model.TokenModel
+import retrofit2.Call
 import javax.inject.Inject
 
 
@@ -20,8 +21,8 @@ public class ApiService {
         return authHeader
     }
 
-    fun getToken(body: HashMap<String, String>, token: String): Single<ApiResponse<TokenModel>> {
-        val auth: HashMap<String, String> = generateAuthenticationHeader(token)
-        return api!!.getTokens(auth, body)
+    fun getToken(body: HashMap<String, String>): Call<TokenModel> {
+//        val auth: HashMap<String, String> = generateAuthenticationHeader(token)
+        return api!!.getToken(body)
     }
 }

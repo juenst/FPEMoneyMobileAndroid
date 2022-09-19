@@ -1,5 +1,6 @@
 package lib.finpay.sdk
 
+import android.content.SharedPreferences
 import com.example.testing.Signature
 import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.UserBallanceModel
@@ -14,10 +15,9 @@ import java.util.*
 
 
 class FinPaySDK{
-    var service: ApiService? = null
     private lateinit var signature: Signature
 
-    fun getToken(
+     fun getToken(
         merchantUsername: String,
         merchantPassword: String,
         merchantSecretKey: String,
@@ -52,6 +52,7 @@ class FinPaySDK{
                     if(response.body()?.getStatusCode() == "000") {
                         println("response ok")
                         println(response.body()?.getTokenID())
+                        saveToken(response.body()!!)
                         tokenID = response.body()?.getTokenID().toString()
                     } else {
                         println("statusCode != 200")
@@ -67,6 +68,13 @@ class FinPaySDK{
         })
         println("tokenID => " + tokenID)
         return tokenID
+    }
+
+    private fun saveToken(tokenModel: TokenModel) {
+//        val editor: SharedPreferences.Editor = preferences!!.edit()
+//        editor.putString("tokenID", tokenModel.getTokenID())
+//        editor.putString("tokenExpiry", tokenModel.getTokenExpiry())
+//        editor.apply()
     }
 
     fun getBalance(
