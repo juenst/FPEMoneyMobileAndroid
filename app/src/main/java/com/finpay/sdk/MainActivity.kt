@@ -8,13 +8,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testing.Signature
 import com.finpay.sdk.constant.Constant
+import com.finpay.wallet.view.app.AppActivity
 import lib.finpay.sdk.FinPaySDK
-import java.text.SimpleDateFormat
 import java.util.*
-import com.finpay.wallet.MainActivity as WalletActivity
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var signature: Signature
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 //        textTokenId.text = tokenID
 
         textTokenId.setOnClickListener {
-            Intent(this, WalletActivity::class.java).apply {
+            println("test")
+            Intent(this, AppActivity::class.java).apply {
                 startActivity(this)
             }
         }
