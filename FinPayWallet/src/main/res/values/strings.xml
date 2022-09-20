@@ -5,4 +5,6 @@
     <string name="nama_profil">Widiyanto Ramadhan</string>
     <string name="noHp_profil">+6283815613839</string>
     <string name="ubah_pin_profil">Ubah PIN</string>
+    <string name="deactivate_biometric_profil">Non Aktifkan Biometrik</string>
+    <string name="logout"><b>KELUAR</b></string>
 </resources>

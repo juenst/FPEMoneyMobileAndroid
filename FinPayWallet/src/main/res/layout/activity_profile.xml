@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent" android:orientation="vertical">
         <LinearLayout
-
             android:paddingVertical="40dp"
             android:layout_width="match_parent"
             android:background="@drawable/bg_profil"
             android:layout_height="270dp" android:orientation="vertical">
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -27,7 +25,6 @@
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:text="@string/profil_profil"/>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_alignParentRight="true"
@@ -52,14 +49,31 @@
                         android:text="@string/standar_profil" />
                 </LinearLayout>
             </RelativeLayout>
-
-            <ImageView
-                android:layout_width="250px"
-                android:layout_height="250px"
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20dp"/>
+            <RelativeLayout
+                android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/qr_example"
-                app:cornerRadius="100dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="250px"
+                    android:layout_height="250px"
+                    android:src="@drawable/qr_example"/>
+
+                <ImageView
+                    android:layout_width="100px"
+                    android:layout_height="100px"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white"
+                    android:nestedScrollingEnabled="false"
+                    android:src="@drawable/ic_profile_ganti" />
+            </RelativeLayout>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="15dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,57 +92,331 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:gravity="top"
-            android:paddingHorizontal="20dp"
             android:layout_marginTop="-25dp"
             android:orientation="vertical"
+            android:layout_weight="1"
             android:background="@drawable/corner_radius_vertical_top_small"
             android:layout_height="match_parent">
-            <Space
-                android:layout_width="0px"
-                android:layout_height="60px"/>
+            <LinearLayout
+                android:paddingHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <Space
+                    android:layout_width="0px"
+                    android:layout_height="60px"/>
+                <LinearLayout
+                    android:id="@+id/ubahPin"
+                    android:paddingTop="15dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_gantipin"
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:text="@string/ubah_pin_profil" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/md_grey_200" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/deactivateBiometric"
+                    android:paddingTop="15dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_fingerprint_auth"
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/black"
+                                    android:text="@string/deactivate_biometric_profil" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textSize="10dp"
+                                    android:text="Gunakan pengenalan wajah atau sidik jari" />
+                            </LinearLayout>
+                            <Switch
+                                android:layout_width="wrap_content"
+                                android:gravity="right"
+                                android:layout_height="20dp"/>
+                        </LinearLayout>
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/md_grey_200" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingHorizontal="20dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/faq"
+                    android:paddingTop="15dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_profile_faq"
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:text="FAQ" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/md_grey_200" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/syarat_ketentuan"
+                    android:paddingTop="15dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_profile_snk"
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:text="Syarat dan Ketentuan" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/md_grey_200" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/contact_su"
+                    android:paddingTop="15dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_profile_hubungikami"
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="12dp"
+                            android:textColor="@color/black"
+                            android:text="Hubungi Kami" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/md_grey_200" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/rating"
+                    android:paddingTop="15dp"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_profile_rating"
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="12dp"
+                                android:textColor="@color/black"
+                                android:text="Beri Kami Penilaian" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12dp"
+                                android:textColor="@color/black"
+                                android:text="Versi 1.0.0" />
+                        </LinearLayout>
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
             <LinearLayout
                 android:paddingVertical="20dp"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_gantipin"
-                        />
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="15dp"/>
-                </LinearLayout>
-                <Space
-                    android:layout_width="15dp"
-                    android:layout_height="wrap_content"/>
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="12dp"
-                        android:textColor="@color/black"
-                        android:text="@string/ubah_pin_profil" />
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="15dp"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/md_grey_200" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:textColor="@color/red_notive"
+                    android:text="@string/logout" />
             </LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
 
 
