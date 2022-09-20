@@ -106,7 +106,7 @@
                     android:layout_width="0px"
                     android:layout_height="60px"/>
                 <LinearLayout
-                    android:id="@+id/ubahPin"
+                    android:id="@+id/buttonUbahPin"
                     android:paddingTop="15dp"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -199,6 +199,7 @@
                                     android:text="Gunakan pengenalan wajah atau sidik jari" />
                             </LinearLayout>
                             <Switch
+                                android:id="@+id/switchBiometrik"
                                 android:layout_width="wrap_content"
                                 android:gravity="right"
                                 android:layout_height="20dp"/>
@@ -222,7 +223,7 @@
                 android:paddingHorizontal="20dp"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/faq"
+                    android:id="@+id/buttonFaq"
                     android:paddingTop="15dp"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -265,7 +266,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/syarat_ketentuan"
+                    android:id="@+id/buttonSyaratKetentuan"
                     android:paddingTop="15dp"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -308,7 +309,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/contact_su"
+                    android:id="@+id/buttonHubungi"
                     android:paddingTop="15dp"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -351,7 +352,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/rating"
+                    android:id="@+id/buttonRating"
                     android:paddingTop="15dp"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -402,18 +403,18 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:paddingVertical="20dp"
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="10dp"/>
+            <TextView
+                android:id="@+id/buttonLogout"
+                android:paddingVertical="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:gravity="center"
-                    android:textColor="@color/red_notive"
-                    android:text="@string/logout" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:gravity="center"
+                android:textColor="@color/red_notive"
+                android:text="@string/logout" />
         </LinearLayout>
 
 
