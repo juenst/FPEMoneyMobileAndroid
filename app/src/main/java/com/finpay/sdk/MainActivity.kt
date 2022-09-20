@@ -11,6 +11,7 @@ import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.FinPaySDK
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.system.measureTimeMillis
 import com.finpay.wallet.MainActivity as WalletActivity
 
 class MainActivity : AppCompatActivity() {
@@ -22,20 +23,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var textTokenId = findViewById(R.id.tokenId) as TextView
 
-        val tokenID = FinPaySDK().getToken(
+
+        FinPaySDK().getToken(
             Constant().userName,
             Constant().password,
             Constant().secretKey,
-            "TRX1234567890"
+            "TRX1234567890",
+            onSuccess = {
+                tokens->
+                FinPaySDK().getBalance(
+                    Constant().userName,
+                    Constant().password,
+                    Constant().secretKey,
+                    "TRX1234567890",
+                    "083815613839",
+                    tokens.getTokenID()!!,
+                    onSuccess = {
+                        userBallanceModel ->
+                        textTokenId.setText(userBallanceModel.getCustBalance())
+                    }
+                )
+            }
         )
 
-        if (tokenID != null) {
-            println(tokenID)
-        } else {
-            println("kosong")
-//        println("Token ID yang di print di MainActivity => "+tokenID
-        }
-//        textTokenId.text = tokenID
+
 
         textTokenId.setOnClickListener {
             Intent(this, WalletActivity::class.java).apply {
