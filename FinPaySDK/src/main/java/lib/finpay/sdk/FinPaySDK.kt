@@ -1,6 +1,10 @@
 package lib.finpay.sdk
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import lib.finpay.sdk.helper.Signature
+import lib.finpay.sdk.networks.ApiConfig
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,7 +27,6 @@ class FinPaySDK {
         )
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
-//        val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
 
         val requestBody: HashMap<String, String> = hashMapOf()
         requestBody["requestType"] = "getToken"
@@ -31,7 +34,23 @@ class FinPaySDK {
         requestBody["reqDtime"] = currentDate
         requestBody["transNumber"] = transNumber
 
-        val tokenID: String = ""
+        var tokenID: String = ""
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = ApiConfig.apiService.getTokenAsync(requestBody)
+            CoroutineScope(Dispatchers.Main).launch {
+                if (response.isSuccessful) {
+                    tokenID = if (response.body()?.statusCode == "000") {
+                        println("response ok")
+                        println(response.body()?.tokenID)
+                        response.body()?.tokenID!!
+                    } else {
+                        println("statusCode != 200")
+                        println(response.body()?.statusDesc)
+                        ""
+                    }
+                }
+            }
+        }
         return tokenID
     }
 
