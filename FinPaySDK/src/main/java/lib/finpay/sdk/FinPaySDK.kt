@@ -23,16 +23,19 @@ import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.system.measureTimeMillis
 
 
 class FinPaySDK{
     private lateinit var signature: Signature
 
-     fun getToken(
+    fun getToken(
         merchantUsername: String,
         merchantPassword: String,
         merchantSecretKey: String,
-        transNumber: String
+        transNumber: String,
+        onSuccess: (TokenModel) -> Unit = {},
+        onError: (Throwable) -> Unit = {}
     ) : String {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
@@ -54,35 +57,42 @@ class FinPaySDK{
                  requestBody["reqDtime"] = currentDate
                  requestBody["transNumber"] = transNumber
 
-                 request.getToken(requestBody).enqueue(object : Callback<TokenModel> {
-                     override fun onFailure(call: Call<TokenModel>, t: Throwable) {
-                         println("response failure")
-                         println(t.message)
-                         tokenID = ""
-                     }
-
-                     override fun onResponse(
-                         call: Call<TokenModel>,
-                         response: Response<TokenModel>
-                     ) {
-                         if (response.code() == 200) {
-                             if (response.body()?.getStatusCode() == "000") {
-                                 println("response ok")
-                                 println(response.body()?.getTokenID())
-                                 saveToken(response.body()!!)
-                                 tokenID = response.body()?.getTokenID().toString()
-                             } else {
-                                 println("statusCode != 200")
-                                 println(response.body()?.getStatusDesc())
-                                 tokenID = ""
-                             }
-                         } else {
-                             println("response code != 200")
-                             print(response.body()?.getStatusDesc())
+                 val time = measureTimeMillis {
+                     request.getToken(requestBody).enqueue(object : Callback<TokenModel> {
+                         override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+                             println("response failure")
+                             println(t.message)
                              tokenID = ""
                          }
-                     }
-                 })
+
+                         override fun onResponse(
+                             call: Call<TokenModel>,
+                             response: Response<TokenModel>
+                         ) {
+                             if (response.code() == 200) {
+                                 if (response.body()?.getStatusCode() == "000") {
+                                     println("response ok")
+                                     println(response.body()?.getTokenID())
+                                     saveToken(response.body()!!)
+                                     tokenID = response.body()?.getTokenID().toString()
+                                     onSuccess(response.body()!!)
+
+                                 } else {
+                                     println("statusCode != 200")
+                                     println(response.body()?.getStatusDesc())
+                                     tokenID = ""
+                                 }
+                             } else {
+                                 println("response code != 200")
+                                 print(response.body()?.getStatusDesc())
+                                 tokenID = ""
+                             }
+                         }
+                     })
+                 }
+
+                println("get data time $time ms")
+
 //             } catch (e: Exception) {
 //                 when (e) {
 //                     is UnknownHostException -> {
@@ -117,6 +127,8 @@ class FinPaySDK{
         merchantSecretKey: String,
         transNumber: String,
         phoneNumber: String,
+        tokenID: String,
+        onSuccess: (UserBallanceModel) -> Unit = {},
     ) {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
@@ -125,36 +137,37 @@ class FinPaySDK{
             "reqDtime" to currentDate,
             "transNumber" to transNumber,
             "phoneNumber" to phoneNumber,
-            "tokenID" to ""
+            "tokenID" to tokenID
         )
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
         val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
 
         val requestBody : HashMap<String, String>  = hashMapOf()
-        requestBody["requestType"] = "getToken"
+        requestBody["requestType"] = "getBalance"
         requestBody["signature"] = signatureID
         requestBody["reqDtime"] = currentDate
         requestBody["transNumber"] = transNumber
         requestBody["phoneNumber"] = phoneNumber
-        requestBody["tokenID"] = transNumber
+        requestBody["tokenID"] = tokenID
 
         retIn.getBalance(requestBody).enqueue(object : Callback<UserBallanceModel> {
             override fun onFailure(call: Call<UserBallanceModel>, t: Throwable) {
-                println("response failure")
+                println("response failure getUserBalance")
                 println(t.message)
             }
             override fun onResponse(call: Call<UserBallanceModel>, response: Response<UserBallanceModel>) {
                 if (response.code() == 200) {
                     if(response.body()?.getStatusCode() == "000") {
-                        println("response ok")
+                        println("response ok getUserBalance")
                         println(response.body()?.getCustBalance())
+                        onSuccess(response.body()!!)
                     } else {
-                        println("statusCode != 200")
+                        println("statusCode != 200 getUserBalance")
                         println(response.body()?.getStatusDesc())
                     }
                 } else {
-                    println("response code != 200")
+                    println("response code != 200 getUserBalance")
                     print(response.body()?.getStatusDesc())
                 }
             }
