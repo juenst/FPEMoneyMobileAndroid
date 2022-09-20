@@ -10,6 +10,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.databinding.FragmentHomeBinding
+import lib.finpay.sdk.FinPaySDK
 
 class HomeFragment : Fragment() {
 
@@ -31,11 +32,40 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val scrollView: NestedScrollView = binding.scrollView
+        val txtUserName: TextView = binding.txtUsername
+        val txtSaldo: TextView = binding.txtSaldo
+
+        val userName: String = "MT77764DKM83N"
+        val password: String = "YJV3AM0y"
+        val secretKey: String = "daYumnMb"
+
         homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
+            txtUserName.text = it
+            txtSaldo.text = it
         }
 
-
+        FinPaySDK().getToken(
+            userName,
+            password,
+            secretKey,
+            "TRX1234567890",
+            onSuccess = {
+                    tokens-> FinPaySDK().getBalance(
+                    userName,
+                    password,
+                    secretKey,
+                    "TRX1234567890",
+                    "083815613839",
+                    tokens.getTokenID()!!,
+                    onSuccess = {
+                        userBallanceModel ->
+                        txtSaldo.setText(userBallanceModel.getCustBalance())
+                        txtUserName.setText(userBallanceModel.getCustName())
+                    }
+                )
+            }
+        )
 
         return root
     }
