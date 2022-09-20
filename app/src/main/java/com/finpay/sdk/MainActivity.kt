@@ -1,5 +1,6 @@
 package com.finpay.sdk
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
@@ -10,6 +11,7 @@ import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.FinPaySDK
 import java.text.SimpleDateFormat
 import java.util.*
+import com.finpay.wallet.MainActivity as WalletActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var signature: Signature
@@ -27,7 +29,18 @@ class MainActivity : AppCompatActivity() {
             "TRX1234567890"
         )
 
-        println("Token ID yang di print di MainActivity => "+tokenID)
-        textTokenId.text = tokenID
+        if (tokenID != null) {
+            println(tokenID)
+        } else {
+            println("kosong")
+//        println("Token ID yang di print di MainActivity => "+tokenID
+        }
+//        textTokenId.text = tokenID
+
+        textTokenId.setOnClickListener {
+            Intent(this, WalletActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
     }
 }

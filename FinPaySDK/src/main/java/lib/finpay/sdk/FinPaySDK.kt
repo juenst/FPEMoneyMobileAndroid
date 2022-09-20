@@ -1,17 +1,28 @@
 package lib.finpay.sdk
 
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import com.example.testing.Signature
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.UserBallanceModel
+import lib.finpay.sdk.repository.TokenRepository
+import lib.finpay.sdk.service.ApiResult
 import lib.finpay.sdk.service.BaseService
 import lib.finpay.sdk.service.network.Api
-import lib.finpay.sdk.service.network.ApiService
+import lib.finpay.sdk.viewmodel.TokenViewModel
+//import lib.finpay.sdk.viewmodel.TokenViewModel
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
+import java.net.ConnectException
+import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 class FinPaySDK{
@@ -22,7 +33,7 @@ class FinPaySDK{
         merchantPassword: String,
         merchantSecretKey: String,
         transNumber: String
-    ) : String? {
+    ) : String {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
         val mapJson = mapOf(
@@ -32,41 +43,64 @@ class FinPaySDK{
         )
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
-        val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
+        val request = BaseService.getRetrofitInstance().create(Api::class.java)
+         var tokenID: String = ""
 
-        val requestBody : HashMap<String, String>  = hashMapOf()
-        requestBody["requestType"] = "getToken"
-        requestBody["signature"] = signatureID
-        requestBody["reqDtime"] = currentDate
-        requestBody["transNumber"] = transNumber
+//         CoroutineScope(Dispatchers.IO).launch {
+//             try {
+                 val requestBody: HashMap<String, String> = hashMapOf()
+                 requestBody["requestType"] = "getToken"
+                 requestBody["signature"] = signatureID
+                 requestBody["reqDtime"] = currentDate
+                 requestBody["transNumber"] = transNumber
 
-        var tokenID: String? = ""
-        retIn.getToken(requestBody).enqueue(object : Callback<TokenModel> {
-            override fun onFailure(call: Call<TokenModel>, t: Throwable) {
-                println("response failure")
-                println(t.message)
-                tokenID = ""
-            }
-            override fun onResponse(call: Call<TokenModel>, response: Response<TokenModel>) {
-                if (response.code() == 200) {
-                    if(response.body()?.getStatusCode() == "000") {
-                        println("response ok")
-                        println(response.body()?.getTokenID())
-                        saveToken(response.body()!!)
-                        tokenID = response.body()?.getTokenID().toString()
-                    } else {
-                        println("statusCode != 200")
-                        println(response.body()?.getStatusDesc())
-                        tokenID = ""
-                    }
-                } else {
-                    println("response code != 200")
-                    print(response.body()?.getStatusDesc())
-                    tokenID = ""
-                }
-            }
-        })
-        println("tokenID => " + tokenID)
+                 request.getToken(requestBody).enqueue(object : Callback<TokenModel> {
+                     override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+                         println("response failure")
+                         println(t.message)
+                         tokenID = ""
+                     }
+
+                     override fun onResponse(
+                         call: Call<TokenModel>,
+                         response: Response<TokenModel>
+                     ) {
+                         if (response.code() == 200) {
+                             if (response.body()?.getStatusCode() == "000") {
+                                 println("response ok")
+                                 println(response.body()?.getTokenID())
+                                 saveToken(response.body()!!)
+                                 tokenID = response.body()?.getTokenID().toString()
+                             } else {
+                                 println("statusCode != 200")
+                                 println(response.body()?.getStatusDesc())
+                                 tokenID = ""
+                             }
+                         } else {
+                             println("response code != 200")
+                             print(response.body()?.getStatusDesc())
+                             tokenID = ""
+                         }
+                     }
+                 })
+//             } catch (e: Exception) {
+//                 when (e) {
+//                     is UnknownHostException -> {
+//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srSomethingWentWrongPleaseTryAgainLater))
+//                     }
+//                     is HttpException -> {
+//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srServerError))
+//                     }
+//                     is ConnectException -> {
+//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srSomethingWentWrongPleaseTryAgainLater))
+//                     }
+//                     else -> {
+//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srServerError))
+//                     }
+//                 }
+//             }
+//         }
+         println("tokenID => " + TokenModel().getTokenID())
         return tokenID
     }
 
@@ -125,5 +159,12 @@ class FinPaySDK{
                 }
             }
         })
+    }
+
+    fun getTokens(merchantUsername: String, merchantPassword: String, merchantSecretKey: String, transNumber: String) : String{
+        lateinit var tokenViewModel: TokenViewModel
+        val test = tokenViewModel.getToken(merchantUsername, merchantPassword, merchantSecretKey, transNumber)
+        print(test)
+        return "test"
     }
 }

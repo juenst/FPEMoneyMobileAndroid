@@ -35,26 +35,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/imgStatus"
-                        android:layout_width="@dimen/_165sdp"
-                        android:layout_height="@dimen/_106sdp"
-                        tools:src="@drawable/ic_dialog_failed"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_22sdp"
-                        />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imgStatus"-->
+<!--                        android:layout_width="@dimen/_165sdp"-->
+<!--                        android:layout_height="@dimen/_106sdp"-->
+<!--                        tools:src="@drawable/ic_dialog_failed"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:layout_marginTop="@dimen/_22sdp"-->
+<!--                        />-->
 
-                    <TextView
-                        android:id="@+id/lblTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_18sdp"
-                        tools:text="Kata Sandi Sama"
-                        android:textColor="@color/colorFailedRed"
-                        android:fontFamily="@font/nunito_sans_bold"
-                        android:textSize="@dimen/_16sdp"
-                        />
+<!--                    <TextView-->
+<!--                        android:id="@+id/lblTitle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:layout_marginTop="@dimen/_18sdp"-->
+<!--                        tools:text="Kata Sandi Sama"-->
+<!--                        android:textColor="@color/colorFailedRed"-->
+<!--                        android:fontFamily="@font/nunito_sans_bold"-->
+<!--                        android:textSize="@dimen/_16sdp"-->
+<!--                        />-->
 
                     <TextView
                         android:id="@+id/lblMessage"
@@ -76,17 +76,17 @@
                         android:orientation="horizontal"
                         android:paddingBottom="20dp">
 
-                        <Button
-                            android:id="@+id/btnConfirmationPositive"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_btn_daftar"
-                            tools:text="Ya, Benar"
-                            android:fontFamily="@font/candara_bold"
-                            android:textSize="@dimen/_14sdp"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white" />
+<!--                        <Button-->
+<!--                            android:id="@+id/btnConfirmationPositive"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="@drawable/bg_btn_daftar"-->
+<!--                            tools:text="Ya, Benar"-->
+<!--                            android:fontFamily="@font/candara_bold"-->
+<!--                            android:textSize="@dimen/_14sdp"-->
+<!--                            android:textAllCaps="false"-->
+<!--                            android:textColor="@color/white" />-->
 
 
                     </LinearLayout>
