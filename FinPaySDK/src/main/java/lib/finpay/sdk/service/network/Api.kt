@@ -2,6 +2,7 @@ package lib.finpay.sdk.service.network
 
 import ApiResponse
 import io.reactivex.Single
+import lib.finpay.sdk.model.HistoryTransactionModel
 import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.UserBallanceModel
 import retrofit2.Call
@@ -20,6 +21,12 @@ interface Api {
     fun getBalance(
         @Body body: HashMap<String, String>
     ): Call<UserBallanceModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun getHistoryTransaction(
+        @Body body: HashMap<String, String>
+    ): Call<HistoryTransactionModel>
 
     @FormUrlEncoded
     @Headers("Content-Type:application/json")

@@ -26,30 +26,26 @@ class MainActivity : AppCompatActivity() {
 
 
         btnCallSDK.setOnClickListener {
-            FinPaySDK().getToken(
+            FinPaySDK().getBalance(
                 Constant().userName,
                 Constant().password,
                 Constant().secretKey,
                 "TRX1234567890",
+                "083815613839",
+
+                getTokenID = {
+                    tokenVal ->
+                    textTokenId.setText(tokenVal)
+                },
                 onSuccess = {
-                        tokens->
-                    textTokenId.setText(tokens.getTokenID())
-                    FinPaySDK().getBalance(
-                        Constant().userName,
-                        Constant().password,
-                        Constant().secretKey,
-                        "TRX1234567890",
-                        "083815613839",
-                        tokens.getTokenID()!!,
-                        onSuccess = {
-                                userBallanceModel ->
+                        userBallanceModel ->
                             textSaldo.setText(userBallanceModel.getCustBalance())
-                        }
-                    )
                 }
+
             )
         }
 
+        println("mesasage")
 
         btnCallWallet.setOnClickListener {
             println("test")

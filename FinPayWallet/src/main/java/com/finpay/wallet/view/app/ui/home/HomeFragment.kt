@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
@@ -35,6 +36,8 @@ class HomeFragment : Fragment() {
         val txtUserName: TextView = binding.txtUsername
         val txtSaldo: TextView = binding.txtSaldo
 
+        val history: LinearLayout = binding.linearHistory
+
         val userName: String = "MT77764DKM83N"
         val password: String = "YJV3AM0y"
         val secretKey: String = "daYumnMb"
@@ -45,25 +48,30 @@ class HomeFragment : Fragment() {
             txtSaldo.text = it
         }
 
-        FinPaySDK().getToken(
+        history.setOnClickListener(){
+            FinPaySDK().getHistoryTransaction(
+                userName,
+                password,
+                secretKey,
+                "TRX1234567890",
+                "083815613839",
+                onSuccess = {
+                    listData ->
+                    println("List Data : " + listData.toString())
+                }
+            )
+        }
+
+        FinPaySDK().getBalance(
             userName,
             password,
             secretKey,
             "TRX1234567890",
+            "083815613839",
             onSuccess = {
-                    tokens-> FinPaySDK().getBalance(
-                    userName,
-                    password,
-                    secretKey,
-                    "TRX1234567890",
-                    "083815613839",
-                    tokens.getTokenID()!!,
-                    onSuccess = {
-                        userBallanceModel ->
-                        txtSaldo.setText(userBallanceModel.getCustBalance())
-                        txtUserName.setText(userBallanceModel.getCustName())
-                    }
-                )
+                    userBallanceModel ->
+                txtSaldo.setText(userBallanceModel.getCustBalance())
+                txtUserName.setText(userBallanceModel.getCustName())
             }
         )
 
