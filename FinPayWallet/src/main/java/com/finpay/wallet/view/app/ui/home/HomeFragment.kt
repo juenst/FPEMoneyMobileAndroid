@@ -18,6 +18,8 @@ import com.finpay.wallet.R
 import com.finpay.wallet.databinding.FragmentHomeBinding
 import com.finpay.wallet.view.upgrade_acc.UpgradeInformationActivity
 import lib.finpay.sdk.FinPaySDK
+import java.text.NumberFormat
+import java.util.*
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
@@ -57,27 +59,25 @@ class HomeFragment : Fragment(), View.OnClickListener {
         _binding = null
     }
 
+    fun formatRupiah(number: Double): String{
+        val localeID =  Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return numberFormat.format(number).toString()
+    }
+
     private fun getBalance() {
         val userName = "MT77764DKM83N"
         val password = "YJV3AM0y"
         val secretKey = "daYumnMb"
-        finPaySDK.getToken(
+        finPaySDK.getBalance(
             userName,
             password,
             secretKey,
             "TRX1234567890",
-            onSuccess = { tokens ->
-                FinPaySDK().getBalance(
-                    userName,
-                    password,
-                    secretKey,
-                    "TRX1234567890",
-                    "083815613839",
-                    onSuccess = { userBalanceModel ->
-                        txtSaldo.text = userBalanceModel.getCustBalance()
-                        txtUserName.text = userBalanceModel.getCustName()
-                    }
-                )
+            "083815613839",
+            onSuccess = { userBalanceModel ->
+                txtSaldo.text = formatRupiah(userBalanceModel.getCustBalance()!!.toDouble())
+                txtUserName.text = userBalanceModel.getCustName()!!.split(" ").toTypedArray().first().toString().toUpperCase()
             }
         )
     }
@@ -86,7 +86,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         crdWarning.setOnClickListener(this)
         setSpanText(
             64,
-            87, Color.BLUE,
+            87, Color.BLACK,
             "Dapatkan banyak keuntungan dengan menjadi Finpay Money Premium. Lihat Info Selengkapnya",
             tvWarningBody
         )
