@@ -73,7 +73,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     secretKey,
                     "TRX1234567890",
                     "083815613839",
-                    tokens.getTokenID()!!,
                     onSuccess = { userBalanceModel ->
                         txtSaldo.text = userBalanceModel.getCustBalance()
                         txtUserName.text = userBalanceModel.getCustName()

@@ -35,8 +35,8 @@ class FinPaySDK{
         merchantSecretKey: String,
         transNumber: String,
         onSuccess: (TokenModel) -> Unit = {},
-        onError: (Throwable) -> Unit = {}
-    ) : String {
+//        onError: (Throwable) -> Unit = {}
+    ): TokenModel {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
         val mapJson = mapOf(
@@ -47,78 +47,41 @@ class FinPaySDK{
         signature = Signature()
         val signatureID = signature.createSignature(merchantSecretKey, mapJson)
         val request = BaseService.getRetrofitInstance().create(Api::class.java)
-         var tokenID: String = ""
+        val requestBody: HashMap<String, String> = hashMapOf()
+        requestBody["requestType"] = "getToken"
+        requestBody["signature"] = signatureID
+        requestBody["reqDtime"] = currentDate
+        requestBody["transNumber"] = transNumber
 
-//         CoroutineScope(Dispatchers.IO).launch {
-//             try {
-                 val requestBody: HashMap<String, String> = hashMapOf()
-                 requestBody["requestType"] = "getToken"
-                 requestBody["signature"] = signatureID
-                 requestBody["reqDtime"] = currentDate
-                 requestBody["transNumber"] = transNumber
+        val time = measureTimeMillis {
+            request.getToken(requestBody).enqueue(object : Callback<TokenModel> {
+                override fun onFailure(call: Call<TokenModel>, t: Throwable) {
+                    println("response failure")
+                    println(t.message)
+                }
 
-                 val time = measureTimeMillis {
-                     request.getToken(requestBody).enqueue(object : Callback<TokenModel> {
-                         override fun onFailure(call: Call<TokenModel>, t: Throwable) {
-                             println("response failure")
-                             println(t.message)
-                             tokenID = ""
-                         }
-
-                         override fun onResponse(
-                             call: Call<TokenModel>,
-                             response: Response<TokenModel>
-                         ) {
-                             if (response.code() == 200) {
-                                 if (response.body()?.getStatusCode() == "000") {
-                                     println("response ok")
-                                     println(response.body()?.getTokenID())
-                                     saveToken(response.body()!!)
-                                     tokenID = response.body()?.getTokenID().toString()
-                                     onSuccess(response.body()!!)
-
-                                 } else {
-                                     println("statusCode != 200")
-                                     println(response.body()?.getStatusDesc())
-                                     tokenID = ""
-                                 }
-                             } else {
-                                 println("response code != 200")
-                                 print(response.body()?.getStatusDesc())
-                                 tokenID = ""
-                             }
-                         }
-                     })
-                 }
-
-                println("get data time $time ms")
-
-//             } catch (e: Exception) {
-//                 when (e) {
-//                     is UnknownHostException -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srSomethingWentWrongPleaseTryAgainLater))
-//                     }
-//                     is HttpException -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srServerError))
-//                     }
-//                     is ConnectException -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srSomethingWentWrongPleaseTryAgainLater))
-//                     }
-//                     else -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srServerError))
-//                     }
-//                 }
-//             }
-//         }
-         println("tokenID => " + TokenModel().getTokenID())
-        return tokenID
-    }
-
-    private fun saveToken(tokenModel: TokenModel) {
-//        val editor: SharedPreferences.Editor = preferences!!.edit()
-//        editor.putString("tokenID", tokenModel.getTokenID())
-//        editor.putString("tokenExpiry", tokenModel.getTokenExpiry())
-//        editor.apply()
+                override fun onResponse(
+                    call: Call<TokenModel>,
+                    response: Response<TokenModel>
+                ) {
+                    if (response.code() == 200) {
+                        if (response.body()?.getStatusCode() == "000") {
+                            println("response ok")
+                            println(response.body()?.getTokenID())
+                            onSuccess(response.body()!!)
+                        } else {
+                            println("statusCode != 200")
+                            println(response.body()?.getStatusDesc())
+                        }
+                    } else {
+                        println("response code != 200")
+                        print(response.body()?.getStatusDesc())
+                    }
+                }
+            })
+        }
+        println("get data time $time ms")
+        return TokenModel()
     }
 
     fun getBalance(
@@ -127,57 +90,61 @@ class FinPaySDK{
         merchantSecretKey: String,
         transNumber: String,
         phoneNumber: String,
-        tokenID: String,
         onSuccess: (UserBallanceModel) -> Unit = {},
     ) {
-        val sdf = SimpleDateFormat("yyyyMMdHHmmss")
-        val currentDate = sdf.format(Date())
-        val mapJson = mapOf(
-            "requestType" to "getBalance",
-            "reqDtime" to currentDate,
-            "transNumber" to transNumber,
-            "phoneNumber" to phoneNumber,
-            "tokenID" to tokenID
-        )
-        signature = Signature()
-        val signatureID = signature.createSignature(merchantSecretKey, mapJson)
-        val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
+        val token: TokenModel
+        token = getToken(
+            merchantUsername = merchantUsername,
+            merchantPassword = merchantPassword,
+            merchantSecretKey = merchantSecretKey,
+            transNumber = transNumber,
+            onSuccess = {
+                tokens->
+                println("tokenID => ...")
+                println(tokens.getTokenID().toString())
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val currentDate = sdf.format(Date())
+                val mapJson = mapOf(
+                    "requestType" to "getBalance",
+                    "reqDtime" to currentDate,
+                    "transNumber" to transNumber,
+                    "phoneNumber" to phoneNumber,
+                    "tokenID" to tokens.getTokenID().toString()
+                )
+                signature = Signature()
+                val signatureID = signature.createSignature(merchantSecretKey, mapJson)
+                val request = BaseService.getRetrofitInstance().create(Api::class.java)
 
-        val requestBody : HashMap<String, String>  = hashMapOf()
-        requestBody["requestType"] = "getBalance"
-        requestBody["signature"] = signatureID
-        requestBody["reqDtime"] = currentDate
-        requestBody["transNumber"] = transNumber
-        requestBody["phoneNumber"] = phoneNumber
-        requestBody["tokenID"] = tokenID
+                val requestBody : HashMap<String, String>  = hashMapOf()
+                requestBody["requestType"] = "getBalance"
+                requestBody["signature"] = signatureID
+                requestBody["reqDtime"] = currentDate
+                requestBody["transNumber"] = transNumber
+                requestBody["phoneNumber"] = phoneNumber
+                requestBody["tokenID"] = tokens.getTokenID().toString()
 
-        retIn.getBalance(requestBody).enqueue(object : Callback<UserBallanceModel> {
-            override fun onFailure(call: Call<UserBallanceModel>, t: Throwable) {
-                println("response failure getUserBalance")
-                println(t.message)
-            }
-            override fun onResponse(call: Call<UserBallanceModel>, response: Response<UserBallanceModel>) {
-                if (response.code() == 200) {
-                    if(response.body()?.getStatusCode() == "000") {
-                        println("response ok getUserBalance")
-                        println(response.body()?.getCustBalance())
-                        onSuccess(response.body()!!)
-                    } else {
-                        println("statusCode != 200 getUserBalance")
-                        println(response.body()?.getStatusDesc())
+                request.getBalance(requestBody).enqueue(object : Callback<UserBallanceModel> {
+                    override fun onFailure(call: Call<UserBallanceModel>, t: Throwable) {
+                        println("response failure getUserBalance")
+                        println(t.message)
                     }
-                } else {
-                    println("response code != 200 getUserBalance")
-                    print(response.body()?.getStatusDesc())
-                }
-            }
-        })
-    }
-
-    fun getTokens(merchantUsername: String, merchantPassword: String, merchantSecretKey: String, transNumber: String) : String{
-        lateinit var tokenViewModel: TokenViewModel
-        val test = tokenViewModel.getToken(merchantUsername, merchantPassword, merchantSecretKey, transNumber)
-        print(test)
-        return "test"
+                    override fun onResponse(call: Call<UserBallanceModel>, response: Response<UserBallanceModel>) {
+                        if (response.code() == 200) {
+                            if(response.body()?.getStatusCode() == "000") {
+                                println("response ok getUserBalance")
+                                println(response.body()?.getCustBalance())
+                                onSuccess(response.body()!!)
+                            } else {
+                                println("statusCode != 200 getUserBalance")
+                                println(response.body()?.getStatusDesc())
+                            }
+                        } else {
+                            println("response code != 200 getUserBalance")
+                            print(response.body()?.getStatusDesc())
+                        }
+                    }
+                })
+            },
+        )
     }
 }
