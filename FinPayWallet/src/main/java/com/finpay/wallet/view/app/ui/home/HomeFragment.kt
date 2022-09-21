@@ -108,7 +108,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.crd_warning_premium -> {
                 val moveToPremiumInfo =
-                    Intent(view?.context, UpgradeInformationActivity::class.java)
+                    Intent(activity, UpgradeInformationActivity::class.java)
                 startActivity(moveToPremiumInfo)
             }
         }
