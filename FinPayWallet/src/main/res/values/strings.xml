@@ -1,12 +1,7 @@
 <resources>
     <string name="app_name">FinPaySDK</string>
-    <string name="profil_profil"><b>Profil</b></string>
-    <string name="standar_profil">STANDAR</string>
-    <string name="nama_profil">Widiyanto Ramadhan</string>
-    <string name="noHp_profil">+6283815613839</string>
-    <string name="ubah_pin_profil">Ubah PIN</string>
-    <string name="deactivate_biometric_profil">Non Aktifkan Biometrik</string>
-    <string name="logout"><b>KELUAR</b></string>
-    <string name="riwayat_trx"><b>RIWAYAT TRANSAKSI</b></string>
-
+    <string name="title_activity_app">AppActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

@@ -4,7 +4,17 @@
 
     <application>
         <activity
+            android:name=".view.app.ui.history.HistoryTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.app.AppActivity"
+            android:exported="false"
+            android:label="@string/title_activity_app" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.home.HomeActivity"
             android:exported="false" />
     </application>
 

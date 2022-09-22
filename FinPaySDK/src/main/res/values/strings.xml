@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FinPaySDK</string>
+    <string name="srSomethingWentWrongPleaseTryAgainLater">Something went wrong, please try again later</string>
+    <string name="srServerError">Server Error</string>
+</resources>
