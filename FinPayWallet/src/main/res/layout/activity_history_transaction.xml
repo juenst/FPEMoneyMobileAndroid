@@ -27,7 +27,6 @@
             android:id="@+id/recyclerViewHistory"
             android:layout_width="409dp"
             android:layout_height="729dp"
-            android:padding="16dp"
             tools:itemCount="2"
             tools:listitem="@layout/content_history_transaction"
             app:layout_constraintBottom_toBottomOf="parent"
