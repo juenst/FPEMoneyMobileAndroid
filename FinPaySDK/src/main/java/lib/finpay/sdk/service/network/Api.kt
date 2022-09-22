@@ -4,6 +4,7 @@ import ApiResponse
 import io.reactivex.Single
 import lib.finpay.sdk.model.HistoryTransactionModel
 import lib.finpay.sdk.model.TokenModel
+import lib.finpay.sdk.model.UpgradeAccountModel
 import lib.finpay.sdk.model.UserBallanceModel
 import retrofit2.Call
 import retrofit2.http.*
@@ -27,6 +28,12 @@ interface Api {
     fun getHistoryTransaction(
         @Body body: HashMap<String, String>
     ): Call<HistoryTransactionModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun upgradeAccount(
+        @Body body: HashMap<String, String>
+    ): Call<UpgradeAccountModel>
 
     @FormUrlEncoded
     @Headers("Content-Type:application/json")
