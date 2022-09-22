@@ -6,6 +6,8 @@ import com.example.testing.Signature
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import lib.finpay.sdk.model.DetailHistoryTransactionModel
+import lib.finpay.sdk.model.HistoryTransactionModel
 import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.UserBallanceModel
 import lib.finpay.sdk.repository.TokenRepository
@@ -146,5 +148,86 @@ class FinPaySDK{
                 })
             },
         )
+    }
+
+    fun getHistoryTransaction(
+        merchantUsername: String,
+        merchantPassword: String,
+        merchantSecretKey: String,
+        transNumber: String,
+        phoneNumber: String,
+        onSuccess: (MutableList<DetailHistoryTransactionModel>) -> Unit = {},
+    ) {
+
+        FinPaySDK().getToken(
+            merchantUsername,
+            merchantPassword,
+            merchantSecretKey,
+            "TRX1234567890",
+            onSuccess = {
+                    tokens->
+
+                val tokenID: String = tokens.getTokenID()!!
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val currentDate = sdf.format(Date())
+
+                val sdf2 = SimpleDateFormat("yyyyMMd")
+                val currentDate2 = sdf2.format(Date())
+
+
+                val mapJson = mapOf(
+                    "requestType" to "getHist",
+                    "reqDtime" to currentDate,
+                    "transNumber" to transNumber,
+                    "phoneNumber" to phoneNumber,
+                    "tokenID" to tokenID,
+                    "startDate" to "20220915",
+                    "endDate" to currentDate2
+                )
+                signature = Signature()
+                val signatureID = signature.createSignature(merchantSecretKey, mapJson)
+                val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
+
+                val requestBody : HashMap<String, String>  = hashMapOf()
+                requestBody["requestType"] = "getHist"
+                requestBody["signature"] = signatureID
+                requestBody["reqDtime"] = currentDate
+                requestBody["transNumber"] = transNumber
+                requestBody["phoneNumber"] = phoneNumber
+                requestBody["tokenID"] = tokenID
+                requestBody["startDate"] = "20220915"
+                requestBody["endDate"] = currentDate2
+
+                retIn.getHistoryTransaction(requestBody).enqueue(object : Callback<HistoryTransactionModel> {
+                    override fun onFailure(call: Call<HistoryTransactionModel>, t: Throwable) {
+                        println("response failure getHistory")
+                        println(t.message)
+                    }
+                    override fun onResponse(call: Call<HistoryTransactionModel>, response: Response<HistoryTransactionModel>) {
+                        if (response.code() == 200) {
+                            if(response.body()?.getStatusCode() == "000") {
+                                println("response ok getHistory")
+                                onSuccess(response.body()!!.getListHistory()!!)
+                            } else {
+                                println("statusCode != 200 getHistory")
+                                println(response.body()?.getStatusDesc())
+                            }
+                        } else {
+                            println("response code != 200 getHistory")
+                            print(response.body()?.getStatusDesc())
+                        }
+                    }
+                })
+            }
+        )
+
+    }
+
+
+    fun getTokens(merchantUsername: String, merchantPassword: String, merchantSecretKey: String, transNumber: String) : String{
+        lateinit var tokenViewModel: TokenViewModel
+        val test = tokenViewModel.getToken(merchantUsername, merchantPassword, merchantSecretKey, transNumber)
+        print(test)
+        return "test"
     }
 }

@@ -3,6 +3,7 @@ package com.finpay.wallet.view.app.ui.history
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,8 @@ class HistoryTransactionActivity : AppCompatActivity() {
 //        // getting the recyclerview by its id
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerViewHistory)
         val loadingBar = findViewById<ProgressBar>(R.id.loadingBar)
+        val historyContent = findViewById<LinearLayout>(R.id.historyContent)
+        val emptyHistory = findViewById<LinearLayout>(R.id.emptyHistory)
 
 //
 //        // this creates a vertical layout Manager
@@ -38,9 +41,17 @@ class HistoryTransactionActivity : AppCompatActivity() {
                     listData ->
                 println("List Data : " + listData.toString())
                 val adapter = HistoryAdapter(listData)
-
-                loadingBar.visibility = View.GONE
-                recyclerview.adapter = adapter
+                if(adapter!=null){
+                    loadingBar.visibility = View.GONE
+                }
+                if(listData.isNotEmpty()){
+                    historyContent.visibility=View.VISIBLE
+                    emptyHistory.visibility=View.GONE
+                    recyclerview.adapter = adapter
+                }else{
+                    emptyHistory.visibility=View.VISIBLE
+                    historyContent.visibility=View.GONE
+                }
             }
         )
     }
