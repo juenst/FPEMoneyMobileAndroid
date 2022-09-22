@@ -96,4 +96,148 @@ class DetailHistoryTransactionModel {
         this.sofCode = sofCode;
         this.sofId = sofId;
     }
+
+    fun getDateTime(): String? {
+        return dateTime
+    }
+
+    fun setDateTime(dateTimes: String?) {
+        this.dateTime = dateTimes
+    }
+
+    fun getType(): String? {
+        return type
+    }
+
+    fun setTypes(types: String?) {
+        this.type = types
+    }
+
+    fun getDesc(): String? {
+        return desc
+    }
+
+    fun setDesc(descs: String?) {
+        this.desc = descs
+    }
+
+    fun getValues(): String? {
+        return value
+    }
+
+    fun setValues(values: String?) {
+        this.value = values
+    }
+
+    fun getTrxCode(): String? {
+        return trxCode
+    }
+
+    fun setTrxCode(trxCodes: String?) {
+        this.trxCode = trxCodes
+    }
+
+    fun getIds(): String? {
+        return id
+    }
+
+    fun setIds(ids: String?) {
+        this.id = ids
+    }
+
+    fun getSumIn(): String? {
+        return sumIn
+    }
+
+    fun setSumIn(sumIns: String?) {
+        this.sumIn = sumIns
+    }
+
+    fun getSumOut(): String? {
+        return sumOut
+    }
+
+    fun setSumOut(sumOuts: String?) {
+        this.sumOut = sumOuts
+    }
+
+    fun getSysLogno(): String? {
+        return sysLogno
+    }
+
+    fun setSysLognos(sysLognos: String?) {
+        this.sysLogno = sysLognos
+    }
+
+    fun getChannelId(): String? {
+        return channelId
+    }
+
+    fun setChannelIds(channelIds: String?) {
+        this.channelId = channelIds
+    }
+
+    fun getSources(): String? {
+        return source
+    }
+
+    fun setSources(sources: String?) {
+        this.source = sources
+    }
+
+    fun getDestination(): String? {
+        return destination
+    }
+
+    fun setDestination(destinations: String?) {
+        this.destination = destinations
+    }
+
+    fun getNames(): String? {
+        return name
+    }
+
+    fun setNames(names: String?) {
+        this.name = names
+    }
+
+    fun getTraxId(): String? {
+        return traxId
+    }
+
+    fun setTraxIds(traxIds: String?) {
+        this.traxId = traxIds
+    }
+
+    fun getProdCode(): String? {
+        return prodCode
+    }
+
+    fun setProdCode(prodCodes: String?) {
+        this.prodCode = prodCodes
+    }
+
+    fun getBillingNo(): String? {
+        return billingNo
+    }
+
+    fun setBillingNo(billingNos: String?) {
+        this.billingNo = billingNos
+    }
+
+    fun getSofCode(): String? {
+        return sofCode
+    }
+
+    fun setSofCode(sofCodes: String?) {
+        this.sofCode = sofCodes
+    }
+
+    fun getSofId(): String? {
+        return sofId
+    }
+
+    fun setSofIds(sofIds: String?) {
+        this.sofId = sofIds
+    }
 }

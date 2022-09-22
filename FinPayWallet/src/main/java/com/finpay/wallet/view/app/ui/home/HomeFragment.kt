@@ -1,5 +1,6 @@
 package com.finpay.wallet.view.app.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.databinding.FragmentHomeBinding
+import com.finpay.wallet.view.app.AppActivity
+import com.finpay.wallet.view.app.ui.history.HistoryTransactionActivity
 import lib.finpay.sdk.FinPaySDK
 
 class HomeFragment : Fragment() {
@@ -49,17 +52,8 @@ class HomeFragment : Fragment() {
         }
 
         history.setOnClickListener(){
-            FinPaySDK().getHistoryTransaction(
-                userName,
-                password,
-                secretKey,
-                "TRX1234567890",
-                "083815613839",
-                onSuccess = {
-                    listData ->
-                    println("List Data : " + listData.toString())
-                }
-            )
+            val intent = Intent (getActivity(), HistoryTransactionActivity::class.java)
+            getActivity()?.startActivity(intent)
         }
 
         FinPaySDK().getBalance(

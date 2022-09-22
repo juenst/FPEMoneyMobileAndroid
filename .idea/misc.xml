@@ -25,17 +25,19 @@
         <entry key="FinPayWallet/src/main/res/drawable/ic_standar.xml" value="0.2085" />
         <entry key="FinPayWallet/src/main/res/layout/abc_action_bar_title_item.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/activity_app.xml" value="0.11197916666666667" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_history_transaction.xml" value="0.1" />
         <entry key="FinPayWallet/src/main/res/layout/activity_home.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/activity_mains.xml" value="0.1431159420289855" />
         <entry key="FinPayWallet/src/main/res/layout/activity_profile.xml" value="0.19610507246376813" />
+        <entry key="FinPayWallet/src/main/res/layout/content_history_transaction.xml" value="0.18258056640624995" />
         <entry key="FinPayWallet/src/main/res/layout/custom_alert_dialog.xml" value="0.298661800486618" />
         <entry key="FinPayWallet/src/main/res/layout/design_bottom_navigation_item.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/dialog_alert_button_with_image.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/dialog_loading.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/floating_action_mode.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/fragment_dashboard.xml" value="0.11458333333333333" />
-        <entry key="FinPayWallet/src/main/res/layout/fragment_home.xml" value="0.11197916666666667" />
+        <entry key="FinPayWallet/src/main/res/layout/fragment_home.xml" value="0.2206263224283853" />
         <entry key="FinPayWallet/src/main/res/layout/fragment_notifications.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/item_spinner_result.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/spinner_with_search_layout.xml" value="0.19610507246376813" />

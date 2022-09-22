@@ -214,4 +214,7 @@ dependencies {
     implementation project(path: ':FinPaySDK')
     implementation files('FinPaySDK')
 
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+
 }
