@@ -33,6 +33,7 @@ class HistoryAdapter(private val mList: MutableList<DetailHistoryTransactionMode
         // sets the image to the imageview from our itemHolder class
         // holder.imageView.setImageResource(dataListHistory.image)
         holder.nameTransaction.text = dataListHistory.getDesc()
+        holder.amountTransaction.text = "Rp"+dataListHistory.getValues()
 
         // sets the text to the textview from our itemHolder class
         // holder.textView.text = ItemsViewModel.text
@@ -61,6 +62,7 @@ class HistoryAdapter(private val mList: MutableList<DetailHistoryTransactionMode
         // Set Value to UI
         val nameTransaction: TextView = itemView.findViewById(R.id.nameTransaction)
         val dateTimeTransaction: TextView =  itemView.findViewById(R.id.dateTimeTransaction)
+        val amountTransaction: TextView = itemView.findViewById(R.id.amountTransaction)
         /*val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val textView: TextView = itemView.findViewById(R.id.textView)*/
     }
