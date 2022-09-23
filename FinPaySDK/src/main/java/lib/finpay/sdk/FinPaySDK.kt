@@ -1,34 +1,19 @@
 package lib.finpay.sdk
 
-import android.content.SharedPreferences
-import androidx.lifecycle.MutableLiveData
+//import lib.finpay.sdk.viewmodel.TokenViewModel
 import com.example.testing.Signature
-import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.annotations.SerializedName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import lib.finpay.sdk.model.DetailHistoryTransactionModel
 import lib.finpay.sdk.model.HistoryTransactionModel
 import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.UserBallanceModel
-import lib.finpay.sdk.repository.TokenRepository
-import lib.finpay.sdk.service.ApiResult
 import lib.finpay.sdk.service.BaseService
 import lib.finpay.sdk.service.network.Api
 import lib.finpay.sdk.viewmodel.TokenViewModel
-import org.json.JSONObject
-//import lib.finpay.sdk.viewmodel.TokenViewModel
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.HttpException
 import retrofit2.Response
-import java.net.ConnectException
-import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 import kotlin.system.measureTimeMillis
 
 
@@ -217,11 +202,14 @@ class FinPaySDK{
 
                 val tokenID: String = tokens.getTokenID()!!
                 val sdf = SimpleDateFormat("yyyyMMdHHmmss")
-                val currentDate = sdf.format(Date())
+                val newDate = Date(Date().getTime() - 7776000000)
 
                 val sdf2 = SimpleDateFormat("yyyyMMd")
+                val currentDate = sdf.format(Date())
                 val currentDate2 = sdf2.format(Date())
+                val minus7Days = sdf2.format(newDate)
 
+                println("seven days : " + minus7Days)
 
                 val mapJson = mapOf(
                     "requestType" to "getHist",
@@ -229,7 +217,7 @@ class FinPaySDK{
                     "transNumber" to transNumber,
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
-                    "startDate" to "20220915",
+                    "startDate" to minus7Days,
                     "endDate" to currentDate2
                 )
                 signature = Signature()
@@ -240,6 +228,83 @@ class FinPaySDK{
                 requestBody["requestType"] = "getHist"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = currentDate
+                requestBody["transNumber"] = transNumber
+                requestBody["phoneNumber"] = phoneNumber
+                requestBody["tokenID"] = tokenID
+                requestBody["startDate"] = minus7Days
+                requestBody["endDate"] = currentDate2
+
+                retIn.getHistoryTransaction(requestBody).enqueue(object : Callback<HistoryTransactionModel> {
+                    override fun onFailure(call: Call<HistoryTransactionModel>, t: Throwable) {
+                        println("response failure getHistory")
+                        println(t.message)
+                    }
+                    override fun onResponse(call: Call<HistoryTransactionModel>, response: Response<HistoryTransactionModel>) {
+                        if (response.code() == 200) {
+                            if(response.body()?.getStatusCode() == "000") {
+                                println("response ok getHistory")
+                                onSuccess(response.body()!!.getListHistory()!!)
+                            } else {
+                                println("statusCode != 200 getHistory")
+                                println(response.body()?.getStatusDesc())
+                            }
+                        } else {
+                            println("response code != 200 getHistory")
+                            print(response.body()?.getStatusDesc())
+                        }
+                    }
+                })
+            }
+        )
+
+    }
+
+    fun getHistoryMasterTransaction(
+        merchantUsername: String,
+        merchantPassword: String,
+        merchantSecretKey: String,
+        transNumber: String,
+        phoneNumber: String,
+        onSuccess: (MutableList<DetailHistoryTransactionModel>) -> Unit = {},
+    ) {
+
+        FinPaySDK().getToken(
+            merchantUsername,
+            merchantPassword,
+            merchantSecretKey,
+            "TRX1234567890",
+            onSuccess = {
+                    tokens->
+
+                val tokenID: String = tokens.getTokenID()!!
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val currentDate = sdf.format(Date())
+
+                val sdf2 = SimpleDateFormat("yyyyMMd")
+                val currentDate2 = sdf2.format(Date())
+
+
+                val mapJson = mapOf(
+                    "requestType" to "getHistMaster",
+                    "reqDtime" to currentDate,
+                    "transNumber" to transNumber,
+                    "phoneNumber" to phoneNumber,
+                    "transType" to "FBX2250",
+                    "tokenID" to tokenID,
+                    "startDate" to "20220915",
+                    "endDate" to currentDate2
+                )
+
+
+                signature = Signature()
+                val signatureID = signature.createSignature(merchantSecretKey, mapJson)
+                val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
+
+                val requestBody : HashMap<String, String>  = hashMapOf()
+                requestBody["requestType"] = "getHistMaster"
+                requestBody["signature"] = signatureID
+                requestBody["reqDtime"] = currentDate
+                requestBody["transType"] = "FBX2250"
                 requestBody["transNumber"] = transNumber
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID

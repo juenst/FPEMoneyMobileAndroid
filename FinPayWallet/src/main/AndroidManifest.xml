@@ -4,6 +4,9 @@
 
     <application>
         <activity
+            android:name=".view.app.ui.history.DetailHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.app.ui.history.HistoryTransactionActivity"
             android:exported="false" />
         <activity

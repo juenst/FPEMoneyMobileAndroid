@@ -15,6 +15,16 @@ import java.util.*
 
 class HistoryAdapter(private val mList: MutableList<DetailHistoryTransactionModel>) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
+    private lateinit var mListener: onItemClickListner
+
+    interface onItemClickListner{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listner: onItemClickListner){
+        mListener = listner
+    }
+
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
@@ -22,8 +32,10 @@ class HistoryAdapter(private val mList: MutableList<DetailHistoryTransactionMode
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.content_history_transaction, parent, false)
 
-        return ViewHolder(view)
+        return ViewHolder(view,mListener)
     }
+
+
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -43,6 +55,7 @@ class HistoryAdapter(private val mList: MutableList<DetailHistoryTransactionMode
         val localDateTime = LocalDateTime.parse(str, pattern)
 
 
+
         val dates: String = ""+localDateTime.dayOfMonth + " " + localDateTime.month.toString().lowercase().replaceFirstChar {
             it.uppercase()
         }+ " " + localDateTime.year
@@ -58,12 +71,17 @@ class HistoryAdapter(private val mList: MutableList<DetailHistoryTransactionMode
         return mList.size
     }
 
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+    class ViewHolder(ItemView: View,listner: onItemClickListner) : RecyclerView.ViewHolder(ItemView) {
         // Set Value to UI
         val nameTransaction: TextView = itemView.findViewById(R.id.nameTransaction)
         val dateTimeTransaction: TextView =  itemView.findViewById(R.id.dateTimeTransaction)
         val amountTransaction: TextView = itemView.findViewById(R.id.amountTransaction)
         /*val imageView: ImageView = itemView.findViewById(R.id.imageview)
         val textView: TextView = itemView.findViewById(R.id.textView)*/
+        init {
+            itemView.setOnClickListener{
+                listner.onItemClick(adapterPosition)
+            }
+        }
     }
 }

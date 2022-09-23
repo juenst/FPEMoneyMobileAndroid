@@ -28,6 +28,12 @@ interface Api {
         @Body body: HashMap<String, String>
     ): Call<HistoryTransactionModel>
 
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun getHistoryMasterTransaction(
+        @Body body: HashMap<String, String>
+    ): Call<HistoryTransactionModel>
+
     @FormUrlEncoded
     @Headers("Content-Type:application/json")
     @POST("api.php")
