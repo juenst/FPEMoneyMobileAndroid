@@ -12,6 +12,7 @@
         <entry key="FinPayWallet/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="FinPayWallet/src/main/res/layout/activity_profile.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/activity_upgrade_information.xml" value="0.14336372847011145" />
+        <entry key="FinPayWallet/src/main/res/layout/bottom_dialog_profile.xml" value="0.19610507246376813" />
         <entry key="FinPayWallet/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="FinPayWallet/src/main/res/layout/fragment_home.xml" value="0.4316710485076213" />
         <entry key="FinPayWallet/src/main/res/layout/fragment_notifications.xml" value="0.25" />
