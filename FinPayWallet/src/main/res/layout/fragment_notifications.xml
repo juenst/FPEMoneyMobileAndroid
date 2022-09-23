@@ -58,6 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="20dp"/>
             <RelativeLayout
+                android:id="@+id/rlPhoto"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -66,13 +67,12 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/qr_example"/>
+                    android:src="@drawable/qr_example" />
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
                     android:background="@color/white"
                     android:nestedScrollingEnabled="false"
                     android:src="@drawable/ic_profile_ganti" />

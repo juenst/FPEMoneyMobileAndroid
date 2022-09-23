@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.finpay.wallet.R
 import com.finpay.wallet.databinding.FragmentNotificationsBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.FinPaySDK
 
 class NotificationsFragment : Fragment() {
@@ -20,6 +24,7 @@ class NotificationsFragment : Fragment() {
     private lateinit var txtUserName: TextView
     private lateinit var txtPhoneNumber: TextView
     private lateinit var txtStatus: TextView
+    private lateinit var rlPhoto: RelativeLayout
     private lateinit var finPaySDK: FinPaySDK
 
     override fun onCreateView(
@@ -28,8 +33,7 @@ class NotificationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         finPaySDK = FinPaySDK()
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val notificationsViewModel = ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -37,7 +41,13 @@ class NotificationsFragment : Fragment() {
         txtUserName = binding.txtUsername
         txtPhoneNumber = binding.txtPhoneNumber
         txtStatus = binding.txtStatus
+        rlPhoto = binding.rlPhoto
         getBalance()
+
+        rlPhoto.setOnClickListener {
+            showDialogProfile()
+        }
+
         return root
     }
 
@@ -68,5 +78,20 @@ class NotificationsFragment : Fragment() {
                 txtStatus.text = custType
             }
         )
+    }
+
+    fun showDialogProfile() {
+        val dialog = BottomSheetDialog(requireContext())
+        dialog.setContentView(R.layout.bottom_dialog_profile)
+        val btnChangePhoto = dialog.findViewById<RelativeLayout>(R.id.rlChangePhoto)
+        val btnQR = dialog.findViewById<RelativeLayout>(R.id.rlQR)
+
+        btnChangePhoto?.setOnClickListener {
+
+        }
+        btnQR?.setOnClickListener {
+
+        }
+        dialog.show()
     }
 }
