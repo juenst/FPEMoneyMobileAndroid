@@ -5,123 +5,121 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ScrollView
-        android:id="@+id/containerContent"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.app.ui.history.HistoryTransactionActivity">
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/appBarHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/toolbar"
+                android:background="@color/white"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/AppTheme.PopupOverlay">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:paddingVertical="15dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/backButton"
+                            android:layout_width="30dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_arrow_left"
+                            android:layout_height="30dp"/>
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:text="Riwayat Transaksi"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:textColor="@color/md_blue_900"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+        </com.google.android.material.appbar.AppBarLayout>
+        <ScrollView
+            android:id="@+id/containerContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/loadingBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            tools:context=".view.app.ui.history.HistoryTransactionActivity">
 
             <LinearLayout
-                android:id="@+id/historyContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingTop="60dp"
-                android:visibility="gone"
-                tools:context=".view.app.ui.history.HistoryTransactionActivity">
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewHistory"
-                    android:layout_width="409dp"
-                    android:layout_height="729dp"
-
+                <ProgressBar
+                    android:id="@+id/loadingBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/content_history_transaction" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/emptyHistory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/img_history_empty" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Tidak Ada Transaksi" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-    <com.google.android.material.appbar.AppBarLayout app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/appBarHistory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            android:background="@color/white"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/AppTheme.PopupOverlay">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    app:layout_constraintTop_toTopOf="parent" />
                 <LinearLayout
-                    android:paddingLeft="5dp"
-                    android:paddingVertical="15dp"
-                    android:orientation="horizontal"
+                    android:id="@+id/historyContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/backButton"
-                        android:layout_width="30dp"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_arrow_left"
-                        android:layout_height="30dp"/>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:text="Riwayat Transaksi"
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:textColor="@color/md_blue_900"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/quantum_grey300"
-                    />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="40dp"
+                    android:visibility="gone"
+                    tools:context=".view.app.ui.history.HistoryTransactionActivity">
 
-    </com.google.android.material.appbar.AppBarLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewHistory"
+                        android:layout_width="409dp"
+                        android:layout_height="729dp"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/content_history_transaction" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/emptyHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/img_history_empty" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Tidak Ada Transaksi" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
