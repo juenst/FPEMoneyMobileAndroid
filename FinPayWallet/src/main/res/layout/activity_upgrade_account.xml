@@ -12,33 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?actionBarSize"
-        android:background="@color/colorPrimaryDark"
         android:orientation="vertical">
 
-        <com.shuhart.stepview.StepView
-            android:id="@+id/step_view"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_16sdp"
-            app:sv_doneCircleColor="@color/colorAccent"
-            app:sv_doneCircleRadius="12dp"
-            app:sv_doneStepLineColor="@color/colorAccent"
-            app:sv_doneStepMarkColor="@color/colorPrimary"
-            app:sv_nextStepLineColor="@color/colorAccent"
-            app:sv_nextTextColor="@color/colorAccent"
-            app:sv_selectedCircleColor="@color/colorAccent"
-            app:sv_selectedCircleRadius="12dp"
-            app:sv_selectedStepNumberColor="@color/colorPrimary"
-            app:sv_selectedTextColor="@color/colorAccent"
-            app:sv_stepLineWidth="1dp"
-            app:sv_stepNumberTextSize="18sp"
-            app:sv_stepPadding="4dp"
-            app:sv_stepViewStyle="@style/StepView" />
-
-        <FrameLayout
-            android:id="@+id/frame_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/stepper_nav" />
 
     </LinearLayout>
 

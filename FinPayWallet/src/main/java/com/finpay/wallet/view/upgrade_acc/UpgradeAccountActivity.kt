@@ -1,37 +1,28 @@
 package com.finpay.wallet.view.upgrade_acc
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.finpay.wallet.R
 import com.shuhart.stepview.StepView
 
 class UpgradeAccountActivity : AppCompatActivity() {
-    private lateinit var stepView: StepView
-    private var index: Int = 0
+    private lateinit var appbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upgrade_account)
-
-        stepView = findViewById(R.id.step_view)
-        stepView.state.animationType(StepView.ANIMATION_ALL).stepsNumber(3)
-            .animationDuration(resources.getInteger(android.R.integer.config_shortAnimTime))
-            .commit()
-
-        val fragmentManager = supportFragmentManager
-        val homeFragment = StepIdentityFragment()
-        val fragment =
-            fragmentManager.findFragmentByTag(StepIdentityFragment::class.java.simpleName)
-
-        if (fragment !is StepIdentityFragment) {
-            fragmentManager.beginTransaction()
-                .add(
-                    R.id.frame_container,
-                    homeFragment,
-                    StepIdentityFragment::class.java.simpleName
-                )
-                .commit()
-        }
+        appbar = findViewById(R.id.appbar_main)
+        appbarSettings(appbar)
     }
 
+    private fun appbarSettings(appbar: Toolbar) {
+        appbar.setTitleTextColor(Color.parseColor("#182156"))
+        appbar.setBackgroundColor(Color.parseColor("#F3F4F9"))
+        setSupportActionBar(appbar)
+        supportActionBar?.title = "Hello World From Upgrade"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+    }
 }

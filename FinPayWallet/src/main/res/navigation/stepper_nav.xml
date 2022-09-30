@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stepper_nav"
+    app:startDestination="@id/stepperFirstFragment">
+
+    <fragment
+        android:id="@+id/stepperFirstFragment"
+        android:name="com.finpay.wallet.view.upgrade_acc.StepperFirstFragment"
+        android:label="fragment_stepper_first"
+        tools:layout="@layout/fragment_stepper_first" />
+    <fragment
+        android:id="@+id/stepperSecondFragment"
+        android:name="com.finpay.wallet.view.upgrade_acc.StepperSecondFragment"
+        android:label="fragment_stepper_second"
+        tools:layout="@layout/fragment_stepper_second" />
+    <fragment
+        android:id="@+id/stepperThirdFragment"
+        android:name="com.finpay.wallet.view.upgrade_acc.StepperThirdFragment"
+        android:label="fragment_stepper_third"
+        tools:layout="@layout/fragment_stepper_third" />
+</navigation>
