@@ -51,9 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Call API token From SDK"
-        android:gravity="center_vertical"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="444dp"
+        android:textAlignment="center"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -61,9 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Call Activity Wallet SDK"
-        android:gravity="center_vertical"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="505dp"
+        android:textAlignment="center"
         tools:ignore="MissingConstraints" />
 
 

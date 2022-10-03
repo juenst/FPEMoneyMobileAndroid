@@ -38,8 +38,8 @@ class FinPaySDK {
         merchantSecretKey: String,
         transNumber: String,
         onSuccess: (TokenModel) -> Unit = {},
-        onError: (Throwable) -> Unit = {}
-    ): String {
+//        onError: (Throwable) -> Unit = {}
+    ): TokenModel {
         val sdf = SimpleDateFormat("yyyyMMdHHmmss")
         val currentDate = sdf.format(Date())
         val mapJson = mapOf(
@@ -53,10 +53,6 @@ class FinPaySDK {
         println("currentDateTime : " + currentDate)
 
         val request = BaseService.getRetrofitInstance().create(Api::class.java)
-        var tokenID: String = ""
-
-//         CoroutineScope(Dispatchers.IO).launch {
-//             try {
         val requestBody: HashMap<String, String> = hashMapOf()
         requestBody["requestType"] = "getToken"
         requestBody["signature"] = signatureID
@@ -68,7 +64,6 @@ class FinPaySDK {
                 override fun onFailure(call: Call<TokenModel>, t: Throwable) {
                     println("response failure")
                     println(t.message)
-                    tokenID = ""
                 }
 
                 override fun onResponse(
@@ -79,52 +74,20 @@ class FinPaySDK {
                         if (response.body()?.getStatusCode() == "000") {
                             println("response ok")
                             println(response.body()?.getTokenID())
-                            saveToken(response.body()!!)
-                            tokenID = response.body()?.getTokenID().toString()
                             onSuccess(response.body()!!)
-
                         } else {
                             println("statusCode != 200")
                             println(response.body()?.getStatusDesc())
-                            tokenID = ""
                         }
                     } else {
                         println("response code != 200")
                         print(response.body()?.getStatusDesc())
-                        tokenID = ""
                     }
                 }
             })
         }
-
         println("get data time $time ms")
-
-//             } catch (e: Exception) {
-//                 when (e) {
-//                     is UnknownHostException -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srSomethingWentWrongPleaseTryAgainLater))
-//                     }
-//                     is HttpException -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srServerError))
-//                     }
-//                     is ConnectException -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srSomethingWentWrongPleaseTryAgainLater))
-//                     }
-//                     else -> {
-//                         //tokenResult.postValue(ApiResult.errorInt(R.string.srServerError))
-//                     }
-//                 }
-//             }
-//         }
-        println("tokenID => " + TokenModel().getTokenID())
-        return tokenID
-    }
-
-    private fun saveToken(tokenModel: TokenModel) {
-//        val editor: SharedPreferences.Editor = preferences!!.edit()
-//        editor.putString("tokenID", tokenModel.getTokenID())
-//        editor.putString("tokenExpiry", tokenModel.getTokenExpiry())
-//        editor.apply()
+        return TokenModel()
     }
 
     fun getBalance(
@@ -136,16 +99,15 @@ class FinPaySDK {
         onSuccess: (UserBallanceModel) -> Unit = {},
         getTokenID: (String) -> Unit = {}
     ) {
-
-        FinPaySDK().getToken(
-            merchantUsername,
-            merchantPassword,
-            merchantSecretKey,
-            "TRX1234567890",
+        val token: TokenModel
+        token = getToken(
+            merchantUsername = merchantUsername,
+            merchantPassword = merchantPassword,
+            merchantSecretKey = merchantSecretKey,
+            transNumber = transNumber,
             onSuccess = { tokens ->
-//                textTokenId.setText(tokens.getTokenID())
-                getTokenID(tokens.getTokenID()!!)
-                val tokenID: String = tokens.getTokenID()!!
+                println("tokenID => ...")
+                println(tokens.getTokenID().toString())
                 val sdf = SimpleDateFormat("yyyyMMdHHmmss")
                 val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
@@ -153,11 +115,11 @@ class FinPaySDK {
                     "reqDtime" to currentDate,
                     "transNumber" to transNumber,
                     "phoneNumber" to phoneNumber,
-                    "tokenID" to tokenID
+                    "tokenID" to tokens.getTokenID().toString()
                 )
                 signature = Signature()
                 val signatureID = signature.createSignature(merchantSecretKey, mapJson)
-                val retIn = BaseService.getRetrofitInstance().create(Api::class.java)
+                val request = BaseService.getRetrofitInstance().create(Api::class.java)
 
                 val requestBody: HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "getBalance"
@@ -165,9 +127,9 @@ class FinPaySDK {
                 requestBody["reqDtime"] = currentDate
                 requestBody["transNumber"] = transNumber
                 requestBody["phoneNumber"] = phoneNumber
-                requestBody["tokenID"] = tokenID
+                requestBody["tokenID"] = tokens.getTokenID().toString()
 
-                retIn.getBalance(requestBody).enqueue(object : Callback<UserBallanceModel> {
+                request.getBalance(requestBody).enqueue(object : Callback<UserBallanceModel> {
                     override fun onFailure(call: Call<UserBallanceModel>, t: Throwable) {
                         println("response failure getUserBalance")
                         println(t.message)
@@ -192,10 +154,8 @@ class FinPaySDK {
                         }
                     }
                 })
-
-            }
+            },
         )
-
     }
 
     fun getHistoryTransaction(
@@ -362,23 +322,5 @@ class FinPaySDK {
                 })
             }
         )
-    }
-
-
-    fun getTokens(
-        merchantUsername: String,
-        merchantPassword: String,
-        merchantSecretKey: String,
-        transNumber: String
-    ): String {
-        lateinit var tokenViewModel: TokenViewModel
-        val test = tokenViewModel.getToken(
-            merchantUsername,
-            merchantPassword,
-            merchantSecretKey,
-            transNumber
-        )
-        print(test)
-        return "test"
     }
 }

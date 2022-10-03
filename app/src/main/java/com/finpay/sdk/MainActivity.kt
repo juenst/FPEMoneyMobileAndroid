@@ -32,14 +32,8 @@ class MainActivity : AppCompatActivity() {
                 Constant().secretKey,
                 "TRX1234567890",
                 "083815613839",
-
-                getTokenID = {
-                    tokenVal ->
-                    textTokenId.setText(tokenVal)
-                },
                 onSuccess = {
-                        userBallanceModel ->
-                            textSaldo.setText(userBallanceModel.getCustBalance())
+                    userBallanceModel -> textSaldo.setText(userBallanceModel.getCustBalance())
                 }
 
             )
