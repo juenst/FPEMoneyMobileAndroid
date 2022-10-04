@@ -5,7 +5,13 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="img_alert">img_alert</string>
-    <string name="be_finpay_premium_title">Menjadi Finpay Money Premmium</string>
+    <string name="be_finpay_premium_title">Menjadi Finpay Money Premium</string>
     <string name="be_finpay_premium_body">Dapatkan banyak keuntungan dengan menjadi Finpay Money Premium. Lihat Info Selengkapnya</string>
     <string name="ic_arrow">ic_arrow</string>
+    <string-array name="stepLabels">
+        <item>Approval</item>
+        <item>Processed</item>
+        <item>Shipped</item>
+        <item>Delivery</item>
+    </string-array>
 </resources>

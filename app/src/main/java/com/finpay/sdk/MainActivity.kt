@@ -8,11 +8,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.FinPaySDK
-import com.finpay.sdk.R
-import com.finpay.wallet.view.app.AppActivity
+import com.finpay.wallet.view.AppActivity
 
 
 class MainActivity : AppCompatActivity() {
+    lateinit var finPaySDK: FinPaySDK
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,17 +23,27 @@ class MainActivity : AppCompatActivity() {
         var btnCallSDK = findViewById(R.id.btn_call_sdk) as TextView
         var btnCallWallet = findViewById(R.id.btn_call_wallet) as TextView
 
+        finPaySDK = FinPaySDK()
+
+        finPaySDK.init(
+            Constant().userName,
+            Constant().password,
+            Constant().secretKey,
+            "TRX1234567890"
+        )
 
 
         btnCallSDK.setOnClickListener {
-            FinPaySDK().getBalance(
-                Constant().userName,
-                Constant().password,
-                Constant().secretKey,
-                "TRX1234567890",
-                "083815613839",
-                onSuccess = {
-                    userBallanceModel -> textSaldo.setText(userBallanceModel.getCustBalance())
+            FinPaySDK().getToken(
+                onResult = {
+                    token->
+                    textTokenId.setText(token.getTokenID())
+                }
+            )
+            FinPaySDK().getToken(
+                onResult = {
+                        token->
+                    textTokenId.setText(token.getTokenID())
                 }
             )
         }

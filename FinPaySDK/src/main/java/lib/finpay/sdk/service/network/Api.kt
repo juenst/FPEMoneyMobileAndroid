@@ -1,9 +1,7 @@
 package lib.finpay.sdk.service.network
 
-import ApiResponse
 import io.reactivex.Single
-import lib.finpay.sdk.model.TokenModel
-import lib.finpay.sdk.model.UserBallanceModel
+import lib.finpay.sdk.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -17,15 +15,68 @@ interface Api {
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
-    fun getBalance(
+    fun reqActivation(
+        @Body body: HashMap<String, String>
+    ): Call<ReqActivationModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun reqConfirmation(
+        @Body body: HashMap<String, String>
+    ): Call<ReqConfirmationModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun getHistoryTransaction(
+        @Body body: HashMap<String, String>
+    ): Call<HistoryTransactionModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun getHistoryMasterTransaction(
+        @Body body: HashMap<String, String>
+    ): Call<HistoryTransactionModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun getUserBallance(
         @Body body: HashMap<String, String>
     ): Call<UserBallanceModel>
 
-    @FormUrlEncoded
     @Headers("Content-Type:application/json")
     @POST("api.php")
-    suspend fun getTokens(
-        @HeaderMap authorization: HashMap<String, String>,
+    fun transaction(
         @Body body: HashMap<String, String>
-    ): TokenModel
+    ): Call<TransactionModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun mutasiBallance(
+        @Body body: HashMap<String, String>
+    ): Call<MutasiBallanceModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun widgetProfile(
+        @Body body: HashMap<String, String>
+    ): Call<WidgetProfileModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun widgetTopUp(
+        @Body body: HashMap<String, String>
+    ): Call<WidgetTopUpModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun regisAccMerchant(
+        @Body body: HashMap<String, String>
+    ): Call<RegisAccMerchantModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun unpair(
+        @Body body: HashMap<String, String>
+    ): Call<UnpairModel>
+
 }

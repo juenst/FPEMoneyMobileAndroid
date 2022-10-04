@@ -11,6 +11,10 @@
         <item name="buttonStyle">?android:attr/borderlessButtonStyle</item>
     </style>
 
+    <style name="AppTheme.finpayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimaryDark">#00ACBA</item>
+    </style>
+
     <style name="AppThemeChihp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>

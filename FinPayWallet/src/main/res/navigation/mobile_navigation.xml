@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.finpay.wallet.view.app.ui.home.HomeFragment"
+        android:name="com.finpay.wallet.view.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.finpay.wallet.view.app.ui.dashboard.DashboardFragment"
+        android:name="com.finpay.wallet.view.qris.QRISFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_qris" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.finpay.wallet.view.app.ui.notifications.NotificationsFragment"
+        android:name="com.finpay.wallet.view.profile.ProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

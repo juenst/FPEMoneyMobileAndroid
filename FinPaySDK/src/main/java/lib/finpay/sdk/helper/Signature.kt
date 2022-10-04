@@ -1,16 +1,22 @@
 package com.example.testing
 
+import lib.finpay.sdk.constant.Constant
+import lib.finpay.sdk.helper.PrefHelper
+import lib.finpay.sdk.helper.SharedPrefKeys
+import lib.finpay.sdk.repository.TokenRepository
 import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import javax.xml.bind.DatatypeConverter
 
 class Signature {
-
-    fun createSignature(secreyKey: String, data: Map<String, Any>): String {
+    lateinit var prefHelper: PrefHelper
+    fun createSignature(data: Map<String, Any>): String {
+        prefHelper = PrefHelper()
+        var secretKey : String = Constant.secretKey
         val dataMapSorted = data.toList().sortedBy { (key, _) -> key }.toMap()
         val mapValue = dataMapSorted.values.joinToString("")
-        val key = bin2hex(secreyKey.toByteArray())
+        val key = bin2hex(secretKey.toByteArray())
         return digest(mapValue, key).uppercase()
     }
 

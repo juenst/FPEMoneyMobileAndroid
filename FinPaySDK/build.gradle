@@ -15,9 +15,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-//        buildConfigField "String", "API_URL", API_URL
-//        buildConfigField "String", "API_KEY", API_KEY
-//        buildConfigField "String", "BASE_IMAGE", BASE_IMAGE
+        buildConfigField "String", "KEY_AES", "\"AmosKeyAES123543\""
+        buildConfigField "String", "RANDOM_INIT_VECTOR", "\"RandomInitVector\""
+
+        def secureProps = new Properties()
+        if (file("../secure.properties").exists()) {
+            file("../secure.properties")?.withInputStream { secureProps.load(it) }
+        }
     }
 
     buildTypes {
@@ -36,6 +40,7 @@ android {
     dataBinding {
         enabled = true
     }
+    namespace 'lib.finpay.sdk'
 }
 
 dependencies {
