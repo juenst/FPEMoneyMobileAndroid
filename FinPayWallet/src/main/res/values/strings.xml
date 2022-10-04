@@ -8,10 +8,23 @@
     <string name="be_finpay_premium_title">Menjadi Finpay Money Premium</string>
     <string name="be_finpay_premium_body">Dapatkan banyak keuntungan dengan menjadi Finpay Money Premium. Lihat Info Selengkapnya</string>
     <string name="ic_arrow">ic_arrow</string>
+
     <string-array name="stepLabels">
         <item>Approval</item>
         <item>Processed</item>
         <item>Shipped</item>
         <item>Delivery</item>
     </string-array>
+
+    <string name="toolbar_title">Toolbar Title</string>
+    <string name="button_back">button_back</string>
+    <string name="upgrade_account_information">Upgrade Account Information</string>
+    <string name="img_upload_identity">img_upload_identity</string>
+    <string name="information_drawer">information_drawer</string>
+    <string name="result_after_taking_pict">result after_taking_pict</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fill_the_form">Fill The Form</string>
+    <string name="selfie_with_id">Selfie With ID</string>
+    <string name="capture_id">Capture ID</string>
 </resources>
