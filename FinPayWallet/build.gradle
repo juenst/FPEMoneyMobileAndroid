@@ -229,7 +229,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
 
     //midtrans
-    implementation 'com.midtrans:uikit:1.21.2-SANDBOX'
+    //implementation 'com.midtrans:uikit:1.21.2-SANDBOX'
 //    sandboxImplementation 'com.midtrans:uikit:1.21.2-SANDBOX'
 
 }

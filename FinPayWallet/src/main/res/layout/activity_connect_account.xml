@@ -20,7 +20,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="300dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/bg_connect" />
 
@@ -30,6 +30,46 @@
                     android:layout_marginTop="40dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/logo_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="200dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="74dp"
+                        android:layout_height="74dp"
+                        android:clipToOutline="true"
+                        android:background="@drawable/round_outline"
+                        android:src="@drawable/logo_finpay_money" />
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-----------"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:textFontWeight="700"
+                        />
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_width="74dp"
+                        android:layout_height="74dp"
+                        android:clipToOutline="true"
+                        android:background="@drawable/round_outline"
+                        android:src="@drawable/logo_finpay_money" />
+
+                </LinearLayout>
 
             </FrameLayout>
 
@@ -43,7 +83,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Untuk Seluruh Kebutuhan Transaksi Anda."
+                    android:text="Aktivasi Akun Finpay Money"
                     android:textSize="20sp"
                     android:textFontWeight="700"
                 />
@@ -55,7 +95,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dimanapun dan kapanpun Anda mau, kini Finpay Money menyediakan seluruh kebutuhan taransaksi elektronik Anda"
+                    android:text="Sambungkan akun kamu dengan Finpay Money untuk mengakses fitur yang memenuhi seluruh kebutuhan transaksi elektronik Anda"
                     android:textSize="14sp"
                     android:textFontWeight="400"
                     android:textColor="#364152"
@@ -75,12 +115,12 @@
 
                 <Space
                     android:layout_width="wrap_content"
-                    android:layout_height="32dp" />
+                    android:layout_height="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dengan daftar atau masuk ke aplikasi, Anda menyetujui Syarat dan Ketentuan layanan Finpay Money"
+                    android:text="Dengan menghubungkan dan mengaktivasikan akun Finpay Money, Anda menyetujui Syarat dan Ketentuan layanan Finpay Money"
                     android:textSize="14sp"
                     android:textFontWeight="400"
                     android:textColor="#364152"

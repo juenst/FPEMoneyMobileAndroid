@@ -22,7 +22,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bg_connect" />
+                    android:src="@drawable/bg_login" />
 
                 <ImageView
                     android:layout_width="110dp"

@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.databinding.FragmentHomeBinding
 import com.finpay.wallet.view.home.banner.item.BannerListener
 import com.finpay.wallet.view.home.banner.model.BannerPromo
-import com.midtrans.sdk.uikit.SdkUIFlowBuilder
+//import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import lib.finpay.sdk.FinPaySDK
@@ -100,9 +100,9 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         _binding = null
     }
 
-    private fun makePayment() {
-        SdkUIFlowBuilder.init()
-    }
+//    private fun makePayment() {
+//        SdkUIFlowBuilder.init()
+//    }
 
     fun formatRupiah(number: Double): String{
         val localeID =  Locale("in", "ID")
