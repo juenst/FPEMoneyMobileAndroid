@@ -1,15 +1,22 @@
 package lib.finpay.sdk
 
 import android.content.Context
-import android.content.SharedPreferences
-import com.example.testing.Signature
-import lib.finpay.sdk.helper.PrefHelper
-import lib.finpay.sdk.helper.SharedPrefKeys
 import lib.finpay.sdk.model.*
 import lib.finpay.sdk.repository.*
 
 
-class FinPaySDK{
+public class FinPaySDK{
+//    private fun SdkUIFlowBuilder(
+//        context: Context,
+//        merchantUsername: String,
+//        merchantPassword: String,
+//        merchantSecretKey: String
+//    ) {
+//        this.context = context
+//        this.username = merchantUsername
+//        this.password = merchantPassword
+//        this.clientKey = merchantSecretKey
+//    }
 
     fun init(
         merchantUsername: String,

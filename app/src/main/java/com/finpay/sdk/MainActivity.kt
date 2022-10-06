@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             )
             FinPaySDK().getToken(
                 onResult = {
-                        token->
+                    token->
                     textTokenId.setText(token.getTokenID())
                 }
             )

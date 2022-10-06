@@ -1,30 +1,29 @@
 package com.finpay.wallet.view.qris
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.finpay.wallet.databinding.FragmentQrisBinding
-import android.app.AlertDialog
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.PermissionChecker
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.finpay.wallet.databinding.FragmentQrisBinding
 import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.integration.android.IntentIntegrator
-import org.json.JSONException
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileInputStream
@@ -32,14 +31,14 @@ import java.io.InputStream
 
 class QRISFragment : Fragment() {
 
+    private var WRITE_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 1
+    private var READ_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 2
+    private var CAMERA_PERMISSION_CODE: Int = 3
+
     private var _binding: FragmentQrisBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private var WRITE_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 1
-    private var READ_EXTERNAL_STORAGE_PERMISSION_CODE: Int = 2
-    private var CAMERA_PERMISSION_CODE: Int = 3
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,27 +56,33 @@ class QRISFragment : Fragment() {
             textView.text = it
         }
 
-        checkPermission()
+//        val intent = Intent(getContext(), QRISActivity::class.java)
+//        startActivity(intent)
 
         return root
     }
 
-    private fun checkPermission(){
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+//    private fun checkPermission(){
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            when (PackageManager.PERMISSION_DENIED) {
-//                PermissionChecker.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+//                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
 //                    requestPermissions(
 //                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
 //                        WRITE_EXTERNAL_STORAGE_PERMISSION_CODE
 //                    )
 //                }
-//                PermissionChecker.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+//                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) -> {
 //                    requestPermissions(
 //                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
 //                        READ_EXTERNAL_STORAGE_PERMISSION_CODE
 //                    )
 //                }
-//                PermissionChecker.checkSelfPermission(Manifest.permission.CAMERA) -> {
+//                ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) -> {
 //                    requestPermissions(
 //                        arrayOf(Manifest.permission.CAMERA),
 //                        CAMERA_PERMISSION_CODE
@@ -85,8 +90,8 @@ class QRISFragment : Fragment() {
 //                }
 //            }
 //        }
-    }
-
+//    }
+//
 //    override fun onRequestPermissionsResult(
 //        requestCode: Int,
 //        permissions: Array<out String>,
@@ -96,39 +101,27 @@ class QRISFragment : Fragment() {
 //        when (requestCode) {
 //            WRITE_EXTERNAL_STORAGE_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
 //                if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-//                    Toast.makeText(this, "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
-//                    finish()
+//                    Toast.makeText(getContext(), "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
+////                    finish()
 //                }
 //            }
 //            READ_EXTERNAL_STORAGE_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
 //                if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-//                    Toast.makeText(this, "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
-//                    finish()
+//                    Toast.makeText(getContext(), "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
+////                    finish()
 //                }
 //            }
 //            CAMERA_PERMISSION_CODE -> if (grantResults.isNotEmpty()) {
 //                if (grantResults[0] == PackageManager.PERMISSION_DENIED){
-//                    Toast.makeText(this, "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
-//                    finish()
+//                    Toast.makeText(getContext(), "Anda perlu memberikan semua izin untuk menggunakan aplikasi ini.", Toast.LENGTH_SHORT).show()
+////                    finish()
 //                }
 //            }
 //        }
 //    }
 //
-//    fun clickScan(view: View) {
-//        val scanOptions = arrayOf<String>("Camera", "Gallery")
-//        AlertDialog.Builder(this)
-//            .setTitle("Scan QR Code melalui")
-//            .setItems(scanOptions) { _, which-> when (which) {
-//                0 -> openCamera()
-//                1 -> openGallery()
-//            } }
-//            .create()
-//            .show()
-//    }
-//
 //    private fun openCamera() {
-//        val qrScan = IntentIntegrator(this)
+//        val qrScan = IntentIntegrator(requireContext())
 //        qrScan.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
 //        qrScan.setPrompt("Scan a QR Code")
 //        qrScan.setOrientationLocked(false)
@@ -152,7 +145,7 @@ class QRISFragment : Fragment() {
 //            val imgFile = File(imagePath)
 //            scanImageQRCode(imgFile)
 //        } else {
-//            Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show()
+//            Toast.makeText(getContext(), "Result Not Found", Toast.LENGTH_LONG).show()
 //        }
 //    }
 //
@@ -184,17 +177,13 @@ class QRISFragment : Fragment() {
 //        try {
 //            val result: Result = reader.decode(bitmap)
 //            contents = result.text
-//
-//            tvResult.text = contents
+//            println("result")
+//            println(contents)
+//            //tvResult.text = contents
 //        } catch (e: Exception) {
 //            Log.e("QrTest", "Error decoding qr code", e)
-//            Toast.makeText(this, "Error decoding QR Code, Mohon pilih gambar QR Code yang benar!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(getContext(), "Error decoding QR Code, Mohon pilih gambar QR Code yang benar!", Toast.LENGTH_SHORT).show()
 //        }
 //        return contents
 //    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
