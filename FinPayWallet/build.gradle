@@ -10,7 +10,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 21
+        minSdk 24
         targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -193,9 +193,7 @@ dependencies {
     //permission util
 //    implementation 'ru.superjob:kotlin-permissions:1.0.3'
 
-//    implementation('com.journeyapps:zxing-android-embedded:4.1.0') { transitive = false }
     implementation 'androidx.appcompat:appcompat:1.5.1'
-//    implementation 'com.google.zxing:core:3.4.1'
 
     //paris airbnb
     implementation 'com.airbnb.android:paris:1.4.0'
@@ -229,5 +227,9 @@ dependencies {
     //QRIS
     implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.0'
+
+    //midtrans
+    //implementation 'com.midtrans:uikit:1.21.2-SANDBOX'
+//    sandboxImplementation 'com.midtrans:uikit:1.21.2-SANDBOX'
 
 }

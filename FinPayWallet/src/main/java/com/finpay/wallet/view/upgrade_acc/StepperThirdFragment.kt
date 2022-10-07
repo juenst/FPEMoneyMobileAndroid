@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.finpay.wallet.R
 import com.finpay.wallet.databinding.FragmentStepperThirdBinding
-import com.finpay.wallet.view.home.HomeActivity
 
 class StepperThirdFragment : Fragment() {
     private var _binding: FragmentStepperThirdBinding? = null
@@ -26,8 +25,8 @@ class StepperThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnFinish.setOnClickListener {
             Toast.makeText(context, "Finish Data and Hit API", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity, HomeActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(activity, HomeActivity::class.java)
+//            startActivity(intent)
         }
     }
 

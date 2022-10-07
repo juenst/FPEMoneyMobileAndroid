@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.R
-import com.finpay.wallet.databinding.FragmentNotificationsBinding
+import com.finpay.wallet.databinding.FragmentProfileBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.FinPaySDK
 
 class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,7 +24,7 @@ class ProfileFragment : Fragment() {
     private lateinit var txtUserName: TextView
     private lateinit var txtPhoneNumber: TextView
     private lateinit var txtStatus: TextView
-    private lateinit var rlPhoto: RelativeLayout
+    private lateinit var imgProfile: ImageView
     private lateinit var finPaySDK: FinPaySDK
 
     override fun onCreateView(
@@ -34,16 +35,16 @@ class ProfileFragment : Fragment() {
         finPaySDK = FinPaySDK()
         val notificationsViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         txtUserName = binding.txtUsername
         txtPhoneNumber = binding.txtPhoneNumber
         txtStatus = binding.txtStatus
-        rlPhoto = binding.rlPhoto
+        imgProfile = binding.imgProfile
         //getBalance()
 
-        rlPhoto.setOnClickListener {
+        imgProfile.setOnClickListener {
             showDialogProfile()
         }
 

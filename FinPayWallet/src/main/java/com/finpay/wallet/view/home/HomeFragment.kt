@@ -1,6 +1,6 @@
 package com.finpay.wallet.view.home
 
-import android.content.Intent
+import android.R
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -12,22 +12,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.finpay.wallet.R
 import com.finpay.wallet.databinding.FragmentHomeBinding
-import com.finpay.wallet.view.home.banner.item.BannerCarouselItem
 import com.finpay.wallet.view.home.banner.item.BannerListener
 import com.finpay.wallet.view.home.banner.model.BannerPromo
-import com.finpay.wallet.view.upgrade_acc.UpgradeInformationActivity
+//import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import lib.finpay.sdk.FinPaySDK
 import java.text.NumberFormat
 import java.util.*
+
 
 class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
 
@@ -102,6 +99,10 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         super.onDestroyView()
         _binding = null
     }
+
+//    private fun makePayment() {
+//        SdkUIFlowBuilder.init()
+//    }
 
     fun formatRupiah(number: Double): String{
         val localeID =  Locale("in", "ID")
