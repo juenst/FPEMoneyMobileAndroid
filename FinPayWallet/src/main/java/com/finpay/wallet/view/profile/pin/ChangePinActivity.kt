@@ -1,9 +1,11 @@
 package com.finpay.wallet.view.profile.pin
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -16,6 +18,7 @@ import java.util.*
 class ChangePinActivity : AppCompatActivity() {
     val oldPin = mutableListOf("", "", "", "", "", "", "")
     val newPin = mutableListOf("", "", "", "", "", "", "")
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar!!.hide()
         super.onCreate(savedInstanceState)
@@ -54,9 +57,12 @@ class ChangePinActivity : AppCompatActivity() {
 
         val confirmButton = findViewById(R.id.confirmButton) as Button
 
+        val buttonViewPin = findViewById(R.id.buttonViewPin) as TextView
+
         val pins = listOf(pinButton0,pinButton1,pinButton2,pinButton3,pinButton4,pinButton5,pinButton6,pinButton7,pinButton8,pinButton9)
         val texts = listOf(firstPin, secondPin, thirdPin, fourthPin, fifthPin, sixthPin)
         val newTexts = listOf(firstPinNew, secondPinNew, thirdPinNew, fourthPinNew, fifthPinNew, sixthPinNew)
+
         for(i in 0..9){
             pins[i].setOnClickListener {
                 if(oldPinView.visibility==View.VISIBLE){
@@ -67,9 +73,11 @@ class ChangePinActivity : AppCompatActivity() {
                     }
                     Log.e("",oldPin.toString())
                 }else{
-                    onPinPressed(i.toString(), newPin, newTexts)
-                    confirmButton.isEnabled = newPin[5]!=""
-                    Log.e("",newPin.toString())
+                    if(newPin[5]==""){
+                        onPinPressed(i.toString(), newPin, newTexts)
+                        confirmButton.isEnabled = newPin[5]!=""
+                        Log.e("",newPin.toString())
+                    }
                 }
 
             }
@@ -77,100 +85,26 @@ class ChangePinActivity : AppCompatActivity() {
 
         pinButtonDel.setOnClickListener {
             if(oldPinView.visibility==View.VISIBLE){
-//                oldPin[oldPin.indexOfLast { it!="" }] = ""
-//                text[0].text = if (array[0]!="") "•" else ""
-//                text[1].text=if (array[1]!="") "•" else ""
-//                text[2].text=if (array[2]!="") "•" else ""
-//                text[3].text=if (array[3]!="") "•" else ""
-//                text[4].text=if (array[4]!="") "•" else ""
-//                text[5].text=if (array[5]!="") "•" else ""
                 onDeleted(oldPin, texts)
             }else{
-//                newPin[newPin.indexOfLast { it!="" }] = ""
                 onDeleted(newPin, newTexts)
                 confirmButton.isEnabled = newPin[5]!=""
             }
 
         }
 
-        backButton.setOnClickListener {
+        backButton.setOnClickListener{
             onBackPressed()
         }
+    }
 
-//        pinButton0.setOnClickListener {
-//            onPinPressed("0")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton1.setOnClickListener {
-//            onPinPressed("1")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton2.setOnClickListener {
-//            onPinPressed("2")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton3.setOnClickListener {
-//            onPinPressed("3")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton4.setOnClickListener {
-//            onPinPressed("4")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton5.setOnClickListener {
-//            onPinPressed("5")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton6.setOnClickListener {
-//            onPinPressed("6")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton7.setOnClickListener {
-//            onPinPressed("7")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton8.setOnClickListener {
-//            onPinPressed("8")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-//        pinButton9.setOnClickListener {
-//            onPinPressed("9")
-//            if(oldPin[5]!=""){
-//                oldPinView.visibility= View.GONE
-//                newPinView.visibility= View.VISIBLE
-//            }
-//        }
-
-
-
-
+    fun onViewPin(touching:Boolean,array:MutableList<String>, text:List<TextView>){
+        text[0].text = if (array[0]!="") if(touching)array[0] else "•" else ""
+        text[1].text=if (array[1]!="") if(touching)array[1] else "•" else ""
+        text[2].text=if (array[2]!="") if(touching)array[2] else "•" else ""
+        text[3].text=if (array[3]!="") if(touching)array[3] else "•" else ""
+        text[4].text=if (array[4]!="") if(touching)array[4] else "•" else ""
+        text[5].text=if (array[5]!="") if(touching)array[5] else "•" else ""
     }
 
     fun onPinPressed(value:String, array:MutableList<String>, text:List<TextView>){
