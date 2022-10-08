@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+
 android {
     compileSdk 32
 
@@ -30,6 +31,10 @@ android {
         jvmTarget = '1.8'
     }
     namespace 'com.finpay.sdk'
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
