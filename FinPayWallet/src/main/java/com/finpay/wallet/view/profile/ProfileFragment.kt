@@ -1,16 +1,19 @@
 package com.finpay.wallet.view.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.R
 import com.finpay.wallet.databinding.FragmentProfileBinding
+import com.finpay.wallet.view.AppActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.FinPaySDK
 
@@ -24,8 +27,9 @@ class ProfileFragment : Fragment() {
     private lateinit var txtUserName: TextView
     private lateinit var txtPhoneNumber: TextView
     private lateinit var txtStatus: TextView
-    private lateinit var imgProfile: ImageView
+//    private lateinit var imgProfile: ImageView
     private lateinit var finPaySDK: FinPaySDK
+    private lateinit var changeProfile: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,10 +45,11 @@ class ProfileFragment : Fragment() {
         txtUserName = binding.txtUsername
         txtPhoneNumber = binding.txtPhoneNumber
         txtStatus = binding.txtStatus
-        imgProfile = binding.imgProfile
+        changeProfile = binding.changeProfile
+//        imgProfile = binding.imgProfile
         //getBalance()
 
-        imgProfile.setOnClickListener {
+        changeProfile.setOnClickListener {
             showDialogProfile()
         }
 
@@ -87,7 +92,10 @@ class ProfileFragment : Fragment() {
         val btnQR = dialog.findViewById<RelativeLayout>(R.id.rlQR)
 
         btnChangePhoto?.setOnClickListener {
-
+            dialog.dismiss()
+            Intent(requireContext(), EditProfileActivity::class.java).apply {
+                startActivity(this)
+            }
         }
         btnQR?.setOnClickListener {
 

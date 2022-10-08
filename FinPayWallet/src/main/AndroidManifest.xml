@@ -4,6 +4,9 @@
 
     <application>
         <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".SelfieActivity"
             android:exported="false">
             <meta-data
@@ -43,8 +46,8 @@
         <activity
             android:name=".view.AppActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:label="@string/title_activity_app" />
+            android:label="@string/title_activity_app"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
