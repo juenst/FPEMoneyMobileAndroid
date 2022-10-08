@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.R
 import com.finpay.wallet.databinding.FragmentProfileBinding
 import com.finpay.wallet.view.AppActivity
+import com.finpay.wallet.view.profile.pin.ChangePinActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.FinPaySDK
 
@@ -31,6 +32,7 @@ class ProfileFragment : Fragment() {
     //    private lateinit var imgProfile: ImageView
     private lateinit var finPaySDK: FinPaySDK
     private lateinit var changeProfile: LinearLayout
+    private lateinit var buttonUbahPin: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,11 +49,17 @@ class ProfileFragment : Fragment() {
         txtPhoneNumber = binding.txtPhoneNumber
         txtStatus = binding.txtStatus
         changeProfile = binding.changeProfile
+        buttonUbahPin = binding.buttonUbahPin
 //        imgProfile = binding.imgProfile
         //getBalance()
 
         changeProfile.setOnClickListener {
             showDialogProfile()
+        }
+
+        buttonUbahPin.setOnClickListener {
+            val intent = Intent(context, ChangePinActivity::class.java)
+            startActivity(intent)
         }
 
         return root

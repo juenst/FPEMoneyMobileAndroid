@@ -4,6 +4,9 @@
 
     <application>
         <activity
+            android:name=".view.profile.pin.ChangePinActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.profile.EditProfileActivity"
             android:exported="false" />
         <activity

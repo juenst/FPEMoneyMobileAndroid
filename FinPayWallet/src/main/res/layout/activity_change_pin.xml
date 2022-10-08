@@ -12,6 +12,7 @@
             android:paddingHorizontal="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
@@ -24,8 +25,10 @@
 
             <ImageView
                 android:id="@+id/backButton"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="false"
                 android:src="@drawable/ic_baseline_arrow_back_24" />
         </RelativeLayout>
 
@@ -70,9 +73,16 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+<!--                <TextView-->
+<!--                    android:id="@+id/firstPin"-->
+<!--                    android:text="•"-->
+<!--                    android:textSize="32sp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
                 <TextView
                     android:id="@+id/firstPin"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -90,7 +100,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/secondPin"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -108,7 +118,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/thirdPin"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -126,7 +136,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/fourthPin"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -144,7 +154,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/fifthPin"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -162,7 +172,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/sixthPin"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -225,7 +235,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/firstPinNew"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -243,7 +253,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/secondPinNew"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -261,7 +271,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/thirdPinNew"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -279,7 +289,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/fourthPinNew"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -297,7 +307,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/fifthPinNew"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -315,7 +325,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/sixthPinNew"
-                    android:text="•"
+                    android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -340,6 +350,7 @@
             android:textColor="#00ACBA"
             android:textSize="14sp" />
         <Button
+            android:id="@+id/confirmButton"
             android:enabled="false"
             android:text="Konfirmasi"
             android:layout_width="match_parent"
