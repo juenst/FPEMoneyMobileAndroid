@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="6dp"
             android:layout_toRightOf="@+id/imgChangePhoto"
-            android:text="Ganti Foto Profil" />
+            android:text="Edit Profil" />
 
     </RelativeLayout>
 
