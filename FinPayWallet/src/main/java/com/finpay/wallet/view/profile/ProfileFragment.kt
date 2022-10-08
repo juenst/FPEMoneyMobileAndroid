@@ -27,7 +27,8 @@ class ProfileFragment : Fragment() {
     private lateinit var txtUserName: TextView
     private lateinit var txtPhoneNumber: TextView
     private lateinit var txtStatus: TextView
-//    private lateinit var imgProfile: ImageView
+
+    //    private lateinit var imgProfile: ImageView
     private lateinit var finPaySDK: FinPaySDK
     private lateinit var changeProfile: LinearLayout
 
@@ -93,9 +94,8 @@ class ProfileFragment : Fragment() {
 
         btnChangePhoto?.setOnClickListener {
             dialog.dismiss()
-            Intent(requireContext(), EditProfileActivity::class.java).apply {
-                startActivity(this)
-            }
+            val intent = Intent(context, EditProfileActivity::class.java)
+            startActivity(intent)
         }
         btnQR?.setOnClickListener {
 
