@@ -1,6 +1,7 @@
 package com.finpay.wallet.view.home
 
-import android.R
+//import com.midtrans.sdk.uikit.SdkUIFlowBuilder
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -12,16 +13,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.databinding.FragmentHomeBinding
+import com.finpay.wallet.utilities.TextUtils
 import com.finpay.wallet.view.home.banner.item.BannerListener
 import com.finpay.wallet.view.home.banner.model.BannerPromo
-//import com.midtrans.sdk.uikit.SdkUIFlowBuilder
+import com.finpay.wallet.view.topup.TopupActivity
+import com.finpay.wallet.view.transaction.history.TransactionHistoryActivity
+import com.finpay.wallet.view.transfer.TransferActivity
+import com.finpay.wallet.view.wallet.WalletActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import lib.finpay.sdk.FinPaySDK
+import lib.finpay.sdk.model.Credential
 import java.text.NumberFormat
 import java.util.*
 
@@ -38,8 +45,14 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
     private lateinit var crdWarning: LinearLayout
     private lateinit var finPaySDK: FinPaySDK
 
+    private lateinit var btnTopUp: LinearLayout
+    private lateinit var btnTransfer: LinearLayout
+    private lateinit var btnHistoryTransaction: LinearLayout
+    private lateinit var btnWallet: LinearLayout
+
     private lateinit var iconVisibility: ImageView
     private lateinit var iconVisibilityOff: ImageView
+    var saldo: String = "Rp0"
 
     private var groupAdapter = GroupAdapter<ViewHolder>()
 
@@ -61,36 +74,31 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         crdWarning = binding.crdWarningPremium
         iconVisibility = binding.iconVisibility
         iconVisibilityOff = binding.iconVisibilityOff
+
+
+        btnTopUp = binding.btnTopup
+        btnTransfer = binding.btnTransfer
+        btnHistoryTransaction = binding.btnHistoryTransaction
+        btnWallet = binding.btnWallet
+
+        txtSaldo.text = saldo
         onCreateFragmentUI()
-        //getBalance()
+        getBalance()
 
         iconVisibility.visibility = View.VISIBLE
         iconVisibilityOff.visibility = View.GONE
 
-        val promos = listOf(
-            BannerPromo(name = "Puncak badai uang",
-                image = "https://s2.bukalapak.com/uploads/promo_partnerinfo_bloggy/2842/Bloggy_1_puncak.jpg"),
-            BannerPromo(
-                name = "hati hati ada guncangan badai uang",
-                image = "https://s4.bukalapak.com/uploads/promo_partnerinfo_bloggy/5042/Bloggy_1.jpg"
-            ),
-            BannerPromo(name = "Puncak badai uang",
-                image = "https://s2.bukalapak.com/uploads/promo_partnerinfo_bloggy/2842/Bloggy_1_puncak.jpg"),
-            BannerPromo(
-                name = "hati hati ada guncangan badai uang",
-                image = "https://s4.bukalapak.com/uploads/promo_partnerinfo_bloggy/5042/Bloggy_1.jpg"
-            ),
-            BannerPromo(name = "Puncak badai uang",
-                image = "https://s2.bukalapak.com/uploads/promo_partnerinfo_bloggy/2842/Bloggy_1_puncak.jpg"),
-            BannerPromo(
-                name = "hati hati ada guncangan badai uang",
-                image = "https://s4.bukalapak.com/uploads/promo_partnerinfo_bloggy/5042/Bloggy_1.jpg"
-            )
-        )
+        iconVisibilityOff.setOnClickListener {
+            txtSaldo.text = "*******"
+            iconVisibility.visibility = View.VISIBLE
+            iconVisibilityOff.visibility = View.GONE
+        }
 
-        // declare banner carousel
-//        val bannerCarouselItem = BannerCarouselItem(promos, supportFragmentManager, this)
-//        groupAdapter.add(bannerCarouselItem)
+        iconVisibility.setOnClickListener {
+            txtSaldo.text = saldo
+            iconVisibility.visibility = View.GONE
+            iconVisibilityOff.visibility = View.VISIBLE
+        }
 
         return root
     }
@@ -100,32 +108,22 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         _binding = null
     }
 
-//    private fun makePayment() {
-//        SdkUIFlowBuilder.init()
-//    }
-
-    fun formatRupiah(number: Double): String{
-        val localeID =  Locale("in", "ID")
-        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
-        return numberFormat.format(number).toString()
+    fun credential(): Credential {
+        val cd = Credential()
+        cd.setUsername("")
+        cd.setPassword("")
+        cd.setSecretKey("")
+        return cd
     }
 
-//    private fun getBalance() {
-//        val userName = "MT77764DKM83N"
-//        val password = "YJV3AM0y"
-//        val secretKey = "daYumnMb"
-//        finPaySDK.getBalance(
-//            userName,
-//            password,
-//            secretKey,
-//            "TRX1234567890",
-//            "083815613839",
-//            onSuccess = { userBalanceModel ->
-//                txtSaldo.text = formatRupiah(userBalanceModel.getCustBalance()!!.toDouble())
-//                txtUserName.text = userBalanceModel.getCustName()!!.split(" ").toTypedArray().first().toString().toUpperCase()
-//            }
-//        )
-//    }
+    fun getBalance() {
+        FinPaySDK().getUserBallance(requireContext(), "083815613839", {
+            saldo = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
+            txtSaldo.text = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
+        },{
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG)
+        })
+    }
 
     private fun onCreateFragmentUI() {
         crdWarning.setOnClickListener(this)
@@ -144,6 +142,30 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         iconVisibilityOff.setOnClickListener{
             iconVisibility.visibility = View.VISIBLE
             iconVisibilityOff.visibility = View.GONE
+        }
+
+        btnTopUp.setOnClickListener{
+            //FinPaySDK().openTopUp(requireContext())
+            val intent = Intent(requireContext(), TopupActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnTransfer.setOnClickListener{
+            //FinPaySDK().openHistoryTransaction(requireContext())
+            val intent = Intent(requireContext(), TransferActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnWallet.setOnClickListener{
+            //FinPaySDK().openWallet(requireContext())
+            val intent = Intent(requireContext(), WalletActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnHistoryTransaction.setOnClickListener{
+            //FinPaySDK().openHistoryTransaction(requireContext())
+            val intent = Intent(requireContext(), TransactionHistoryActivity::class.java)
+            this.startActivity(intent)
         }
     }
 

@@ -36,13 +36,12 @@ class MainActivity : AppCompatActivity() {
         val btnOpenDialogQr = findViewById<Button>(R.id.btn_open_dialog_qr)
         finPaySDK = FinPaySDK()
 
-        finPaySDK.init(
-            Constant().userName,
-            Constant().password,
-            Constant().secretKey,
-            "TRX1234567890"
-        )
-
+//        finPaySDK.buildSDK(
+//            this,
+//            Constant().userName,
+//            Constant().password,
+//            Constant().secretKey,
+//        )
 
         btnCallSDK.setOnClickListener {
             FinPaySDK().getToken(

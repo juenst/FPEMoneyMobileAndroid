@@ -44,28 +44,54 @@
             android:name=".view.upgrade_acc.UpgradeAccountActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
         <activity
             android:name=".view.camera.CameraResultActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
         <activity
             android:name=".view.camera.CameraActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
         <activity
             android:name=".view.upgrade_acc.UpgradeInformationActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
         <activity
             android:name=".view.AppActivity"
             android:exported="false"
-            android:label="@string/title_activity_app"
-            android:theme="@style/AppTheme.finpayTheme" />
+            android:theme="@style/AppTheme.finpayTheme"
+            android:label="@string/title_activity_app" />
+
+        <activity
+            android:name=".view.wallet.WalletActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme"
+            android:label="Wallet" />
+
+        <activity
+            android:name=".view.transaction.history.TransactionHistoryActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme"
+            android:label="History Transaksi" />
+
+        <activity
+            android:name=".view.topup.TopupActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme"
+            android:label="Top Up" />
+
+        <activity
+            android:name=".view.transfer.TransferActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme"
+            android:label="Metode Kiring Uang" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.home.HomeActivity"
             android:exported="false" />
     </application>
 
