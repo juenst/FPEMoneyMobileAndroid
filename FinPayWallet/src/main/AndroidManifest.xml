@@ -4,9 +4,13 @@
 
     <application>
         <activity
-            android:name=".view.onboarding.OnboardingActivity"
+            android:name=".view.login.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="false" />
+        <activity
+            android:name=".view.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".view.splash.SplashActivity"
             android:exported="false"
@@ -44,52 +48,43 @@
             android:name=".view.upgrade_acc.UpgradeAccountActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
-
         <activity
             android:name=".view.camera.CameraResultActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
-
         <activity
             android:name=".view.camera.CameraActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
-
         <activity
             android:name=".view.upgrade_acc.UpgradeInformationActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
-
         <activity
             android:name=".view.AppActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:label="@string/title_activity_app" />
-
+            android:label="@string/title_activity_app"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.wallet.WalletActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:label="Wallet" />
-
+            android:label="Wallet"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.transaction.history.TransactionHistoryActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:label="History Transaksi" />
-
+            android:label="History Transaksi"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.topup.TopupActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:label="Top Up" />
-
+            android:label="Top Up"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.transfer.TransferActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:label="Metode Kiring Uang" />
-
+            android:label="Metode Kiring Uang"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

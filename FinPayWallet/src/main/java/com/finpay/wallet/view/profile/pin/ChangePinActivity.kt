@@ -55,7 +55,7 @@ class ChangePinActivity : AppCompatActivity() {
         val fifthPinNew = findViewById(R.id.fifthPinNew) as TextView
         val sixthPinNew = findViewById(R.id.sixthPinNew) as TextView
 
-        val confirmButton = findViewById(R.id.confirmButton) as Button
+        val btnConfirm = findViewById(R.id.confirmButton) as Button
 
         val buttonViewPin = findViewById(R.id.buttonViewPin) as TextView
 
@@ -73,7 +73,7 @@ class ChangePinActivity : AppCompatActivity() {
                     }
                     Log.e("",oldPin.toString())
                 }else{
-                    checkButtonState()
+                    checkButtonState(btnConfirm)
                     if(newPin[5]==""){
                         onPinPressed(i.toString(), newPin, newTexts)
                         confirmButton.isEnabled = newPin[5]!=""
@@ -96,6 +96,10 @@ class ChangePinActivity : AppCompatActivity() {
 
         backButton.setOnClickListener{
             onBackPressed()
+        }
+
+        btnConfirm.setOnClickListener {
+            finish()
         }
     }
 
@@ -132,7 +136,7 @@ class ChangePinActivity : AppCompatActivity() {
         }
     }
 
-    fun checkButtonState(){
+    fun checkButtonState(button:Button){
         // Create a color state list programmatically
         val states = arrayOf(
             intArrayOf(android.R.attr.state_enabled), // enabled
@@ -150,8 +154,8 @@ class ChangePinActivity : AppCompatActivity() {
         val textColorStates = ColorStateList(states,textColors)
 
         // Set button background tint
-        confirmButton.backgroundTintList = bgColorStates
-        confirmButton.setTextColor(textColorStates)
+        button.backgroundTintList = bgColorStates
+        button.setTextColor(textColorStates)
     }
 
 
