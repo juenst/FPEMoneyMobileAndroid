@@ -4,11 +4,21 @@
 
     <application>
         <activity
-            android:name=".view.profile.pin.ChangePinActivity"
+            android:name=".view.onboarding.OnboardingActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="false" />
         <activity
+            android:name=".view.splash.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".view.profile.pin.ChangePinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
             android:name=".view.profile.EditProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
         <activity
             android:name=".SelfieActivity"
             android:exported="false">

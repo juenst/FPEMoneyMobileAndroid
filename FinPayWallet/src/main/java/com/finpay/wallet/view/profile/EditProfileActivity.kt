@@ -11,7 +11,7 @@ import com.finpay.wallet.R
 class EditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        supportActionBar!!.hide()
+//        supportActionBar!!.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
 

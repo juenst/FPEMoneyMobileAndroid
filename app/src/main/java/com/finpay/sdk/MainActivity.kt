@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.FinPaySDK
 import com.finpay.wallet.view.AppActivity
+import com.finpay.wallet.view.splash.SplashActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         btnCallWallet.setOnClickListener {
             println("test")
-            Intent(this, AppActivity::class.java).apply {
+            Intent(this, SplashActivity::class.java).apply {
                 startActivity(this)
             }
         }

@@ -1,6 +1,7 @@
 package com.finpay.wallet.view.profile.pin
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,9 +19,8 @@ import java.util.*
 class ChangePinActivity : AppCompatActivity() {
     val oldPin = mutableListOf("", "", "", "", "", "", "")
     val newPin = mutableListOf("", "", "", "", "", "", "")
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar!!.hide()
+//        supportActionBar!!.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_pin)
 
@@ -73,6 +73,7 @@ class ChangePinActivity : AppCompatActivity() {
                     }
                     Log.e("",oldPin.toString())
                 }else{
+                    checkButtonState()
                     if(newPin[5]==""){
                         onPinPressed(i.toString(), newPin, newTexts)
                         confirmButton.isEnabled = newPin[5]!=""
@@ -129,6 +130,28 @@ class ChangePinActivity : AppCompatActivity() {
             text[4].text=if (array[4]!="") "•" else ""
             text[5].text=if (array[5]!="") "•" else ""
         }
+    }
+
+    fun checkButtonState(){
+        // Create a color state list programmatically
+        val states = arrayOf(
+            intArrayOf(android.R.attr.state_enabled), // enabled
+            intArrayOf(-android.R.attr.state_enabled) // disabled
+        )
+        val bgColors = intArrayOf(
+            Color.parseColor("#00ACBA"), // enabled color
+            Color.parseColor("#d5d5d5") // disabled color
+        )
+        val textColors = intArrayOf(
+            Color.parseColor("#ffffff"), // enabled color
+            Color.parseColor("#a5a5a5")// disabled color
+        )
+        val bgColorStates = ColorStateList(states,bgColors)
+        val textColorStates = ColorStateList(states,textColors)
+
+        // Set button background tint
+        confirmButton.backgroundTintList = bgColorStates
+        confirmButton.setTextColor(textColorStates)
     }
 
 

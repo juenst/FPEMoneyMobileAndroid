@@ -27,4 +27,9 @@
     <string name="fill_the_form">Fill The Form</string>
     <string name="selfie_with_id">Selfie With ID</string>
     <string name="capture_id">Capture ID</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="term_condition">Dengan daftar atau masuk ke aplikasi, Anda menyetujui <b>Syarat</b> dan <b>Ketentuan layanan</b> Finpay Money</string>
 </resources>

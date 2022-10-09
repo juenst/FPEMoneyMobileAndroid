@@ -15,6 +15,10 @@
         <item name="colorPrimaryDark">#00ACBA</item>
     </style>
 
+    <style name="AppTheme.finpayTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">#00ACBA</item>
+    </style>
+
     <style name="AppThemeChihp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -85,5 +89,14 @@
     <style name="Stepper.CardView" parent="CardView">
         <item name="cardElevation">@dimen/card_elevation_medium</item>
         <item name="cardCornerRadius">@dimen/card_radius_default</item>
+    </style>
+
+    <style name="Widget.Theme.FinPaySDK.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="Widget.Theme.FinPaySDK.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
 </resources>

@@ -19,7 +19,7 @@
     <color name="transparant">#00000000</color>
     <color name="colorStatusHelp">#9d9d9d</color>
 
-    <color name ="green">#d6f1e2</color>
+    <color name="green">#d6f1e2</color>
 
     <color name="clr_amount_data_help">#d6f1e2</color>
 
@@ -347,8 +347,8 @@
     <color name="fontBlackDisable">#50000000</color>
     <color name="transparent">#00000000</color>
 
-    <color name="grey_100"> #F5F5F5</color>
-    <color name="grey_300"> #E0E0E0</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_300">#E0E0E0</color>
     <color name="red_100">#F4C7C3</color>
     <color name="red_300">#E67C73</color>
     <color name="red_500">#DB4437</color>
@@ -395,4 +395,9 @@
     <color name="colorFailedRed">#FF5252</color>
     <color name="colorBackgroundUnreadNotif">#D6F1E2</color>
     <color name="light_grey">#D8D8D8</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

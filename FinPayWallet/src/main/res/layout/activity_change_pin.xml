@@ -359,7 +359,7 @@
             android:enabled="false"
             android:text="Konfirmasi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
     </LinearLayout>
     <LinearLayout
         android:gravity="bottom"
