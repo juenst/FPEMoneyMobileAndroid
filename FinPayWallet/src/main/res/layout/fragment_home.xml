@@ -553,6 +553,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btnMore"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -575,6 +576,10 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -584,14 +589,19 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp">
 
-                    <com.denzcoskun.imageslider.ImageSlider
-                        android:id="@+id/img_slider"
+<!--                    <com.denzcoskun.imageslider.ImageSlider-->
+<!--                        android:id="@+id/img_slider"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        app:iss_auto_cycle="true"-->
+<!--                        app:iss_corner_radius="8"-->
+<!--                        app:iss_delay="1000"-->
+<!--                        app:iss_period="1000" />-->
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        app:iss_auto_cycle="true"
-                        app:iss_corner_radius="8"
-                        app:iss_delay="1000"
-                        app:iss_period="1000" />
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/banner_example" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

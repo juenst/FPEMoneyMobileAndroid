@@ -23,6 +23,10 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name=".view.more.MoreActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
             android:name=".view.profile.pin.ChangePinActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />

@@ -21,6 +21,7 @@ import com.finpay.wallet.databinding.FragmentHomeBinding
 import com.finpay.wallet.utilities.TextUtils
 import com.finpay.wallet.view.home.banner.item.BannerListener
 import com.finpay.wallet.view.home.banner.model.BannerPromo
+import com.finpay.wallet.view.more.MoreActivity
 import com.finpay.wallet.view.topup.TopupActivity
 import com.finpay.wallet.view.transaction.history.TransactionHistoryActivity
 import com.finpay.wallet.view.transfer.TransferActivity
@@ -51,6 +52,9 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
     private lateinit var iconVisibility: ImageView
     private lateinit var iconVisibilityOff: ImageView
 
+
+    private lateinit var btnMore: LinearLayout
+
     var saldo: String = "Rp0"
 
     private var groupAdapter = GroupAdapter<ViewHolder>()
@@ -80,12 +84,14 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         btnHistoryTransaction = binding.btnHistoryTransaction
         btnWallet = binding.btnWallet
 
+        btnMore = binding.btnMore
+
         txtSaldo.text = saldo
         onCreateFragmentUI()
         getBalance()
 
-        iconVisibility.visibility = View.VISIBLE
-        iconVisibilityOff.visibility = View.GONE
+        iconVisibility.visibility = View.GONE
+        iconVisibilityOff.visibility = View.VISIBLE
 
         iconVisibilityOff.setOnClickListener {
             txtSaldo.text = "*******"
@@ -163,6 +169,12 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         btnHistoryTransaction.setOnClickListener {
             //FinPaySDK().openHistoryTransaction(requireContext())
             val intent = Intent(requireContext(), TransactionHistoryActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnMore.setOnClickListener {
+            //FinPaySDK().openMore(requireContext())
+            val intent = Intent(requireContext(), MoreActivity::class.java)
             this.startActivity(intent)
         }
     }
