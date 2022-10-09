@@ -17,6 +17,8 @@ import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.finpay.wallet.databinding.FragmentHomeBinding
 import com.finpay.wallet.utilities.TextUtils
 import com.finpay.wallet.view.home.banner.item.BannerListener
@@ -32,7 +34,7 @@ import lib.finpay.sdk.FinPaySDK
 import lib.finpay.sdk.model.Credential
 
 
-class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -90,6 +92,22 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         onCreateFragmentUI()
         getBalance()
 
+        val imageSlider: ArrayList<SlideModel> = arrayListOf(
+            SlideModel(
+                "https://demos.finpay.id/finpay/Intagram promo_ liburan sekolah_200622121303.jpg",
+                ScaleTypes.FIT
+            ),
+            SlideModel(
+                "https://demos.finpay.id/finpay/Promo Follow_111019033312.png",
+                ScaleTypes.FIT
+            ),
+            SlideModel(
+                "https://demos.finpay.id/finpay/Banner promo Finpay ID-02_180820083917_Helpdesk_RZ_140621025709.png",
+                ScaleTypes.FIT
+            )
+        )
+        binding.imageSlider.setImageList(imageSlider, ScaleTypes.FIT)
+
         iconVisibility.visibility = View.GONE
         iconVisibilityOff.visibility = View.VISIBLE
 
@@ -130,7 +148,7 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
     }
 
     private fun onCreateFragmentUI() {
-        crdWarning.setOnClickListener(this)
+        //crdWarning.setOnClickListener(this)
         setSpanText(
             64,
             87, Color.BLACK,
@@ -188,27 +206,5 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
             Spannable.SPAN_EXCLUSIVE_INCLUSIVE
         )
         textView.text = spannable
-    }
-
-    override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onSeeAllPromoClick() {
-        TODO("Not yet implemented")
-    }
-
-//    override fun onClick(v: View?) {
-//        when (v?.id) {
-//            R.id.crd_warning_premium -> {
-//                val moveToPremiumInfo =
-//                    Intent(view?.context, UpgradeInformationActivity::class.java)
-//                startActivity(moveToPremiumInfo)
-//            }
-//        }
-//    }
-
-
-    override fun onBannerClick(promo: BannerPromo) {
     }
 }
