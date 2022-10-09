@@ -1,14 +1,19 @@
 package com.finpay.wallet.view.profile
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.view.Window
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.R
@@ -106,7 +111,35 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
         btnQR?.setOnClickListener {
+            dialog.dismiss()
+            openQrDialog()
+        }
+        dialog.show()
+    }
 
+    private fun openQrDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(com.finpay.wallet.R.layout.dialog_share_qr)
+
+        val btnShare = dialog.findViewById<Button>(com.finpay.wallet.R.id.btn_share_qr)
+        btnShare.setOnClickListener {
+            val qrImage = dialog.findViewById<ImageView>(com.finpay.wallet.R.id.qr_image)
+            val mDrawable: Drawable = qrImage.drawable
+            val mBitmap = (mDrawable as BitmapDrawable).bitmap
+            val path = MediaStore.Images.Media.insertImage(
+                activity!!.contentResolver,
+                mBitmap,
+                "Image Description",
+                null
+            )
+            val uri = Uri.parse(path)
+            val share = Intent(Intent.ACTION_SEND)
+            share.type = "image/*"
+            share.putExtra(Intent.EXTRA_STREAM, uri)
+            startActivity(Intent.createChooser(share, "Bagikan QR kode"))
+//            dialog.dismiss()
         }
         dialog.show()
     }

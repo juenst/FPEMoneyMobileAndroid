@@ -46,7 +46,7 @@ class ChangePinActivity : AppCompatActivity() {
         val pinButton7 = findViewById(R.id.pinButton7) as TextView
         val pinButton8 = findViewById(R.id.pinButton8) as TextView
         val pinButton9 = findViewById(R.id.pinButton9) as TextView
-        val pinButtonDel = findViewById(R.id.pinButtonDel) as TextView
+        val pinButtonDel = findViewById(R.id.pinButtonDel) as ImageView
 
         val firstPinNew = findViewById(R.id.firstPinNew) as TextView
         val secondPinNew = findViewById(R.id.secondPinNew) as TextView
@@ -55,7 +55,7 @@ class ChangePinActivity : AppCompatActivity() {
         val fifthPinNew = findViewById(R.id.fifthPinNew) as TextView
         val sixthPinNew = findViewById(R.id.sixthPinNew) as TextView
 
-        val confirmButton = findViewById(R.id.confirmButton) as Button
+        val btnConfirm = findViewById(R.id.confirmButton) as Button
 
         val buttonViewPin = findViewById(R.id.buttonViewPin) as TextView
 
@@ -73,7 +73,7 @@ class ChangePinActivity : AppCompatActivity() {
                     }
                     Log.e("",oldPin.toString())
                 }else{
-                    checkButtonState()
+                    checkButtonState(btnConfirm)
                     if(newPin[5]==""){
                         onPinPressed(i.toString(), newPin, newTexts)
                         confirmButton.isEnabled = newPin[5]!=""
@@ -97,6 +97,10 @@ class ChangePinActivity : AppCompatActivity() {
         backButton.setOnClickListener{
             onBackPressed()
         }
+
+        btnConfirm.setOnClickListener {
+            finish()
+        }
     }
 
     fun onViewPin(touching:Boolean,array:MutableList<String>, text:List<TextView>){
@@ -109,7 +113,7 @@ class ChangePinActivity : AppCompatActivity() {
     }
 
     fun onPinPressed(value:String, array:MutableList<String>, text:List<TextView>){
-        if(array.last()==""){
+        if(array[5]==""){
             array[array.indexOfFirst { it=="" }] = value
             text[0].text = if (array[0]!="") "•" else ""
             text[1].text=if (array[1]!="") "•" else ""
@@ -132,7 +136,7 @@ class ChangePinActivity : AppCompatActivity() {
         }
     }
 
-    fun checkButtonState(){
+    fun checkButtonState(button:Button){
         // Create a color state list programmatically
         val states = arrayOf(
             intArrayOf(android.R.attr.state_enabled), // enabled
@@ -150,8 +154,8 @@ class ChangePinActivity : AppCompatActivity() {
         val textColorStates = ColorStateList(states,textColors)
 
         // Set button background tint
-        confirmButton.backgroundTintList = bgColorStates
-        confirmButton.setTextColor(textColorStates)
+        button.backgroundTintList = bgColorStates
+        button.setTextColor(textColorStates)
     }
 
 

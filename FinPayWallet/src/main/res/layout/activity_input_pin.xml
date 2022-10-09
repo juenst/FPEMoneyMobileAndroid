@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.profile.pin.InputPinActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -18,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Ubah PIN"
+                android:text="Masukkan PIN"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18dp" />
@@ -35,7 +38,7 @@
     </androidx.appcompat.widget.Toolbar>
     <Space
         android:layout_width="0dp"
-        android:layout_height="12dp"/>
+        android:layout_height="24dp"/>
     <LinearLayout
         android:id="@+id/oldPin"
         android:visibility="visible"
@@ -47,19 +50,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Masukkan PIN Lama Anda"
+            android:text="Masukkan PIN"
+            android:gravity="center"
             android:textColor="@color/black"
-            android:textFontWeight="600"
+            android:textFontWeight="700"
             android:textSize="16sp" />
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="4dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Masukkan PIN lama Anda untuk verifikasi penggantian PIN"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
         <Space
             android:layout_width="0dp"
             android:layout_height="40dp"/>
@@ -73,15 +68,15 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-<!--                <TextView-->
-<!--                    android:id="@+id/firstPin"-->
-<!--                    android:text="•"-->
-<!--                    android:textSize="32sp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"/>-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/firstPin"-->
+                <!--                    android:text="•"-->
+                <!--                    android:textSize="32sp"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"/>-->
                 <TextView
-                    android:id="@+id/firstPin"
+                    android:id="@+id/firstPinInput"
                     android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
@@ -99,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/secondPin"
+                    android:id="@+id/secondPinInput"
                     android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
@@ -117,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/thirdPin"
+                    android:id="@+id/thirdPinInput"
                     android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
@@ -135,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/fourthPin"
+                    android:id="@+id/fourthPinInput"
                     android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
@@ -153,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/fifthPin"
+                    android:id="@+id/fifthPinInput"
                     android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
@@ -171,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/sixthPin"
+                    android:id="@+id/sixthPinInput"
                     android:text=""
                     android:textSize="32sp"
                     android:textColor="@color/black"
@@ -197,171 +192,6 @@
             android:textSize="14sp" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/newPin"
-        android:visibility="gone"
-        android:layout_weight="1"
-        android:paddingHorizontal="12dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Buat PIN Baru"
-            android:textColor="@color/black"
-            android:textFontWeight="600"
-            android:textSize="16sp" />
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="4dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Masukkan PIN keamanan bertransaksi"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="40dp"/>
-        <LinearLayout
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/firstPinNew"
-                    android:text=""
-                    android:textSize="32sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <View
-                    android:layout_marginHorizontal="12dp"
-                    android:background="@color/black"
-                    android:layout_width="24dp"
-                    android:layout_height="2dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/secondPinNew"
-                    android:text=""
-                    android:textSize="32sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <View
-                    android:layout_marginHorizontal="12dp"
-                    android:background="@color/black"
-                    android:layout_width="24dp"
-                    android:layout_height="2dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/thirdPinNew"
-                    android:text=""
-                    android:textSize="32sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <View
-                    android:layout_marginHorizontal="12dp"
-                    android:background="@color/black"
-                    android:layout_width="24dp"
-                    android:layout_height="2dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/fourthPinNew"
-                    android:text=""
-                    android:textSize="32sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <View
-                    android:layout_marginHorizontal="12dp"
-                    android:background="@color/black"
-                    android:layout_width="24dp"
-                    android:layout_height="2dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/fifthPinNew"
-                    android:text=""
-                    android:textSize="32sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <View
-                    android:layout_marginHorizontal="12dp"
-                    android:background="@color/black"
-                    android:layout_width="24dp"
-                    android:layout_height="2dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/sixthPinNew"
-                    android:text=""
-                    android:textSize="32sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <View
-                    android:layout_marginHorizontal="12dp"
-                    android:background="@color/black"
-                    android:layout_width="24dp"
-                    android:layout_height="2dp"/>
-            </LinearLayout>
-        </LinearLayout>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="20dp"/>
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:padding="8dp"
-                android:id="@+id/buttonViewPin"
-                android:gravity="center|top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lihat PIN"
-                android:textColor="#00ACBA"
-                android:textSize="14sp" />
-        </LinearLayout>
-        <Button
-            android:id="@+id/confirmButton"
-            android:enabled="false"
-            android:text="Konfirmasi"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"/>
-    </LinearLayout>
-    <LinearLayout
         android:gravity="bottom"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -374,7 +204,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/pinButton1"
+                android:id="@+id/pinButton1Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -384,7 +214,7 @@
                 android:textColor="@color/black"
                 android:textSize="28sp" />
             <TextView
-                android:id="@+id/pinButton2"
+                android:id="@+id/pinButton2Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -394,7 +224,7 @@
                 android:textColor="@color/black"
                 android:textSize="28sp" />
             <TextView
-                android:id="@+id/pinButton3"
+                android:id="@+id/pinButton3Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -412,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/pinButton4"
+                android:id="@+id/pinButton4Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -422,7 +252,7 @@
                 android:textColor="@color/black"
                 android:textSize="28sp" />
             <TextView
-                android:id="@+id/pinButton5"
+                android:id="@+id/pinButton5Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -432,7 +262,7 @@
                 android:textColor="@color/black"
                 android:textSize="28sp" />
             <TextView
-                android:id="@+id/pinButton6"
+                android:id="@+id/pinButton6Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -450,7 +280,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/pinButton7"
+                android:id="@+id/pinButton7Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -460,7 +290,7 @@
                 android:textColor="@color/black"
                 android:textSize="28sp" />
             <TextView
-                android:id="@+id/pinButton8"
+                android:id="@+id/pinButton8Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -470,7 +300,7 @@
                 android:textColor="@color/black"
                 android:textSize="28sp" />
             <TextView
-                android:id="@+id/pinButton9"
+                android:id="@+id/pinButton9Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -487,18 +317,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/pinButtonStar"
+            <ImageView
+                android:id="@+id/pinFingerprint"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="28sp" />
+                android:src="@drawable/ic_fingerprint_new"/>
             <TextView
-                android:id="@+id/pinButton0"
+                android:id="@+id/pinButton0Input"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -508,7 +335,7 @@
                 android:textColor="@color/black"
                 android:textSize="28sp" />
             <ImageView
-                android:id="@+id/pinButtonDel"
+                android:id="@+id/pinButtonDelInput"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="match_parent"

@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/transparant"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#fff"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="15dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
@@ -17,14 +18,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="32dp">
 
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:background="@color/black"
-                android:src="@drawable/logo" />
+                android:src="@drawable/logo_color" />
 
             <ImageView
                 android:id="@+id/qr_image"
@@ -33,28 +34,42 @@
                 android:layout_gravity="center"
                 android:src="@drawable/qr_example" />
 
-
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="12dp"/>
             <TextView
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rahmat Hamid - 628888888888"
-                android:textAlignment="center" />
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Widiyanto Ramadhan - 6283815613839"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="12dp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#c0c0c0" />
-
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="12dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bagikan kode QR untuk terima pembayaran real-time dari pengguna Finpay money lainnya" />
-
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="12dp"/>
             <Button
+                android:textColor="@color/white"
                 android:id="@+id/btn_share_qr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bagikan QR Ccode"
+                android:text="Bagikan QR Code"
+                android:background="#00ACBA"
                 android:textAlignment="center" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
