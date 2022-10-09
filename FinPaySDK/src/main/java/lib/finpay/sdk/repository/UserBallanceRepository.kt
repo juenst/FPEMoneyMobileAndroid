@@ -2,7 +2,6 @@ package lib.finpay.sdk.repository
 
 import com.example.testing.Signature
 import lib.finpay.sdk.constant.Constant
-import lib.finpay.sdk.model.TokenModel
 import lib.finpay.sdk.model.UserBallanceModel
 import lib.finpay.sdk.service.BaseService
 import lib.finpay.sdk.service.network.Api
@@ -22,9 +21,13 @@ class UserBallanceRepository() {
         fun getUserBallance(
             phoneNumber: String,
             tokenID: String,
-            onResult: (UserBallanceModel) -> Unit)  {
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            onResult: (UserBallanceModel) -> Unit,
+            onFailed: (String) -> Unit
+        )  {
+                val sdf = SimpleDateFormat("yyyyMMddHHmmss")
                 val currentDate = sdf.format(Date())
+                println("dateeee")
+                println(currentDate)
                 val mapJson = mapOf(
                     "requestType" to "getBalance",
                     "reqDtime" to currentDate,
@@ -54,6 +57,7 @@ class UserBallanceRepository() {
                     override fun onFailure(call: Call<UserBallanceModel>, t: Throwable) {
                         println("response failure")
                         println(t.message)
+                        onFailed(t.message!!)
                     }
                     override fun onResponse(
                         call: Call<UserBallanceModel>,
@@ -65,9 +69,11 @@ class UserBallanceRepository() {
                             } else {
                                 println("statusCode != 200")
                                 println(response.body()?.getStatusDesc())
+                                onFailed(response.body()?.getStatusDesc()!!)
                             }
                         } else {
                             println("response code != 200")
+                            onFailed("Opps... something went wrong")
                         }
                     }
                 })

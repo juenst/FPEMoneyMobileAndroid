@@ -1,35 +1,38 @@
 package lib.finpay.sdk
 
 import android.content.Context
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+//import com.finpay.wallet.view.wallet.WalletActivity
 import lib.finpay.sdk.model.*
 import lib.finpay.sdk.repository.*
 
 
-public class FinPaySDK{
-//    private fun SdkUIFlowBuilder(
+public class FinPaySDK {
+//    fun buildSDK(
 //        context: Context,
 //        merchantUsername: String,
 //        merchantPassword: String,
 //        merchantSecretKey: String
 //    ) {
-//        this.context = context
-//        this.username = merchantUsername
-//        this.password = merchantPassword
-//        this.clientKey = merchantSecretKey
-//    }
-
-    fun init(
-        merchantUsername: String,
-        merchantPassword: String,
-        merchantSecretKey: String,
-        transNumber: String,
-    ) {
 //        val prefHelper = PrefHelper()
 //        prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_USERNAME, merchantUsername)
 //        prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_PASSWORD, merchantPassword)
 //        prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_SECRET_KEY, merchantSecretKey)
-//        prefHelper.setStringToShared(SharedPrefKeys.TRANSACTION_NUMBER, transNumber)
+//    }
+
+    fun init(context: Context, credential: Credential): FinPaySDK {
+        if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
+            println("Client key, username and password cannot be null or empty. Please set the client key, username and password")
+            Toast.makeText(context, "Client key, username and password cannot be null or empty. Please set the client key, username and password", Toast.LENGTH_LONG)
+        }
+        return this
     }
+
+//    fun setContext(var1: Context): FinPaySDK {
+//        this.context = var1
+//        return this
+//    }
 
     fun getToken(
         onResult: (TokenModel) -> Unit
@@ -116,18 +119,23 @@ public class FinPaySDK{
     }
 
     fun getUserBallance(
+        context: Context,
         phoneNumber: String,
-        onResult: (UserBallanceModel) -> Unit
-    ) {
+        onResult: (UserBallanceModel) -> Unit,
+        onFailed: (String) -> Unit
+    ) : FinPaySDK{
         getToken({
             if(it.getTokenID() != null) {
                 UserBallanceRepository.getUserBallance(
                     phoneNumber, it.getTokenID().toString(), {
                         onResult(it)
+                    }, {
+                        onFailed(it)
                     }
                 )
             }
         })
+        return this
     }
 
     fun transaction(
@@ -148,4 +156,9 @@ public class FinPaySDK{
             }
         })
     }
+
+//    fun openWallet(context: Context) {
+//        val intent = Intent (context, WalletActivity::class.java)
+//        context.startActivity(intent)
+//    }
 }
