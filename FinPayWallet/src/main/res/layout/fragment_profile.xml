@@ -70,7 +70,7 @@
                     android:textSize="12dp"
                     android:textFontWeight="400"
                     android:textColor="#4B5565"
-                    android:text="083815613839" />
+                    android:text="6283815613839" />
 
                 <TextView
                     android:id="@+id/txtStatus"

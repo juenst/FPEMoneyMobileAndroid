@@ -36,13 +36,13 @@
             <TextView
                 android:text="Untuk Seluruh Kebutuhan \nTransaksi Anda."
                 android:layout_width="wrap_content"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
             <Space
                 android:layout_width="0dp"
-                android:layout_height="12dp"/>
+                android:layout_height="4dp"/>
             <TextView
                 android:text="Dimanapun dan kapanpun Anda mau, kini Finpay Money menyediakan seluruh kebutuhan taransaksi elektronik Anda"
                 android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"/>
             <Space
                 android:layout_width="0dp"
-                android:layout_height="12dp"/>
+                android:layout_height="20dp"/>
             <Button
                 android:id="@+id/buttonLogin"
                 android:text="Masuk"
