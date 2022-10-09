@@ -1,4 +1,4 @@
-package com.finpay.wallet.view.profile
+package com.finpay.wallet.view.profile.edit_profile
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

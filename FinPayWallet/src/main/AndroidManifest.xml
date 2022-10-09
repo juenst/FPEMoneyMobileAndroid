@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.finpay.wallet">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
         <activity
-            android:name=".view.profile.pin.InputPinActivity"
+            android:name=".view.pin.PinActivity"
             android:theme="@style/AppTheme.finpayTheme2"
             android:exported="false" />
         <activity
             android:name=".view.login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.register.RegisterActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity
@@ -24,7 +27,7 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity
-            android:name=".view.profile.EditProfileActivity"
+            android:name=".view.profile.edit_profile.EditProfileActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity

@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.finpay.wallet.R
 import com.finpay.wallet.databinding.FragmentProfileBinding
-import com.finpay.wallet.view.AppActivity
+import com.finpay.wallet.view.profile.edit_profile.EditProfileActivity
 import com.finpay.wallet.view.profile.pin.ChangePinActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.FinPaySDK

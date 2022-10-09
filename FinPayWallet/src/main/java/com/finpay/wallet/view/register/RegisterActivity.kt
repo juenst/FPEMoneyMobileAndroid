@@ -1,55 +1,59 @@
-package com.finpay.wallet.view.login
+package com.finpay.wallet.view.register
 
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.finpay.wallet.R
+import com.finpay.wallet.view.login.LoginActivity
 import com.finpay.wallet.view.pin.PinActivity
 import com.midtrans.sdk.corekit.utilities.Utils
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity: AppCompatActivity() {
+    lateinit var btnBack: ImageView
+    lateinit var btnRegister: Button
+    lateinit var mainParent: LinearLayout
+    lateinit var txtName: EditText
+    lateinit var txtPhoneNumber: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_register)
 
-        val btnMasuk = findViewById<Button>(R.id.buttonMasuk)
-        val backButton = findViewById<ImageView>(R.id.backButtonLogin)
-        val mainparent = findViewById<LinearLayout>(R.id.mainParentLogin)
+        btnBack = findViewById(R.id.btnBack)
+        btnRegister = findViewById(R.id.btnRegister)
+        mainParent = findViewById(R.id.mainParentRegister)
+        txtName = findViewById(R.id.txtName)
+        txtPhoneNumber = findViewById(R.id.txtPhoneNumber)
 
-        val numberField = findViewById<EditText>(R.id.phoneNumberField)
-        checkButtonState(btnMasuk)
-        btnMasuk.setOnClickListener{
+        btnBack.setOnClickListener{
+            finish()
+        }
+
+        btnRegister.setOnClickListener {
             val intent = Intent(this, PinActivity::class.java)
             startActivity(intent)
-//            finish()
         }
 
-        backButton.setOnClickListener{
-            onBackPressed()
+        txtPhoneNumber.doOnTextChanged { text, start, before, count ->
+            btnRegister.isEnabled = (!text.isNullOrBlank() && text.length>=9)
+            checkButtonState(btnRegister)
         }
 
-        numberField.doOnTextChanged { text, start, before, count ->
-            btnMasuk.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            checkButtonState(btnMasuk)
-        }
-
-        mainparent.setOnClickListener {
-            if(numberField.hasFocus()){
-                Utils.hideKeyboard(this,numberField)
+        mainParent.setOnClickListener {
+            if(txtPhoneNumber.hasFocus()){
+                Utils.hideKeyboard(this, txtPhoneNumber)
             }
         }
-
     }
 
-    fun checkButtonState(button:Button){
-        // Create a color state list programmatically
+    private fun checkButtonState(button:Button){
         val states = arrayOf(
             intArrayOf(android.R.attr.state_enabled), // enabled
             intArrayOf(-android.R.attr.state_enabled) // disabled

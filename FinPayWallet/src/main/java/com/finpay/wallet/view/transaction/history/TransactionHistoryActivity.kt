@@ -33,14 +33,13 @@ class TransactionHistoryActivity : AppCompatActivity() {
         }
 
         var list = mutableListOf<DetailHistoryTransactionModel>()
-        DetailHistoryTransactionModel().setDateTime("15-09-2022 18:25:25")
-        DetailHistoryTransactionModel().setTypes("pay")
-        DetailHistoryTransactionModel().setDesc("Pembelian Pulsa")
-        DetailHistoryTransactionModel().setValues("50000")
+//        DetailHistoryTransactionModel().setDateTime("15-09-2022 18:25:25")
+//        DetailHistoryTransactionModel().setTypes("pay")
+//        DetailHistoryTransactionModel().setDesc("Pembelian Pulsa")
+//        DetailHistoryTransactionModel().setValues("50000")
 
         list.add(DetailHistoryTransactionModel())
-        println("total")
-        println(list.count())
+
         if(list.isEmpty() || list.count() == 0) {
             listHistoryTransaction.visibility = View.GONE
             emptyState.visibility = View.VISIBLE

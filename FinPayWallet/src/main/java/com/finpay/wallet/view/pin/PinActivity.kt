@@ -1,18 +1,15 @@
-package com.finpay.wallet.view.profile.pin
+package com.finpay.wallet.view.pin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.finpay.wallet.R
 import com.finpay.wallet.view.AppActivity
-import com.finpay.wallet.view.login.LoginActivity
-import kotlinx.android.synthetic.main.activity_change_pin.*
 
-class InputPinActivity : AppCompatActivity() {
+class PinActivity : AppCompatActivity() {
     val pin = mutableListOf("", "", "", "", "", "", "")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
