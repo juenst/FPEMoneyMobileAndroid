@@ -220,14 +220,16 @@ dependencies {
     implementation files('FinPaySDK')
 
     //page indicator
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.romandanylyk:pageindicatorview:1.0.1'
-    implementation 'com.xwray:groupie:2.1.0'
-    implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
+//    implementation 'com.squareup.picasso:picasso:2.71828'
+//    implementation 'com.romandanylyk:pageindicatorview:1.0.1'
+//    implementation 'com.xwray:groupie:2.1.0'
+//    implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
 
     //QRIS
     implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.0'
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 
     //midtrans
     implementation 'com.midtrans:uikit:1.21.2-SANDBOX'
