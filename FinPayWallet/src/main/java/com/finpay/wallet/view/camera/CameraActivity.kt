@@ -1,12 +1,13 @@
 package com.finpay.wallet.view.camera
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -17,7 +18,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.finpay.wallet.R
 import com.finpay.wallet.databinding.ActivityCameraBinding
-import com.google.android.material.button.MaterialButton
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,6 +26,25 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
+
+    companion object {
+        const val EXTRA_RESULT = "extra_result_value"
+    }
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            result.data?.getStringExtra(CameraResultActivity.EXTRA_RESULT)?.let {
+                val intent = Intent()
+                intent.putExtra(EXTRA_RESULT, it)
+                setResult(RESULT_OK, intent)
+                finish()
+            }
+        } else if (result.resultCode == RESULT_CANCELED) {
+            //TODO: RE USE CAMERA
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +90,9 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
-                    val msg = "Photo Saved"
-                    Toast.makeText(this@CameraActivity, "$msg $saveUri", Toast.LENGTH_SHORT).show()
-                    //Todo: Add Intent Here To Result -> Value From URI
+                    val intent = Intent(this@CameraActivity, CameraResultActivity::class.java)
+                    intent.putExtra(CameraResultActivity.EXTRA_DATA, "URI $saveUri")
+                    resultLauncher.launch(intent)
                 }
 
                 override fun onError(exception: ImageCaptureException) {

@@ -29,8 +29,6 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import lib.finpay.sdk.FinPaySDK
 import lib.finpay.sdk.model.Credential
-import java.text.NumberFormat
-import java.util.*
 
 
 class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
@@ -52,6 +50,7 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
 
     private lateinit var iconVisibility: ImageView
     private lateinit var iconVisibilityOff: ImageView
+
     var saldo: String = "Rp0"
 
     private var groupAdapter = GroupAdapter<ViewHolder>()
@@ -99,7 +98,6 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
             iconVisibility.visibility = View.GONE
             iconVisibilityOff.visibility = View.VISIBLE
         }
-
         return root
     }
 
@@ -120,7 +118,7 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
         FinPaySDK().getUserBallance(requireContext(), "083815613839", {
             saldo = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
             txtSaldo.text = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
-        },{
+        }, {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG)
         })
     }
@@ -134,35 +132,35 @@ class HomeFragment : Fragment(), View.OnClickListener, BannerListener {
             tvWarningBody
         )
 
-        iconVisibility.setOnClickListener{
+        iconVisibility.setOnClickListener {
             iconVisibility.visibility = View.GONE
             iconVisibilityOff.visibility = View.VISIBLE
         }
 
-        iconVisibilityOff.setOnClickListener{
+        iconVisibilityOff.setOnClickListener {
             iconVisibility.visibility = View.VISIBLE
             iconVisibilityOff.visibility = View.GONE
         }
 
-        btnTopUp.setOnClickListener{
+        btnTopUp.setOnClickListener {
             //FinPaySDK().openTopUp(requireContext())
             val intent = Intent(requireContext(), TopupActivity::class.java)
             this.startActivity(intent)
         }
 
-        btnTransfer.setOnClickListener{
+        btnTransfer.setOnClickListener {
             //FinPaySDK().openHistoryTransaction(requireContext())
             val intent = Intent(requireContext(), TransferActivity::class.java)
             this.startActivity(intent)
         }
 
-        btnWallet.setOnClickListener{
+        btnWallet.setOnClickListener {
             //FinPaySDK().openWallet(requireContext())
             val intent = Intent(requireContext(), WalletActivity::class.java)
             this.startActivity(intent)
         }
 
-        btnHistoryTransaction.setOnClickListener{
+        btnHistoryTransaction.setOnClickListener {
             //FinPaySDK().openHistoryTransaction(requireContext())
             val intent = Intent(requireContext(), TransactionHistoryActivity::class.java)
             this.startActivity(intent)

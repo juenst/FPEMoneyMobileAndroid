@@ -1,19 +1,51 @@
 package com.finpay.wallet.view.upgrade_acc
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import com.finpay.wallet.R
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import com.finpay.wallet.databinding.FragmentStepperSecondBinding
 import com.finpay.wallet.view.camera.CameraActivity
+import com.finpay.wallet.view.camera.CameraResultActivity
 
 class StepperSecondFragment : Fragment() {
     private var _binding: FragmentStepperSecondBinding? = null
     private val binding get() = _binding!!
+
+    private var callback: FragmentCallback? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            callback = context as? FragmentCallback
+        } catch (_: Exception) {
+
+        }
+    }
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.getStringExtra(CameraResultActivity.EXTRA_RESULT)?.let {
+                val uri = arguments?.getString(EXTRA_DATA)
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), uri, Toast.LENGTH_SHORT).show()
+
+                callback?.onSecondFr(uri, it)
+
+            }
+        }
+    }
+
+    companion object {
+        const val EXTRA_DATA = "extra_result_data"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,9 +57,11 @@ class StepperSecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnContinue.setOnClickListener{
-            val mIntent = Intent(requireActivity(), CameraActivity::class.java)
-            startActivity(mIntent)
+        val uri = arguments?.getString(EXTRA_DATA)
+        binding.tvWelcomeFragment.text = "State 2 = $uri"
+        binding.btnContinue.setOnClickListener {
+            val intent = Intent(context, CameraActivity::class.java)
+            resultLauncher.launch(intent)
         }
     }
 

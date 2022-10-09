@@ -78,13 +78,13 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/content_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintTop_toBottomOf="@id/stepper_bar">
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,72 +93,74 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_welcome_fragment1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lengkapi Data Diri Anda" />
+                android:text="Result From Fragment 1"
+                android:textColor="@color/teal_200"
+                android:textSize="14sp" />
 
-            <Space
+            <TextView
+                android:id="@+id/tv_welcome_fragment2"
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="wrap_content"
+                android:text="Result From Fragment 2"
+                android:textColor="@color/teal_200"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pastikan data diri anda sesuai dengan yang tertera pada kartu keluarga" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:text="Foto Selfie Dengan Memegang Identitas"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Masukan Nama Ibu Kandung" />
+                android:layout_marginTop="16dp"
+                android:text="Persiapkan kart identitas asli Anda, untuk melakukan foto selfie"
+                android:textSize="14sp" />
 
-            <EditText
-                android:id="@+id/edt_ibu_kandung"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="1" />
+                android:layout_marginTop="16dp">
 
-            <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nomor Kartu Keluarga (Opsional)" />
+                android:layout_marginTop="16dp">
 
-            <EditText
-                android:id="@+id/edt_kk"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField3"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:lines="1" />
+                android:layout_marginTop="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Kewarganegaraan" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/edt_kewarganegaraan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:lines="1" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email" />
-
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1" />
 
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_finish"
