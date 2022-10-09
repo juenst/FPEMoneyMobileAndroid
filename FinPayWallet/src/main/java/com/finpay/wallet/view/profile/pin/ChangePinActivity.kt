@@ -46,7 +46,7 @@ class ChangePinActivity : AppCompatActivity() {
         val pinButton7 = findViewById(R.id.pinButton7) as TextView
         val pinButton8 = findViewById(R.id.pinButton8) as TextView
         val pinButton9 = findViewById(R.id.pinButton9) as TextView
-        val pinButtonDel = findViewById(R.id.pinButtonDel) as TextView
+        val pinButtonDel = findViewById(R.id.pinButtonDel) as ImageView
 
         val firstPinNew = findViewById(R.id.firstPinNew) as TextView
         val secondPinNew = findViewById(R.id.secondPinNew) as TextView
@@ -113,7 +113,7 @@ class ChangePinActivity : AppCompatActivity() {
     }
 
     fun onPinPressed(value:String, array:MutableList<String>, text:List<TextView>){
-        if(array.last()==""){
+        if(array[5]==""){
             array[array.indexOfFirst { it=="" }] = value
             text[0].text = if (array[0]!="") "•" else ""
             text[1].text=if (array[1]!="") "•" else ""

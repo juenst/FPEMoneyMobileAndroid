@@ -4,9 +4,13 @@
 
     <application>
         <activity
-            android:name=".view.login.LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".view.profile.pin.InputPinActivity"
+            android:theme="@style/AppTheme.finpayTheme2"
             android:exported="false" />
+        <activity
+            android:name=".view.login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
         <activity
             android:name=".view.onboarding.OnboardingActivity"
             android:exported="false"

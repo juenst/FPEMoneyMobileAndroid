@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import androidx.core.widget.doOnTextChanged
 import com.finpay.wallet.R
 import com.finpay.wallet.view.AppActivity
+import com.finpay.wallet.view.profile.pin.InputPinActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.midtrans.sdk.corekit.utilities.Utils
 import kotlinx.android.synthetic.main.activity_change_pin.*
@@ -28,9 +29,9 @@ class LoginActivity : AppCompatActivity() {
         val numberField = findViewById<TextInputEditText>(R.id.phoneNumberField)
         checkButtonState(btnMasuk)
         btnMasuk.setOnClickListener{
-            val intent = Intent(this, AppActivity::class.java)
+            val intent = Intent(this, InputPinActivity::class.java)
             startActivity(intent)
-            finish()
+//            finish()
         }
 
         backButton.setOnClickListener{
