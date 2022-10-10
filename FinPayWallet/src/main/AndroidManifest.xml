@@ -107,6 +107,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.qris.QRISActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.qris.QRISResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
     </application>
 
 </manifest>

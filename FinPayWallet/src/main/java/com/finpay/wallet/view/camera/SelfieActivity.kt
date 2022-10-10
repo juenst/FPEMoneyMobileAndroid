@@ -91,8 +91,8 @@ class SelfieActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
-                    val intent = Intent(this@SelfieActivity, CameraResultActivity::class.java)
-                    intent.putExtra(CameraResultActivity.EXTRA_DATA, "URI $saveUri")
+                    val intent = Intent(this@SelfieActivity, SelfieResultActivity::class.java)
+                    intent.putExtra(SelfieResultActivity.EXTRA_DATA, "URI $saveUri")
                     intent.putExtra("imagesResult", photoFile)
                     resultLauncher.launch(intent)
                 }
