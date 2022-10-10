@@ -27,7 +27,7 @@ class SelfieResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar!!.hide()
 
-//        binding.imgResult
+        binding.imgResult
 
         val imgFile = File(uriImage!!.replace("URI file://", ""))
         if(imgFile.exists()) {
