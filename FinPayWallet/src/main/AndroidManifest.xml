@@ -3,9 +3,33 @@
 
     <application>
         <activity
-            android:name=".view.pin.PinActivity"
+            android:name=".view.ppob.AsuransiActivity"
             android:theme="@style/AppTheme.finpayTheme2"
             android:exported="false" />
+        <activity
+            android:name=".view.ppob.PegadaianActivity"
+            android:theme="@style/AppTheme.finpayTheme2"
+            android:exported="false" />
+        <activity
+            android:name=".view.ppob.CarLifeInsuranceActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.UlangGadaiActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.FinpayActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.TagihanHaloActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.pin.PinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="false"
