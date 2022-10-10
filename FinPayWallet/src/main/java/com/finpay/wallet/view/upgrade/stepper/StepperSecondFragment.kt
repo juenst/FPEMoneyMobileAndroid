@@ -1,4 +1,4 @@
-package com.finpay.wallet.view.upgrade_acc
+package com.finpay.wallet.view.upgrade.stepper
 
 import android.app.Activity
 import android.content.Context
@@ -7,14 +7,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.finpay.wallet.databinding.FragmentStepperFirstBinding
+import com.finpay.wallet.databinding.FragmentStepperSecondBinding
 import com.finpay.wallet.view.camera.CameraActivity
 import com.finpay.wallet.view.camera.CameraResultActivity
+import com.finpay.wallet.view.camera.SelfieActivity
+import com.finpay.wallet.view.upgrade.FragmentCallback
 
-class StepperFirstFragment : Fragment() {
-    private var _binding: FragmentStepperFirstBinding? = null
+class StepperSecondFragment : Fragment() {
+    private var _binding: FragmentStepperSecondBinding? = null
     private val binding get() = _binding!!
 
     private var callback: FragmentCallback? = null
@@ -32,23 +35,31 @@ class StepperFirstFragment : Fragment() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.getStringExtra(CameraResultActivity.EXTRA_RESULT)?.let {
-                callback?.onFirstFr(it)
+                val uri = arguments?.getString(EXTRA_DATA)
+                callback?.onSecondFr(uri, it)
+
             }
         }
+    }
+
+    companion object {
+        const val EXTRA_DATA = "extra_result_data"
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStepperFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentStepperSecondBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnContinue.setOnClickListener {
-            val intent = Intent(context, CameraActivity::class.java)
+//        val uri = arguments?.getString(EXTRA_DATA)
+//        binding.tvWelcomeFragment.text = "State 2 = $uri"
+        binding.btnNext.setOnClickListener {
+            val intent = Intent(context, SelfieActivity::class.java)
             resultLauncher.launch(intent)
         }
     }
@@ -57,4 +68,5 @@ class StepperFirstFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
 }

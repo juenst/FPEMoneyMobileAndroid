@@ -56,21 +56,29 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.upgrade_acc.UpgradeAccountActivity"
+            android:name=".view.upgrade.UpgradeAccountActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/AppTheme.finpayTheme2" />
         <activity
             android:name=".view.camera.CameraResultActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.camera.CameraActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".view.upgrade_acc.UpgradeInformationActivity"
+            android:name=".view.camera.SelfieActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.camera.SelfieResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountGuideActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.AppActivity"
             android:exported="false"

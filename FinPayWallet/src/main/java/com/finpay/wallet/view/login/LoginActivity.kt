@@ -28,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
         btnMasuk.setOnClickListener{
             val intent = Intent(this, PinActivity::class.java)
             startActivity(intent)
-//            finish()
         }
 
         backButton.setOnClickListener{

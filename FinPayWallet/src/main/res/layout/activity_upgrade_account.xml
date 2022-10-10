@@ -3,9 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.upgrade_acc.UpgradeAccountActivity">
+    tools:context=".view.upgrade.UpgradeAccountActivity">
 
-    <include layout="@layout/app_toolbar" />
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingLeft="20dp"
+        android:background="#00ACBA">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_left" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textFontWeight="600"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Uprage Premium" />
+
+        </FrameLayout>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/frame_upgrade_acc"

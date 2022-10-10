@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         btnCallWallet.setOnClickListener {
             println("test")
-            Intent(this, SplashActivity::class.java).apply {
+            Intent(this, AppActivity::class.java).apply {
                 startActivity(this)
                 finish()
             }

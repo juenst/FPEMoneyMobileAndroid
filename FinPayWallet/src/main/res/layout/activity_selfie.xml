@@ -30,7 +30,7 @@
                 android:gravity="center"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:text="Foto Identitas" />
+                android:text="Foto Selfie" />
 
             <ImageView
                 android:id="@+id/btnFlash"
@@ -65,7 +65,7 @@
                 android:textFontWeight="600"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="Posisikan Identitas Anda berada dalam kotak dibawah dan pastikan hasil foto terbaca jelas" />
+                android:text="Posisikan wajah Anda berada dalam lingkaran dan Identitas berada dalam kotak dibawah ini, pastikan hasil foto terlihat jelas" />
 
         </LinearLayout>
 
@@ -77,9 +77,9 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:src="@drawable/camera_overlay_outline" />
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:src="@drawable/bg_camera_selfie" />
 
         </LinearLayout>
 

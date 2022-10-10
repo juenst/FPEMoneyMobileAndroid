@@ -17,13 +17,13 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.finpay.wallet.R
-import com.finpay.wallet.databinding.ActivityCameraBinding
+import com.finpay.wallet.databinding.ActivitySelfieBinding
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CameraActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCameraBinding
+class SelfieActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySelfieBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
 
@@ -35,7 +35,7 @@ class CameraActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            result.data?.getStringExtra(CameraResultActivity.EXTRA_RESULT)?.let {
+            result.data?.getStringExtra(SelfieResultActivity.EXTRA_RESULT)?.let {
                 val intent = Intent()
                 intent.putExtra(EXTRA_RESULT, it)
                 setResult(RESULT_OK, intent)
@@ -49,15 +49,15 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         outputDirectory = getOutputDirectory()
-        binding = ActivityCameraBinding.inflate(layoutInflater)
+        binding = ActivitySelfieBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar!!.hide()
         if (allPermissionGranted()) {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
-                this, Constants.REQUIRED_PERMISSIONS,
-                Constants.REQUEST_CODE_PERMISSIONS,
+                this, Constant.REQUIRED_PERMISSIONS,
+                Constant.REQUEST_CODE_PERMISSIONS,
             )
         }
         binding.btnTakePic.setOnClickListener {
@@ -80,7 +80,7 @@ class CameraActivity : AppCompatActivity() {
             File(
                 outputDirectory,
                 SimpleDateFormat(
-                    Constants.FILE_NAME_FORMAT,
+                    Constant.FILE_NAME_FORMAT,
                     Locale.getDefault()
                 ).format(System.currentTimeMillis()) + ".jpg"
             )
@@ -91,14 +91,14 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
-                    val intent = Intent(this@CameraActivity, CameraResultActivity::class.java)
+                    val intent = Intent(this@SelfieActivity, CameraResultActivity::class.java)
                     intent.putExtra(CameraResultActivity.EXTRA_DATA, "URI $saveUri")
                     intent.putExtra("imagesResult", photoFile)
                     resultLauncher.launch(intent)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Log.e(Constants.TAG, "onError: ${exception.message}", exception)
+                    Log.e(Constant.TAG, "onError: ${exception.message}", exception)
                 }
 
             })
@@ -111,7 +111,7 @@ class CameraActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == Constants.REQUEST_CODE_PERMISSIONS) {
+        if (requestCode == Constant.REQUEST_CODE_PERMISSIONS) {
             if (allPermissionGranted()) {
                 startCamera()
             } else {
@@ -135,13 +135,13 @@ class CameraActivity : AppCompatActivity() {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
             } catch (e: Exception) {
-                Log.d(Constants.TAG, "startCamera Fail", e)
+                Log.d(Constant.TAG, "startCamera Fail", e)
             }
         }, ContextCompat.getMainExecutor(this))
     }
 
     private fun allPermissionGranted() =
-        Constants.REQUIRED_PERMISSIONS.all {
+        Constant.REQUIRED_PERMISSIONS.all {
             ContextCompat.checkSelfPermission(
                 baseContext, it
             ) == PackageManager.PERMISSION_GRANTED
@@ -150,7 +150,7 @@ class CameraActivity : AppCompatActivity() {
 }
 
 
-object Constants {
+object Constant {
     const val TAG = "cameraX"
     const val FILE_NAME_FORMAT = "yy-MM-dd-HH-mm-ss-SSS"
     const val REQUEST_CODE_PERMISSIONS = 123

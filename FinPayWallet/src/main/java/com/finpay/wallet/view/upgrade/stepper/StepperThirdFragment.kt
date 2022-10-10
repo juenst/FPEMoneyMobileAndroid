@@ -1,4 +1,4 @@
-package com.finpay.wallet.view.upgrade_acc
+package com.finpay.wallet.view.upgrade.stepper
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,9 +31,9 @@ class StepperThirdFragment : Fragment() {
         val dataFromFirst = arguments?.getString(EXTRA_FIRST_DATA)
         val dataFromSecond = arguments?.getString(EXTRA_SECOND_DATA)
 
-        binding.tvWelcomeFragment1.text = "State 3 Data From First Fragment= $dataFromFirst"
-        binding.tvWelcomeFragment2.text = "State 3 Data From Camera= $dataFromSecond"
-        binding.btnFinish.setOnClickListener {
+//        binding.tvWelcomeFragment1.text = "State 3 Data From First Fragment= $dataFromFirst"
+//        binding.tvWelcomeFragment2.text = "State 3 Data From Camera= $dataFromSecond"
+        binding.btnSubmit.setOnClickListener {
             Toast.makeText(context, "Finish Data and Hit API", Toast.LENGTH_SHORT).show()
         }
     }

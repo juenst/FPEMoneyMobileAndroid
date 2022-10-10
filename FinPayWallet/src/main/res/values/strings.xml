@@ -16,6 +16,12 @@
         <item>Delivery</item>
     </string-array>
 
+    <array name="stepLabel">
+        <item>Foto Identitas</item>
+        <item>Foto Selfie</item>
+        <item>Data Diri</item>
+    </array>
+
     <string name="toolbar_title">Toolbar Title</string>
     <string name="button_back">button_back</string>
     <string name="upgrade_account_information">Upgrade Account Information</string>

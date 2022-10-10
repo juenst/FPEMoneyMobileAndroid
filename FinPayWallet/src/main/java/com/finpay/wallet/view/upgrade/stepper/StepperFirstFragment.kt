@@ -1,4 +1,4 @@
-package com.finpay.wallet.view.upgrade_acc
+package com.finpay.wallet.view.upgrade.stepper
 
 import android.app.Activity
 import android.content.Context
@@ -7,15 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.finpay.wallet.databinding.FragmentStepperSecondBinding
+import com.finpay.wallet.databinding.FragmentStepperFirstBinding
 import com.finpay.wallet.view.camera.CameraActivity
 import com.finpay.wallet.view.camera.CameraResultActivity
+import com.finpay.wallet.view.upgrade.FragmentCallback
 
-class StepperSecondFragment : Fragment() {
-    private var _binding: FragmentStepperSecondBinding? = null
+class StepperFirstFragment : Fragment() {
+    private var _binding: FragmentStepperFirstBinding? = null
     private val binding get() = _binding!!
 
     private var callback: FragmentCallback? = null
@@ -33,33 +33,22 @@ class StepperSecondFragment : Fragment() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.getStringExtra(CameraResultActivity.EXTRA_RESULT)?.let {
-                val uri = arguments?.getString(EXTRA_DATA)
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                Toast.makeText(requireContext(), uri, Toast.LENGTH_SHORT).show()
-
-                callback?.onSecondFr(uri, it)
-
+                callback?.onFirstFr(it)
             }
         }
-    }
-
-    companion object {
-        const val EXTRA_DATA = "extra_result_data"
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStepperSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentStepperFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val uri = arguments?.getString(EXTRA_DATA)
-        binding.tvWelcomeFragment.text = "State 2 = $uri"
-        binding.btnContinue.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             val intent = Intent(context, CameraActivity::class.java)
             resultLauncher.launch(intent)
         }
@@ -69,5 +58,4 @@ class StepperSecondFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }

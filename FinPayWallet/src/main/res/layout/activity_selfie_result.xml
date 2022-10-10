@@ -29,7 +29,7 @@
                 android:textFontWeight="600"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="Data Identitas" />
+                android:text="Foto Selfie" />
 
         </FrameLayout>
 
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hasil Foto Identitas"
+                android:text="Hasil Foto Selfie"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textSize="18sp" />
@@ -71,7 +71,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pastikan hasil foto terbaca dengan jelas dan fokus, ulangi foto jika dirasa foto kurang jelas agar proses verifikasi berhasil"
+                android:text="Pastikan wajah terlihat jelas dan tanpa menggunakan kacamata, topi, atau penghalang wajah lainnya"
                 android:gravity="center"
                 android:textSize="14sp" />
         </LinearLayout>

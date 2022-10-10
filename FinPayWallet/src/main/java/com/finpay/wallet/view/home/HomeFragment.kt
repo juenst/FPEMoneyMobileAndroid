@@ -21,12 +21,11 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.finpay.wallet.databinding.FragmentHomeBinding
 import com.finpay.wallet.utilities.TextUtils
-import com.finpay.wallet.view.home.banner.item.BannerListener
-import com.finpay.wallet.view.home.banner.model.BannerPromo
 import com.finpay.wallet.view.more.MoreActivity
 import com.finpay.wallet.view.topup.TopupActivity
 import com.finpay.wallet.view.transaction.history.TransactionHistoryActivity
 import com.finpay.wallet.view.transfer.TransferActivity
+import com.finpay.wallet.view.upgrade.UpgradeAccountGuideActivity
 import com.finpay.wallet.view.wallet.WalletActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -43,7 +42,7 @@ class HomeFragment : Fragment() {
     private lateinit var txtUserName: TextView
     private lateinit var txtSaldo: TextView
     private lateinit var tvWarningBody: TextView
-    private lateinit var crdWarning: LinearLayout
+    private lateinit var sectionUpgradeAccount: LinearLayout
     private lateinit var finPaySDK: FinPaySDK
 
     private lateinit var btnTopUp: LinearLayout
@@ -76,7 +75,7 @@ class HomeFragment : Fragment() {
         txtUserName = binding.txtUsername
         txtSaldo = binding.txtSaldo
         tvWarningBody = binding.tvBeFinpayPremiumBody
-        crdWarning = binding.crdWarningPremium
+        sectionUpgradeAccount = binding.sectionUpgradeAccount
         iconVisibility = binding.iconVisibility
         iconVisibilityOff = binding.iconVisibilityOff
 
@@ -193,6 +192,12 @@ class HomeFragment : Fragment() {
         btnMore.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
             val intent = Intent(requireContext(), MoreActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        sectionUpgradeAccount.setOnClickListener {
+            //FinPaySDK().openUpgradeAccount(requireContext())
+            val intent = Intent(requireContext(), UpgradeAccountGuideActivity::class.java)
             this.startActivity(intent)
         }
     }

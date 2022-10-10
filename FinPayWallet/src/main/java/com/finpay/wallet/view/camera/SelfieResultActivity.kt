@@ -4,13 +4,13 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.finpay.wallet.databinding.ActivityCameraResultBinding
+import com.finpay.wallet.databinding.ActivitySelfieResultBinding
 import kotlinx.android.synthetic.main.activity_camera_result.*
 import java.io.File
 
 
-class CameraResultActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCameraResultBinding
+class SelfieResultActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySelfieResultBinding
     val uriImage: String? by lazy {
         intent.getStringExtra(EXTRA_DATA)
     }
@@ -23,7 +23,7 @@ class CameraResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCameraResultBinding.inflate(layoutInflater)
+        binding = ActivitySelfieResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar!!.hide()
 
