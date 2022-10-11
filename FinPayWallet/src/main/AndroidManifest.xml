@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application>
         <activity
-            android:name=".view.ppob.AsuransiActivity"
+            android:name=".view.ppob.voucher.VoucherDealsActivity"
             android:theme="@style/AppTheme.finpayTheme2"
+            android:exported="false" />
+        <activity
+            android:name=".view.ppob.asuransi.AsuransiActivity"
+            android:exported="false"
             android:hardwareAccelerated="false"
-            android:largeHeap="true"
-            android:exported="false" />
+            android:theme="@style/AppTheme.finpayTheme2" />
         <activity
-            android:name=".view.ppob.PegadaianActivity"
-            android:theme="@style/AppTheme.finpayTheme2"
-            android:exported="false" />
-        <activity
-            android:name=".view.ppob.CarLifeInsuranceActivity"
+            android:name=".view.ppob.pegadaian.PegadaianActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity
-            android:name=".view.ppob.UlangGadaiActivity"
+            android:name=".view.ppob.asuransi.CarLifeInsuranceActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.pegadaian.UlangGadaiActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity

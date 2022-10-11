@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F5F5F5"
-    tools:context=".view.ppob.CarLifeInsuranceActivity">
+    tools:context=".view.ppob.asuransi.CarLifeInsuranceActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -54,8 +54,10 @@
             android:background="@drawable/shape_edittext_outline"
             android:layout_width="match_parent"
             android:layout_height="40dp">
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
+                android:id="@+id/noPelangganField"
                 android:layout_weight="1"
+                android:paddingHorizontal="8dp"
                 android:background="@color/transparant"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>

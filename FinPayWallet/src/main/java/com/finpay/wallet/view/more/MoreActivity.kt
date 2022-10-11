@@ -6,8 +6,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.finpay.wallet.R
-import com.finpay.wallet.view.ppob.AsuransiActivity
+import com.finpay.wallet.view.ppob.asuransi.AsuransiActivity
 import com.finpay.wallet.view.ppob.FinpayActivity
+import com.finpay.wallet.view.ppob.voucher.VoucherDealsActivity
 
 class MoreActivity : AppCompatActivity()  {
     lateinit var btnBack: ImageView
@@ -20,6 +21,7 @@ class MoreActivity : AppCompatActivity()  {
         btnBack = findViewById(R.id.btnBack)
         val btnFinpay = findViewById<LinearLayout>(R.id.btnFinpay)
         val btnAsuransi = findViewById<LinearLayout>(R.id.btnAsuransi)
+        val btnVoucherDeals = findViewById<LinearLayout>(R.id.btnVoucherDeals)
 
         btnFinpay.setOnClickListener {
             val intent = Intent(this, FinpayActivity::class.java)
@@ -28,6 +30,11 @@ class MoreActivity : AppCompatActivity()  {
 
         btnAsuransi.setOnClickListener {
             val intent = Intent(this, AsuransiActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnVoucherDeals.setOnClickListener {
+            val intent = Intent(this, VoucherDealsActivity::class.java)
             this.startActivity(intent)
         }
 

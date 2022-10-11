@@ -1,4 +1,4 @@
-package com.finpay.wallet.view.ppob
+package com.finpay.wallet.view.ppob.asuransi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

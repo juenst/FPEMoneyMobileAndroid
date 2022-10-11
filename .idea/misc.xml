@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_app.xml" value="0.2375" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_asuransi.xml" value="0.15715579710144928" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_camera.xml" value="0.2375" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_car_life_insurance.xml" value="0.1" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_finpay.xml" value="0.1" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_history_transaction.xml" value="0.3382066276803119" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_login.xml" value="0.11550151975683891" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_more.xml" value="0.1" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_pegadaian.xml" value="0.15715579710144928" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_tagihan_halo.xml" value="0.1" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_ulang_gadai.xml" value="0.1" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_voucher_streaming.xml" value="0.1" />
+        <entry key="FinPayWallet/src/main/res/layout/item_voucher.xml" value="0.23645833333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

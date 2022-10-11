@@ -1,4 +1,4 @@
-package com.finpay.wallet.view.ppob
+package com.finpay.wallet.view.ppob.pegadaian
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -9,20 +9,19 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.widget.doOnTextChanged
 import com.finpay.wallet.R
-import com.google.android.material.textfield.TextInputEditText
 
-class FinpayActivity : AppCompatActivity() {
+class UlangGadaiActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_finpay)
+        setContentView(R.layout.activity_ulang_gadai)
 
         val backButton = findViewById<ImageView>(R.id.btnBack)
-        val noPelangganField = findViewById<EditText>(R.id.noPelangganField)
+        val noKreditField = findViewById<EditText>(R.id.noKreditField)
         val btnLanjut = findViewById<Button>(R.id.btnLanjut)
 
         checkButtonState(btnLanjut)
 
-        noPelangganField.doOnTextChanged { text, start, before, count ->
+        noKreditField.doOnTextChanged { text, start, before, count ->
             btnLanjut.isEnabled = text!!.isNotEmpty()
             checkButtonState(btnLanjut)
         }
