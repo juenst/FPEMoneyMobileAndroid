@@ -94,7 +94,7 @@ class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
-                    progressDialog.hide()
+                    progressDialog.dismiss()
                     val intent = Intent(this@UpgradeAccountSelfieCameraActivity, UpgradeAccountSelfieResultActivity::class.java)
                     intent.putExtra("imgResultSelfie", "${saveUri}")
                     intent.putExtra("imgResultIdentity", imgResultIdentity)
@@ -103,7 +103,7 @@ class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    progressDialog.hide()
+                    progressDialog.dismiss()
                     Toast.makeText(this@UpgradeAccountSelfieCameraActivity, exception.message, Toast.LENGTH_LONG)
                     Log.e(Constant.TAG, "onError: ${exception.message}", exception)
                 }

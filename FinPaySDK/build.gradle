@@ -41,6 +41,12 @@ android {
     dataBinding {
         enabled = true
     }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+        preDexLibraries true
+        dexInProcess = true
+    }
     namespace 'lib.finpay.sdk'
 }
 

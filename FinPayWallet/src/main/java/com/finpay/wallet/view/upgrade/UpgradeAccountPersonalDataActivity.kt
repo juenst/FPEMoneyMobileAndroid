@@ -85,14 +85,14 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
                 {
                     val intent = Intent(this, UpgradeAccountSuccessActivity::class.java)
                     startActivity(intent)
-                    progressDialog.hide()
+                    progressDialog.dismiss()
                 },
                 {
                     Toast.makeText(this@UpgradeAccountPersonalDataActivity, it, Toast.LENGTH_LONG)
-                    progressDialog.hide()
+                    progressDialog.dismiss()
                 }
             )
-            progressDialog.hide()
+            progressDialog.dismiss()
         }
 
         txtMotherName.doOnTextChanged { text, start, before, count ->
