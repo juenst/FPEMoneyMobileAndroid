@@ -93,7 +93,6 @@ class SelfieActivity : AppCompatActivity() {
                     val saveUri = Uri.fromFile(photoFile)
                     val intent = Intent(this@SelfieActivity, SelfieResultActivity::class.java)
                     intent.putExtra(SelfieResultActivity.EXTRA_DATA, "URI $saveUri")
-                    intent.putExtra("imagesResult", photoFile)
                     resultLauncher.launch(intent)
                 }
 
@@ -130,7 +129,7 @@ class SelfieActivity : AppCompatActivity() {
                 mPreview.setSurfaceProvider(binding.previewView.surfaceProvider)
             }
             imageCapture = ImageCapture.Builder().build()
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)

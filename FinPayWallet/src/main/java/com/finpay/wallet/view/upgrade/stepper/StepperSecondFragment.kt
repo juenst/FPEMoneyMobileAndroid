@@ -11,9 +11,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.finpay.wallet.databinding.FragmentStepperSecondBinding
-import com.finpay.wallet.view.camera.CameraActivity
-import com.finpay.wallet.view.camera.CameraResultActivity
 import com.finpay.wallet.view.camera.SelfieActivity
+import com.finpay.wallet.view.camera.SelfieResultActivity
 import com.finpay.wallet.view.upgrade.FragmentCallback
 
 class StepperSecondFragment : Fragment() {
@@ -34,10 +33,9 @@ class StepperSecondFragment : Fragment() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.getStringExtra(CameraResultActivity.EXTRA_RESULT)?.let {
+            result.data?.getStringExtra(SelfieResultActivity.EXTRA_RESULT)?.let {
                 val uri = arguments?.getString(EXTRA_DATA)
                 callback?.onSecondFr(uri, it)
-
             }
         }
     }
@@ -56,8 +54,6 @@ class StepperSecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val uri = arguments?.getString(EXTRA_DATA)
-//        binding.tvWelcomeFragment.text = "State 2 = $uri"
         binding.btnNext.setOnClickListener {
             val intent = Intent(context, SelfieActivity::class.java)
             resultLauncher.launch(intent)

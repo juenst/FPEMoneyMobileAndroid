@@ -93,7 +93,6 @@ class CameraActivity : AppCompatActivity() {
                     val saveUri = Uri.fromFile(photoFile)
                     val intent = Intent(this@CameraActivity, CameraResultActivity::class.java)
                     intent.putExtra(CameraResultActivity.EXTRA_DATA, "URI $saveUri")
-                    intent.putExtra("imagesResult", photoFile)
                     resultLauncher.launch(intent)
                 }
 

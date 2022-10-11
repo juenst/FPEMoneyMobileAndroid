@@ -11,7 +11,7 @@ import java.io.File
 
 class SelfieResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelfieResultBinding
-    val uriImage: String? by lazy {
+    private val uriImage: String? by lazy {
         intent.getStringExtra(EXTRA_DATA)
     }
 
