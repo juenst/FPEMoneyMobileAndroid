@@ -36,10 +36,6 @@ class StepperSecondFragment : Fragment() {
             result.data?.getStringExtra(SelfieResultActivity.EXTRA_RESULT)?.let {
                 val uri = arguments?.getString(EXTRA_DATA)
                 callback?.onSecondFr(uri, it)
-                Toast.makeText(requireContext(), "From First Fragment: $uri", Toast.LENGTH_SHORT)
-                    .show()
-                Toast.makeText(requireContext(), "From Second Fragment: $it", Toast.LENGTH_SHORT)
-                    .show()
             }
         }
     }
