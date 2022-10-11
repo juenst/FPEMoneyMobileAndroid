@@ -85,13 +85,14 @@
                     android:layout_width="0dp"
                     android:layout_height="15dp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/md_grey_200" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:paddingHorizontal="15dp"
+            android:background="@color/md_grey_200" />
 
         <LinearLayout
             android:id="@+id/btn_mnc_vision"
@@ -138,13 +139,14 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="15dp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/md_grey_200" />
             </LinearLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:paddingHorizontal="15dp"
+            android:background="@color/md_grey_200" />
 
     </LinearLayout>
 

@@ -122,6 +122,41 @@
             android:name=".view.qris.QRISResultActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.alfamart.AlfamartActivity"
+            android:exported="false"
+            android:label="Alfamart"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.best.telkomsel.package.BestTelkomselPackageActivity"
+            android:exported="false"
+            android:label="Paket Terbaik Telkomsel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.state.revenue.StateRevenueActivity"
+            android:exported="false"
+            android:label="Penerimaan Negara"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.internet.tv.cable.InternetTvCableActivity"
+            android:exported="false"
+            android:label="Internet &amp; Tv Cable"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.internet.tv.cable.InternetTvCableDetailActivity"
+            android:exported="false"
+            android:label="Internet &amp; Tv Cable"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.pdam.PDAMActivity"
+            android:exported="false"
+            android:label="Voucher TV Kabel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.voucher.VoucherDealsActivity"
+            android:exported="false"
+            android:label="Voucher Deals"
+            android:theme="@style/AppTheme.finpayTheme" />
     </application>
 
 </manifest>
