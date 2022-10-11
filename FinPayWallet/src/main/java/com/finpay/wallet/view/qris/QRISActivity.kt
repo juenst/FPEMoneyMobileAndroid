@@ -1,12 +1,20 @@
 package com.finpay.wallet.view.qris
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.SurfaceHolder
+import android.view.SurfaceView
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -16,141 +24,151 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import com.finpay.wallet.R
+import com.finpay.wallet.constant.Constant
 import com.finpay.wallet.databinding.ActivityQrisBinding
+import com.finpay.wallet.view.pin.PinActivity
+import com.finpay.wallet.view.upgrade.UpgradeAccountSelfieResultActivity
+import com.google.android.gms.vision.CameraSource
+import com.google.android.gms.vision.Detector
+import com.google.android.gms.vision.Detector.Detections
+import com.google.android.gms.vision.barcode.Barcode
+import com.google.android.gms.vision.barcode.BarcodeDetector
+import com.google.zxing.integration.android.IntentIntegrator
+import com.midtrans.sdk.corekit.utilities.Utils
 import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class QRISActivity : AppCompatActivity() {
+    lateinit var progressDialog: ProgressDialog
+    lateinit var btnBack: ImageView
+    private val requestCodeCameraPermission = 1001
+    private lateinit var cameraSource: CameraSource
+    private lateinit var barcodeDetector: BarcodeDetector
+    private var scannedValue = ""
+
     private lateinit var binding: ActivityQrisBinding
-    private var imageCapture: ImageCapture? = null
-    private lateinit var outputDirectory: File
-
-    companion object {
-        const val EXTRA_RESULT = "extra_result_value"
-    }
-
-    private val resultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            result.data?.getStringExtra(QRISResultActivity.EXTRA_RESULT)?.let {
-                val intent = Intent()
-                intent.putExtra(EXTRA_RESULT, it)
-                setResult(RESULT_OK, intent)
-                finish()
-            }
-        } else if (result.resultCode == RESULT_CANCELED) {
-            //TODO: RE USE CAMERA
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        outputDirectory = getOutputDirectory()
         binding = ActivityQrisBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val view = binding.root
+        setContentView(view)
         supportActionBar!!.hide()
-        if (allPermissionGranted()) {
-            startCamera()
+
+        progressDialog = ProgressDialog(this@QRISActivity)
+
+        if (ContextCompat.checkSelfPermission(this@QRISActivity, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            askForCameraPermission()
         } else {
-            ActivityCompat.requestPermissions(
-                this, Constan.REQUIRED_PERMISSIONS,
-                Constan.REQUEST_CODE_PERMISSIONS,
-            )
+            setupControls()
         }
-//        binding.btnTakePic.setOnClickListener {
-//            takePic()
-//        }
+
+        val aniSlide: Animation = AnimationUtils.loadAnimation(this@QRISActivity, R.anim.scanner_animation)
+        binding.barcodeLine.startAnimation(aniSlide)
     }
 
-    private fun getOutputDirectory(): File {
-        val mediaDir = externalMediaDirs.firstOrNull()?.let { mFile ->
-            File(mFile, resources.getString(R.string.app_name)).apply {
-                mkdirs()
+    private fun setupControls() {
+        barcodeDetector = BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build()
+        cameraSource = CameraSource.Builder(this, barcodeDetector)
+            .setRequestedPreviewSize(1920, 1080)
+            .setAutoFocusEnabled(true) //you should add this feature
+            .build()
+
+        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
+            @SuppressLint("MissingPermission")
+            override fun surfaceCreated(holder: SurfaceHolder) {
+                try {
+                    //Start preview after 1s delay
+                    cameraSource.start(holder)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
-        }
-        return if (mediaDir != null && mediaDir.exists()) mediaDir else filesDir
+
+            @SuppressLint("MissingPermission")
+            override fun surfaceChanged(
+                holder: SurfaceHolder,
+                format: Int,
+                width: Int,
+                height: Int
+            ) {
+                try {
+                    cameraSource.start(holder)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun surfaceDestroyed(holder: SurfaceHolder) {
+                cameraSource.stop()
+            }
+        })
+
+
+        barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
+            override fun release() {
+                Toast.makeText(applicationContext, "Scanner has been closed", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun receiveDetections(detections: Detections<Barcode>) {
+//                progressDialog.setTitle("Mohon Menunggu")
+//                progressDialog.setMessage("Sedang Memuat ...")
+//                progressDialog.setCancelable(false) // blocks UI interaction
+//                progressDialog.show()
+
+                val barcodes = detections.detectedItems
+                if (barcodes.size() == 1) {
+                    scannedValue = barcodes.valueAt(0).rawValue
+                    if(scannedValue.contains("FINPAY")) {
+                        runOnUiThread {
+                            cameraSource.stop()
+//                            progressDialog.dismiss()
+                            val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
+                            intent.putExtra("resultQR", "${scannedValue}")
+                            startActivity(intent)
+                            this@QRISActivity.finish()
+                        }
+                    } else {
+//                        progressDialog.dismiss()
+                        //Toast.makeText(this@QRISActivity, "Format QRIS salah", Toast.LENGTH_SHORT).show()
+                    }
+                }else {
+//                    progressDialog.dismiss()
+                    //Toast.makeText(this@QRISActivity, "value- else", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
-    private fun takePic() {
-        val imageCapture = imageCapture ?: return
-        val photoFile =
-            File(
-                outputDirectory,
-                SimpleDateFormat(
-                    Constan.FILE_NAME_FORMAT,
-                    Locale.getDefault()
-                ).format(System.currentTimeMillis()) + ".jpg"
-            )
-        val outputOption = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-        imageCapture.takePicture(
-            outputOption,
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    val saveUri = Uri.fromFile(photoFile)
-                    val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
-                    intent.putExtra(QRISResultActivity.EXTRA_DATA, "URI $saveUri")
-                    intent.putExtra("imagesResult", photoFile)
-                    resultLauncher.launch(intent)
-                }
-
-                override fun onError(exception: ImageCaptureException) {
-                    Log.e(Constan.TAG, "onError: ${exception.message}", exception)
-                }
-
-            })
+    private fun askForCameraPermission() {
+        ActivityCompat.requestPermissions(
+            this@QRISActivity,
+            arrayOf(android.Manifest.permission.CAMERA),
+            requestCodeCameraPermission
+        )
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<String>,
+        permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == Constan.REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionGranted()) {
-                startCamera()
+        if (requestCode == requestCodeCameraPermission && grantResults.isNotEmpty()) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setupControls()
             } else {
-                Toast.makeText(this, "Permission not granted by the user", Toast.LENGTH_SHORT)
-                    .show()
-                finish()
+                Toast.makeText(applicationContext, "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder().build().also { mPreview ->
-                mPreview.setSurfaceProvider(binding.previewView.surfaceProvider)
-            }
-            imageCapture = ImageCapture.Builder().build()
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
-            } catch (e: Exception) {
-                Log.d(Constan.TAG, "startCamera Fail", e)
-            }
-        }, ContextCompat.getMainExecutor(this))
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraSource.stop()
     }
-
-    private fun allPermissionGranted() =
-        Constan.REQUIRED_PERMISSIONS.all {
-            ContextCompat.checkSelfPermission(
-                baseContext, it
-            ) == PackageManager.PERMISSION_GRANTED
-        }
-}
-
-object Constan {
-    const val TAG = "cameraX"
-    const val FILE_NAME_FORMAT = "yy-MM-dd-HH-mm-ss-SSS"
-    const val REQUEST_CODE_PERMISSIONS = 123
-    val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 }
