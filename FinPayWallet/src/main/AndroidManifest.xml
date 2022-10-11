@@ -5,6 +5,8 @@
         <activity
             android:name=".view.pin.PinActivity"
             android:theme="@style/AppTheme.finpayTheme2"
+            android:hardwareAccelerated="false"
+            android:largeHeap="true"
             android:exported="false" />
         <activity
             android:name=".view.login.LoginActivity"

@@ -19,8 +19,6 @@ import com.finpay.wallet.R
 import lib.finpay.sdk.FinPaySDK
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileNotFoundException
 
 
 class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
@@ -115,19 +113,16 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
     }
 
     private fun encodeImage(path: String): String? {
-        val imagefile = File(path)
-        var fis: FileInputStream? = null
-        try {
-            fis = FileInputStream(imagefile)
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
+        val imgFile = File(path.replace("file://", ""))
+        if(imgFile.exists()) {
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            myBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
+            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+            val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            return encoded
         }
-        val bm = BitmapFactory.decodeStream(fis)
-        val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 50, baos)
-        val b = baos.toByteArray()
-        //Base64.de
-        return Base64.encodeToString(b, Base64.DEFAULT)
+        return ""
     }
 
     fun checkForm() {
