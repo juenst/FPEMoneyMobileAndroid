@@ -25,7 +25,7 @@ import com.finpay.wallet.view.more.MoreActivity
 import com.finpay.wallet.view.topup.TopupActivity
 import com.finpay.wallet.view.transaction.history.TransactionHistoryActivity
 import com.finpay.wallet.view.transfer.TransferActivity
-import com.finpay.wallet.view.upgrade.UpgradeAccountGuideActivity
+import com.finpay.wallet.view.upgrade.UpgradeAccountActivity
 import com.finpay.wallet.view.wallet.WalletActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -197,7 +197,7 @@ class HomeFragment : Fragment() {
 
         sectionUpgradeAccount.setOnClickListener {
             //FinPaySDK().openUpgradeAccount(requireContext())
-            val intent = Intent(requireContext(), UpgradeAccountGuideActivity::class.java)
+            val intent = Intent(requireContext(), UpgradeAccountActivity::class.java)
             this.startActivity(intent)
         }
     }

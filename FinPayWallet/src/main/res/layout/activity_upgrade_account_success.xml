@@ -12,26 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingLeft="20dp"
-        android:background="#00ACBA">
+        android:background="#FFF">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/btnBack"
+                android:id="@+id/btnClose"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_left" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textFontWeight="600"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:text="Upgrade Akun" />
+                android:src="@drawable/ic_close" />
 
         </FrameLayout>
 
@@ -52,7 +43,7 @@
                 android:layout_width="256dp"
                 android:layout_height="256dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img_upgrade_account"/>
+                android:src="@drawable/img_upgrade_success"/>
 
             <Space
                 android:layout_width="wrap_content"
@@ -64,7 +55,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:text="Verifikasi Identitas Anda" />
+                android:text="Permintaan Terkirim" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -74,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Lakukan verifikasi identitas sebelum menggunakan fitur ini. Berikut 3 langkah mudah verifikasi dan upgrade akun Anda." />
+                android:text="Terima kasih telah melakukan permintaan upgrade akun. Kami akan melakukan verifikasi secepatnya." />
 
             <Space
                 android:layout_width="wrap_content"
@@ -110,7 +101,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Unggah foto identitas"
+                    android:text="Permintaan menjadi pengguna premium akan diproses maksimal 3 x 24 jam (hari kerja)"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -149,7 +140,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Unggah foto selfie dengan identitas Anda"
+                    android:text="Untuk informasi lebih lanjut, hubungi
+021 1500 770 atau kirim email ke care@finpay.id"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -157,41 +149,6 @@
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="10dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardBackgroundColor="#EEF2F6">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="3"
-                        android:textSize="14sp" />
-
-                </androidx.cardview.widget.CardView>
-
-                <Space
-                    android:layout_width="16dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Lengkapi detai data diri Anda"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -202,8 +159,8 @@
             android:padding="20dp">
 
             <Button
-                android:id="@+id/btnNext"
-                android:text="Lanjutkan"
+                android:id="@+id/btnBack"
+                android:text="Kembali ke Halaman Utama"
                 android:textColor="@color/white"
                 android:background="#00ACBA"
                 android:layout_width="match_parent"

@@ -35,31 +35,6 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity
-            android:name=".SelfieActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".IdentityActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".FormActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.upgrade.UpgradeAccountActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
-        <activity
             android:name=".view.camera.CameraResultActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
@@ -76,7 +51,39 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".view.upgrade.UpgradeAccountGuideActivity"
+            android:name=".view.upgrade.UpgradeAccountActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountIdentityGuideActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountIdentityCameraActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountIdentityResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountSelfieGuideActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountSelfieCameraActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountSelfieResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountPersonalDataActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.upgrade.UpgradeAccountSuccessActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity

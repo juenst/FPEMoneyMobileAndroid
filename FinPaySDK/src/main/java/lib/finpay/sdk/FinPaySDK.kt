@@ -157,6 +157,37 @@ public class FinPaySDK {
         })
     }
 
+    fun upgradeAccount(
+        phoneNumber: String,
+        imageIdentity: String,
+        imageSelfie: String,
+        motherName: String,
+        noKK: String,
+        nationality: String,
+        email: String,
+        onSuccess: (UpgradeAccountModel) -> Unit,
+        onFailed: (String) -> Unit
+    )  {
+        getToken({
+            if(it.getTokenID() != null) {
+                UpgradeAccountRepository.upgradeAccount(
+                    phoneNumber,
+                    it.getTokenID().toString(),
+                    imageIdentity,
+                    imageSelfie,
+                    motherName,
+                    noKK,
+                    nationality,
+                    email, {
+                        onSuccess(it)
+                    }, {
+                        onFailed(it)
+                    }
+                )
+            }
+        })
+    }
+
 //    fun openWallet(context: Context) {
 //        val intent = Intent (context, WalletActivity::class.java)
 //        context.startActivity(intent)

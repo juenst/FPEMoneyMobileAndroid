@@ -79,4 +79,10 @@ interface Api {
         @Body body: HashMap<String, String>
     ): Call<UnpairModel>
 
+    @Headers("Content-Type:application/json")
+    @POST("api.php")
+    fun upgradeAccount(
+        @Body body: HashMap<String, String>
+    ): Call<UpgradeAccountModel>
+
 }

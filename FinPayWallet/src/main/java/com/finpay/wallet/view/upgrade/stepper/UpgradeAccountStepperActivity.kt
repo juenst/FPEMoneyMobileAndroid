@@ -1,6 +1,5 @@
 package com.finpay.wallet.view.upgrade
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -9,12 +8,12 @@ import com.finpay.wallet.view.upgrade.stepper.StepperFirstFragment
 import com.finpay.wallet.view.upgrade.stepper.StepperSecondFragment
 import com.finpay.wallet.view.upgrade.stepper.StepperThirdFragment
 
-class UpgradeAccountActivity : AppCompatActivity(), FragmentCallback {
+class UpgradeAccountStepperActivity : AppCompatActivity(), FragmentCallback {
     private lateinit var appbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_upgrade_account)
+        setContentView(R.layout.activity_upgrade_accounts)
 
         val mFragmentManager = supportFragmentManager
         val mFirstStepFragment = StepperFirstFragment()
