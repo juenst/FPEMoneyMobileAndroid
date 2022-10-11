@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:paddingLeft="20dp"
+        android:paddingHorizontal="20dp"
         android:background="#00ACBA">
 
         <LinearLayout
@@ -51,6 +51,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <ImageView
+            android:id="@+id/preview_view_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_upgrade_selfie"
+            android:scaleType="fitXY" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,20 +73,6 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:text="Posisikan wajah Anda berada dalam lingkaran dan Identitas berada dalam kotak dibawah ini, pastikan hasil foto terlihat jelas" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:paddingHorizontal="20dp"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:src="@drawable/bg_camera_selfie" />
 
         </LinearLayout>
 
