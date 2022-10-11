@@ -51,7 +51,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
         txtNationality = findViewById(R.id.txtNationality)
         txtEmail = findViewById(R.id.txtEmail)
         activity = this@UpgradeAccountPersonalDataActivity
-        progressDialog = ProgressDialog(this)
+        progressDialog = ProgressDialog(this@UpgradeAccountPersonalDataActivity)
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -66,13 +66,13 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             println("nationality => ${txtNationality.getText()}")
             println("email => ${txtEmail.getText()}")
 
-            var imageIdentity: String = encodeImage(imgResultIdentity!!)!!
-            var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
-
             progressDialog.setTitle("Mohon Menunggu")
             progressDialog.setMessage("Sedang Memuat ...")
-            progressDialog.setCancelable(false) // blocks UI interaction
+            progressDialog.setCancelable(false)
             progressDialog.show()
+
+            var imageIdentity: String = encodeImage(imgResultIdentity!!)!!
+            var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
 
             FinPaySDK().upgradeAccount(
                 "083815613839,",
@@ -83,16 +83,15 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
                 txtNationality.text.toString(),
                 txtEmail.text.toString(),
                 {
+                    progressDialog.dismiss()
                     val intent = Intent(this, UpgradeAccountSuccessActivity::class.java)
                     startActivity(intent)
-                    progressDialog.dismiss()
                 },
                 {
-                    Toast.makeText(this@UpgradeAccountPersonalDataActivity, it, Toast.LENGTH_LONG)
                     progressDialog.dismiss()
+                    Toast.makeText(this@UpgradeAccountPersonalDataActivity, it, Toast.LENGTH_LONG)
                 }
             )
-            progressDialog.dismiss()
         }
 
         txtMotherName.doOnTextChanged { text, start, before, count ->
