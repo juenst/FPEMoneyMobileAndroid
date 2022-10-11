@@ -91,17 +91,17 @@ class UpgradeAccountIdentityCameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
+                    progressDialog.dismiss()
                     val intent = Intent(this@UpgradeAccountIdentityCameraActivity, UpgradeAccountIdentityResultActivity::class.java)
                     intent.putExtra("imgResultIdentity", "${saveUri}")
                     startActivity(intent)
                     this@UpgradeAccountIdentityCameraActivity.finish()
-                    progressDialog.hide()
                 }
 
                 override fun onError(exception: ImageCaptureException) {
+                    progressDialog.dismiss()
                     Toast.makeText(this@UpgradeAccountIdentityCameraActivity, exception.message, Toast.LENGTH_LONG)
                     Log.e(Constant.TAG, "onError: ${exception.message}", exception)
-                    progressDialog.hide()
                 }
             })
     }

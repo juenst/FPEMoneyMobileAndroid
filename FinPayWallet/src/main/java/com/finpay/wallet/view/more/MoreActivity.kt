@@ -12,6 +12,8 @@ import com.finpay.wallet.view.state.revenue.StateRevenueActivity
 import com.finpay.wallet.view.internet.tv.cable.*
 import com.finpay.wallet.view.pdam.PDAMActivity
 import com.finpay.wallet.view.voucher.VoucherDealsActivity
+import com.finpay.wallet.view.ppob.AsuransiActivity
+import com.finpay.wallet.view.ppob.FinpayActivity
 
 class MoreActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
@@ -34,6 +36,18 @@ class MoreActivity : AppCompatActivity() {
         btnPDAM = findViewById(R.id.btn_pdam)
         btnStateRevenue = findViewById(R.id.btn_state_revenue)
         btnVoucherDeals = findViewById(R.id.btn_voucher_deals)
+        val btnFinpay = findViewById<LinearLayout>(R.id.btnFinpay)
+        val btnAsuransi = findViewById<LinearLayout>(R.id.btnAsuransi)
+
+        btnFinpay.setOnClickListener {
+            val intent = Intent(this, FinpayActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnAsuransi.setOnClickListener {
+            val intent = Intent(this, AsuransiActivity::class.java)
+            this.startActivity(intent)
+        }
 
         btnBack.setOnClickListener {
             finish()

@@ -94,18 +94,18 @@ class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
+                    progressDialog.dismiss()
                     val intent = Intent(this@UpgradeAccountSelfieCameraActivity, UpgradeAccountSelfieResultActivity::class.java)
                     intent.putExtra("imgResultSelfie", "${saveUri}")
                     intent.putExtra("imgResultIdentity", imgResultIdentity)
                     startActivity(intent)
                     this@UpgradeAccountSelfieCameraActivity.finish()
-                    progressDialog.hide()
                 }
 
                 override fun onError(exception: ImageCaptureException) {
+                    progressDialog.dismiss()
                     Toast.makeText(this@UpgradeAccountSelfieCameraActivity, exception.message, Toast.LENGTH_LONG)
                     Log.e(Constant.TAG, "onError: ${exception.message}", exception)
-                    progressDialog.hide()
                 }
             })
     }
@@ -135,7 +135,7 @@ class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
                 mPreview.setSurfaceProvider(cameraView.surfaceProvider)
             }
             imageCapture = ImageCapture.Builder().build()
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)

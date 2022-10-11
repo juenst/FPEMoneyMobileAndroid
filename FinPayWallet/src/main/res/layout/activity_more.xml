@@ -607,6 +607,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btnFinpay"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -641,12 +642,12 @@
                     android:baselineAligned="false">
 
                     <LinearLayout
+                        android:id="@+id/btnAsuransi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
-
 
                         <ImageView
                             android:layout_width="32dp"
@@ -688,6 +689,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btnPegadaian"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

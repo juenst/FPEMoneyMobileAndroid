@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <application>
         <activity
-            android:name=".view.pin.PinActivity"
+            android:name=".view.ppob.AsuransiActivity"
+            android:theme="@style/AppTheme.finpayTheme2"
+            android:hardwareAccelerated="false"
+            android:largeHeap="true"
+            android:exported="false" />
+        <activity
+            android:name=".view.ppob.PegadaianActivity"
             android:theme="@style/AppTheme.finpayTheme2"
             android:exported="false" />
+        <activity
+            android:name=".view.ppob.CarLifeInsuranceActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.UlangGadaiActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.FinpayActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.TagihanHaloActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.pin.PinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="false"

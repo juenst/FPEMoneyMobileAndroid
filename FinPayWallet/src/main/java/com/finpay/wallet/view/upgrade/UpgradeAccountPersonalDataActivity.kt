@@ -19,8 +19,6 @@ import com.finpay.wallet.R
 import lib.finpay.sdk.FinPaySDK
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileNotFoundException
 
 
 class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
@@ -53,7 +51,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
         txtNationality = findViewById(R.id.txtNationality)
         txtEmail = findViewById(R.id.txtEmail)
         activity = this@UpgradeAccountPersonalDataActivity
-        progressDialog = ProgressDialog(this)
+        progressDialog = ProgressDialog(this@UpgradeAccountPersonalDataActivity)
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -68,13 +66,13 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             println("nationality => ${txtNationality.getText()}")
             println("email => ${txtEmail.getText()}")
 
-            var imageIdentity: String = encodeImage(imgResultIdentity!!)!!
-            var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
-
             progressDialog.setTitle("Mohon Menunggu")
             progressDialog.setMessage("Sedang Memuat ...")
-            progressDialog.setCancelable(false) // blocks UI interaction
+            progressDialog.setCancelable(false)
             progressDialog.show()
+
+            var imageIdentity: String = encodeImage(imgResultIdentity!!)!!
+            var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
 
             FinPaySDK().upgradeAccount(
                 "083815613839,",
@@ -85,16 +83,15 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
                 txtNationality.text.toString(),
                 txtEmail.text.toString(),
                 {
+                    progressDialog.dismiss()
                     val intent = Intent(this, UpgradeAccountSuccessActivity::class.java)
                     startActivity(intent)
-                    progressDialog.hide()
                 },
                 {
+                    progressDialog.dismiss()
                     Toast.makeText(this@UpgradeAccountPersonalDataActivity, it, Toast.LENGTH_LONG)
-                    progressDialog.hide()
                 }
             )
-            progressDialog.hide()
         }
 
         txtMotherName.doOnTextChanged { text, start, before, count ->
@@ -115,19 +112,16 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
     }
 
     private fun encodeImage(path: String): String? {
-        val imagefile = File(path)
-        var fis: FileInputStream? = null
-        try {
-            fis = FileInputStream(imagefile)
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
+        val imgFile = File(path.replace("file://", ""))
+        if(imgFile.exists()) {
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            myBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
+            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+            val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            return encoded
         }
-        val bm = BitmapFactory.decodeStream(fis)
-        val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 50, baos)
-        val b = baos.toByteArray()
-        //Base64.de
-        return Base64.encodeToString(b, Base64.DEFAULT)
+        return ""
     }
 
     fun checkForm() {
