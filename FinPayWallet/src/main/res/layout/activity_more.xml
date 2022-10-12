@@ -130,6 +130,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/btn_alfamart"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -302,6 +303,7 @@
                     android:baselineAligned="false">
 
                     <LinearLayout
+                        android:id="@+id/menuCredit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -347,6 +349,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_voucher_deals"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -456,6 +459,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/menuTelkom"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -478,6 +482,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_pdam"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -501,6 +506,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/menuBpjs"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -558,6 +564,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_internet_tv_cable"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -581,6 +588,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/menuCicilan"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -603,6 +611,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btnFinpay"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -637,12 +646,12 @@
                     android:baselineAligned="false">
 
                     <LinearLayout
+                        android:id="@+id/btnAsuransi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
-
 
                         <ImageView
                             android:layout_width="32dp"
@@ -660,6 +669,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_best_telkomsel_package"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -683,6 +693,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btnPegadaian"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -755,6 +766,7 @@
                     android:baselineAligned="false">
 
                     <LinearLayout
+                        android:id="@+id/btn_state_revenue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

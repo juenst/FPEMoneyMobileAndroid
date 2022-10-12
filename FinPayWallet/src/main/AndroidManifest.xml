@@ -5,11 +5,59 @@
 
     <application>
         <activity
-            android:name=".view.pin.PinActivity"
+            android:name=".view.internettvkabel.InternetCableTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.internettvkabel.ChooseInternetCableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.instalment.ChooseInstalmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.instalment.InstalmentTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.bpjs.ChooseBpjsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.bpjs.BpjsTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.telkom.TelkomTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.pulsa.CreditTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ppob.AsuransiActivity"
             android:theme="@style/AppTheme.finpayTheme2"
             android:hardwareAccelerated="false"
             android:largeHeap="true"
             android:exported="false" />
+        <activity
+            android:name=".view.ppob.PegadaianActivity"
+            android:theme="@style/AppTheme.finpayTheme2"
+            android:exported="false" />
+        <activity
+            android:name=".view.ppob.CarLifeInsuranceActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.UlangGadaiActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.FinpayActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.ppob.TagihanHaloActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".view.pin.PinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="false"
@@ -39,6 +87,10 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity
+            android:name=".view.upgrade.UpgradeAccountActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
             android:name=".view.camera.CameraResultActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
@@ -52,10 +104,6 @@
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.camera.SelfieResultActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".view.upgrade.UpgradeAccountActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
@@ -130,6 +178,40 @@
             android:name=".view.transaction.TransactionDetailActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.alfamart.AlfamartActivity"
+            android:exported="false"
+            android:label="Alfamart"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.best.telkomsel.package.BestTelkomselPackageActivity"
+            android:exported="false"
+            android:label="Paket Terbaik Telkomsel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.state.revenue.StateRevenueActivity"
+            android:exported="false"
+            android:label="Penerimaan Negara"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.internet.tv.cable.InternetTvCableActivity"
+            android:exported="false"
+            android:label="Internet &amp; Tv Cable"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.internet.tv.cable.InternetTvCableDetailActivity"
+            android:exported="false"
+            android:label="Internet &amp; Tv Cable"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.pdam.PDAMActivity"
+            android:exported="false"
+            android:label="Voucher TV Kabel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".view.voucher.VoucherDealsActivity"
+            android:exported="false"
+            android:label="Voucher Deals" />
     </application>
 
 </manifest>

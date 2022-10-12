@@ -94,7 +94,7 @@ public class FinPaySDK {
             if(it.getTokenID() != null) {
                 HistoryTransactionRepository.getHistoryTransaction (
                     {
-                        if (it.getStatusCode() != "000") {
+                        if (it.getStatusCode() == "000") {
                             onResult(it)
                         }
                     })
@@ -235,6 +235,21 @@ public class FinPaySDK {
                 )
             }
         })
+    }
+
+    fun getListProduct(
+        onResult: (ProductModel) -> Unit
+    ) {
+        getToken { token ->
+            if (token.getTokenID() != null) {
+                ProductRepository.getListProduct {value->
+                    println("Jalan loh " + value.getStatusCode()!!)
+                    if (value.getStatusCode() == "000") {
+                        onResult(value)
+                    }
+                }
+            }
+        }
     }
 
 //    fun openWallet(context: Context) {

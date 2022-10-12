@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="FinPayWallet/src/main/res/drawable/corner_radius_horizontal_left_large.xml" value="0.187" />
+        <entry key="FinPayWallet/src/main/res/drawable/corner_radius_vertical_top_small.xml" value="0.187" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_bpjs_transaction.xml" value="0.28657790114638126" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_choose_bpjs.xml" value="0.14945652173913043" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_choose_instalment.xml" value="0.2711790964393418" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_choose_internet_cable.xml" value="0.5041666666666667" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_credit_transaction.xml" value="0.14945652173913043" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_edit_profile.xml" value="0.14945652173913043" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_history_transaction.xml" value="0.14945652173913043" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_home.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_input_pin.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_instalment_transaction.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_internet_cable_transaction.xml" value="0.1464057369508605" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_more.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/activity_telkom_transaction.xml" value="0.14945652173913043" />
+        <entry key="FinPayWallet/src/main/res/layout/app_toolbar.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/bottom_dialog_profile.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/bottom_sheet_dialog.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/bottom_sheet_dialog_bpjs.xml" value="0.3397651119508605" />
+        <entry key="FinPayWallet/src/main/res/layout/button_custom.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/custom_alert_dialog.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/item_bpjs.xml" value="0.25" />
+        <entry key="FinPayWallet/src/main/res/layout/item_history_transaction.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/item_instalment.xml" value="0.375" />
+        <entry key="FinPayWallet/src/main/res/layout/item_periode_bpjs.xml" value="0.1431159420289855" />
+        <entry key="FinPayWallet/src/main/res/layout/item_spinner_result.xml" value="0.1431159420289855" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

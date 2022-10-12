@@ -11,6 +11,9 @@ class BaseService {
         val BASE_URL: String = "https://demos.finnet.co.id/emondev/"
 //        val BASE_URL: String = "https://demos.finnet.co.id/apicobrand/"
 
+        val BASE_URL_COBRAND: String = "https://demos.finnet.co.id/apicobrand/"
+
+
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
@@ -20,9 +23,20 @@ class BaseService {
             this.addInterceptor(interceptor)
         }.build()
 
+
+
         fun getRetrofitInstance(): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+
+        fun getRetrofitInstance2(
+        ): Retrofit {
+            return Retrofit.Builder()
+                .baseUrl(BASE_URL_COBRAND)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
