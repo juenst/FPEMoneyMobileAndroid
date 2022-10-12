@@ -8,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class BaseServices {
     companion object {
-//        val BASE_URL: String = "https://demos.finnet.co.id/emondev/"
         val BASE_URL: String = "https://demos.finnet.co.id/apicobrand/"
 
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {

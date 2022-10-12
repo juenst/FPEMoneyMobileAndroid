@@ -10,19 +10,19 @@ interface Api {
     @POST("api.php")
     fun getToken(
         @Body body: HashMap<String, String>
-    ): Call<TokenModel>
+    ): Call<Token>
 
     @Headers("Content-Type:application/json")
-    @POST("api.php")
+    @POST("customer/activation")
     fun reqActivation(
         @Body body: HashMap<String, String>
-    ): Call<ReqActivationModel>
+    ): Call<Customer>
 
     @Headers("Content-Type:application/json")
-    @POST("api.php")
+    @POST("customer/confirmation")
     fun reqConfirmation(
         @Body body: HashMap<String, String>
-    ): Call<ReqConfirmationModel>
+    ): Call<Customer>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
@@ -43,10 +43,10 @@ interface Api {
     ): Call<HistoryTransactionModel>
 
     @Headers("Content-Type:application/json")
-    @POST("api.php")
+    @POST("checkProfile/cekSaldo")
     fun getUserBallance(
         @Body body: HashMap<String, String>
-    ): Call<UserBallanceModel>
+    ): Call<UserBalance>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
@@ -94,11 +94,11 @@ interface Api {
     @POST("qris/Inquiry")
     fun qrisInquiry(
         @Body body: HashMap<String, String>
-    ): Call<QrisInquiryModel>
+    ): Call<QrisInquiry>
 
     @Headers("Content-Type:application/json")
     @POST("qris/Payment")
     fun qrisPayment(
         @Body body: HashMap<String, String>
-    ): Call<QrisPaymentModel>
+    ): Call<QrisPayment>
 }

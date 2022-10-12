@@ -1,10 +1,13 @@
 package lib.finpay.sdk.corekit.repository
 
 import com.example.testing.Signature
+import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
-import lib.finpay.sdk.corekit.model.UserBallanceModel
+import lib.finpay.sdk.corekit.model.UserBalance
 import lib.finpay.sdk.corekit.service.BaseService
+import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
+import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import okhttp3.Credentials
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,67 +19,60 @@ import java.util.*
 class UserBallanceRepository() {
 
     companion object {
-        private lateinit var signature: Signature
+        var tokenID: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID)!!
+        var phoneNumber: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.USER_PHONE_NUMBER)!!
+        var userName: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_USERNAME)!!
+        var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
+        var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
-        fun getUserBallance(
-            phoneNumber: String,
-            tokenID: String,
-            onResult: (UserBallanceModel) -> Unit,
-            onFailed: (String) -> Unit
-        )  {
-                val sdf = SimpleDateFormat("yyyyMMddHHmmss")
-                val currentDate = sdf.format(Date())
-                println("dateeee")
-                println(currentDate)
-                val mapJson = mapOf(
-                    "requestType" to "getBalance",
-                    "reqDtime" to currentDate,
-                    "transNumber" to currentDate,
-                    "phoneNumber" to phoneNumber,
-                    "tokenID" to tokenID
-                )
-                signature = Signature()
-                val signatureID = signature.createSignature(mapJson)
-                val credential = Credentials.basic(
-                    Constant.userName,
-                    Constant.password
-                )
-                var header : HashMap<String, String> = hashMapOf()
-                header["Authorization"] = credential
-                val requestBody : HashMap<String, String> = hashMapOf()
-                requestBody["requestType"] = "getBalance"
-                requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = currentDate
-                requestBody["transNumber"] = currentDate
-                requestBody["phoneNumber"] = phoneNumber
-                requestBody["tokenID"] = tokenID
+        fun getUserBallance(onSuccess: (UserBalance) -> Unit, onFailed: (String) -> Unit)  {
+            //create signature
+            val sdf = SimpleDateFormat("yyyyMMddHHmmss")
+            val currentDate = sdf.format(Date())
+            val mapJson = mapOf(
+                "requestType" to "getBalance",
+                "reqDtime" to currentDate,
+                "transNumber" to currentDate,
+                "phoneNumber" to phoneNumber,
+                "tokenID" to tokenID
+            )
+            FinpaySDK.signature = Signature()
+            val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
 
-                val request = BaseService.getRetrofitInstance().create(Api::class.java)
+            //auth header
+            val credential = Credentials.basic(userName, password)
+            var header : HashMap<String, String> = hashMapOf()
+            header["Authorization"] = credential
 
-                request.getUserBallance(requestBody).enqueue(object : Callback<UserBallanceModel> {
-                    override fun onFailure(call: Call<UserBallanceModel>, t: Throwable) {
-                        println("response failure")
-                        println(t.message)
-                        onFailed(t.message!!)
-                    }
-                    override fun onResponse(
-                        call: Call<UserBallanceModel>,
-                        response: Response<UserBallanceModel>
-                    ) {
-                        if (response.code() == 200) {
-                            if (response.body()?.getStatusCode() == "000") {
-                                onResult(response.body()!!)
-                            } else {
-                                println("statusCode != 200")
-                                println(response.body()?.getStatusDesc())
-                                onFailed(response.body()?.getStatusDesc()!!)
-                            }
+            //request body
+            val requestBody : HashMap<String, String> = hashMapOf()
+            requestBody["requestType"] = "getBalance"
+            requestBody["signature"] = signatureID
+            requestBody["reqDtime"] = currentDate
+            requestBody["transNumber"] = currentDate
+            requestBody["phoneNumber"] = phoneNumber
+            requestBody["tokenID"] = tokenID
+
+            val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+            request.getUserBallance(requestBody).enqueue(object : Callback<UserBalance> {
+                override fun onFailure(call: Call<UserBalance>, t: Throwable) {
+                    onFailed(t.message!!)
+                }
+                override fun onResponse(
+                    call: Call<UserBalance>,
+                    response: Response<UserBalance>
+                ) {
+                    if (response.code() == 200) {
+                        if (response.body()?.statusCode == "000") {
+                            onSuccess(response.body()!!)
                         } else {
-                            println("response code != 200")
-                            onFailed("Opps... something went wrong")
+                            onFailed(response.body()?.statusDesc!!)
                         }
+                    } else {
+                        onFailed(Constant.defaultErrorMessage)
                     }
-                })
+                }
+            })
         }
     }
 }

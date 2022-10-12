@@ -175,7 +175,7 @@ class MoreActivity : AppCompatActivity() {
     fun getListProduct(
         onResult: (ProductModel)-> Unit
     ) {
-        FinpaySDK().getListProduct {
+        FinpaySDK.getListProduct {
             onResult(it)
         }
     }

@@ -1,13 +1,10 @@
 package lib.finpay.sdk.uikit.utilities
 
 enum class SharedPrefKeys {
-    SHARED_NAME,
-    TOKEN,
-    LANGUAGE,
-    USER_ID,
-    IS_LOGIN,
-    FIREBASE_TOKEN,
-    LATITUDE,
-    LONGITUDE,
-    TYPE_USER,
+    MERCHANT_USERNAME,
+    MERCHANT_PASSWORD,
+    MERCHANT_SECRET_KEY,
+    USER_PHONE_NUMBER,
+    TOKEN_ID,
+    IS_CONNECT
 }

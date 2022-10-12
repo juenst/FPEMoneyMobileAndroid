@@ -1,243 +1,178 @@
 package lib.finpay.sdk.corekit
 
 import android.content.Context
-import android.widget.Toast
+import com.example.testing.Signature
 import lib.finpay.sdk.corekit.model.*
 import lib.finpay.sdk.corekit.repository.*
-//import com.finpay.sdk.view.wallet.WalletActivity
+import lib.finpay.sdk.uikit.utilities.PrefHelper
 
 
 public class FinpaySDK {
+    companion object {
+        lateinit var prefHelper: PrefHelper
+        lateinit var signature: Signature
 
-    fun init(context: Context, credential: Credential): FinpaySDK {
-        if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
-            println("Client key, username and password cannot be null or empty. Please set the client key, username and password")
-            Toast.makeText(context, "Client key, username and password cannot be null or empty. Please set the client key, username and password", Toast.LENGTH_LONG)
+        fun getToken(onSuccess: (Token) -> Unit, onFailed: (String) -> Unit) {
+            prefHelper = PrefHelper()
+            TokenRepository.getToken( {
+                onSuccess(it)
+            }, {
+                onFailed(it)
+            })
         }
-        return this
-    }
 
-    fun getToken(
-        onResult: (TokenModel) -> Unit
-    ) {
-        TokenRepository.getToken() {
-            if (it.getTokenID() != null) {
-                onResult(it)
-            }
+        fun reqActivation(
+            phoneNumber: String,
+            onSuccess: (Customer) -> Unit,
+            onFailed: (String) -> Unit
+        ) {
+            CustomerRepository.reqActivation(
+                phoneNumber, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
         }
-    }
 
-    fun reqActivation(
-        phoneNumber: String,
-        onResult: (ReqActivationModel) -> Unit
-    ) {
-        getToken({
-            if(it.getTokenID() != null) {
-                ReqActivationRepository.reqActivation(
-                    phoneNumber, it.getTokenID().toString(), {
-                    if (it.getCustStatusCode() != null) {
-                        if(it.getCustStatusCode() == "003") {
-                            onResult(it)
-                        } else {
-                            //reqConfirmation()
-                        }
-                    }
+        fun reqConfirmation(
+            phoneNumber: String,
+            custName: String,
+            otp: String,
+            custStatusCode: String,
+            onSuccess: (Customer) -> Unit,
+            onFailed: (String) -> Unit
+        ) {
+            CustomerRepository.reqConfirmation(
+                phoneNumber, custName, otp, custStatusCode, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
                 })
-            }
-        })
-    }
+        }
 
-    fun reqConfirmation(
-        phoneNumber: String,
-        custName: String,
-        otp: String,
-        custStatusCode: String,
-        onResult: (ReqConfirmationModel) -> Unit
-    ) {
-        getToken({
-            if(it.getTokenID() != null) {
-                ReqConfirmationRepository.reqConfirmation(
-                    phoneNumber,
-                    it.getTokenID().toString(),
-                    custName,
-                    otp,
-                    custStatusCode,
-                    {
-                        if (it.getStatusCode() != "000") {
+        fun getHistoryTransaction(
+            onResult: (HistoryTransactionModel) -> Unit
+        ) {
+            getToken({
+                if(it.tokenID != null) {
+                    HistoryTransactionRepository.getHistoryTransaction (
+                        {
+                            if (it.getStatusCode() == "000") {
+                                onResult(it)
+                            }
+                        })
+                }
+            },{})
+        }
+
+        fun getHistoryMasterTransaction(
+            onResult: (HistoryTransactionModel) -> Unit
+        ) {
+            getToken({
+                if(it.tokenID != null) {
+                    HistoryTransactionRepository.getHistoryTransaction (
+                        {
+                            if (it.getStatusCode() != "000") {
+                                onResult(it)
+                            }
+                        })
+                }
+            },{})
+        }
+
+        fun getUserBallance(
+            onResult: (UserBalance) -> Unit,
+            onFailed: (String) -> Unit
+        ) {
+            prefHelper = PrefHelper()
+            UserBallanceRepository.getUserBallance({ onResult(it) }, { onFailed(it) })
+        }
+
+        fun transaction(
+            phoneNumber: String,
+            transAmount: String,
+            transType: String,
+            transDesc: String,
+            dataBagi: String,
+            onResult: (TransactionModel) -> Unit
+        ) {
+            getToken({
+                if(it.tokenID != null) {
+                    TransactionRepository.transaction(
+                        phoneNumber, it.tokenID.toString(), transAmount, transType, transDesc, dataBagi, {
                             onResult(it)
                         }
-                    })
-            }
-        })
-    }
+                    )
+                }
+            },{})
+        }
 
-    fun getHistoryTransaction(
-        onResult: (HistoryTransactionModel) -> Unit
-    ) {
-        getToken({
-            if(it.getTokenID() != null) {
-                HistoryTransactionRepository.getHistoryTransaction (
-                    {
-                        if (it.getStatusCode() == "000") {
-                            onResult(it)
+        fun upgradeAccount(
+            phoneNumber: String,
+            imageIdentity: String,
+            imageSelfie: String,
+            motherName: String,
+            noKK: String,
+            nationality: String,
+            email: String,
+            onSuccess: (UpgradeAccountModel) -> Unit,
+            onFailed: (String) -> Unit
+        )  {
+            getToken({
+                if(it.tokenID != null) {
+                    UpgradeAccountRepository.upgradeAccount(
+                        phoneNumber,
+                        it.tokenID.toString(),
+                        imageIdentity,
+                        imageSelfie,
+                        motherName,
+                        noKK,
+                        nationality,
+                        email, {
+                            onSuccess(it)
+                        }, {
+                            onFailed(it)
                         }
-                    })
-            }
-        })
-    }
+                    )
+                }
+            },{})
+        }
 
-    fun getHistoryMasterTransaction(
-        onResult: (HistoryTransactionModel) -> Unit
-    ) {
-        getToken({
-            if(it.getTokenID() != null) {
-                HistoryTransactionRepository.getHistoryTransaction (
-                    {
-                        if (it.getStatusCode() != "000") {
-                            onResult(it)
+        fun qrisInquiry(stringQris: String, onSuccess: (QrisInquiry) -> Unit, onFailed: (String) -> Unit)  {
+            prefHelper = PrefHelper()
+            QrisPayRepository.inquiry(
+                stringQris, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
+        }
+
+        fun qrisPayment(sof: String, amount: String, amountTips: String, reffFlag: String, pinToken: String, onSuccess: (QrisPayment) -> Unit, onFailed: (String) -> Unit)  {
+            QrisPayRepository.payment(
+                sof, amount, amountTips, reffFlag, pinToken, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
+        }
+
+        fun getListProduct(
+            onResult: (ProductModel) -> Unit
+        ) {
+            getToken( { token ->
+                if (token.tokenID != null) {
+                    ProductRepository.getListProduct { value->
+                        println("Jalan loh " + value.getStatusCode()!!)
+                        if (value.getStatusCode() == "000") {
+                            onResult(value)
                         }
-                    })
-            }
-        })
-    }
-
-    fun getUserBallance(
-        context: Context,
-        phoneNumber: String,
-        onResult: (UserBallanceModel) -> Unit,
-        onFailed: (String) -> Unit
-    ) : FinpaySDK {
-        getToken({
-            if(it.getTokenID() != null) {
-                UserBallanceRepository.getUserBallance(
-                    phoneNumber, it.getTokenID().toString(), {
-                        onResult(it)
-                    }, {
-                        onFailed(it)
-                    }
-                )
-            }
-        })
-        return this
-    }
-
-    fun transaction(
-        phoneNumber: String,
-        transAmount: String,
-        transType: String,
-        transDesc: String,
-        dataBagi: String,
-        onResult: (TransactionModel) -> Unit
-    ) {
-        getToken({
-            if(it.getTokenID() != null) {
-                TransactionRepository.transaction(
-                    phoneNumber, it.getTokenID().toString(), transAmount, transType, transDesc, dataBagi, {
-                        onResult(it)
-                    }
-                )
-            }
-        })
-    }
-
-    fun upgradeAccount(
-        phoneNumber: String,
-        imageIdentity: String,
-        imageSelfie: String,
-        motherName: String,
-        noKK: String,
-        nationality: String,
-        email: String,
-        onSuccess: (UpgradeAccountModel) -> Unit,
-        onFailed: (String) -> Unit
-    )  {
-        getToken({
-            if(it.getTokenID() != null) {
-                UpgradeAccountRepository.upgradeAccount(
-                    phoneNumber,
-                    it.getTokenID().toString(),
-                    imageIdentity,
-                    imageSelfie,
-                    motherName,
-                    noKK,
-                    nationality,
-                    email, {
-                        onSuccess(it)
-                    }, {
-                        onFailed(it)
-                    }
-                )
-            }
-        })
-    }
-
-    fun qrisInquiry(
-        phoneNumber: String,
-        stringQris: String,
-        onSuccess: (QrisInquiryModel) -> Unit,
-        onFailed: (String) -> Unit
-    )  {
-        getToken({
-            if(it.getTokenID() != null) {
-                QrisPayRepository.inquiry(
-                    phoneNumber,
-                    it.getTokenID().toString(),
-                    stringQris, {
-                        onSuccess(it)
-                    }, {
-                        onFailed(it)
-                    }
-                )
-            }
-        })
-    }
-
-    fun qrisPayment(
-        phoneNumber: String,
-        sof: String,
-        amount: String,
-        amountTips: String,
-        reffFlag: String,
-        pinToken: String,
-        onSuccess: (QrisPaymentModel) -> Unit,
-        onFailed: (String) -> Unit
-    )  {
-        getToken({
-            if(it.getTokenID() != null) {
-                QrisPayRepository.payment(
-                    phoneNumber,
-                    it.getTokenID().toString(),
-                    sof,
-                    amount,
-                    amountTips,
-                    reffFlag,
-                    pinToken, {
-                        onSuccess(it)
-                    }, {
-                        onFailed(it)
-                    }
-                )
-            }
-        })
-    }
-
-    fun getListProduct(
-        onResult: (ProductModel) -> Unit
-    ) {
-        getToken { token ->
-            if (token.getTokenID() != null) {
-                ProductRepository.getListProduct { value->
-                    println("Jalan loh " + value.getStatusCode()!!)
-                    if (value.getStatusCode() == "000") {
-                        onResult(value)
                     }
                 }
-            }
+            },{})
         }
     }
-
-//    fun openWallet(context: Context) {
-//        val intent = Intent (context, WalletActivity::class.java)
-//        context.startActivity(intent)
-//    }
 }

@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.InspectableProperty
 import androidx.annotation.InspectableProperty.EnumEntry
+import lib.finpay.sdk.BuildConfig
+import lib.finpay.sdk.corekit.helper.StringFormat.decrypt
+import lib.finpay.sdk.corekit.helper.StringFormat.encrypt
 
 class PrefHelper {
     companion object{
@@ -32,33 +35,31 @@ class PrefHelper {
 
     fun setStringToShared(enumEntry: SharedPrefKeys, value: String) {
         try {
-//            if(BuildConfig.DEBUG) {
-//                sharedPreferences.edit().putString(enumEntry.name, value).apply()
-//            }
-//            else
-//            {
-//                sharedPreferences.edit().putString(enumEntry.name, value.encrypt()).apply()
-//            }
+            if(BuildConfig.DEBUG) {
+                sharedPreferences.edit().putString(enumEntry.name, value).apply()
+            }
+            else
+            {
+                sharedPreferences.edit().putString(enumEntry.name, value.encrypt()).apply()
+            }
 
         } catch (exception: ExceptionInInitializerError) {
             exception.printStackTrace()
         }
     }
 
-//    fun getStringFromShared(enumEntry: SharedPrefKeys): String? {
-//        return try {
-//            if(BuildConfig.DEBUG) {
-//                sharedPreferences.getString(enumEntry.name, "")
-//            }
-//            else
-//            {
-//                if(sharedPreferences.getString(enumEntry.name, "") == null) null else sharedPreferences.getString(enumEntry.name, "")!!.decrypt()
-//            }
-//        } catch (exception: ExceptionInInitializerError) {
-//            exception.printStackTrace()
-//            "null"
-//        }
-//    }
+    fun getStringFromShared(enumEntry: SharedPrefKeys): String? {
+        return try {
+            if(BuildConfig.DEBUG) {
+                sharedPreferences.getString(enumEntry.name, "")
+            } else {
+                if(sharedPreferences.getString(enumEntry.name, "") == null) null else sharedPreferences.getString(enumEntry.name, "")!!.decrypt()
+            }
+        } catch (exception: ExceptionInInitializerError) {
+            exception.printStackTrace()
+            "null"
+        }
+    }
 
     fun setBooleanToShared(enumEntry: SharedPrefKeys, value: Boolean) {
         try {

@@ -69,7 +69,7 @@ class WalletActivity : AppCompatActivity() {
     }
 
     fun getBalance() {
-        FinpaySDK().getUserBallance(this, "083815613839", {
+        FinpaySDK.getUserBallance(this, "083815613839", {
             _saldo = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
             textSaldo.text = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
         },{

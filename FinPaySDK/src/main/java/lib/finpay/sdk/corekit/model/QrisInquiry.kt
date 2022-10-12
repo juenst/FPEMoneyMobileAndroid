@@ -2,7 +2,7 @@ package lib.finpay.sdk.corekit.model
 
 import com.google.gson.annotations.SerializedName
 
-class QrisInquiryModel {
+class QrisInquiry {
     @SerializedName("statusCode")
     var statusCode: String? = null
 

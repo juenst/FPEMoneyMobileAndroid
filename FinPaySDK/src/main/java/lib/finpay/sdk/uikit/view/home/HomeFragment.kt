@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
     }
 
     fun getBalance() {
-        FinpaySDK().getUserBallance(requireContext(), "083815613839", {
+        FinpaySDK.getUserBallance(requireContext(), "083815613839", {
             saldo = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
             txtSaldo.text = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
         }, {

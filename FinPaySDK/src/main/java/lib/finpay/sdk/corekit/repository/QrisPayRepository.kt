@@ -1,11 +1,14 @@
 package lib.finpay.sdk.corekit.repository
 
 import com.example.testing.Signature
+import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
-import lib.finpay.sdk.corekit.model.QrisInquiryModel
-import lib.finpay.sdk.corekit.model.QrisPaymentModel
+import lib.finpay.sdk.corekit.model.QrisInquiry
+import lib.finpay.sdk.corekit.model.QrisPayment
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
+import lib.finpay.sdk.uikit.utilities.PrefHelper
+import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import okhttp3.Credentials
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,14 +20,17 @@ import java.util.*
 class QrisPayRepository() {
 
     companion object {
-        private lateinit var signature: Signature
+        var tokenID: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID)!!
+        var phoneNumber: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.USER_PHONE_NUMBER)!!
+        var userName: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_USERNAME)!!
+        var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
+        var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun inquiry(
-            phoneNumber: String,
-            tokenID: String,
             stringQris: String,
-            onSuccess: (QrisInquiryModel) -> Unit,
+            onSuccess: (QrisInquiry) -> Unit,
             onFailed: (String) -> Unit)  {
+                //create signature
                 val sdf = SimpleDateFormat("yyyyMMdHHmmss")
                 val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
@@ -35,14 +41,15 @@ class QrisPayRepository() {
                     "tokenID" to tokenID,
                     "stringQris" to stringQris,
                 )
-                signature = Signature()
-                val signatureID = signature.createSignature(mapJson)
-                val credential = Credentials.basic(
-                    Constant.userName,
-                    Constant.password
-                )
+                FinpaySDK.signature = Signature()
+                val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
+
+                //auth header
+                val credential = Credentials.basic(userName, password)
                 var header : HashMap<String, String> = hashMapOf()
                 header["Authorization"] = credential
+
+                //request body
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "inquiryQrisMPM"
                 requestBody["signature"] = signatureID
@@ -53,14 +60,13 @@ class QrisPayRepository() {
                 requestBody["stringQris"] = stringQris
 
                 val request = BaseServices.getRetrofitInstance().create(Api::class.java)
-
-                request.qrisInquiry(requestBody).enqueue(object : Callback<QrisInquiryModel> {
-                    override fun onFailure(call: Call<QrisInquiryModel>, t: Throwable) {
+                request.qrisInquiry(requestBody).enqueue(object : Callback<QrisInquiry> {
+                    override fun onFailure(call: Call<QrisInquiry>, t: Throwable) {
                         onFailed(t.message.toString())
                     }
                     override fun onResponse(
-                        call: Call<QrisInquiryModel>,
-                        response: Response<QrisInquiryModel>
+                        call: Call<QrisInquiry>,
+                        response: Response<QrisInquiry>
                     ) {
                         if (response.code() == 200) {
                             if (response.body()?.statusCode == "000") {
@@ -69,78 +75,77 @@ class QrisPayRepository() {
                                 onFailed(response.body()?.statusDesc.toString())
                             }
                         } else {
-                            onFailed("Opss..something went wrong")
+                            onFailed(Constant.defaultErrorMessage)
                         }
                     }
                 })
         }
 
         fun payment(
-            phoneNumber: String,
-            tokenID: String,
             sof: String,
             amount: String,
             amountTips: String,
             reffFlag: String,
             pinToken: String,
-            onSuccess: (QrisPaymentModel) -> Unit,
+            onSuccess: (QrisPayment) -> Unit,
             onFailed: (String) -> Unit)  {
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
-            val currentDate = sdf.format(Date())
-            val mapJson = mapOf(
-                "requestType" to "inquiryQrisMPM",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
-                "phoneNumber" to phoneNumber,
-                "tokenID" to tokenID,
-                "sof" to sof,
-                "amount" to amount,
-                "amountTips" to amountTips,
-                "reffFlag" to reffFlag,
-                "pinToken" to pinToken,
-            )
-            signature = Signature()
-            val signatureID = signature.createSignature(mapJson)
-            val credential = Credentials.basic(
-                Constant.userName,
-                Constant.password
-            )
-            var header : HashMap<String, String> = hashMapOf()
-            header["Authorization"] = credential
-            val requestBody : HashMap<String, String> = hashMapOf()
-            requestBody["requestType"] = "inquiryQrisMPM"
-            requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
-            requestBody["phoneNumber"] = phoneNumber
-            requestBody["tokenID"] = tokenID
-            requestBody["sof"] = sof
-            requestBody["amount"] = amount
-            requestBody["amountTips"] = amountTips
-            requestBody["reffFlag"] = reffFlag
-            requestBody["pinToken"] = pinToken
+                //create signature
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val currentDate = sdf.format(Date())
+                val mapJson = mapOf(
+                    "requestType" to "inquiryQrisMPM",
+                    "reqDtime" to currentDate,
+                    "transNumber" to currentDate,
+                    "phoneNumber" to phoneNumber,
+                    "tokenID" to tokenID,
+                    "sof" to sof,
+                    "amount" to amount,
+                    "amountTips" to amountTips,
+                    "reffFlag" to reffFlag,
+                    "pinToken" to pinToken,
+                )
+                FinpaySDK.signature = Signature()
+                val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
 
-            val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                //auth header
+                val credential = Credentials.basic(userName, password)
+                var header : HashMap<String, String> = hashMapOf()
+                header["Authorization"] = credential
 
-            request.qrisPayment(requestBody).enqueue(object : Callback<QrisPaymentModel> {
-                override fun onFailure(call: Call<QrisPaymentModel>, t: Throwable) {
-                    onFailed(t.message.toString())
-                }
-                override fun onResponse(
-                    call: Call<QrisPaymentModel>,
-                    response: Response<QrisPaymentModel>
-                ) {
-                    if (response.code() == 200) {
-                        if (response.body()?.statusCode == "000") {
-                            onSuccess(response.body()!!)
-                        } else {
-                            onFailed(response.body()?.statusDesc.toString())
-                        }
-                    } else {
-                        onFailed("Opss..something went wrong")
+                //request body
+                val requestBody : HashMap<String, String> = hashMapOf()
+                requestBody["requestType"] = "inquiryQrisMPM"
+                requestBody["signature"] = signatureID
+                requestBody["reqDtime"] = currentDate
+                requestBody["transNumber"] = currentDate
+                requestBody["phoneNumber"] = phoneNumber
+                requestBody["tokenID"] = tokenID
+                requestBody["sof"] = sof
+                requestBody["amount"] = amount
+                requestBody["amountTips"] = amountTips
+                requestBody["reffFlag"] = reffFlag
+                requestBody["pinToken"] = pinToken
+
+                val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                request.qrisPayment(requestBody).enqueue(object : Callback<QrisPayment> {
+                    override fun onFailure(call: Call<QrisPayment>, t: Throwable) {
+                        onFailed(t.message.toString())
                     }
-                }
-            })
+                    override fun onResponse(
+                        call: Call<QrisPayment>,
+                        response: Response<QrisPayment>
+                    ) {
+                        if (response.code() == 200) {
+                            if (response.body()?.statusCode == "000") {
+                                onSuccess(response.body()!!)
+                            } else {
+                                onFailed(response.body()?.statusDesc.toString())
+                            }
+                        } else {
+                            onFailed(Constant.defaultErrorMessage)
+                        }
+                    }
+                })
         }
     }
 }

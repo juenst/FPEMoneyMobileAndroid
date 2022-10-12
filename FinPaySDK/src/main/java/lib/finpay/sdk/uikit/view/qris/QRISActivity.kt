@@ -215,14 +215,8 @@ class QRISActivity : AppCompatActivity() {
     }
 
     private fun scanQRImage(bMap: Bitmap): String? {
-//        progressDialog.setTitle("Mohon Menunggu")
-//        progressDialog.setMessage("Sedang Memuat ...")
-//        progressDialog.setCancelable(false) // blocks UI interaction
-//        progressDialog.show()
-
         var contents: String? = null
         val intArray = IntArray(bMap.width * bMap.height)
-        //copy pixel data from the Bitmap into the 'intArray' array
         bMap.getPixels(intArray, 0, bMap.width, 0, 0, bMap.width, bMap.height)
         val source: LuminanceSource = RGBLuminanceSource(bMap.width, bMap.height, intArray)
         val bitmap = BinaryBitmap(HybridBinarizer(source))
@@ -232,13 +226,11 @@ class QRISActivity : AppCompatActivity() {
             val result: com.google.zxing.Result = reader.decode(bitmap)
             contents = result.text
             println("QR code -> ${contents}")
-//            progressDialog.dismiss()
             val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
             intent.putExtra("resultQR", "${contents}")
             startActivity(intent)
             this@QRISActivity.finish()
         } catch (e: Exception) {
-//            progressDialog.dismiss()
             Log.e("QrTest", "Error decoding qr code", e)
             Toast.makeText(this, "Error decoding QR Code, Mohon pilih gambar QR Code yang benar!", Toast.LENGTH_SHORT).show()
         }

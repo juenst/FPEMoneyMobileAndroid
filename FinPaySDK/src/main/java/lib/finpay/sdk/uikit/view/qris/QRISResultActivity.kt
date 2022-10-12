@@ -59,8 +59,7 @@ class QRISResultActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK().qrisInquiry(
-            "083815613839",
+        FinpaySDK.qrisInquiry(
             stringQris!!, {
                 merchantName.text = it.bit61Parse!!.merchantName
                 txtTotalBayar.text = TextUtils.formatRupiah(it.tagihan!!.toDouble())
@@ -68,23 +67,19 @@ class QRISResultActivity : AppCompatActivity() {
                 _biayaLayanan = TextUtils.formatRupiah(it.fee[0].fee!!.toDouble())
                 _totalBayar = TextUtils.formatRupiah(it.fee[0].total!!.toDouble())
                 _reffFlag = it.conf.toString()
-                FinpaySDK().getUserBallance(
-                    this@QRISResultActivity,
-                    "083815613839",
-                    {
-                        txtSaldo.text = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
-                        _saldo = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
-                        progressDialog.dismiss()
-                    },{
-                        progressDialog.dismiss()
-                        Toast.makeText(this@QRISResultActivity, it, Toast.LENGTH_LONG)
-                    }
-                )
+                progressDialog.dismiss()
             }, {
                 progressDialog.dismiss()
                 Toast.makeText(this@QRISResultActivity, it, Toast.LENGTH_LONG)
             }
         )
+
+        FinpaySDK.getUserBallance({
+            txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
+            _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
+        },{
+            Toast.makeText(this@QRISResultActivity, it, Toast.LENGTH_LONG)
+        })
 
         txtAmount.doOnTextChanged { text, start, before, count ->
             btnBayar.isEnabled = (!text.isNullOrBlank() && text.length>=1 && text != "0")

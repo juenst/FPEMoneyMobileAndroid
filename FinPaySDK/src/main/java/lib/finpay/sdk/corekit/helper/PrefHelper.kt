@@ -7,12 +7,11 @@ import lib.finpay.sdk.corekit.helper.StringFormat.decrypt
 import lib.finpay.sdk.corekit.helper.StringFormat.encrypt
 
 class PrefHelper {
-    private lateinit var sharedPreferences: SharedPreferences
     companion object{
-
-//        fun setSharedPreferences(context: Context, nameSharedPreferences: String, modeType: Int) {
-//            sharedPreferences = context.getSharedPreferences(nameSharedPreferences, modeType);
-//        }
+        private lateinit var sharedPreferences: SharedPreferences
+        fun setSharedPreferences(context: Context, nameSharedPreferences: String, modeType: Int) {
+            sharedPreferences = context.getSharedPreferences(nameSharedPreferences, modeType);
+        }
     }
 
     fun setSharedPreferences(context: Context, nameSharedPreferences: String, modeType: Int) {
@@ -56,8 +55,7 @@ class PrefHelper {
             if(BuildConfig.DEBUG) {
                 sharedPreferences.getString(enumEntry.name, "")
             }
-            else
-            {
+            else {
                 if(sharedPreferences.getString(enumEntry.name, "") == null) null else sharedPreferences.getString(enumEntry.name, "")!!.decrypt()
             }
         } catch (exception: ExceptionInInitializerError) {

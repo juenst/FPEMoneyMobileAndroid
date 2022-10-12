@@ -69,4 +69,12 @@
         android:textAlignment="center"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout Session Data"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints" />
+
 </LinearLayout>

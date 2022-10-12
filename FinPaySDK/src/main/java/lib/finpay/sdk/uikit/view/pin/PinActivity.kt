@@ -10,6 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.model.Credential
+import lib.finpay.sdk.corekit.model.Customer
+import lib.finpay.sdk.uikit.utilities.PinTypeKeys
 import lib.finpay.sdk.uikit.view.AppActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailActivity
 
@@ -57,42 +60,11 @@ class PinActivity : AppCompatActivity() {
                         val intent = Intent(this, AppActivity::class.java)
                         startActivity(intent)
                     } else if(pinType == "paymentQris") {
-                        val sof: String? by lazy {
-                            intent.getStringExtra("sof")
-                        }
-                        val amount: String? by lazy {
-                            intent.getStringExtra("amount")
-                        }
-                        val amountTips: String? by lazy {
-                            intent.getStringExtra("amountTips")
-                        }
-                        val reffFlag: String? by lazy {
-                            intent.getStringExtra("reffFlag")
-                        }
-                        progressDialog.setTitle("Mohon Menunggu")
-                        progressDialog.setMessage("Sedang Memuat ...")
-                        progressDialog.setCancelable(false) // blocks UI interaction
-                        progressDialog.show()
-                        FinpaySDK().qrisPayment(
-                            "083815613839",
-                            sof!!,
-                            amount!!,
-                            amountTips!!,
-                            reffFlag!!,
-                            pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5], {
-                               progressDialog.dismiss()
-                                val intent = Intent(this@PinActivity, TransactionDetailActivity::class.java)
-                                startActivity(intent)
-
-                            }, {
-                                progressDialog.dismiss()
-                                println(it)
-                                Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
-                            }
-                        )
+                        paymenQris()
+                    } else if(pinType == "otp_connect") {
+                        otpConnectAccount()
                     }
                 }
-                Log.e("",pin.toString())
             }
         }
 
@@ -128,5 +100,58 @@ class PinActivity : AppCompatActivity() {
             text[4].text=if (array[4]!="") "•" else ""
             text[5].text=if (array[5]!="") "•" else ""
         }
+    }
+
+    fun paymenQris() {
+        val sof: String? by lazy { intent.getStringExtra("sof") }
+        val amount: String? by lazy { intent.getStringExtra("amount") }
+        val amountTips: String? by lazy { intent.getStringExtra("amountTips") }
+        val reffFlag: String? by lazy { intent.getStringExtra("reffFlag") }
+        progressDialog.setTitle("Mohon Menunggu")
+        progressDialog.setMessage("Sedang Memuat ...")
+        progressDialog.setCancelable(false) // blocks UI interaction
+        progressDialog.show()
+        FinpaySDK.qrisPayment(
+            sof!!,
+            amount!!,
+            amountTips!!,
+            reffFlag!!,
+            pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5], {
+                progressDialog.dismiss()
+                val intent = Intent(this@PinActivity, TransactionDetailActivity::class.java)
+                startActivity(intent)
+            }, {
+                progressDialog.dismiss()
+                println(it)
+                Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
+            }
+        )
+    }
+
+    fun otpConnectAccount() {
+        val phoneNumber: String? by lazy { intent.getStringExtra("phoneNumber") }
+        val custName: String? by lazy { intent.getStringExtra("custName") }
+        val custStatusCode: String? by lazy { intent.getStringExtra("custStatusCode") }
+
+        progressDialog.setTitle("Mohon Menunggu")
+        progressDialog.setMessage("Sedang Memuat ...")
+        progressDialog.setCancelable(false) // blocks UI interaction
+        progressDialog.show()
+        FinpaySDK.reqConfirmation(
+            phoneNumber!!,
+            custName!!,
+            pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5],
+            custStatusCode!!, {
+                if(it.statusCode == "000") {
+                    println("OK")
+                    Toast.makeText(this@PinActivity, "Aktifasi akun berhasil, silahkan hubungkan kembali", Toast.LENGTH_LONG)
+                    progressDialog.dismiss()
+                    this@PinActivity.finish()
+                }
+            }, {
+                Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
+                progressDialog.dismiss()
+            }
+        )
     }
 }

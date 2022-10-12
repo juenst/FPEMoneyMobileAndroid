@@ -8,10 +8,7 @@ import javax.crypto.spec.SecretKeySpec
 import javax.xml.bind.DatatypeConverter
 
 class Signature {
-    lateinit var prefHelper: PrefHelper
-    fun createSignature(data: Map<String, Any>): String {
-        prefHelper = PrefHelper()
-        var secretKey : String = Constant.secretKey
+    fun createSignature(data: Map<String, Any>, secretKey: String): String {
         val dataMapSorted = data.toList().sortedBy { (key, _) -> key }.toMap()
         val mapValue = dataMapSorted.values.joinToString("")
         val key = bin2hex(secretKey.toByteArray())
