@@ -2,7 +2,6 @@ package lib.finpay.sdk
 
 import android.content.Context
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 //import com.finpay.wallet.view.wallet.WalletActivity
 import lib.finpay.sdk.model.*
 import lib.finpay.sdk.repository.*
@@ -179,6 +178,56 @@ public class FinPaySDK {
                     noKK,
                     nationality,
                     email, {
+                        onSuccess(it)
+                    }, {
+                        onFailed(it)
+                    }
+                )
+            }
+        })
+    }
+
+    fun qrisInquiry(
+        phoneNumber: String,
+        stringQris: String,
+        onSuccess: (QrisInquiryModel) -> Unit,
+        onFailed: (String) -> Unit
+    )  {
+        getToken({
+            if(it.getTokenID() != null) {
+                QrisPayRepository.inquiry(
+                    phoneNumber,
+                    it.getTokenID().toString(),
+                    stringQris, {
+                        onSuccess(it)
+                    }, {
+                        onFailed(it)
+                    }
+                )
+            }
+        })
+    }
+
+    fun qrisPayment(
+        phoneNumber: String,
+        sof: String,
+        amount: String,
+        amountTips: String,
+        reffFlag: String,
+        pinToken: String,
+        onSuccess: (QrisPaymentModel) -> Unit,
+        onFailed: (String) -> Unit
+    )  {
+        getToken({
+            if(it.getTokenID() != null) {
+                QrisPayRepository.payment(
+                    phoneNumber,
+                    it.getTokenID().toString(),
+                    sof,
+                    amount,
+                    amountTips,
+                    reffFlag,
+                    pinToken, {
                         onSuccess(it)
                     }, {
                         onFailed(it)

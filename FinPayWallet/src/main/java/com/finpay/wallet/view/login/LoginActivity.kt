@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.widget.doOnTextChanged
 import com.finpay.wallet.R
+import com.finpay.wallet.utilities.ButtonUtils
 import com.finpay.wallet.view.pin.PinActivity
 import com.midtrans.sdk.corekit.utilities.Utils
 
@@ -24,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
         val mainparent = findViewById<LinearLayout>(R.id.mainParentLogin)
 
         val numberField = findViewById<EditText>(R.id.phoneNumberField)
-        checkButtonState(btnMasuk)
+        ButtonUtils.checkButtonState(btnMasuk)
         btnMasuk.setOnClickListener{
             val intent = Intent(this, PinActivity::class.java)
             startActivity(intent)
@@ -36,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
         numberField.doOnTextChanged { text, start, before, count ->
             btnMasuk.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            checkButtonState(btnMasuk)
+            ButtonUtils.checkButtonState(btnMasuk)
         }
 
         mainparent.setOnClickListener {
@@ -45,27 +46,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    fun checkButtonState(button:Button){
-        // Create a color state list programmatically
-        val states = arrayOf(
-            intArrayOf(android.R.attr.state_enabled), // enabled
-            intArrayOf(-android.R.attr.state_enabled) // disabled
-        )
-        val bgColors = intArrayOf(
-            Color.parseColor("#00ACBA"), // enabled color
-            Color.parseColor("#d5d5d5") // disabled color
-        )
-        val textColors = intArrayOf(
-            Color.parseColor("#ffffff"), // enabled color
-            Color.parseColor("#a5a5a5")// disabled color
-        )
-        val bgColorStates = ColorStateList(states,bgColors)
-        val textColorStates = ColorStateList(states,textColors)
-
-        // Set button background tint
-        button.backgroundTintList = bgColorStates
-        button.setTextColor(textColorStates)
     }
 }

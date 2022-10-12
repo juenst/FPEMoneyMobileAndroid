@@ -75,7 +75,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
 
             FinPaySDK().upgradeAccount(
-                "083815613839,",
+                "083815613839",
                 imageIdentity,
                 imageSelfie,
                 txtMotherName.text.toString(),

@@ -80,9 +80,20 @@ interface Api {
     ): Call<UnpairModel>
 
     @Headers("Content-Type:application/json")
-    @POST("api.php")
+    @POST("upgradeAccount")
     fun upgradeAccount(
         @Body body: HashMap<String, String>
     ): Call<UpgradeAccountModel>
 
+    @Headers("Content-Type:application/json")
+    @POST("qris/Inquiry")
+    fun qrisInquiry(
+        @Body body: HashMap<String, String>
+    ): Call<QrisInquiryModel>
+
+    @Headers("Content-Type:application/json")
+    @POST("qris/Payment")
+    fun qrisPayment(
+        @Body body: HashMap<String, String>
+    ): Call<QrisPaymentModel>
 }

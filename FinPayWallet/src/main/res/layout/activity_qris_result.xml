@@ -48,7 +48,152 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                android:textColor="#4F4C4D"
                 android:text="Info Merchant" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardBackgroundColor="#eeeeee"
+                    app:cardCornerRadius="14dp"
+                    android:elevation="0dp" >
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_merchant" />
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/merchantName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="#121926"
+                    android:text="-" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:text="Masukkan nominal pembayaran"
+                android:textColor="#121926"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="5dp"/>
+
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/white"
+                android:outlineSpotShadowColor="@color/transparent"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="4dp"
+                android:elevation="0dp"
+                android:layout_height="48dp">
+
+                <EditText
+                    android:id="@+id/txtAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Rp0"
+                    android:padding="8dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textSize="14sp"
+                    android:textColor="#121926"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:background="@drawable/shape_edittext_outline"
+                    android:textColorHint="@color/md_grey_300">
+
+                    <requestFocus />
+                </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Total Bayar"
+                    android:textColor="#121926"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txtTotalBayar"
+                    android:text="Rp0"
+                    android:textColor="#121926"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Saldo Anda"
+                    android:textColor="#121926"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txtSaldo"
+                    android:text="Rp0"
+                    android:textColor="#121926"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -60,11 +205,12 @@
 
 
                 <Button
-                    android:id="@+id/btnNext"
-                    android:text="Selesai"
+                    android:id="@+id/btnBayar"
+                    android:text="Bayar Sekarang"
                     android:textColor="@color/white"
                     android:background="#00ACBA"
                     android:layout_weight="1"
+                    android:enabled="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

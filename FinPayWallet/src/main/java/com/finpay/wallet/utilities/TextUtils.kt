@@ -7,6 +7,6 @@ public class TextUtils {
     public fun formatRupiah(number: Double): String{
         val localeID =  Locale("in", "ID")
         val numberFormat = NumberFormat.getCurrencyInstance(localeID)
-        return numberFormat.format(number).toString()
+        return numberFormat.format(number).toString().replace(",00", "")
     }
 }

@@ -6,10 +6,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class BaseService {
+class BaseServices {
     companion object {
-        val BASE_URL: String = "https://demos.finnet.co.id/emondev/"
-//        val BASE_URL: String = "https://demos.finnet.co.id/apicobrand/"
+//        val BASE_URL: String = "https://demos.finnet.co.id/emondev/"
+        val BASE_URL: String = "https://demos.finnet.co.id/apicobrand/"
 
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY

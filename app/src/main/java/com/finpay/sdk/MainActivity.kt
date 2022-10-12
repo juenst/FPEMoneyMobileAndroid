@@ -36,12 +36,6 @@ class MainActivity : AppCompatActivity() {
         val btnOpenDialogQr = findViewById<Button>(R.id.btn_open_dialog_qr)
         finPaySDK = FinPaySDK()
 
-//        finPaySDK.buildSDK(
-//            this,
-//            Constant().userName,
-//            Constant().password,
-//            Constant().secretKey,
-//        )
 
         btnCallSDK.setOnClickListener {
             FinPaySDK().getToken(
@@ -67,34 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnOpenDialogQr.setOnClickListener {
-            openQrDialog()
-        }
-    }
 
-    private fun openQrDialog() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setContentView(com.finpay.wallet.R.layout.dialog_share_qr)
-
-        val btnShare = dialog.findViewById<Button>(com.finpay.wallet.R.id.btn_share_qr)
-        btnShare.setOnClickListener {
-            val qrImage = dialog.findViewById<ImageView>(com.finpay.wallet.R.id.qr_image)
-            val mDrawable: Drawable = qrImage.drawable
-            val mBitmap = (mDrawable as BitmapDrawable).bitmap
-            val path = MediaStore.Images.Media.insertImage(
-                contentResolver,
-                mBitmap,
-                "Image Description",
-                null
-            )
-            val uri = Uri.parse(path)
-            val share = Intent(Intent.ACTION_SEND)
-            share.type = "image/*"
-            share.putExtra(Intent.EXTRA_STREAM, uri)
-            startActivity(Intent.createChooser(share, "Bagikan QR kode"))
-            dialog.dismiss()
         }
-        dialog.show()
     }
 }

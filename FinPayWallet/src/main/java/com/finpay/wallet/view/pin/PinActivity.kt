@@ -1,20 +1,30 @@
 package com.finpay.wallet.view.pin
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.finpay.wallet.R
 import com.finpay.wallet.view.AppActivity
+import com.finpay.wallet.view.transaction.TransactionDetailActivity
+import lib.finpay.sdk.FinPaySDK
 
 class PinActivity : AppCompatActivity() {
+    val pinType: String? by lazy {
+        intent.getStringExtra("pinType")
+    }
+    lateinit var progressDialog: ProgressDialog
+
     val pin = mutableListOf("", "", "", "", "", "", "")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_pin)
 
+        progressDialog = ProgressDialog(this@PinActivity)
         val backButton = findViewById<ImageView>(R.id.backButton)
 
         val firstPin = findViewById(R.id.firstPinInput) as TextView
@@ -43,8 +53,44 @@ class PinActivity : AppCompatActivity() {
             pins[i].setOnClickListener {
                 onPinPressed(i.toString(), pin, texts)
                 if(pin[5]!=""){
-                    val intent = Intent(this, AppActivity::class.java)
-                    startActivity(intent)
+                    if(pinType == "login") {
+                        val intent = Intent(this, AppActivity::class.java)
+                        startActivity(intent)
+                    } else if(pinType == "paymentQris") {
+                        val sof: String? by lazy {
+                            intent.getStringExtra("sof")
+                        }
+                        val amount: String? by lazy {
+                            intent.getStringExtra("amount")
+                        }
+                        val amountTips: String? by lazy {
+                            intent.getStringExtra("amountTips")
+                        }
+                        val reffFlag: String? by lazy {
+                            intent.getStringExtra("reffFlag")
+                        }
+                        progressDialog.setTitle("Mohon Menunggu")
+                        progressDialog.setMessage("Sedang Memuat ...")
+                        progressDialog.setCancelable(false) // blocks UI interaction
+                        progressDialog.show()
+                        FinPaySDK().qrisPayment(
+                            "083815613839",
+                            sof!!,
+                            amount!!,
+                            amountTips!!,
+                            reffFlag!!,
+                            pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5], {
+                               progressDialog.dismiss()
+                                val intent = Intent(this@PinActivity, TransactionDetailActivity::class.java)
+                                startActivity(intent)
+
+                            }, {
+                                progressDialog.dismiss()
+                                println(it)
+                                Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
+                            }
+                        )
+                    }
                 }
                 Log.e("",pin.toString())
             }
