@@ -14,6 +14,8 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.databinding.ActivityAppBinding
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.utilities.Credential
 import lib.finpay.sdk.uikit.view.qris.QRISActivity
 
 class AppActivity : AppCompatActivity() {
@@ -48,8 +50,7 @@ class AppActivity : AppCompatActivity() {
         val btnQris = findViewById<ImageButton>(R.id.btnQris)
 
         btnQris.setOnClickListener {
-            val intent = Intent(this, QRISActivity::class.java)
-            startActivity(intent)
+            FinpaySDKUI.openQris(this@AppActivity, Credential.credential())
         }
     }
 }

@@ -13,23 +13,22 @@ import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.view.AppActivity
 import lib.finpay.sdk.uikit.view.pin.PinActivity
 import lib.finpay.sdk.uikit.view.qris.QRISActivity
+import lib.finpay.sdk.uikit.view.wallet.WalletActivity
 
 class FinpaySDKUI {
 
     companion object {
-        lateinit var prefHelper: PrefHelper
         fun connectAccount(
             context: Context,
             credential: Credential
         ) {
-            prefHelper = PrefHelper()
-            PrefHelper.setSharedPreferences(context, Constant.sharedPreferencesName, Context.MODE_PRIVATE)
-            prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_USERNAME, credential.getUsername()!!)
-            prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_PASSWORD, credential.getUsername()!!)
-            prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_SECRET_KEY, credential.getSecretKey()!!)
-            prefHelper.setStringToShared(SharedPrefKeys.USER_PHONE_NUMBER, credential.getPhoneNumber()!!)
+            FinpaySDK.init(context)
+            FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_USERNAME, credential.getUsername()!!)
+            FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_PASSWORD, credential.getUsername()!!)
+            FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_SECRET_KEY, credential.getSecretKey()!!)
+            FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.USER_PHONE_NUMBER, credential.getPhoneNumber()!!)
             FinpaySDK.getToken ({
-                prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, it.tokenID!!)
+                FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, it.tokenID!!)
 
                 if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
                     println("Client key, username and password cannot be null or empty. Please set the client key, username and password")
@@ -39,12 +38,12 @@ class FinpaySDKUI {
                 } else {
                     //cek ke reqActivation dulu
                     //jika custStatusCode 003, sudah bisa connect
-                    //jika custStatusCode 001/002 harus hit API reqConfirmation
-                    //logic sudah ada di SDK
+                    //jika custStatusCode 001/002 harus memasukan OTP dan hit API reqConfirmation
                     FinpaySDK.reqActivation(
+                        context,
                         credential.getPhoneNumber()!!, {
                             if(it.custStatusCode == "003") {
-                                prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
+                                FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
                                 Toast.makeText(context, "Aktifasi akun berhasil, silahkan hubungkan kembali", Toast.LENGTH_LONG)
                             } else {
                                 val intent = Intent(context, PinActivity::class.java)
@@ -65,28 +64,38 @@ class FinpaySDKUI {
         }
 
         fun logout(context: Context) {
-            prefHelper = PrefHelper()
-            PrefHelper.setSharedPreferences(context, Constant.sharedPreferencesName, Context.MODE_PRIVATE)
-            prefHelper.clearDataLogout()
+            FinpaySDK.init(context)
+            FinpaySDK.prefHelper.clearDataLogout()
         }
 
 
-        fun openWallet(context: Context) {
-            val intent = Intent(context, AppActivity::class.java)
-            context.startActivity(intent)
+        fun openApplication(context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, AppActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(context, credential)
+            }
         }
 
-        fun openQris(
-            context: Context,
-            credential: Credential
-        ) {
-            //jika belum connect account
-            //panggil function connect account
-            prefHelper = PrefHelper()
-            PrefHelper.setSharedPreferences(context, Constant.sharedPreferencesName, Context.MODE_PRIVATE)
-            var isConnect: Boolean = prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+        fun openQris(context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, QRISActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(context, credential)
+            }
+        }
+
+        fun openWallet(context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, WalletActivity::class.java)
                 context.startActivity(intent)
             } else {
                 DialogUtils.showDialogConnectAccount(context, credential)

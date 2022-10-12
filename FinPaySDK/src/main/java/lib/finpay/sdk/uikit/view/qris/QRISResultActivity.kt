@@ -60,6 +60,7 @@ class QRISResultActivity : AppCompatActivity() {
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
         FinpaySDK.qrisInquiry(
+            this@QRISResultActivity,
             stringQris!!, {
                 merchantName.text = it.bit61Parse!!.merchantName
                 txtTotalBayar.text = TextUtils.formatRupiah(it.tagihan!!.toDouble())
@@ -74,7 +75,7 @@ class QRISResultActivity : AppCompatActivity() {
             }
         )
 
-        FinpaySDK.getUserBallance({
+        FinpaySDK.getUserBallance(this@QRISResultActivity, {
             txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
             _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
         },{

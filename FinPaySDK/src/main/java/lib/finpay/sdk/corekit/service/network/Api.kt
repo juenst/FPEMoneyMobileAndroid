@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface Api {
     @Headers("Content-Type:application/json")
-    @POST("api.php")
+    @POST("security/getToken")
     fun getToken(
         @Body body: HashMap<String, String>
     ): Call<Token>

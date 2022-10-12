@@ -112,6 +112,7 @@ class PinActivity : AppCompatActivity() {
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
         FinpaySDK.qrisPayment(
+            this@PinActivity,
             sof!!,
             amount!!,
             amountTips!!,
@@ -138,6 +139,7 @@ class PinActivity : AppCompatActivity() {
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
         FinpaySDK.reqConfirmation(
+            this@PinActivity,
             phoneNumber!!,
             custName!!,
             pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5],

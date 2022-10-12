@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
 
         btnCallWallet.setOnClickListener {
-            FinpaySDKUI.openWallet(this@MainActivity)
+            FinpaySDKUI.openApplication(this@MainActivity, credential())
         }
 
         btnOpenDialogQr.setOnClickListener {

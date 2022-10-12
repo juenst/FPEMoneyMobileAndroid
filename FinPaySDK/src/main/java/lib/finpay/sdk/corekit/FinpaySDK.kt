@@ -2,8 +2,10 @@ package lib.finpay.sdk.corekit
 
 import android.content.Context
 import com.example.testing.Signature
+import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.*
 import lib.finpay.sdk.corekit.repository.*
+import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.utilities.PrefHelper
 
 
@@ -12,8 +14,13 @@ public class FinpaySDK {
         lateinit var prefHelper: PrefHelper
         lateinit var signature: Signature
 
-        fun getToken(onSuccess: (Token) -> Unit, onFailed: (String) -> Unit) {
+        fun init(context: Context){
             prefHelper = PrefHelper()
+            PrefHelper.setSharedPreferences(context, Constant.sharedPreferencesName, Context.MODE_PRIVATE)
+        }
+
+        fun getToken(/*context: Context, */onSuccess: (Token) -> Unit, onFailed: (String) -> Unit) {
+            //init(context)
             TokenRepository.getToken( {
                 onSuccess(it)
             }, {
@@ -22,10 +29,12 @@ public class FinpaySDK {
         }
 
         fun reqActivation(
+            context:Context,
             phoneNumber: String,
             onSuccess: (Customer) -> Unit,
             onFailed: (String) -> Unit
         ) {
+            init(context)
             CustomerRepository.reqActivation(
                 phoneNumber, {
                     onSuccess(it)
@@ -36,6 +45,7 @@ public class FinpaySDK {
         }
 
         fun reqConfirmation(
+            context: Context,
             phoneNumber: String,
             custName: String,
             otp: String,
@@ -43,6 +53,7 @@ public class FinpaySDK {
             onSuccess: (Customer) -> Unit,
             onFailed: (String) -> Unit
         ) {
+            init(context)
             CustomerRepository.reqConfirmation(
                 phoneNumber, custName, otp, custStatusCode, {
                     onSuccess(it)
@@ -82,10 +93,11 @@ public class FinpaySDK {
         }
 
         fun getUserBallance(
+            context: Context,
             onResult: (UserBalance) -> Unit,
             onFailed: (String) -> Unit
         ) {
-            prefHelper = PrefHelper()
+            init(context)
             UserBallanceRepository.getUserBallance({ onResult(it) }, { onFailed(it) })
         }
 
@@ -139,8 +151,8 @@ public class FinpaySDK {
             },{})
         }
 
-        fun qrisInquiry(stringQris: String, onSuccess: (QrisInquiry) -> Unit, onFailed: (String) -> Unit)  {
-            prefHelper = PrefHelper()
+        fun qrisInquiry(context: Context, stringQris: String, onSuccess: (QrisInquiry) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
             QrisPayRepository.inquiry(
                 stringQris, {
                     onSuccess(it)
@@ -150,7 +162,8 @@ public class FinpaySDK {
             )
         }
 
-        fun qrisPayment(sof: String, amount: String, amountTips: String, reffFlag: String, pinToken: String, onSuccess: (QrisPayment) -> Unit, onFailed: (String) -> Unit)  {
+        fun qrisPayment(context: Context, sof: String, amount: String, amountTips: String, reffFlag: String, pinToken: String, onSuccess: (QrisPayment) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
             QrisPayRepository.payment(
                 sof, amount, amountTips, reffFlag, pinToken, {
                     onSuccess(it)

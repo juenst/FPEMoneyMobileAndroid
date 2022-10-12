@@ -129,18 +129,10 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun credential(): Credential {
-        val cd = Credential()
-        cd.setUsername("")
-        cd.setPassword("")
-        cd.setSecretKey("")
-        return cd
-    }
-
     fun getBalance() {
-        FinpaySDK.getUserBallance(requireContext(), "083815613839", {
-            saldo = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
-            txtSaldo.text = TextUtils.formatRupiah(it.getCustBalance()!!.toDouble())
+        FinpaySDK.getUserBallance(requireContext(), {
+            saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
+            txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
         }, {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG)
         })
