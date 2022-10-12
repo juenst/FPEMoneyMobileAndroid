@@ -1,5 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.internettvkabel.InternetCableTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.internettvkabel.ChooseInternetCableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.instalment.ChooseInstalmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.instalment.InstalmentTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.bpjs.ChooseBpjsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.bpjs.BpjsTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.telkom.TelkomTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.pulsa.CreditTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uikit.view.ppob.AsuransiActivity"
+            android:exported="false"
+            android:hardwareAccelerated="false"
+            android:largeHeap="true"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.ppob.PegadaianActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.ppob.CarLifeInsuranceActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.ppob.UlangGadaiActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.ppob.FinpayActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.ppob.TagihanHaloActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.pin.PinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.register.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".uikit.view.splash.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".uikit.view.more.MoreActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.profile.pin.ChangePinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.profile.edit_profile.EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountIdentityGuideActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountIdentityCameraActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountIdentityResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountSelfieGuideActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountSelfieCameraActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountSelfieResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountPersonalDataActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.upgrade.UpgradeAccountSuccessActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.AppActivity"
+            android:exported="false"
+            android:label="@string/title_activity_app"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.wallet.WalletActivity"
+            android:exported="false"
+            android:label="Wallet"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.transaction.history.TransactionHistoryActivity"
+            android:exported="false"
+            android:label="History Transaksi"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.topup.TopupActivity"
+            android:exported="false"
+            android:label="Top Up"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.transfer.TransferActivity"
+            android:exported="false"
+            android:label="Metode Kiring Uang"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.qris.QRISActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.qris.QRISResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.transaction.TransactionDetailActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.alfamart.AlfamartActivity"
+            android:exported="false"
+            android:label="Alfamart"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.best.telkomsel.package.BestTelkomselPackageActivity"
+            android:exported="false"
+            android:label="Paket Terbaik Telkomsel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.state.revenue.StateRevenueActivity"
+            android:exported="false"
+            android:label="Penerimaan Negara"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.internet.tv.cable.InternetTvCableActivity"
+            android:exported="false"
+            android:label="Internet &amp; Tv Cable"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.internet.tv.cable.InternetTvCableDetailActivity"
+            android:exported="false"
+            android:label="Internet &amp; Tv Cable"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.pdam.PDAMActivity"
+            android:exported="false"
+            android:label="Voucher TV Kabel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.voucher.VoucherDealsActivity"
+            android:exported="false"
+            android:label="Voucher Deals" />
+    </application>
 
 </manifest>

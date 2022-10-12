@@ -23,4 +23,3 @@ dependencyResolutionManagement {
 rootProject.name = "FinPaySDK"
 include ':app'
 include ':FinPaySDK'
-include ':FinPayWallet'

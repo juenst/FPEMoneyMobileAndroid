@@ -24,15 +24,7 @@ class MainActivity : AppCompatActivity() {
         var btnCallWallet = findViewById(R.id.btn_call_wallet) as TextView
         val btnOpenDialogQr = findViewById<Button>(R.id.btn_open_dialog_qr)
         finPaySDK = FinpaySDK()
-
-
         btnCallSDK.setOnClickListener {
-            FinpaySDK().getToken(
-                onResult = {
-                    token->
-                    textTokenId.setText(token.getTokenID())
-                }
-            )
             FinpaySDK().getToken(
                 onResult = {
                     token->
@@ -43,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
         btnCallWallet.setOnClickListener {
-
+            FinpaySDKUI.openWallet(this@MainActivity)
         }
 
         btnOpenDialogQr.setOnClickListener {

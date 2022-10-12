@@ -4,21 +4,10 @@ import android.content.Context
 import android.widget.Toast
 import lib.finpay.sdk.corekit.model.*
 import lib.finpay.sdk.corekit.repository.*
-//import com.finpay.wallet.view.wallet.WalletActivity
+//import com.finpay.sdk.view.wallet.WalletActivity
 
 
 public class FinpaySDK {
-//    fun buildSDK(
-//        context: Context,
-//        merchantUsername: String,
-//        merchantPassword: String,
-//        merchantSecretKey: String
-//    ) {
-//        val prefHelper = PrefHelper()
-//        prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_USERNAME, merchantUsername)
-//        prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_PASSWORD, merchantPassword)
-//        prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_SECRET_KEY, merchantSecretKey)
-//    }
 
     fun init(context: Context, credential: Credential): FinpaySDK {
         if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
@@ -27,11 +16,6 @@ public class FinpaySDK {
         }
         return this
     }
-
-//    fun setContext(var1: Context): FinPaySDK {
-//        this.context = var1
-//        return this
-//    }
 
     fun getToken(
         onResult: (TokenModel) -> Unit
