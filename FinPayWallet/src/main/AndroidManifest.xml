@@ -5,6 +5,30 @@
 
     <application>
         <activity
+            android:name=".view.internettvkabel.InternetCableTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.internettvkabel.ChooseInternetCableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.instalment.ChooseInstalmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.instalment.InstalmentTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.bpjs.ChooseBpjsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.bpjs.BpjsTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.telkom.TelkomTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.pulsa.CreditTransactionActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ppob.AsuransiActivity"
             android:theme="@style/AppTheme.finpayTheme2"
             android:hardwareAccelerated="false"
@@ -63,6 +87,10 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme2" />
         <activity
+            android:name=".view.upgrade.UpgradeAccountActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
             android:name=".view.camera.CameraResultActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
@@ -76,10 +104,6 @@
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".view.camera.SelfieResultActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".view.upgrade.UpgradeAccountActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
