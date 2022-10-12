@@ -1,18 +1,14 @@
 package com.finpay.wallet.view.instalment.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.finpay.wallet.R
-import com.finpay.wallet.view.telkom.TelkomTransactionActivity
-import lib.finpay.sdk.model.DetailHistoryTransactionModel
-import lib.finpay.sdk.model.DetailProductModel
+import lib.finpay.sdk.corekit.model.DetailProductModel
 
 class InstalmentAdapter(var mCtx: Context, var resource: Int, var items: MutableList<DetailProductModel>): ArrayAdapter<DetailProductModel>(mCtx , resource , items ) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

@@ -29,8 +29,8 @@ import com.finpay.wallet.view.upgrade.UpgradeAccountActivity
 import com.finpay.wallet.view.wallet.WalletActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import lib.finpay.sdk.FinPaySDK
-import lib.finpay.sdk.model.Credential
+import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.model.Credential
 
 
 class HomeFragment : Fragment() {
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
     private lateinit var txtSaldo: TextView
     private lateinit var tvWarningBody: TextView
     private lateinit var sectionUpgradeAccount: LinearLayout
-    private lateinit var finPaySDK: FinPaySDK
+    private lateinit var finPaySDK: FinpaySDK
 
     private lateinit var btnTopUp: LinearLayout
     private lateinit var btnTransfer: LinearLayout
@@ -66,7 +66,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        finPaySDK = FinPaySDK()
+        finPaySDK = FinpaySDK()
 
         val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
     }
 
     fun getBalance() {
-        FinPaySDK().getUserBallance(requireContext(), "083815613839", {
+        FinpaySDK().getUserBallance(requireContext(), "083815613839", {
             saldo = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
             txtSaldo.text = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
         }, {

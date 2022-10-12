@@ -2,7 +2,6 @@ package com.finpay.wallet.view.qris
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -11,16 +10,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.room.util.StringUtil
 import com.finpay.wallet.R
-import com.finpay.wallet.databinding.ActivityQrisResultBinding
 import com.finpay.wallet.utilities.ButtonUtils
 import com.finpay.wallet.utilities.TextUtils
 import com.finpay.wallet.view.pin.PinActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.activity_camera_result.*
-import lib.finpay.sdk.FinPaySDK
-import java.io.File
+import lib.finpay.sdk.corekit.FinpaySDK
 
 
 class QRISResultActivity : AppCompatActivity() {
@@ -64,7 +59,7 @@ class QRISResultActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinPaySDK().qrisInquiry(
+        FinpaySDK().qrisInquiry(
             "083815613839",
             stringQris!!, {
                 merchantName.text = it.bit61Parse!!.merchantName
@@ -73,7 +68,7 @@ class QRISResultActivity : AppCompatActivity() {
                 _biayaLayanan = TextUtils().formatRupiah(it.fee[0].fee!!.toDouble())
                 _totalBayar = TextUtils().formatRupiah(it.fee[0].total!!.toDouble())
                 _reffFlag = it.conf.toString()
-                FinPaySDK().getUserBallance(
+                FinpaySDK().getUserBallance(
                     this@QRISResultActivity,
                     "083815613839",
                     {

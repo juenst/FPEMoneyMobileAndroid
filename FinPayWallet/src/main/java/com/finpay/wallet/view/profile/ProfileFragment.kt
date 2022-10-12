@@ -21,7 +21,7 @@ import com.finpay.wallet.databinding.FragmentProfileBinding
 import com.finpay.wallet.view.profile.edit_profile.EditProfileActivity
 import com.finpay.wallet.view.profile.pin.ChangePinActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import lib.finpay.sdk.FinPaySDK
+import lib.finpay.sdk.corekit.FinpaySDK
 
 class ProfileFragment : Fragment() {
 
@@ -35,7 +35,7 @@ class ProfileFragment : Fragment() {
     private lateinit var txtStatus: TextView
 
     //    private lateinit var imgProfile: ImageView
-    private lateinit var finPaySDK: FinPaySDK
+    private lateinit var finPaySDK: FinpaySDK
     private lateinit var changeProfile: LinearLayout
     private lateinit var buttonUbahPin: LinearLayout
 
@@ -44,7 +44,7 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        finPaySDK = FinPaySDK()
+        finPaySDK = FinpaySDK()
         val notificationsViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)

@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.finpay.wallet.R
 import com.finpay.wallet.view.AppActivity
 import com.finpay.wallet.view.transaction.TransactionDetailActivity
-import lib.finpay.sdk.FinPaySDK
+import lib.finpay.sdk.corekit.FinpaySDK
 
 class PinActivity : AppCompatActivity() {
     val pinType: String? by lazy {
@@ -73,7 +73,7 @@ class PinActivity : AppCompatActivity() {
                         progressDialog.setMessage("Sedang Memuat ...")
                         progressDialog.setCancelable(false) // blocks UI interaction
                         progressDialog.show()
-                        FinPaySDK().qrisPayment(
+                        FinpaySDK().qrisPayment(
                             "083815613839",
                             sof!!,
                             amount!!,

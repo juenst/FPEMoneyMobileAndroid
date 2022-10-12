@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.finpay.wallet.R
-import lib.finpay.sdk.FinPaySDK
+import lib.finpay.sdk.corekit.FinpaySDK
 import com.finpay.wallet.utilities.TextUtils
 import com.finpay.wallet.view.topup.TopupActivity
 import com.finpay.wallet.view.transfer.TransferActivity
@@ -69,7 +69,7 @@ class WalletActivity : AppCompatActivity() {
     }
 
     fun getBalance() {
-        FinPaySDK().getUserBallance(this, "083815613839", {
+        FinpaySDK().getUserBallance(this, "083815613839", {
             _saldo = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
             textSaldo.text = TextUtils().formatRupiah(it.getCustBalance()!!.toDouble())
         },{

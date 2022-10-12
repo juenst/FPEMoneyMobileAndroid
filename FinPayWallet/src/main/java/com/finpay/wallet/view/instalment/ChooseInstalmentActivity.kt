@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.finpay.wallet.R
-import com.finpay.wallet.utilities.extension.toJson
 import com.finpay.wallet.view.instalment.adapter.InstalmentAdapter
 import com.google.gson.Gson
-import lib.finpay.sdk.model.DetailHistoryTransactionModel
-import lib.finpay.sdk.model.DetailProductModel
+import lib.finpay.sdk.corekit.model.DetailProductModel
 import org.json.JSONArray
-import org.json.JSONObject
 
 
 class ChooseInstalmentActivity : AppCompatActivity() {

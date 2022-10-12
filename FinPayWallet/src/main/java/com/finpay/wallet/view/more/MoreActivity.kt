@@ -21,9 +21,9 @@ import com.finpay.wallet.view.bpjs.ChooseBpjsActivity
 import com.finpay.wallet.view.instalment.ChooseInstalmentActivity
 import com.finpay.wallet.view.pulsa.CreditTransactionActivity
 import com.finpay.wallet.view.telkom.TelkomTransactionActivity
-import lib.finpay.sdk.FinPaySDK
-import lib.finpay.sdk.model.DetailProductModel
-import lib.finpay.sdk.model.ProductModel
+import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.model.DetailProductModel
+import lib.finpay.sdk.corekit.model.ProductModel
 
 
 class MoreActivity : AppCompatActivity() {
@@ -177,7 +177,7 @@ class MoreActivity : AppCompatActivity() {
     fun getListProduct(
         onResult: (ProductModel)-> Unit
     ) {
-        FinPaySDK().getListProduct {
+        FinpaySDK().getListProduct {
             onResult(it)
         }
     }

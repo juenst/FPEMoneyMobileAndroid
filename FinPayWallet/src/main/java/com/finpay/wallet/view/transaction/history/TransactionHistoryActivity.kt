@@ -1,6 +1,5 @@
 package com.finpay.wallet.view.transaction.history
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -9,7 +8,7 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.finpay.wallet.R
 import com.finpay.wallet.view.transaction.history.adapter.TransactionHistoryAdapter
-import lib.finpay.sdk.model.DetailHistoryTransactionModel
+import lib.finpay.sdk.corekit.model.DetailHistoryTransactionModel
 
 class TransactionHistoryActivity : AppCompatActivity() {
     lateinit var listHistoryTransaction: ListView

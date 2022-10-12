@@ -16,7 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.finpay.wallet.R
-import lib.finpay.sdk.FinPaySDK
+import lib.finpay.sdk.corekit.FinpaySDK
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -74,7 +74,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             var imageIdentity: String = encodeImage(imgResultIdentity!!)!!
             var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
 
-            FinPaySDK().upgradeAccount(
+            FinpaySDK().upgradeAccount(
                 "083815613839",
                 imageIdentity,
                 imageSelfie,

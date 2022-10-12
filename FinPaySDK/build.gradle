@@ -72,8 +72,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
     implementation "javax.inject:javax.inject:1"
 
-//    implementation project(path: ':FinPayWallet')
-//    implementation files('FinPayWallet')
+    implementation project(path: ':FinPayWallet')
+    implementation files('FinPayWallet')
 
 //    // Dagger
 //    implementation "com.google.dagger:dagger:2.35.1"

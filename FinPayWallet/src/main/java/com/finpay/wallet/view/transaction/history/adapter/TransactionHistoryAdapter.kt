@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.finpay.wallet.R
-import lib.finpay.sdk.model.DetailHistoryTransactionModel
+import lib.finpay.sdk.corekit.model.DetailHistoryTransactionModel
 
 class TransactionHistoryAdapter(var mCtx: Context, var resource: Int, var items: List<DetailHistoryTransactionModel>): ArrayAdapter<DetailHistoryTransactionModel>(mCtx , resource , items ) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

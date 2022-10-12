@@ -48,6 +48,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation project(path: ':FinPaySDK')
     implementation files('FinPaySDK')
-    implementation project(path: ':FinPayWallet')
-    implementation files('FinPayWallet')
 }
