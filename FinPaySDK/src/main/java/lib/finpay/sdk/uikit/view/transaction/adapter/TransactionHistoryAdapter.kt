@@ -8,9 +8,9 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import lib.finpay.sdk.R
-import lib.finpay.sdk.corekit.model.DetailHistoryTransactionModel
+import lib.finpay.sdk.corekit.model.DataHistoryTransaction
 
-class TransactionHistoryAdapter(var mCtx: Context, var resource: Int, var items: List<DetailHistoryTransactionModel>): ArrayAdapter<DetailHistoryTransactionModel>(mCtx , resource , items ) {
+class TransactionHistoryAdapter(var mCtx: Context, var resource: Int, var items: List<DataHistoryTransaction>): ArrayAdapter<DataHistoryTransaction>(mCtx , resource , items ) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
             val layoutInflater : LayoutInflater = LayoutInflater.from(mCtx)
@@ -22,16 +22,16 @@ class TransactionHistoryAdapter(var mCtx: Context, var resource: Int, var items:
             var transactionImages : ImageView = view.findViewById(R.id.transactionImages)
 
 
-            var position : DetailHistoryTransactionModel = items[position]
+            var position : DataHistoryTransaction = items[position]
 
             println("get Desc")
-            println(position.getDesc())
-            if(position.getType() == "pay") {
+            println(position.desc)
+            if(position.type == "pay") {
                 transactionImages.setImageDrawable(mCtx.resources.getDrawable(R.drawable.ic_history_pay))
             }
-            transactionName.text = position.getDesc()
-            transactionDate.text = position.getDateTime()
-            transactionAmount.text = position.getValues()
+            transactionName.text = position.desc
+            transactionDate.text = position.dateTime
+            transactionAmount.text = position.value
 
             return view
         }
