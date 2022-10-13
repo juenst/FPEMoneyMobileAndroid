@@ -28,7 +28,7 @@ interface Api {
     @POST("api.php")
     fun getHistoryTransaction(
         @Body body: HashMap<String, String>
-    ): Call<HistoryTransactionModel>
+    ): Call<HistoryTransaction>
 
     @Headers("Content-Type:application/json")
     @POST("content/produk/")
@@ -40,7 +40,7 @@ interface Api {
     @POST("api.php")
     fun getHistoryMasterTransaction(
         @Body body: HashMap<String, String>
-    ): Call<HistoryTransactionModel>
+    ): Call<HistoryTransaction>
 
     @Headers("Content-Type:application/json")
     @POST("checkProfile/cekSaldo")

@@ -76,4 +76,12 @@ class WalletActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_LONG)
         })
     }
+
+    fun getHistoryTransaction() {
+        FinpaySDK.getHistoryTransaction(this@WalletActivity, {
+
+        },{
+            Toast.makeText(this, it, Toast.LENGTH_LONG)
+        })
+    }
 }

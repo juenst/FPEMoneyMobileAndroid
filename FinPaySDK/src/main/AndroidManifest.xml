@@ -145,7 +145,7 @@
             android:label="Wallet"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.transaction.history.TransactionHistoryActivity"
+            android:name=".uikit.view.transaction.TransactionHistoryActivity"
             android:exported="false"
             android:label="History Transaksi"
             android:theme="@style/AppTheme.finpayTheme" />

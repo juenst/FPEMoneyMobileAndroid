@@ -27,7 +27,7 @@ import lib.finpay.sdk.databinding.FragmentHomeBinding
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.more.MoreActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
-import lib.finpay.sdk.uikit.view.transaction.history.TransactionHistoryActivity
+import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
 import lib.finpay.sdk.uikit.view.transfer.TransferActivity
 import lib.finpay.sdk.uikit.view.upgrade.UpgradeAccountActivity
 import lib.finpay.sdk.uikit.view.wallet.WalletActivity

@@ -1,4 +1,4 @@
-package lib.finpay.sdk.uikit.view.transaction.history.adapter
+package lib.finpay.sdk.uikit.view.transaction.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

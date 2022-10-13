@@ -44,8 +44,7 @@ public class FinpaySDK {
             )
         }
 
-        fun reqConfirmation(context: Context, phoneNumber: String, custName: String, otp: String, custStatusCode: String, onSuccess: (Customer) -> Unit, onFailed: (String) -> Unit
-        ) {
+        fun reqConfirmation(context: Context, phoneNumber: String, custName: String, otp: String, custStatusCode: String, onSuccess: (Customer) -> Unit, onFailed: (String) -> Unit) {
             init(context)
             CustomerRepository.reqConfirmation(
                 phoneNumber, custName, otp, custStatusCode, {
@@ -55,7 +54,8 @@ public class FinpaySDK {
                 })
         }
 
-        fun getHistoryTransaction(onSuccess: (HistoryTransaction) -> Unit, onFailed: (String) -> Unit) {
+        fun getHistoryTransaction(context: Context, onSuccess: (HistoryTransaction) -> Unit, onFailed: (String) -> Unit) {
+            init(context)
             HistoryTransactionRepository.getHistoryTransaction ({
                 onSuccess(it)
             },{
