@@ -34,7 +34,11 @@ class HistoryTransactionRepository() {
             val mapJson = mapOf(
                 "requestType" to "getHist",
                 "reqDtime" to currentDate,
-                "transNumber" to currentDate
+                "transNumber" to currentDate,
+                "phoneNumber" to phoneNumber,
+                "tokenID" to tokenID,
+                "startDate" to "20220910",
+                "endDate" to "20221009"
             )
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -50,6 +54,10 @@ class HistoryTransactionRepository() {
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = currentDate
             requestBody["transNumber"] = currentDate
+            requestBody["phoneNumber"] = phoneNumber
+            requestBody["tokenID"] = tokenID
+            requestBody["startDate"] = "20220910"
+            requestBody["endDate"] = "20221009"
 
             val request = BaseService.getRetrofitInstance().create(Api::class.java)
             request.getHistoryTransaction(requestBody).enqueue(object : Callback<HistoryTransaction> {
