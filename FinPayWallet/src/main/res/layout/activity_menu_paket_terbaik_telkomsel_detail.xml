@@ -64,18 +64,31 @@
                 app:cardBackgroundColor="@color/md_grey_100"
                 app:cardCornerRadius="4dp">
 
-                <EditText
-                    android:id="@+id/txt_kode_bayar"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:singleLine="true"
-                    android:textColor="#121926"
-                    android:textColorHint="@color/md_grey_300"
-                    android:textSize="14sp" />
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/txt_kode_bayar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textColor="#121926"
+                        android:textColorHint="@color/md_grey_300"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/btn_open_contact"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:src="@drawable/ic_contact" />
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 

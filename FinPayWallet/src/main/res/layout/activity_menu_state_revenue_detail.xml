@@ -65,21 +65,78 @@
                 app:cardBackgroundColor="@color/md_grey_100"
                 app:cardCornerRadius="4dp">
 
-                <EditText
-                    android:id="@+id/txt_billing_code"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:singleLine="true"
-                    android:textColor="#121926"
-                    android:textColorHint="@color/md_grey_300"
-                    android:textSize="14sp" />
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/txt_billing_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textColor="#121926"
+                        android:textColorHint="@color/md_grey_300"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/btn_open_contact"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:src="@drawable/ic_contact" />
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/transparent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/md_blue_200"
+                app:cardCornerRadius="25dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/img_warning"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_info_24" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pembayaran kode billing tagihan terakhir adalah jam 23:30 WIB setiap harinya. Pembayaran akan dibuka kembali pada jam 02:00 WIB"
+                            android:textColor="#202939"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"

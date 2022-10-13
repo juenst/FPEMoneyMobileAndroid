@@ -40,133 +40,138 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/shape_edittext_outline"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:padding="20dp">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="48dp"-->
+        <!--                android:layout_height="48dp"-->
+        <!--                android:src="@drawable/ic_pajak" />-->
+
+        <!--            <Space-->
+        <!--                android:layout_width="10dp"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:text="Penerimaan Negara Bukan Pajak (PNBP)"-->
+        <!--                    android:textColor="#121926"-->
+        <!--                    android:textFontWeight="600"-->
+        <!--                    android:textSize="12dp" />-->
+
+        <!--                <Space-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="5dp" />-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:text="Pembayaran Perpanjangan SIM, Paspor dan KUA"-->
+        <!--                    android:textColor="#202939"-->
+        <!--                    android:textSize="12dp" />-->
+
+        <!--            </LinearLayout>-->
+
+        <!--            <Space-->
+        <!--                android:layout_width="10dp"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/shape_edittext_outline"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:padding="20dp">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="48dp"-->
+        <!--                android:layout_height="48dp"-->
+        <!--                android:src="@drawable/ic_pajak" />-->
+
+        <!--            <Space-->
+        <!--                android:layout_width="10dp"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="Bea Cukai"-->
+        <!--                android:textColor="#4B5565"-->
+        <!--                android:textSize="12sp" />-->
+
+        <!--            <Space-->
+        <!--                android:layout_width="10dp"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/shape_edittext_outline"-->
+        <!--            android:gravity="center"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:padding="20dp">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="48dp"-->
+        <!--                android:layout_height="48dp"-->
+        <!--                android:src="@drawable/ic_pajak" />-->
+
+        <!--            <Space-->
+        <!--                android:layout_width="10dp"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:text="Pajak Online"-->
+        <!--                    android:textColor="#121926"-->
+        <!--                    android:textFontWeight="600"-->
+        <!--                    android:textSize="12dp" />-->
+
+        <!--                <Space-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="5dp" />-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:text="Pembayaran Pajak Pph21, Pph23, Pph25 dan Pajak lainnya"-->
+        <!--                    android:textColor="#202939"-->
+        <!--                    android:textSize="12dp" />-->
+
+        <!--            </LinearLayout>-->
+
+        <!--            <Space-->
+        <!--                android:layout_width="10dp"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--        </LinearLayout>-->
+
+        <ListView
+            android:id="@+id/listview_state_revenue"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_edittext_outline"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_pajak" />
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Penerimaan Negara Bukan Pajak (PNBP)"
-                    android:textColor="#121926"
-                    android:textFontWeight="600"
-                    android:textSize="12dp" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Pembayaran Perpanjangan SIM, Paspor dan KUA"
-                    android:textColor="#202939"
-                    android:textSize="12dp" />
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_edittext_outline"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_pajak" />
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Bea Cukai"
-                android:textColor="#4B5565"
-                android:textSize="12sp" />
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_edittext_outline"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_pajak" />
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pajak Online"
-                    android:textColor="#121926"
-                    android:textFontWeight="600"
-                    android:textSize="12dp" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Pembayaran Pajak Pph21, Pph23, Pph25 dan Pajak lainnya"
-                    android:textColor="#202939"
-                    android:textSize="12dp" />
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

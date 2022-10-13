@@ -212,6 +212,11 @@
             android:name=".view.voucher.VoucherDealsActivity"
             android:exported="false"
             android:label="Voucher Deals" />
+        <activity
+            android:name=".view.pdam.PDAMSearchRegionActivity"
+            android:exported="false"
+            android:label="Pilih Wilayah"
+            android:theme="@style/AppTheme.finpayTheme" />
     </application>
 
 </manifest>

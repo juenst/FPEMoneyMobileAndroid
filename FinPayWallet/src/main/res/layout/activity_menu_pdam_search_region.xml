@@ -36,7 +36,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="VOUCHER DEALS"
+                        android:text="Pilih Wilayah"
                         android:textColor="@color/white"
                         android:textFontWeight="600"
                         android:textSize="18sp" />
@@ -65,7 +65,8 @@
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
                             android:drawableLeft="@drawable/icon_search"
-                            android:hint="Cari Merchant"
+                            android:drawablePadding="10dp"
+                            android:hint="Cari nama wilayah"
                             android:lines="1"
                             android:maxLines="1"
                             android:padding="8dp"
@@ -87,29 +88,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="20dp">
 
-        <ScrollView
+        <ListView
+            android:id="@+id/pdam_region_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:singleLine="true"
-                    android:text="Item 1"
-                    android:textColor="#121926"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>
