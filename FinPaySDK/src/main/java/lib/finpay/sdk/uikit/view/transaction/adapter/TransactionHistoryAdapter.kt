@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.model.DataHistoryTransaction
+import lib.finpay.sdk.uikit.utilities.TextUtils
 
 class TransactionHistoryAdapter(var mCtx: Context, var resource: Int, var items: List<DataHistoryTransaction>): ArrayAdapter<DataHistoryTransaction>(mCtx , resource , items ) {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -20,18 +21,28 @@ class TransactionHistoryAdapter(var mCtx: Context, var resource: Int, var items:
             var transactionDate : TextView = view.findViewById(R.id.transactionDate)
             var transactionAmount : TextView = view.findViewById(R.id.transactionAmount)
             var transactionImages : ImageView = view.findViewById(R.id.transactionImages)
+            var transactionType : TextView = view.findViewById(R.id.transactionType)
 
 
             var position : DataHistoryTransaction = items[position]
 
-            println("get Desc")
-            println(position.desc)
-            if(position.type == "pay") {
+            if(position.type == "pay" || position.type == "AJRI") {
                 transactionImages.setImageDrawable(mCtx.resources.getDrawable(R.drawable.ic_history_pay))
+            } else if(position.type == "topup") {
+                transactionImages.setImageDrawable(mCtx.resources.getDrawable(R.drawable.ic_history_topup))
+            } else {
+                transactionImages.setImageDrawable(mCtx.resources.getDrawable(R.drawable.ic_history_transfer))
             }
             transactionName.text = position.desc
             transactionDate.text = position.dateTime
-            transactionAmount.text = position.value
+            transactionType.text = position.type
+            if(position.type == "topup") {
+                transactionAmount.text = "+"+TextUtils.formatRupiah(position.value!!.toDouble())
+                transactionAmount.setTextColor(Integer.parseUnsignedInt("ff34A853", 16))
+            } else {
+                transactionAmount.text = "-"+TextUtils.formatRupiah(position.value!!.toDouble())
+                transactionAmount.setTextColor(Integer.parseUnsignedInt("ffDF5A2A", 16))
+            }
 
             return view
         }

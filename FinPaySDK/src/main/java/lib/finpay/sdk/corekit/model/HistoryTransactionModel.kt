@@ -14,20 +14,24 @@ class HistoryTransaction {
     @SerializedName("detailHist")
     var data: String? = null
 
-    var listData : MutableList<DataHistoryTransaction>? = getListHistory()
+    var listData : MutableList<DataHistoryTransaction>? = null
 
-    fun getListHistory(): MutableList<DataHistoryTransaction>? {
+    fun setDataHistory(data: String?) {
+        this.data = data
+    }
+
+    fun getListHistory(): MutableList<DataHistoryTransaction> {
         val listTemp :MutableList<DataHistoryTransaction> = mutableListOf()
         if (this.data != null){
-            val answer = JSONObject(this.data)
-            for (i in 0..(answer.length()-1)){
+            val json = JSONObject(this.data)
+            for (i in 0..(json.length()-1)){
                 val gson = Gson()
-                val dataDetail = gson.fromJson(JSONObject(answer.getJSONObject("$i").toString()).toString(), DataHistoryTransaction::class.java)
+                val dataDetail = gson.fromJson(JSONObject(json.getJSONObject("$i").toString()).toString(), DataHistoryTransaction::class.java)
                 listTemp.add(dataDetail)
             }
         }
         listData = listTemp
-        return listData
+        return listData as MutableList<DataHistoryTransaction>
     }
 }
 

@@ -6,6 +6,7 @@ import android.widget.Toast
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.Credential
+import lib.finpay.sdk.corekit.model.HistoryTransaction
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.PinTypeKeys
 import lib.finpay.sdk.uikit.utilities.PrefHelper
@@ -13,6 +14,7 @@ import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.view.AppActivity
 import lib.finpay.sdk.uikit.view.pin.PinActivity
 import lib.finpay.sdk.uikit.view.qris.QRISActivity
+import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
 import lib.finpay.sdk.uikit.view.wallet.WalletActivity
 
 class FinpaySDKUI {
@@ -106,6 +108,17 @@ class FinpaySDKUI {
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, WalletActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(context, credential)
+            }
+        }
+
+        fun openHistoryTransaction(context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, TransactionHistoryActivity::class.java)
                 context.startActivity(intent)
             } else {
                 DialogUtils.showDialogConnectAccount(context, credential)

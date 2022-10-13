@@ -1,25 +1,35 @@
 package lib.finpay.sdk.uikit.view.wallet
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.constant.Credential
+import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
+import lib.finpay.sdk.uikit.view.transaction.adapter.TransactionHistoryAdapter
 import lib.finpay.sdk.uikit.view.transfer.TransferActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WalletActivity : AppCompatActivity() {
     lateinit var textSaldo: TextView
+    lateinit var txtId: TextView
+    lateinit var txtSeeAll: TextView
     lateinit var btnVisible: ImageView
     lateinit var btnVisibleOff: ImageView
     lateinit var btnBack: ImageView
     lateinit var btnTopup: ImageView
     lateinit var btnTransfer: ImageView
+    lateinit var listHistoryTransaction: ListView
+    lateinit var emptyState: LinearLayout
+    lateinit var progressDialog: ProgressDialog
     var _saldo: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +39,8 @@ class WalletActivity : AppCompatActivity() {
 
         //initialize
         textSaldo = findViewById(R.id.txt_saldo)
+        txtId = findViewById(R.id.txt_id)
+        txtSeeAll = findViewById(R.id.txtSeeAll)
         btnVisible = findViewById(R.id.icon_visibility)
         btnVisibleOff = findViewById(R.id.icon_visibility_off)
         btnBack = findViewById(R.id.btnBack)
@@ -36,8 +48,20 @@ class WalletActivity : AppCompatActivity() {
         btnTransfer = findViewById(R.id.btnTransfer)
         btnVisible.visibility = View.GONE
         btnVisibleOff.visibility = View.VISIBLE
+        listHistoryTransaction = findViewById(R.id.list_history_transaction)
+        emptyState = findViewById(R.id.emptyState)
+        progressDialog = ProgressDialog(this@WalletActivity)
+        FinpaySDK.init(this@WalletActivity)
+        txtId.text = "ID: "+FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.USER_PHONE_NUMBER)!!
 
         getBalance()
+
+        val format = SimpleDateFormat("yyyyMMdd")
+        val calendar = Calendar.getInstance()
+        val endDate = format.format(calendar.time)
+        calendar.add(Calendar.MONTH, -1)
+        val startDate = format.format(calendar.time)
+        getHistoryTransaction(startDate.toString(), endDate.toString())
 
         btnBack.setOnClickListener{
             finish()
@@ -56,15 +80,17 @@ class WalletActivity : AppCompatActivity() {
         }
 
         btnTopup.setOnClickListener{
-            //FinPaySDK().openTopUp(requireContext())
             val intent = Intent(this, TopupActivity::class.java)
             this.startActivity(intent)
         }
 
         btnTransfer.setOnClickListener{
-            //FinPaySDK().openHistoryTransaction(requireContext())
             val intent = Intent(this, TransferActivity::class.java)
             this.startActivity(intent)
+        }
+
+        txtSeeAll.setOnClickListener {
+            FinpaySDKUI.openHistoryTransaction(this@WalletActivity, Credential.credential(this@WalletActivity))
         }
     }
 
@@ -77,10 +103,19 @@ class WalletActivity : AppCompatActivity() {
         })
     }
 
-    fun getHistoryTransaction() {
-        FinpaySDK.getHistoryTransaction(this@WalletActivity, {
-
+    fun getHistoryTransaction(startDate: String, endDate: String) {
+        FinpaySDK.getHistoryTransaction(this@WalletActivity, startDate, endDate, {
+            if(it.getListHistory().isEmpty() || it.getListHistory().count() == 0) {
+                listHistoryTransaction.visibility = View.GONE
+                emptyState.visibility = View.VISIBLE
+            } else {
+                listHistoryTransaction.visibility = View.VISIBLE
+                emptyState.visibility = View.GONE
+            }
+            listHistoryTransaction.adapter = TransactionHistoryAdapter(this, R.layout.item_history_transaction, it.getListHistory())
+            progressDialog.dismiss()
         },{
+            progressDialog.dismiss()
             Toast.makeText(this, it, Toast.LENGTH_LONG)
         })
     }

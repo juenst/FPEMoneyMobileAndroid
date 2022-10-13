@@ -54,9 +54,9 @@ public class FinpaySDK {
                 })
         }
 
-        fun getHistoryTransaction(context: Context, onSuccess: (HistoryTransaction) -> Unit, onFailed: (String) -> Unit) {
+        fun getHistoryTransaction(context: Context, startDate: String, endDate: String, onSuccess: (HistoryTransaction) -> Unit, onFailed: (String) -> Unit) {
             init(context)
-            HistoryTransactionRepository.getHistoryTransaction ({
+            HistoryTransactionRepository.getHistoryTransaction (startDate, endDate, {
                 onSuccess(it)
             },{
                 onFailed(it)
