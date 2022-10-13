@@ -7,8 +7,6 @@ import android.net.ConnectivityManager
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.midtrans.sdk.corekit.core.Logger
-import com.midtrans.sdk.corekit.utilities.Utils
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.ParseException
@@ -75,12 +73,12 @@ object Utils {
                     val var5 = var4.split("-".toRegex()).toTypedArray()
                     val var6 = Utils.getMonth(var5[1].toInt())
                     val var7 = "" + var5[2] + " " + var6 + " " + var5[0] + ", " + var1[1]
-                    Logger.i("after parsing validity date becomes : $var4")
-                    Logger.i("month is : $var6")
-                    Logger.i("validity time is : $var7")
+//                    Logger.i("after parsing validity date becomes : $var4")
+//                    Logger.i("month is : $var6")
+//                    Logger.i("validity time is : $var7")
                     return var7
                 } catch (var8: ParseException) {
-                    Logger.e("Error while parsing date : " + var8.message)
+//                    Logger.e("Error while parsing date : " + var8.message)
                 }
             }
         }
@@ -155,7 +153,7 @@ object Utils {
                 var0.toLong()
             ) else String.format("%s", var0)
         } catch (var4: RuntimeException) {
-            Logger.e("formatDouble():" + var4.message)
+//            Logger.e("formatDouble():" + var4.message)
         }
         return var2
     }

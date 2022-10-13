@@ -13,7 +13,11 @@
 
     <style name="AppTheme.finpayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#00ACBA</item>
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+<!--        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>-->
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/rounded_corner</item>
     </style>
 
     <style name="AppTheme.finpayTheme2" parent="Theme.AppCompat.Light.NoActionBar">

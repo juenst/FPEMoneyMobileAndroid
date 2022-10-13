@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.uikit.utilities.DialogUtils
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -75,21 +76,18 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
 
             FinpaySDK.upgradeAccount(
-                "083815613839",
                 imageIdentity,
                 imageSelfie,
                 txtMotherName.text.toString(),
                 txtKK.text.toString(),
                 txtNationality.text.toString(),
-                txtEmail.text.toString(),
-                {
+                txtEmail.text.toString(), {
                     progressDialog.dismiss()
                     val intent = Intent(this, UpgradeAccountSuccessActivity::class.java)
                     startActivity(intent)
-                },
-                {
+                }, {
                     progressDialog.dismiss()
-                    Toast.makeText(this@UpgradeAccountPersonalDataActivity, it, Toast.LENGTH_LONG)
+                    DialogUtils.showDialogError(this@UpgradeAccountPersonalDataActivity, "Error", it)
                 }
             )
         }

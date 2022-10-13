@@ -88,7 +88,7 @@ interface Api {
     @POST("upgradeAccount")
     fun upgradeAccount(
         @Body body: HashMap<String, String>
-    ): Call<UpgradeAccountModel>
+    ): Call<UpgradeAccount>
 
     @Headers("Content-Type:application/json")
     @POST("qris/Inquiry")

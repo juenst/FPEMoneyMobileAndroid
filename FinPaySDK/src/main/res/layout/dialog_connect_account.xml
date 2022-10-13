@@ -38,9 +38,9 @@
                     android:textStyle="bold"
                     android:textFontWeight="700" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="20sp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -73,9 +73,9 @@
                     android:layout_height="24dp"
                     android:src="@drawable/ic_security" />
 
-                <Space
+                <View
                     android:layout_width="10dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="0dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -88,14 +88,14 @@
 
             </LinearLayout>
 
-            <Space
-                android:layout_width="wrap_content"
+            <View
+                android:layout_width="0dp"
                 android:layout_height="20dp" />
 
         <Button
             android:id="@+id/btnConnect"
             android:text="Sambungkan"
-            android:textColor="@color/white"
+            android:textColor="#00ACBA"
             android:background="@drawable/button_primary"
             android:layout_weight="1"
             android:layout_width="match_parent"

@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         var btnCallSDK = findViewById(R.id.btn_call_sdk) as Button
         var btnCallWallet = findViewById(R.id.btn_call_wallet) as Button
         val btnOpenDialogQr = findViewById<Button>(R.id.btn_open_dialog_qr)
+        val btnTransfer = findViewById<Button>(R.id.btn_transfer)
         val btnLogout = findViewById<Button>(R.id.btn_logout)
         finPaySDK = FinpaySDK()
 
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         btnLogout.setOnClickListener {
             FinpaySDKUI.logout(this@MainActivity)
+        }
+
+        btnTransfer.setOnClickListener {
+
         }
 
     }

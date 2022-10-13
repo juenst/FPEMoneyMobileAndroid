@@ -31,10 +31,9 @@ class FinpaySDKUI {
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, it.tokenID!!)
 
                 if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
-                    println("Client key, username and password cannot be null or empty. Please set the client key, username and password")
-                    Toast.makeText(context, "Client key, username, or password cannot be null or empty. Please set the client key, username, or password", Toast.LENGTH_LONG)
+                    DialogUtils.showDialogError(context, "Credential Error", "Client key, username, or password cannot be null or empty. Please set the client key, username, or password")
                 } else if(credential.getPhoneNumber() == null) {
-                    Toast.makeText(context, "Phone number cannot be null or empty", Toast.LENGTH_LONG)
+                    DialogUtils.showDialogError(context, "Required", "Phone number cannot be null or empty")
                 } else {
                     //cek ke reqActivation dulu
                     //jika custStatusCode 003, sudah bisa connect
@@ -44,7 +43,7 @@ class FinpaySDKUI {
                         credential.getPhoneNumber()!!, {
                             if(it.custStatusCode == "003") {
                                 FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
-                                Toast.makeText(context, "Aktifasi akun berhasil, silahkan hubungkan kembali", Toast.LENGTH_LONG)
+                                DialogUtils.showDialogError(context, "Aktifasi Sukses", "Aktifasi akun berhasil, silahkan hubungkan kembali")
                             } else {
                                 val intent = Intent(context, PinActivity::class.java)
                                 intent.putExtra("pinType", "otp_connect")
@@ -92,6 +91,17 @@ class FinpaySDKUI {
         }
 
         fun openWallet(context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, WalletActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(context, credential)
+            }
+        }
+
+        fun openTransfer(context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {

@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import com.midtrans.sdk.corekit.utilities.Utils
 import lib.finpay.sdk.R
 import lib.finpay.sdk.uikit.view.pin.PinActivity
 
@@ -47,7 +46,7 @@ class RegisterActivity: AppCompatActivity() {
 
         mainParent.setOnClickListener {
             if(txtPhoneNumber.hasFocus()){
-                Utils.hideKeyboard(this, txtPhoneNumber)
+                //Utils.hideKeyboard(this, txtPhoneNumber)
             }
         }
     }

@@ -4,79 +4,85 @@ import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import org.json.JSONObject
 
-class HistoryTransactionModel {
+class HistoryTransaction {
     @SerializedName("statusCode")
-    private var statusCode: String? = null
+    var statusCode: String? = null
 
     @SerializedName("statusDesc")
-    private var statusDesc: String? = null
+    var statusDesc: String? = null
 
     @SerializedName("detailHist")
-    private var data: String? = null
+    var data: String? = null
 
-    @SerializedName("0")
-    var dataDetail: DetailHistoryTransactionModel? =null
+    var listData : MutableList<DataHistoryTransaction>? = getListHistory()
 
-    private var listData : MutableList<DetailHistoryTransactionModel>? = null
-
-    fun HistoryTransactionModel(
-        statusCode: String?,
-        statusDesc: String?,
-        data : String,
-        detail: DetailHistoryTransactionModel,
-        listData : MutableList<DetailHistoryTransactionModel>
-    ){
-        this.statusCode = statusCode
-        this.statusDesc = statusDesc
-        this.data = data
-        this.listData = listData
-        this.dataDetail = detail
-
-    }
-
-    fun getStatusCode(): String? {
-        return statusCode
-    }
-
-    fun setStatusCode(statusCode: String?) {
-        this.statusCode = statusCode
-    }
-
-    fun getStatusDesc(): String? {
-        return statusDesc
-    }
-
-    fun setStatusDesc(statusDesc: String?) {
-        this.statusDesc = statusDesc
-    }
-
-    fun getDataHistory(): String? {
-        return data
-    }
-
-    fun setDataHistory(data: String?) {
-        this.data = data
-    }
-
-    fun getListHistory(): MutableList<DetailHistoryTransactionModel>? {
-        val listTemp :MutableList<DetailHistoryTransactionModel> = mutableListOf()
+    fun getListHistory(): MutableList<DataHistoryTransaction>? {
+        val listTemp :MutableList<DataHistoryTransaction> = mutableListOf()
         if (this.data != null){
             val answer = JSONObject(this.data)
             for (i in 0..(answer.length()-1)){
                 val gson = Gson()
-                val dataDetail = gson.fromJson(JSONObject(answer.getJSONObject("$i").toString()).toString(), DetailHistoryTransactionModel::class.java)
+                val dataDetail = gson.fromJson(JSONObject(answer.getJSONObject("$i").toString()).toString(), DataHistoryTransaction::class.java)
                 listTemp.add(dataDetail)
             }
         }
         listData = listTemp
         return listData
     }
+}
 
-    fun setListHistory(data: DetailHistoryTransactionModel) {
-        this.listData!!.toMutableList().add(data)
-    }
+class DataHistoryTransaction {
+    @SerializedName("tanggal")
+    private var dateTime: String? = null
 
-    fun getDetailDataHistory(): DetailHistoryTransactionModel? {
-        return dataDetail
-    }
+    @SerializedName("type")
+    private var type: String? = null
+
+    @SerializedName("desc")
+    private var desc: String? = null
+
+    @SerializedName("value")
+    private var value: String? = null
+
+    @SerializedName("trxcode")
+    private var trxCode: String? = null
+
+    @SerializedName("id")
+    private var id: String? = null
+
+    @SerializedName("sum_in")
+    private var sumIn: String? = null
+
+    @SerializedName("sum_out")
+    private var sumOut: String? = null
+
+    @SerializedName("syslogno")
+    private var sysLogno: String? = null
+
+    @SerializedName("channel_id")
+    private var channelId: String? = null
+
+    @SerializedName("source")
+    private var source: String? = null
+
+    @SerializedName("destination")
+    private var destination: String? = null
+
+    @SerializedName("name")
+    private var name: String? = null
+
+    @SerializedName("traxId")
+    private var traxId: String? = null
+
+    @SerializedName("prodCode")
+    private var prodCode: String? = null
+
+    @SerializedName("billingNo")
+    private var billingNo: String? = null
+
+    @SerializedName("sofCode")
+    private var sofCode: String? = null
+
+    @SerializedName("sofId")
+    private var sofId: String? = null
 }

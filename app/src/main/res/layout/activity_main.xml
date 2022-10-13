@@ -70,6 +70,14 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:id="@+id/btn_transfer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QRIS"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints" />
+
+    <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

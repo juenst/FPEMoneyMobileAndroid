@@ -44,14 +44,7 @@ public class FinpaySDK {
             )
         }
 
-        fun reqConfirmation(
-            context: Context,
-            phoneNumber: String,
-            custName: String,
-            otp: String,
-            custStatusCode: String,
-            onSuccess: (Customer) -> Unit,
-            onFailed: (String) -> Unit
+        fun reqConfirmation(context: Context, phoneNumber: String, custName: String, otp: String, custStatusCode: String, onSuccess: (Customer) -> Unit, onFailed: (String) -> Unit
         ) {
             init(context)
             CustomerRepository.reqConfirmation(
@@ -62,41 +55,16 @@ public class FinpaySDK {
                 })
         }
 
-        fun getHistoryTransaction(
-            onResult: (HistoryTransactionModel) -> Unit
-        ) {
-            getToken({
-                if(it.tokenID != null) {
-                    HistoryTransactionRepository.getHistoryTransaction (
-                        {
-                            if (it.getStatusCode() == "000") {
-                                onResult(it)
-                            }
-                        })
-                }
-            },{})
+        fun getHistoryTransaction(onSuccess: (HistoryTransaction) -> Unit, onFailed: (String) -> Unit) {
+            HistoryTransactionRepository.getHistoryTransaction ({
+                onSuccess(it)
+            },{
+                onFailed(it)
+            })
         }
 
-        fun getHistoryMasterTransaction(
-            onResult: (HistoryTransactionModel) -> Unit
-        ) {
-            getToken({
-                if(it.tokenID != null) {
-                    HistoryTransactionRepository.getHistoryTransaction (
-                        {
-                            if (it.getStatusCode() != "000") {
-                                onResult(it)
-                            }
-                        })
-                }
-            },{})
-        }
 
-        fun getUserBallance(
-            context: Context,
-            onResult: (UserBalance) -> Unit,
-            onFailed: (String) -> Unit
-        ) {
+        fun getUserBallance(context: Context, onResult: (UserBalance) -> Unit, onFailed: (String) -> Unit) {
             init(context)
             UserBallanceRepository.getUserBallance({ onResult(it) }, { onFailed(it) })
         }
@@ -120,35 +88,19 @@ public class FinpaySDK {
             },{})
         }
 
-        fun upgradeAccount(
-            phoneNumber: String,
-            imageIdentity: String,
-            imageSelfie: String,
-            motherName: String,
-            noKK: String,
-            nationality: String,
-            email: String,
-            onSuccess: (UpgradeAccountModel) -> Unit,
-            onFailed: (String) -> Unit
-        )  {
-            getToken({
-                if(it.tokenID != null) {
-                    UpgradeAccountRepository.upgradeAccount(
-                        phoneNumber,
-                        it.tokenID.toString(),
-                        imageIdentity,
-                        imageSelfie,
-                        motherName,
-                        noKK,
-                        nationality,
-                        email, {
-                            onSuccess(it)
-                        }, {
-                            onFailed(it)
-                        }
-                    )
+        fun upgradeAccount(imageIdentity: String, imageSelfie: String, motherName: String, noKK: String, nationality: String, email: String, onSuccess: (UpgradeAccount) -> Unit, onFailed: (String) -> Unit)  {
+            UpgradeAccountRepository.upgradeAccount(
+                imageIdentity,
+                imageSelfie,
+                motherName,
+                noKK,
+                nationality,
+                email, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
                 }
-            },{})
+            )
         }
 
         fun qrisInquiry(context: Context, stringQris: String, onSuccess: (QrisInquiry) -> Unit, onFailed: (String) -> Unit)  {
