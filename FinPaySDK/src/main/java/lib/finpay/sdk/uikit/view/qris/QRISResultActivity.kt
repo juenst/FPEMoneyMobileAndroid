@@ -122,13 +122,23 @@ class QRISResultActivity : AppCompatActivity() {
         txtSaldo!!.text = saldo
 
         btnPay?.setOnClickListener {
-            val intent = Intent(this@QRISResultActivity, PinActivity::class.java)
-            intent.putExtra("pinType", "paymentQris")
-            intent.putExtra("sof", "mc")
-            intent.putExtra("amount", "0")
-            intent.putExtra("amountTips", "0")
-            intent.putExtra("reffFlag", _reffFlag)
-            startActivity(intent)
+            FinpaySDK.authPin(
+                this@QRISResultActivity,
+                txtAmount.text.toString(), "",{
+                    val intent = Intent(this@QRISResultActivity, PinActivity::class.java)
+                    intent.putExtra("pinType", "paymentQris")
+                    intent.putExtra("sof", "mc")
+                    intent.putExtra("amount", "0")
+                    intent.putExtra("amountTips", "0")
+                    intent.putExtra("reffFlag", _reffFlag)
+                    intent.putExtra("pinToken", it.pinToken)
+                    startActivity(intent)
+                }, {
+                    progressDialog.dismiss()
+                    println(it)
+                    Toast.makeText(this@QRISResultActivity, it, Toast.LENGTH_LONG)
+                }
+            )
         }
         dialog.show()
     }

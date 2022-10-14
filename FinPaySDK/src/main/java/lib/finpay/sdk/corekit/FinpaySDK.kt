@@ -162,5 +162,16 @@ public class FinpaySDK {
                 }
             },{})
         }
+
+        fun authPin(context: Context, amount: String, productCode: String, onSuccess: (AuthPin) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
+            PinRepository.authPin(
+                amount, productCode, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
+        }
     }
 }

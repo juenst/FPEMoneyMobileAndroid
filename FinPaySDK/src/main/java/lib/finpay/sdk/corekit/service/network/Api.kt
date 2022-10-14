@@ -113,4 +113,10 @@ interface Api {
     fun ppobPayment(
         @Body body: HashMap<String, String>
     ): Call<PpobPayment>
+
+    @Headers("Content-Type:application/json")
+    @POST("security/pin/auth")
+    fun authPin(
+        @Body body: HashMap<String, String>
+    ): Call<AuthPin>
 }
