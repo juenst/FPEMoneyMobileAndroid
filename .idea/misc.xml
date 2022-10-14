@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="FinPaySDK/src/main/res/layout/activity_credit_transaction.xml" value="0.4556615193684896" />
         <entry key="FinPayWallet/src/main/res/drawable/corner_radius_horizontal_left_large.xml" value="0.187" />
         <entry key="FinPayWallet/src/main/res/drawable/corner_radius_vertical_top_small.xml" value="0.187" />
         <entry key="FinPayWallet/src/main/res/layout/activity_bpjs_transaction.xml" value="0.28657790114638126" />
