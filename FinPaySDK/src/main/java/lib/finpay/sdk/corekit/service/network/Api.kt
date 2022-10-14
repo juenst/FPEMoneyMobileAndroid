@@ -101,4 +101,22 @@ interface Api {
     fun qrisPayment(
         @Body body: HashMap<String, String>
     ): Call<QrisPayment>
+
+    @Headers("Content-Type:application/json")
+    @POST("inqBill")
+    fun ppobInquiry(
+        @Body body: HashMap<String, String>
+    ): Call<PpobInquiry>
+
+    @Headers("Content-Type:application/json")
+    @POST("paymentConf")
+    fun ppobPayment(
+        @Body body: HashMap<String, String>
+    ): Call<PpobPayment>
+
+    @Headers("Content-Type:application/json")
+    @POST("security/pin/auth")
+    fun authPin(
+        @Body body: HashMap<String, String>
+    ): Call<AuthPin>
 }

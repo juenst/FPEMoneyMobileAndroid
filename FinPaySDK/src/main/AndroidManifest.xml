@@ -10,13 +10,6 @@
 
     <application>
         <activity
-            android:name=".MainActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".uikit.view.internettvkabel.InternetCableTransactionActivity"
             android:exported="false" />
         <activity
@@ -45,39 +38,39 @@
             android:exported="false"
             android:hardwareAccelerated="false"
             android:largeHeap="true"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.PegadaianActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.CarLifeInsuranceActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.UlangGadaiActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.FinpayActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.TagihanHaloActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.pin.PinActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.login.LoginActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.register.RegisterActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.onboarding.OnboardingActivity"
             android:exported="false"
@@ -93,15 +86,15 @@
         <activity
             android:name=".uikit.view.profile.pin.ChangePinActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.profile.edit_profile.EditProfileActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.upgrade.UpgradeAccountActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme2" />
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.upgrade.UpgradeAccountIdentityGuideActivity"
             android:exported="false"

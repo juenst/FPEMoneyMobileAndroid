@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -34,10 +36,145 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="5dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="#EEF2F6">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/seven_days"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:elevation="0dp"
+            android:dividerHeight="0dp"
+            android:divider="@null"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="7 hari"
+                    android:textColor="#9AA3B2"
+                    android:textFontWeight="500"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="terakhir"
+                    android:textColor="#9AA3B2"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/one_month"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:elevation="0dp"
+            android:dividerHeight="0dp"
+            android:divider="@null"
+            app:cardBackgroundColor="#EEF2F6"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="30 hari"
+                    android:textColor="#9AA3B2"
+                    android:textFontWeight="500"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="terakhir"
+                    android:textColor="#9AA3B2"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/thirty_month"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:elevation="0dp"
+            android:dividerHeight="0dp"
+            android:divider="@null"
+            app:cardBackgroundColor="#EEF2F6"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="3 bulan"
+                    android:textColor="#9AA3B2"
+                    android:textFontWeight="500"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="terakhir"
+                    android:textColor="#9AA3B2"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/list_history_transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
         android:visibility="gone"/>
 
     <LinearLayout
@@ -62,8 +199,8 @@
             android:textSize="18sp"
             android:textColor="#121926" />
 
-        <Space
-            android:layout_width="match_parent"
+        <View
+            android:layout_width="0dp"
             android:layout_height="10dp" />
 
         <TextView
@@ -75,7 +212,5 @@
             android:textSize="14sp"
             android:textColor="#4B5565" />
     </LinearLayout>
-
-
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.UpgradeAccount
 import lib.finpay.sdk.corekit.service.BaseService
+import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import okhttp3.Credentials
@@ -66,7 +67,7 @@ class UpgradeAccountRepository() {
             requestBody["email"] = email
             requestBody["chID"] = ""
 
-            val request = BaseService.getRetrofitInstance().create(Api::class.java)
+            val request = BaseServices.getRetrofitInstance().create(Api::class.java)
             request.upgradeAccount(requestBody).enqueue(object : Callback<UpgradeAccount> {
                 override fun onFailure(call: Call<UpgradeAccount>, t: Throwable) {
                     onFailed(t.message.toString())

@@ -54,9 +54,9 @@ public class FinpaySDK {
                 })
         }
 
-        fun getHistoryTransaction(context: Context, onSuccess: (HistoryTransaction) -> Unit, onFailed: (String) -> Unit) {
+        fun getHistoryTransaction(context: Context, startDate: String, endDate: String, onSuccess: (HistoryTransaction) -> Unit, onFailed: (String) -> Unit) {
             init(context)
-            HistoryTransactionRepository.getHistoryTransaction ({
+            HistoryTransactionRepository.getHistoryTransaction (startDate, endDate, {
                 onSuccess(it)
             },{
                 onFailed(it)
@@ -125,6 +125,29 @@ public class FinpaySDK {
             )
         }
 
+
+        fun ppobInquiry(context: Context, billingId: String, productCode: String, billingAmount: String, onSuccess: (PpobInquiry) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
+            PpobRepository.inquiry(
+                billingId, productCode, billingAmount, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
+        }
+
+        fun ppobPayment(context: Context, sof: String, payType: String, denom: String, amount: String, billingId: String, productCode: String, reffFlag: String, activationDate: String, pinToken: String, onSuccess: (PpobPayment) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
+            PpobRepository.payment(
+                sof, payType, denom, amount, billingId, productCode, reffFlag,activationDate, pinToken, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
+        }
+
         fun getListProduct(
             onResult: (ProductModel) -> Unit
         ) {
@@ -138,6 +161,17 @@ public class FinpaySDK {
                     }
                 }
             },{})
+        }
+
+        fun authPin(context: Context, amount: String, productCode: String, onSuccess: (AuthPin) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
+            PinRepository.authPin(
+                amount, productCode, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
         }
     }
 }

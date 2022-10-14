@@ -22,12 +22,12 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import lib.finpay.sdk.corekit.FinpaySDK
-import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.databinding.FragmentHomeBinding
+import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.constant.Credential
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.more.MoreActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
-import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
 import lib.finpay.sdk.uikit.view.transfer.TransferActivity
 import lib.finpay.sdk.uikit.view.upgrade.UpgradeAccountActivity
 import lib.finpay.sdk.uikit.view.wallet.WalletActivity
@@ -170,15 +170,11 @@ class HomeFragment : Fragment() {
         }
 
         btnWallet.setOnClickListener {
-            //FinPaySDK().openWallet(requireContext())
-            val intent = Intent(requireContext(), WalletActivity::class.java)
-            this.startActivity(intent)
+            FinpaySDKUI.openWallet(requireContext(), Credential.credential(requireContext()))
         }
 
         btnHistoryTransaction.setOnClickListener {
-            //FinPaySDK().openHistoryTransaction(requireContext())
-            val intent = Intent(requireContext(), TransactionHistoryActivity::class.java)
-            this.startActivity(intent)
+            FinpaySDKUI.openHistoryTransaction(requireContext(), Credential.credential(requireContext()))
         }
 
         btnMore.setOnClickListener {
@@ -204,4 +200,6 @@ class HomeFragment : Fragment() {
         )
         textView.text = spannable
     }
+
+
 }

@@ -25,6 +25,8 @@ class HistoryTransactionRepository() {
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun getHistoryTransaction(
+            startDate: String,
+            endDate: String,
             onSuccess: (HistoryTransaction) -> Unit,
             onFailed: (String) -> Unit
         )  {
@@ -34,7 +36,11 @@ class HistoryTransactionRepository() {
             val mapJson = mapOf(
                 "requestType" to "getHist",
                 "reqDtime" to currentDate,
-                "transNumber" to currentDate
+                "transNumber" to currentDate,
+                "phoneNumber" to phoneNumber,
+                "tokenID" to tokenID,
+                "startDate" to startDate,
+                "endDate" to endDate
             )
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -50,6 +56,10 @@ class HistoryTransactionRepository() {
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = currentDate
             requestBody["transNumber"] = currentDate
+            requestBody["phoneNumber"] = phoneNumber
+            requestBody["tokenID"] = tokenID
+            requestBody["startDate"] = startDate
+            requestBody["endDate"] = endDate
 
             val request = BaseService.getRetrofitInstance().create(Api::class.java)
             request.getHistoryTransaction(requestBody).enqueue(object : Callback<HistoryTransaction> {
