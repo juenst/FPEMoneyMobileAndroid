@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingLeft="20dp"
+        android:background="#00ACBA">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_left" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textFontWeight="600"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="Scan Kode QR" />
+
+            <ImageView
+                android:id="@+id/btnFlash"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_flash" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/preview_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Scan kode QR" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textFontWeight="600"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Scan kode QR untuk melakukan pembayaran" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@drawable/qris_logo_white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="20dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/camera_overlay_outline" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/white"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Gunakan Gambar QRIS" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="Pilih gambar QRIS dari galeri Anda" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnNext"
+                android:text="Buka Galeri"
+                android:textColor="@color/white"
+                android:background="#00ACBA"
+                android:paddingHorizontal="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/btn_take_pic"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
+
+</LinearLayout>

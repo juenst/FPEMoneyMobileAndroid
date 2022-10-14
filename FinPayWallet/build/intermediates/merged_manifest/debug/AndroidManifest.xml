@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.finpay.wallet" >
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="32" />
+
+    <application>
+        <activity
+            android:name="com.finpay.wallet.view.internettvkabel.InternetCableTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.internettvkabel.ChooseInternetCableActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.instalment.ChooseInstalmentActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.instalment.InstalmentTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.bpjs.ChooseBpjsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.bpjs.BpjsTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.telkom.TelkomTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.pulsa.CreditTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.pin.PinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name="com.finpay.wallet.view.login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name="com.finpay.wallet.view.register.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name="com.finpay.wallet.view.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="com.finpay.wallet.view.splash.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.finpay.wallet.view.more.MoreActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.profile.pin.ChangePinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name="com.finpay.wallet.view.profile.edit_profile.EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name="com.finpay.wallet.view.upgrade.UpgradeAccountActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme2" />
+        <activity
+            android:name="com.finpay.wallet.view.camera.CameraResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.camera.CameraActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.camera.SelfieActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.camera.SelfieResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.upgrade.UpgradeAccountGuideActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.AppActivity"
+            android:exported="false"
+            android:label="@string/title_activity_app"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.wallet.WalletActivity"
+            android:exported="false"
+            android:label="Wallet"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.transaction.history.TransactionHistoryActivity"
+            android:exported="false"
+            android:label="History Transaksi"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.topup.TopupActivity"
+            android:exported="false"
+            android:label="Top Up"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.transfer.TransferActivity"
+            android:exported="false"
+            android:label="Metode Kiring Uang"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.finpay.wallet.view.qris.QRISActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name="com.finpay.wallet.view.qris.QRISResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+    </application>
+
+</manifest>

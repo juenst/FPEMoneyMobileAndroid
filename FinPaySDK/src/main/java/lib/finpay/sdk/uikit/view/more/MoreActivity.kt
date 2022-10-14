@@ -127,6 +127,56 @@ class MoreActivity : AppCompatActivity() {
 
         button.setOnClickListener{
             when(nameMenu){
+                "Finpay"->{
+                    var listRandom =
+                        dataProduct.getDataProduct()!!.filter {
+                            it.getProductDesc()!!.contains("Finpay")
+                        } as ArrayList<DetailProductModel>
+                    println("dataFinpay : " + listRandom.toString())
+                    val intent = Intent(this, FinpayActivity::class.java)
+                    intent.putExtra("dataFinpay", listRandom.toJson())
+                    startActivity(intent)
+                }
+                "Alfamart"->{
+                    var listRandom =
+                        dataProduct.getDataProduct()!!.filter {
+                            it.getProductDesc()!!.contains("Alfamart")
+                        } as ArrayList<DetailProductModel>
+                    println("dataAlfamart : " + listRandom.toString())
+                    val intent = Intent(this, AlfamartActivity::class.java)
+                    intent.putExtra("dataAlfamart", listRandom.toJson())
+                    startActivity(intent)
+                }
+                "Asuransi"->{
+                    var listRandom =
+                        dataProduct.getDataProduct()!!.filter {
+                            it.getProductDesc()!!.contains("Asuransi")
+                        } as ArrayList<DetailProductModel>
+                    println("dataAsuransi : " + listRandom.toString())
+                    val intent = Intent(this, AlfamartActivity::class.java)
+                    intent.putExtra("dataAsuransi", listRandom.toJson())
+                    startActivity(intent)
+                }
+                "Best Telkomsel"->{
+                    var listRandom =
+                        dataProduct.getDataProduct()!!.filter {
+                            it.getProductDesc()!!.contains("Best Telkomsel")
+                        } as ArrayList<DetailProductModel>
+                    println("dataBest Telkomsel : " + listRandom.toString())
+                    val intent = Intent(this, AlfamartActivity::class.java)
+                    intent.putExtra("dataBest Telkomsel", listRandom.toJson())
+                    startActivity(intent)
+                }
+                "Internet Tv Cable"->{
+                    var listRandom =
+                        dataProduct.getDataProduct()!!.filter {
+                            it.getProductDesc()!!.contains("Best Telkomsel")
+                        } as ArrayList<DetailProductModel>
+                    println("dataBest Telkomsel : " + listRandom.toString())
+                    val intent = Intent(this, AlfamartActivity::class.java)
+                    intent.putExtra("dataBest Telkomsel", listRandom.toJson())
+                    startActivity(intent)
+                }
                 "Credit"->{
                     var listRandom =
                         dataProduct.getDataProduct()!!.filter {
