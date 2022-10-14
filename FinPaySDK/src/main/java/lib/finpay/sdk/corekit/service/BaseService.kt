@@ -1,5 +1,6 @@
 package lib.finpay.sdk.corekit.service
 
+import android.hardware.usb.UsbEndpoint
 import lib.finpay.sdk.corekit.helper.BasicAuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -35,6 +36,16 @@ class BaseService {
         }
 
         fun getRetrofitInstance2(
+        ): Retrofit {
+            return Retrofit.Builder()
+                .baseUrl(BASE_URL_COBRAND)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+
+        fun getRetrofitInstanceWithDynamicEndpoint(
+            endpoints: String
         ): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL_COBRAND)
