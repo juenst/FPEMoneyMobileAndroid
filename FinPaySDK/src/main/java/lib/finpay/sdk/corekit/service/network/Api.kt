@@ -49,6 +49,12 @@ interface Api {
     ): Call<OprProduct>
 
     @Headers("Content-Type:application/json")
+    @POST("getFee/")
+    fun getFee(
+        @Body body: HashMap<String, String>
+    ): Call<ListFeePbob>
+
+    @Headers("Content-Type:application/json")
     @POST("api.php")
     fun getHistoryMasterTransaction(
         @Body body: HashMap<String, String>

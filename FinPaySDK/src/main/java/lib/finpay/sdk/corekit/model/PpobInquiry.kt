@@ -25,6 +25,15 @@ class PpobInquiry {
     var processingTime: Double? = null
 }
 
+class ListFeePbob{
+    @SerializedName("statusCode")
+    var statusCode: String? = null
+    @SerializedName("statusDesc")
+    var statusDesc: String? = null
+    @SerializedName("data")
+    var dataListFee: ArrayList<FeePpob> = arrayListOf()
+}
+
 class FeePpob {
     @SerializedName("sof")
     var sof: String? = null
