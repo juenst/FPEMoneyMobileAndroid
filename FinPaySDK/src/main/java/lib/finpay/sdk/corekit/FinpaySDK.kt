@@ -200,6 +200,22 @@ public class FinpaySDK {
             },{})
         }
 
+        fun getFeePbob(
+            onResult: (ListFeePbob) -> Unit
+        ){
+            getToken( { token ->
+                if (token.tokenID != null) {
+                    PpobRepository.getFeePbob(
+                    ) { value->
+                        println("Jalan loh " + value.statusCode)
+                        if (value.statusCode == "000") {
+                            onResult(value)
+                        }
+                    }
+                }
+            },{})
+        }
+
         fun authPin(context: Context, amount: String, productCode: String, onSuccess: (AuthPin) -> Unit, onFailed: (String) -> Unit)  {
             init(context)
             PinRepository.authPin(

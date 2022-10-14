@@ -3,10 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import com.example.testing.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
-import lib.finpay.sdk.corekit.model.PpobInquiry
-import lib.finpay.sdk.corekit.model.PpobPayment
-import lib.finpay.sdk.corekit.model.QrisInquiry
-import lib.finpay.sdk.corekit.model.QrisPayment
+import lib.finpay.sdk.corekit.model.*
+import lib.finpay.sdk.corekit.service.BaseService
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.PrefHelper
@@ -166,6 +164,58 @@ class PpobRepository() {
                         }
                     }
                 })
+        }
+
+        fun getFeePbob(
+            onResult: (ListFeePbob) -> Unit
+        ){
+            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            val currentDate = sdf.format(Date())
+            val mapJson = mapOf(
+                "requestType" to "getOprProduk",
+                "reqDtime" to currentDate,
+                "transNumber" to currentDate
+            )
+
+            FinpaySDK.signature = Signature()
+            val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
+
+            //auth header
+            val credential = Credentials.basic(userName, password)
+            var header : HashMap<String, String> = hashMapOf()
+            header["Authorization"] = credential
+
+            val requestBody : HashMap<String, String> = hashMapOf()
+            requestBody["requestType"] = "getOprProduk"
+            requestBody["signature"] = signatureID
+            requestBody["reqDtime"] = currentDate
+            requestBody["transNumber"] = currentDate
+
+            val request = BaseService.getRetrofitInstance2().create(Api::class.java)
+
+            request.getFee(requestBody).enqueue(object :
+                Callback<ListFeePbob> {
+                override fun onFailure(call: Call<ListFeePbob>, t: Throwable) {
+                    println("response failure")
+                    println(t.message)
+                }
+                override fun onResponse(
+                    call: Call<ListFeePbob>,
+                    response: Response<ListFeePbob>
+                ) {
+                    if (response.code() == 200) {
+                        if (response.body()?.statusCode == "000") {
+                            onResult(response.body()!!)
+//                            println("Data : " + response.body()!!.getDataProduct()!!.first().getProductDesc())
+                        } else {
+                            println("statusCode != 200")
+                            println(response.body()?.statusCode)
+                        }
+                    } else {
+                        println("response code != 200")
+                    }
+                }
+            })
         }
     }
 }

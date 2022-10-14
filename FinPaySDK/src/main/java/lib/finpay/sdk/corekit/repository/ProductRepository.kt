@@ -146,14 +146,7 @@ class ProductRepository()  {
                 "reqDtime" to currentDate,
                 "transNumber" to currentDate
             )
-            /*
-            {
-              "signature": "27620048843E41C486EDE9B29D78B91F81970B879CA3162B509CF3173940B2D5",
-              "requestType": "getOprProduk",
-              "transNumber": "xd7ayx2gs",
-              "reqDtime": "20210929000000"
-            }
-             */
+
             signature = Signature()
             val signatureID = signature.createSignature(mapJson, secretKey)
             val credential = Credentials.basic(userName, password)
