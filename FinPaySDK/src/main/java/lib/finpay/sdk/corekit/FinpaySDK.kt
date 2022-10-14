@@ -125,7 +125,6 @@ public class FinpaySDK {
             )
         }
 
-
         fun ppobInquiry(context: Context, billingId: String, productCode: String, billingAmount: String, onSuccess: (PpobInquiry) -> Unit, onFailed: (String) -> Unit)  {
             init(context)
             PpobRepository.inquiry(
@@ -156,6 +155,44 @@ public class FinpaySDK {
                     ProductRepository.getListProduct { value->
                         println("Jalan loh " + value.getStatusCode()!!)
                         if (value.getStatusCode() == "000") {
+                            onResult(value)
+                        }
+                    }
+                }
+            },{})
+        }
+
+        fun getListSubProduct(
+            listOpr: ArrayList<String>,
+            onResult: (SubProduct) -> Unit
+        ){
+            //Example
+            listOpr.add("Telkomsel")
+            getToken( { token ->
+                if (token.tokenID != null) {
+                    ProductRepository.getListSubProduct(
+                        listOpr
+                    ) { value->
+                        println("Jalan loh " + value.statusCode)
+                        if (value.statusCode == "000") {
+                            onResult(value)
+                        }
+                    }
+                }
+            },{})
+        }
+
+        fun getListOprProduct(
+            productCode: String,
+            onResult: (OprProduct) -> Unit
+        ){
+            getToken( { token ->
+                if (token.tokenID != null) {
+                    ProductRepository.getListOprProduct(
+                        productCode
+                    ) { value->
+                        println("Jalan loh " + value.statusCode)
+                        if (value.statusCode == "000") {
                             onResult(value)
                         }
                     }

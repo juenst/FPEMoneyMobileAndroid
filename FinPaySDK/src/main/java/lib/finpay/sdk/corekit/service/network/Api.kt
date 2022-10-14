@@ -37,6 +37,18 @@ interface Api {
     ): Call<ProductModel>
 
     @Headers("Content-Type:application/json")
+    @POST("getDenom/")
+    fun getListSubProduct(
+        @Body body: HashMap<String, Any>
+    ): Call<SubProduct>
+
+    @Headers("Content-Type:application/json")
+    @POST("content/produk/{product_code}")
+    fun getListOprProduct(
+        @Body body: HashMap<String, String>
+    ): Call<OprProduct>
+
+    @Headers("Content-Type:application/json")
     @POST("api.php")
     fun getHistoryMasterTransaction(
         @Body body: HashMap<String, String>
