@@ -1,6 +1,7 @@
 package lib.finpay.sdk.uikit.view.home
 
 //import com.midtrans.sdk.uikit.SdkUIFlowBuilder
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -25,6 +26,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.databinding.FragmentHomeBinding
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.Credential
+import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.more.MoreActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
@@ -44,6 +46,7 @@ class HomeFragment : Fragment() {
     private lateinit var tvWarningBody: TextView
     private lateinit var sectionUpgradeAccount: LinearLayout
     private lateinit var finPaySDK: FinpaySDK
+    lateinit var progressDialog: ProgressDialog
 
     private lateinit var btnTopUp: LinearLayout
     private lateinit var btnTransfer: LinearLayout
@@ -78,6 +81,7 @@ class HomeFragment : Fragment() {
         sectionUpgradeAccount = binding.sectionUpgradeAccount
         iconVisibility = binding.iconVisibility
         iconVisibilityOff = binding.iconVisibilityOff
+        progressDialog = ProgressDialog(requireContext())
 
 
         btnTopUp = binding.btnTopup
@@ -130,11 +134,18 @@ class HomeFragment : Fragment() {
     }
 
     fun getBalance() {
+        progressDialog = ProgressDialog(context)
+        progressDialog.setTitle("Mohon Menunggu")
+        progressDialog.setMessage("Sedang Memuat ...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
         FinpaySDK.getUserBallance(requireContext(), {
             saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
             txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
+            progressDialog.dismiss()
         }, {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG)
+            DialogUtils.showDialogError(requireContext(), "", it)
+            progressDialog.dismiss()
         })
     }
 
@@ -184,9 +195,7 @@ class HomeFragment : Fragment() {
         }
 
         sectionUpgradeAccount.setOnClickListener {
-            //FinPaySDK().openUpgradeAccount(requireContext())
-            val intent = Intent(requireContext(), UpgradeAccountActivity::class.java)
-            this.startActivity(intent)
+            FinpaySDKUI.openUpgradeAccount(requireContext(), Credential.credential(requireContext()))
         }
     }
 

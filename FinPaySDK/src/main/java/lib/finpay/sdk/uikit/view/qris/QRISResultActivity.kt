@@ -13,6 +13,8 @@ import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.pin.PinActivity
@@ -83,6 +85,9 @@ class QRISResultActivity : AppCompatActivity() {
         })
 
         txtAmount.doOnTextChanged { text, start, before, count ->
+            txtTotalBayar.text = txtAmount.text
+            _totalBayar = txtAmount.text.toString()
+            _tagihan = txtAmount.text.toString()
             btnBayar.isEnabled = (!text.isNullOrBlank() && text.length>=1 && text != "0")
             ButtonUtils.checkButtonState(btnBayar)
         }
@@ -124,7 +129,7 @@ class QRISResultActivity : AppCompatActivity() {
         btnPay?.setOnClickListener {
             FinpaySDK.authPin(
                 this@QRISResultActivity,
-                txtAmount.text.toString(), "",{
+                txtAmount.text.toString(), ProductCode.QRIS,{
                     val intent = Intent(this@QRISResultActivity, PinActivity::class.java)
                     intent.putExtra("pinType", "paymentQris")
                     intent.putExtra("sof", "mc")

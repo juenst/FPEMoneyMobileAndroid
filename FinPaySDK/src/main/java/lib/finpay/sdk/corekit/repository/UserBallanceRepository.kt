@@ -65,6 +65,8 @@ class UserBallanceRepository() {
                     if (response.code() == 200) {
                         if (response.body()?.statusCode == "000") {
                             onSuccess(response.body()!!)
+                        } else if(response.body()?.statusCode == "A2081")  {
+                            FinpaySDK.getToken({},{})
                         } else {
                             onFailed(response.body()?.statusDesc!!)
                         }

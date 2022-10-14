@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_connect"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo_color" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_upgrade_account"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upgrade ke Premium"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textFontWeight="700" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lakukan upgrade ke Finpay Money Premium untuk menikmati layanan lebih luas"
+                android:textSize="14sp"
+                android:textFontWeight="400"
+                android:textColor="#364152"
+                android:gravity="center"
+                android:lineHeight="20sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/btnUpgrade"
+                android:text="Upgrade"
+                android:textColor="#00ACBA"
+                android:background="@drawable/button_primary"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+
+</LinearLayout>

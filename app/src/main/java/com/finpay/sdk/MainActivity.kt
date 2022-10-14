@@ -10,6 +10,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.utilities.DialogUtils
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTransfer.setOnClickListener {
-
+            FinpaySDKUI.openTransfer(this@MainActivity, credential())
         }
 
     }

@@ -60,6 +60,7 @@ class TokenRepository() {
                     ) {
                         if (response.code() == 200) {
                             if (response.body()?.statusCode == "000") {
+                                FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, response.body()!!.tokenID.toString())
                                 onSuccess(response.body()!!)
                             } else {
                                 onFailed(response.body()?.statusDesc.toString())

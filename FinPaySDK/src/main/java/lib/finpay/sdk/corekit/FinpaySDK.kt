@@ -125,7 +125,6 @@ public class FinpaySDK {
             )
         }
 
-
         fun ppobInquiry(context: Context, billingId: String, productCode: String, billingAmount: String, onSuccess: (PpobInquiry) -> Unit, onFailed: (String) -> Unit)  {
             init(context)
             PpobRepository.inquiry(
