@@ -12,7 +12,7 @@ import android.util.Base64
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
@@ -40,6 +40,16 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
         intent.getStringExtra("imgResultIdentity")
     }
 
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            result.data?.getStringExtra("countrySelectedResult")?.let {
+                txtNationality.setText(it.uppercase())
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upgrade_account_personal_data)
@@ -59,7 +69,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
         }
 
         checkButtonState(btnSubmit)
-        btnSubmit.setOnClickListener{
+        btnSubmit.setOnClickListener {
             println("image identity => ${imgResultIdentity}")
             println("image selfie => ${imgResultSelfie}")
             println("mother name => ${txtMotherName.getText()}")
@@ -87,7 +97,11 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
                     startActivity(intent)
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@UpgradeAccountPersonalDataActivity, "Error", it)
+                    DialogUtils.showDialogError(
+                        this@UpgradeAccountPersonalDataActivity,
+                        "Error",
+                        it
+                    )
                 }
             )
         }
@@ -107,11 +121,17 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
         txtEmail.doOnTextChanged { text, start, before, count ->
             checkForm()
         }
+
+        txtNationality.setText("indonesia".uppercase())
+        txtNationality.setOnClickListener {
+            val intent = Intent(this, CitizenshipActivity::class.java)
+            resultLauncher.launch(intent)
+        }
     }
 
     private fun encodeImage(path: String): String? {
         val imgFile = File(path.replace("file://", ""))
-        if(imgFile.exists()) {
+        if (imgFile.exists()) {
             val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
             val byteArrayOutputStream = ByteArrayOutputStream()
             myBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
@@ -123,7 +143,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
     }
 
     fun checkForm() {
-        if(
+        if (
             txtMotherName.text.trim().length == 0 ||
             txtNationality.text.trim().length == 0 ||
             txtNationality.text.trim().length == 0 ||
@@ -135,7 +155,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
         }
     }
 
-    fun checkButtonState(button:Button){
+    fun checkButtonState(button: Button) {
         // Create a color state list programmatically
         val states = arrayOf(
             intArrayOf(android.R.attr.state_enabled), // enabled
@@ -149,8 +169,8 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             Color.parseColor("#ffffff"), // enabled color
             Color.parseColor("#a5a5a5")// disabled color
         )
-        val bgColorStates = ColorStateList(states,bgColors)
-        val textColorStates = ColorStateList(states,textColors)
+        val bgColorStates = ColorStateList(states, bgColors)
+        val textColorStates = ColorStateList(states, textColors)
 
         // Set button background tint
         button.backgroundTintList = bgColorStates
