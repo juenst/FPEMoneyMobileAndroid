@@ -14,7 +14,7 @@
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:src="@drawable/img_maintenance"
+            android:src="@drawable/ic_failed"
             android:textSize="24sp"/>
 
 
@@ -33,10 +33,11 @@
 
         <TextView
             android:id="@+id/txtDesc"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
             android:text="Oppss... something went wrong"/>
 
         <View

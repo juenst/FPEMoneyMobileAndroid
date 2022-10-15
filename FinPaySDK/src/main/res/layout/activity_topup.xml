@@ -34,13 +34,42 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:id="@+id/scrollView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:animateLayoutChanges="false"-->
+<!--        android:fillViewport="true"-->
+<!--        android:focusableInTouchMode="true">-->
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih Channel Pembayaran Anda"
+                android:textFontWeight="600"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:textColor="#121926" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+
+            <ListView
+                android:id="@+id/list_channel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"/>
+
+        </LinearLayout>
+<!--    </androidx.core.widget.NestedScrollView>-->
 
 </LinearLayout>

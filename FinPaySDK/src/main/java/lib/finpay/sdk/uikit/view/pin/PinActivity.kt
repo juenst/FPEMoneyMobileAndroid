@@ -26,6 +26,7 @@ class PinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_pin)
+        supportActionBar!!.hide()
 
         progressDialog = ProgressDialog(this@PinActivity)
         val backButton = findViewById<ImageView>(R.id.backButton)
