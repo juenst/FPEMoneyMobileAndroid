@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F5F5F5"
-    tools:context=".view.ppob.PegadaianActivity">
+    tools:context=".view.ppob.pegadaian.PegadaianActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -38,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/btnUlangGadai"
             android:paddingTop="16dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -67,6 +68,7 @@
                 android:layout_height="1.7dp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/btnCicilGadai"
             android:paddingTop="16dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -96,6 +98,7 @@
                 android:layout_height="1.7dp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/btnGadaiTebus"
             android:paddingTop="16dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -125,6 +128,7 @@
                 android:layout_height="1.7dp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/btnAngsuranMikro"
             android:paddingTop="16dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -154,6 +158,7 @@
                 android:layout_height="1.7dp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/btnTabunganEmas"
             android:paddingTop="16dp"
             android:orientation="vertical"
             android:layout_width="match_parent"

@@ -45,6 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Nomor Ponsel" />
 
         <Space
@@ -62,6 +63,9 @@
                 android:id="@+id/textfieldNmbrPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:digits="0123456789"
+                android:inputType="phone"
                 android:background="@null" />
 
         </LinearLayout>
@@ -90,6 +94,7 @@
             android:id="@+id/txtNmbrPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Pilih Nomor dari Transaksi Terakhir"/>
 
         <LinearLayout

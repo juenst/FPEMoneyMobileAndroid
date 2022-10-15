@@ -182,7 +182,17 @@
             android:label="Paket Terbaik Telkomsel"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
+            android:name=".uikit.view.best.telkomsel.package.BestTelkomselPackageDetailActivity"
+            android:exported="false"
+            android:label="Paket Terbaik Telkomsel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
             android:name=".uikit.view.state.revenue.StateRevenueActivity"
+            android:exported="false"
+            android:label="Penerimaan Negara"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.state.revenue.StateRevenueDetailActivity"
             android:exported="false"
             android:label="Penerimaan Negara"
             android:theme="@style/AppTheme.finpayTheme" />

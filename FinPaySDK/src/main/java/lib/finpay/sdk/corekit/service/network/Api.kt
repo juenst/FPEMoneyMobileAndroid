@@ -37,6 +37,24 @@ interface Api {
     ): Call<ProductModel>
 
     @Headers("Content-Type:application/json")
+    @POST("getDenom/")
+    fun getListSubProduct(
+        @Body body: HashMap<String, Any>
+    ): Call<SubProduct>
+
+    @Headers("Content-Type:application/json")
+    @POST("content/produk/{product_code}")
+    fun getListOprProduct(
+        @Body body: HashMap<String, String>
+    ): Call<OprProduct>
+
+    @Headers("Content-Type:application/json")
+    @POST("getFee/")
+    fun getFee(
+        @Body body: HashMap<String, String>
+    ): Call<ListFeePbob>
+
+    @Headers("Content-Type:application/json")
     @POST("api.php")
     fun getHistoryMasterTransaction(
         @Body body: HashMap<String, String>
@@ -101,4 +119,22 @@ interface Api {
     fun qrisPayment(
         @Body body: HashMap<String, String>
     ): Call<QrisPayment>
+
+    @Headers("Content-Type:application/json")
+    @POST("inqBill")
+    fun ppobInquiry(
+        @Body body: HashMap<String, String>
+    ): Call<PpobInquiry>
+
+    @Headers("Content-Type:application/json")
+    @POST("paymentConf")
+    fun ppobPayment(
+        @Body body: HashMap<String, String>
+    ): Call<PpobPayment>
+
+    @Headers("Content-Type:application/json")
+    @POST("security/pin/auth")
+    fun authPin(
+        @Body body: HashMap<String, String>
+    ): Call<AuthPin>
 }

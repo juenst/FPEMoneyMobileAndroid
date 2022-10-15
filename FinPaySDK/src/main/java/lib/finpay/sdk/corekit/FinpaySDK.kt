@@ -125,6 +125,28 @@ public class FinpaySDK {
             )
         }
 
+        fun ppobInquiry(context: Context, billingId: String, productCode: String, billingAmount: String, onSuccess: (PpobInquiry) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
+            PpobRepository.inquiry(
+                billingId, productCode, billingAmount, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
+        }
+
+        fun ppobPayment(context: Context, sof: String, payType: String, denom: String, amount: String, billingId: String, productCode: String, reffFlag: String, activationDate: String, pinToken: String, onSuccess: (PpobPayment) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
+            PpobRepository.payment(
+                sof, payType, denom, amount, billingId, productCode, reffFlag,activationDate, pinToken, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
+        }
+
         fun getListProduct(
             onResult: (ProductModel) -> Unit
         ) {
@@ -138,6 +160,71 @@ public class FinpaySDK {
                     }
                 }
             },{})
+        }
+
+        fun getListSubProduct(
+            listOpr: ArrayList<String>,
+            onResult: (SubProduct) -> Unit
+        ){
+            //Example
+            listOpr.add("Telkomsel")
+            getToken( { token ->
+                if (token.tokenID != null) {
+                    ProductRepository.getListSubProduct(
+                        listOpr
+                    ) { value->
+                        println("Jalan loh " + value.statusCode)
+                        if (value.statusCode == "000") {
+                            onResult(value)
+                        }
+                    }
+                }
+            },{})
+        }
+
+        fun getListOprProduct(
+            productCode: String,
+            onResult: (OprProduct) -> Unit
+        ){
+            getToken( { token ->
+                if (token.tokenID != null) {
+                    ProductRepository.getListOprProduct(
+                        productCode
+                    ) { value->
+                        println("Jalan loh " + value.statusCode)
+                        if (value.statusCode == "000") {
+                            onResult(value)
+                        }
+                    }
+                }
+            },{})
+        }
+
+        fun getFeePbob(
+            onResult: (ListFeePbob) -> Unit
+        ){
+            getToken( { token ->
+                if (token.tokenID != null) {
+                    PpobRepository.getFeePbob(
+                    ) { value->
+                        println("Jalan loh " + value.statusCode)
+                        if (value.statusCode == "000") {
+                            onResult(value)
+                        }
+                    }
+                }
+            },{})
+        }
+
+        fun authPin(context: Context, amount: String, productCode: String, onSuccess: (AuthPin) -> Unit, onFailed: (String) -> Unit)  {
+            init(context)
+            PinRepository.authPin(
+                amount, productCode, {
+                    onSuccess(it)
+                }, {
+                    onFailed(it)
+                }
+            )
         }
     }
 }

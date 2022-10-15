@@ -107,26 +107,31 @@ class PinActivity : AppCompatActivity() {
         val amount: String? by lazy { intent.getStringExtra("amount") }
         val amountTips: String? by lazy { intent.getStringExtra("amountTips") }
         val reffFlag: String? by lazy { intent.getStringExtra("reffFlag") }
+        val pinToken: String? by lazy { intent.getStringExtra("pinToken") }
         progressDialog.setTitle("Mohon Menunggu")
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK.qrisPayment(
-            this@PinActivity,
-            sof!!,
-            amount!!,
-            amountTips!!,
-            reffFlag!!,
-            pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5], {
-                progressDialog.dismiss()
-                val intent = Intent(this@PinActivity, TransactionDetailActivity::class.java)
-                startActivity(intent)
-            }, {
-                progressDialog.dismiss()
-                println(it)
-                Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
-            }
-        )
+        if(pinToken == pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5]) {
+            FinpaySDK.qrisPayment(
+                this@PinActivity,
+                sof!!,
+                amount!!,
+                amountTips!!,
+                reffFlag!!,
+                pin[0] + pin[1] + pin[2] + pin[3] + pin[4] + pin[5], {
+                    progressDialog.dismiss()
+                    val intent = Intent(this@PinActivity, TransactionDetailActivity::class.java)
+                    startActivity(intent)
+                }, {
+                    progressDialog.dismiss()
+                    println(it)
+                    Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
+                }
+            )
+        } else {
+            Toast.makeText(this@PinActivity, "Pin yang Anda masukan salah", Toast.LENGTH_LONG)
+        }
     }
 
     fun otpConnectAccount() {
