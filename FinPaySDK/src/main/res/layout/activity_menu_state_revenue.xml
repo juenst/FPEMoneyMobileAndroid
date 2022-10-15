@@ -41,6 +41,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/btn_pnbp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edittext_outline"
@@ -90,6 +91,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btn_bea_cukai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edittext_outline"
@@ -110,8 +112,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bea Cukai"
-                android:textColor="#4B5565"
-                android:textSize="12sp" />
+                android:textColor="#121926"
+                android:textFontWeight="600"
+                android:textSize="12dp" />
 
             <Space
                 android:layout_width="10dp"
@@ -120,6 +123,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btn_pajak_online"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edittext_outline"

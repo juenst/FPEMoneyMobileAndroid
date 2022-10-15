@@ -1,4 +1,4 @@
-package lib.finpay.sdk.uikit.view.ppob
+package com.finpay.wallet.view.ppob.asuransi
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -8,13 +8,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.widget.doOnTextChanged
-import lib.finpay.sdk.R
+import com.finpay.wallet.R
 
-class FinpayActivity : AppCompatActivity() {
+class CarLifeInsuranceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_finpay)
-        supportActionBar!!.hide()
+        setContentView(R.layout.activity_car_life_insurance)
 
         val backButton = findViewById<ImageView>(R.id.btnBack)
         val noPelangganField = findViewById<EditText>(R.id.noPelangganField)
@@ -32,7 +31,7 @@ class FinpayActivity : AppCompatActivity() {
         }
     }
 
-    fun checkButtonState(button: Button){
+    fun checkButtonState(button:Button){
         // Create a color state list programmatically
         val states = arrayOf(
             intArrayOf(android.R.attr.state_enabled), // enabled

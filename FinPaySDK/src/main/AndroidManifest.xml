@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,6 +9,13 @@
         android:required="true" />
 
     <application>
+        <activity
+            android:name=".uikit.view.upgrade.CitizenshipActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".uikit.view.internettvkabel.InternetCableTransactionActivity"
             android:exported="false" />
@@ -175,7 +182,17 @@
             android:label="Paket Terbaik Telkomsel"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
+            android:name=".uikit.view.best.telkomsel.package.BestTelkomselPackageDetailActivity"
+            android:exported="false"
+            android:label="Paket Terbaik Telkomsel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
             android:name=".uikit.view.state.revenue.StateRevenueActivity"
+            android:exported="false"
+            android:label="Penerimaan Negara"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.state.revenue.StateRevenueDetailActivity"
             android:exported="false"
             android:label="Penerimaan Negara"
             android:theme="@style/AppTheme.finpayTheme" />

@@ -3,10 +3,7 @@ package lib.finpay.sdk.uikit.utilities
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
-import android.net.ConnectivityManager
 import android.util.DisplayMetrics
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.ParseException
@@ -171,5 +168,11 @@ object Utils {
             "PHONE"
         }
         return var1
+    }
+
+    fun Context.getJsonFromRaw(file: Int): String {
+        return this.resources.openRawResource(file).bufferedReader().use {
+            it.readText()
+        }
     }
 }
