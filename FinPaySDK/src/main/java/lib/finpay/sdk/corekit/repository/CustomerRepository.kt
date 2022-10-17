@@ -4,8 +4,7 @@ import com.example.testing.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.Customer
-import lib.finpay.sdk.corekit.model.ReqConfirmationModel
-import lib.finpay.sdk.corekit.service.BaseService
+import lib.finpay.sdk.corekit.model.Profile
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
@@ -54,7 +53,7 @@ class CustomerRepository() {
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 
-            val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.reqActivation(requestBody).enqueue(object : Callback<Customer> {
                 override fun onFailure(call: Call<Customer>, t: Throwable) {
                     onFailed(t.message.toString())
@@ -116,7 +115,7 @@ class CustomerRepository() {
                 requestBody["otp"] = otp
                 requestBody["custStatusCode"] = custStatusCode
 
-                val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
                 request.reqConfirmation(requestBody).enqueue(object : Callback<Customer> {
                     override fun onFailure(call: Call<Customer>, t: Throwable) {
                         onFailed(t.message.toString())
@@ -136,6 +135,58 @@ class CustomerRepository() {
                         }
                     }
                 })
+        }
+
+        fun checkProfile(
+            onSuccess: (Profile) -> Unit,
+            onFailed: (String) -> Unit)  {
+            //create signature
+            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            val currentDate = sdf.format(Date())
+            val mapJson = mapOf(
+                "requestType" to "checkProfile",
+                "reqDtime" to currentDate,
+                "transNumber" to currentDate,
+                "phoneNumber" to phoneNumber,
+                "tokenID" to tokenID,
+            )
+            FinpaySDK.signature = Signature()
+            val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
+
+            //auth header
+            val credential = Credentials.basic(userName, password)
+            var header : HashMap<String, String> = hashMapOf()
+            header["Authorization"] = credential
+
+            //request body
+            val requestBody : HashMap<String, String> = hashMapOf()
+            requestBody["requestType"] = "checkProfile"
+            requestBody["signature"] = signatureID
+            requestBody["reqDtime"] = currentDate
+            requestBody["transNumber"] = currentDate
+            requestBody["phoneNumber"] = phoneNumber
+            requestBody["tokenID"] = tokenID
+
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
+            request.checkProfile(requestBody).enqueue(object : Callback<Profile> {
+                override fun onFailure(call: Call<Profile>, t: Throwable) {
+                    onFailed(t.message.toString())
+                }
+                override fun onResponse(
+                    call: Call<Profile>,
+                    response: Response<Profile>
+                ) {
+                    if (response.code() == 200) {
+                        if (response.body()?.statusCode == "000") {
+                            onSuccess(response.body()!!)
+                        } else {
+                            onFailed(response.body()?.statusDesc.toString())
+                        }
+                    } else {
+                        onFailed(Constant.defaultErrorMessage)
+                    }
+                }
+            })
         }
     }
 }

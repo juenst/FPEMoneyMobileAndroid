@@ -4,7 +4,6 @@ import com.example.testing.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.*
-import lib.finpay.sdk.corekit.service.BaseService
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.PrefHelper
@@ -65,7 +64,7 @@ class PpobRepository() {
                 requestBody["productCode"] = productCode
                 requestBody["billingAmount"] = billingAmount
 
-                val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
                 request.ppobInquiry(requestBody).enqueue(object : Callback<PpobInquiry> {
                     override fun onFailure(call: Call<PpobInquiry>, t: Throwable) {
                         onFailed(t.message.toString())
@@ -144,7 +143,7 @@ class PpobRepository() {
                 requestBody["activationDate"] = activationDate
                 requestBody["pinToken"] = pinToken
 
-                val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
                 request.ppobPayment(requestBody).enqueue(object : Callback<PpobPayment> {
                     override fun onFailure(call: Call<PpobPayment>, t: Throwable) {
                         onFailed(t.message.toString())
@@ -166,17 +165,29 @@ class PpobRepository() {
                 })
         }
 
-        fun getFeePbob(
-            onResult: (ListFeePbob) -> Unit
+        fun getFeePpob(
+            phoneNumber: String,
+            payType: String,
+            billingId: String,
+            productCode: String,
+            denom: String,
+            onSuccess: (GetFee) -> Unit,
+            onFailed: (String) -> Unit
         ){
+            //create signature
             val sdf = SimpleDateFormat("yyyyMMdHHmmss")
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
-                "requestType" to "getOprProduk",
+                "requestType" to "getFee",
                 "reqDtime" to currentDate,
-                "transNumber" to currentDate
+                "transNumber" to currentDate,
+                "phoneNumber" to phoneNumber,
+                "tokenID" to tokenID,
+                "payType" to payType,
+                "billingId" to billingId,
+                "productCode" to productCode,
+                "denom" to denom
             )
-
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
 
@@ -185,34 +196,36 @@ class PpobRepository() {
             var header : HashMap<String, String> = hashMapOf()
             header["Authorization"] = credential
 
+            //request body
             val requestBody : HashMap<String, String> = hashMapOf()
-            requestBody["requestType"] = "getOprProduk"
+            requestBody["requestType"] = "getFee"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = currentDate
             requestBody["transNumber"] = currentDate
+            requestBody["phoneNumber"] = phoneNumber
+            requestBody["tokenID"] = tokenID
+            requestBody["payType"] = payType
+            requestBody["billingId"] = billingId
+            requestBody["productCode"] = productCode
+            requestBody["denom"] = denom
 
-            val request = BaseService.getRetrofitInstance2().create(Api::class.java)
-
-            request.getFee(requestBody).enqueue(object :
-                Callback<ListFeePbob> {
-                override fun onFailure(call: Call<ListFeePbob>, t: Throwable) {
-                    println("response failure")
-                    println(t.message)
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
+            request.getFee(requestBody).enqueue(object : Callback<GetFee> {
+                override fun onFailure(call: Call<GetFee>, t: Throwable) {
+                    onFailed(t.message.toString())
                 }
                 override fun onResponse(
-                    call: Call<ListFeePbob>,
-                    response: Response<ListFeePbob>
+                    call: Call<GetFee>,
+                    response: Response<GetFee>
                 ) {
                     if (response.code() == 200) {
                         if (response.body()?.statusCode == "000") {
-                            onResult(response.body()!!)
-//                            println("Data : " + response.body()!!.getDataProduct()!!.first().getProductDesc())
+                            onSuccess(response.body()!!)
                         } else {
-                            println("statusCode != 200")
-                            println(response.body()?.statusCode)
+                            onFailed(response.body()?.statusDesc.toString())
                         }
                     } else {
-                        println("response code != 200")
+                        onFailed(Constant.defaultErrorMessage)
                     }
                 }
             })

@@ -15,8 +15,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.constant.ProductCode
+import lib.finpay.sdk.uikit.constant.PinType
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
+import lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText
+import lib.finpay.sdk.uikit.utilities.widget.NumberEditText
+import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.pin.PinActivity
 
 
@@ -28,7 +32,7 @@ class QRISResultActivity : AppCompatActivity() {
     lateinit var merchantName: TextView
     lateinit var txtTotalBayar: TextView
     lateinit var txtSaldo: TextView
-    lateinit var txtAmount: EditText
+    lateinit var txtAmount: CurrencyEditText
     lateinit var btnBayar: Button
     lateinit var btnBack: ImageView
     lateinit var progressDialog: ProgressDialog
@@ -127,16 +131,21 @@ class QRISResultActivity : AppCompatActivity() {
         txtSaldo!!.text = saldo
 
         btnPay?.setOnClickListener {
+            progressDialog.setTitle("Mohon Menunggu")
+            progressDialog.setMessage("Sedang Memuat ...")
+            progressDialog.setCancelable(false) // blocks UI interaction
+            progressDialog.show()
             FinpaySDK.authPin(
                 this@QRISResultActivity,
                 txtAmount.text.toString(), ProductCode.QRIS,{
-                    val intent = Intent(this@QRISResultActivity, PinActivity::class.java)
-                    intent.putExtra("pinType", "paymentQris")
+                    progressDialog.dismiss()
+                    val intent = Intent(this@QRISResultActivity, PaymentActivity::class.java)
+                    intent.putExtra("pinType", PinType.paymentQRIS)
                     intent.putExtra("sof", "mc")
-                    intent.putExtra("amount", "0")
+                    intent.putExtra("amount", totalBayar.replace("Rp", "").replace(",",""))
                     intent.putExtra("amountTips", "0")
                     intent.putExtra("reffFlag", _reffFlag)
-                    intent.putExtra("pinToken", it.pinToken)
+                    intent.putExtra("widgetURL", it.widgetURL)
                     startActivity(intent)
                 }, {
                     progressDialog.dismiss()

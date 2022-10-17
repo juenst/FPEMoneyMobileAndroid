@@ -37,10 +37,10 @@ class TransactionHistoryAdapter(var mCtx: Context, var resource: Int, var items:
             transactionDate.text = position.dateTime
             transactionType.text = position.type
             if(position.type == "topup") {
-                transactionAmount.text = "+"+TextUtils.formatRupiah(position.value!!.toDouble())
+                transactionAmount.text = "+"+TextUtils.formatRupiah((if(position.value == null) "0" else position.value)!!.toDouble())
                 transactionAmount.setTextColor(Integer.parseUnsignedInt("ff34A853", 16))
             } else {
-                transactionAmount.text = "-"+TextUtils.formatRupiah(position.value!!.toDouble())
+                transactionAmount.text = "-"+TextUtils.formatRupiah((if(position.value == null) "0" else position.value)!!.toDouble())
                 transactionAmount.setTextColor(Integer.parseUnsignedInt("ffDF5A2A", 16))
             }
 

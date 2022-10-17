@@ -39,7 +39,7 @@ class FinpaySDKUI {
             FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_PASSWORD, credential.getUsername()!!)
             FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_SECRET_KEY, credential.getSecretKey()!!)
             FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.USER_PHONE_NUMBER, credential.getPhoneNumber()!!)
-            FinpaySDK.getToken ({
+            FinpaySDK.getToken (context, {
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, it.tokenID!!)
 
                 if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
@@ -55,7 +55,7 @@ class FinpaySDKUI {
                             if(it.custStatusCode == "003") {
                                 progressDialog.dismiss()
                                 FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
-                                DialogUtils.showDialogError(context, "Aktifasi Sukses", "Aktifasi akun berhasil, silahkan hubungkan kembali")
+                                DialogUtils.showDialogSuccess(context, "Aktivasi Sukses", "Aktivasi akun berhasil, silahkan hubungkan kembali")
                             } else {
                                 progressDialog.dismiss()
                                 val intent = Intent(context, PinActivity::class.java)

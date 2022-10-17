@@ -106,8 +106,6 @@ class TransactionHistoryActivity : AppCompatActivity() {
                 listHistoryTransaction.visibility = View.VISIBLE
                 emptyState.visibility = View.GONE
             }
-            println("coba dulu")
-            print(it.getListHistory().size)
             listHistoryTransaction.adapter = TransactionHistoryAdapter(this, R.layout.item_history_transaction, it.getListHistory())
             progressDialog.dismiss()
         },{

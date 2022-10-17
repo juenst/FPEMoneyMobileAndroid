@@ -1,16 +1,21 @@
 package com.finpay.sdk
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.corekit.FinpaySDK
-import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.view.payment.PaymentActivity
+import lib.finpay.sdk.uikit.view.pin.PinActivity
+import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
+import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +44,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnOpenDialogQr.setOnClickListener {
-            FinpaySDKUI.openQris(this@MainActivity, credential())
+//            FinpaySDKUI.openQris(this@MainActivity, credential())
+            val intent = Intent(this@MainActivity, PaymentActivity::class.java)
+            startActivity(intent)
         }
 
         btnLogout.setOnClickListener {
@@ -47,7 +54,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTransfer.setOnClickListener {
-            FinpaySDKUI.openTransfer(this@MainActivity, credential())
+//            FinpaySDKUI.openTransfer(this@MainActivity, credential())
+            val intent = Intent(this, PulsaDataActivity::class.java)
+            this.startActivity(intent)
         }
 
     }

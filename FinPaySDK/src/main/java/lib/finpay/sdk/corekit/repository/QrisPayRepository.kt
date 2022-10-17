@@ -59,7 +59,7 @@ class QrisPayRepository() {
                 requestBody["tokenID"] = tokenID
                 requestBody["stringQris"] = stringQris
 
-                val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
                 request.qrisInquiry(requestBody).enqueue(object : Callback<QrisInquiry> {
                     override fun onFailure(call: Call<QrisInquiry>, t: Throwable) {
                         onFailed(t.message.toString())
@@ -126,7 +126,7 @@ class QrisPayRepository() {
                 requestBody["reffFlag"] = reffFlag
                 requestBody["pinToken"] = pinToken
 
-                val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
                 request.qrisPayment(requestBody).enqueue(object : Callback<QrisPayment> {
                     override fun onFailure(call: Call<QrisPayment>, t: Throwable) {
                         onFailed(t.message.toString())

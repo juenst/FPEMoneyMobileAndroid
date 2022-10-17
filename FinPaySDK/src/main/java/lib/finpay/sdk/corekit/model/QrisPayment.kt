@@ -46,4 +46,8 @@ class Bit61Parses {
     var terminalID: String? = null
     @SerializedName("isOnUs")
     var isOnUs: String? = null
+    @SerializedName("customerPAN")
+    var customerPAN: String? = null
+    @SerializedName("invoice")
+    var invoice: String? = null
 }

@@ -4,7 +4,6 @@ import com.example.testing.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.UserBalance
-import lib.finpay.sdk.corekit.service.BaseService
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
@@ -53,7 +52,7 @@ class UserBallanceRepository() {
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 
-            val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getUserBallance(requestBody).enqueue(object : Callback<UserBalance> {
                 override fun onFailure(call: Call<UserBalance>, t: Throwable) {
                     onFailed(t.message!!)
@@ -66,7 +65,8 @@ class UserBallanceRepository() {
                         if (response.body()?.statusCode == "000") {
                             onSuccess(response.body()!!)
                         } else if(response.body()?.statusCode == "A2081")  {
-                            FinpaySDK.getToken({},{})
+                            //FinpaySDK.getToken({},{})
+                            println("token expired")
                         } else {
                             onFailed(response.body()?.statusDesc!!)
                         }

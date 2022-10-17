@@ -52,6 +52,7 @@
             android:text="Tutup"
             android:textAllCaps="false"
             android:textSize="16sp"
+            style="@style/AppTheme.finpayTheme"
             android:background="#00ACBA"/>
     </LinearLayout>
 </RelativeLayout>

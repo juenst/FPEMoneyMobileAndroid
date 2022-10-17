@@ -2,7 +2,6 @@ package lib.finpay.sdk.uikit.constant
 
 import android.content.Context
 import lib.finpay.sdk.corekit.FinpaySDK
-import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 

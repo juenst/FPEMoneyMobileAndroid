@@ -4,7 +4,6 @@ import com.example.testing.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.UpgradeAccount
-import lib.finpay.sdk.corekit.service.BaseService
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
@@ -41,7 +40,7 @@ class UpgradeAccountRepository() {
                 "namaIbuKandung" to motherName,
                 "kewarganegaraan" to nationality,
                 "email" to email,
-                "chID" to ""
+                "chID" to userName
             )
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -65,9 +64,9 @@ class UpgradeAccountRepository() {
             requestBody["namaIbuKandung"] = motherName
             requestBody["kewarganegaraan"] = nationality
             requestBody["email"] = email
-            requestBody["chID"] = ""
+            requestBody["chID"] = userName
 
-            val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.upgradeAccount(requestBody).enqueue(object : Callback<UpgradeAccount> {
                 override fun onFailure(call: Call<UpgradeAccount>, t: Throwable) {
                     onFailed(t.message.toString())

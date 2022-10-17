@@ -116,7 +116,7 @@
                 android:elevation="0dp"
                 android:layout_height="48dp">
 
-                <EditText
+                <lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText
                     android:id="@+id/txtAmount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -133,7 +133,7 @@
                     android:textColorHint="@color/md_grey_300">
 
                     <requestFocus />
-                </EditText>
+                </lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText>
 
             </androidx.cardview.widget.CardView>
 

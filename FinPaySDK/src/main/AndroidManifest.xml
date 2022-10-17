@@ -17,28 +17,28 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".uikit.view.internettvkabel.InternetCableTransactionActivity"
+            android:name=".uikit.view.ppob.internettvkabel.InternetCableTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.internettvkabel.ChooseInternetCableActivity"
+            android:name=".uikit.view.ppob.internettvkabel.ChooseInternetCableActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.instalment.ChooseInstalmentActivity"
+            android:name=".uikit.view.ppob.instalment.ChooseInstalmentActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.instalment.InstalmentTransactionActivity"
+            android:name=".uikit.view.ppob.instalment.InstalmentTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.bpjs.ChooseBpjsActivity"
+            android:name=".uikit.view.ppob.bpjs.ChooseBpjsActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.bpjs.BpjsTransactionActivity"
+            android:name=".uikit.view.ppob.bpjs.BpjsTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.telkom.TelkomTransactionActivity"
+            android:name=".uikit.view.ppob.telkom.TelkomTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.pulsa.CreditTransactionActivity"
+            android:name=".uikit.view.ppob.pulsa_data.PulsaDataActivity"
             android:exported="false" />
         <activity
             android:name=".uikit.view.ppob.AsuransiActivity"
@@ -172,49 +172,53 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.alfamart.AlfamartActivity"
+            android:name=".uikit.view.ppob.alfamart.AlfamartActivity"
             android:exported="false"
             android:label="Alfamart"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.best.telkomsel.package.BestTelkomselPackageActivity"
+            android:name=".uikit.view.ppob.best.telkomsel.package.BestTelkomselPackageActivity"
             android:exported="false"
             android:label="Paket Terbaik Telkomsel"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.best.telkomsel.package.BestTelkomselPackageDetailActivity"
+            android:name=".uikit.view.ppob.best.telkomsel.package.BestTelkomselPackageDetailActivity"
             android:exported="false"
             android:label="Paket Terbaik Telkomsel"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.state.revenue.StateRevenueActivity"
+            android:name=".uikit.view.ppob.state.revenue.StateRevenueActivity"
             android:exported="false"
             android:label="Penerimaan Negara"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.state.revenue.StateRevenueDetailActivity"
+            android:name=".uikit.view.ppob.state.revenue.StateRevenueDetailActivity"
             android:exported="false"
             android:label="Penerimaan Negara"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.internet.tv.cable.InternetTvCableActivity"
+            android:name=".uikit.view.ppob.internet.tv.cable.InternetTvCableActivity"
             android:exported="false"
             android:label="Internet &amp; Tv Cable"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.internet.tv.cable.InternetTvCableDetailActivity"
+            android:name=".uikit.view.ppob.internet.tv.cable.InternetTvCableDetailActivity"
             android:exported="false"
             android:label="Internet &amp; Tv Cable"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.pdam.PDAMActivity"
+            android:name=".uikit.view.ppob.pdam.PDAMActivity"
             android:exported="false"
             android:label="Voucher TV Kabel"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.voucher.VoucherDealsActivity"
+            android:name=".uikit.view.ppob.voucher.VoucherDealsActivity"
             android:exported="false"
             android:label="Voucher Deals" />
+        <activity
+            android:name=".uikit.view.payment.PaymentActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
     </application>
 
 </manifest>

@@ -1,27 +1,29 @@
 package lib.finpay.sdk.uikit.view.more
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
 
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.DetailProductModel
-import lib.finpay.sdk.corekit.model.ProductModel
-import lib.finpay.sdk.uikit.view.alfamart.AlfamartActivity
-import lib.finpay.sdk.uikit.view.best.telkomsel.`package`.BestTelkomselPackageActivity
-import lib.finpay.sdk.uikit.view.bpjs.ChooseBpjsActivity
-import lib.finpay.sdk.uikit.view.instalment.ChooseInstalmentActivity
-import lib.finpay.sdk.uikit.view.internet.tv.cable.InternetTvCableActivity
-import lib.finpay.sdk.uikit.view.pdam.PDAMActivity
+import lib.finpay.sdk.corekit.model.Product
+import lib.finpay.sdk.uikit.view.ppob.alfamart.AlfamartActivity
+import lib.finpay.sdk.uikit.view.ppob.best.telkomsel.`package`.BestTelkomselPackageActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.ChooseBpjsActivity
+import lib.finpay.sdk.uikit.view.ppob.instalment.ChooseInstalmentActivity
+import lib.finpay.sdk.uikit.view.ppob.internet.tv.cable.InternetTvCableActivity
+import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
 import lib.finpay.sdk.uikit.view.ppob.AsuransiActivity
 import lib.finpay.sdk.uikit.view.ppob.FinpayActivity
-import lib.finpay.sdk.uikit.view.pulsa.CreditTransactionActivity
-import lib.finpay.sdk.uikit.view.state.revenue.StateRevenueActivity
-import lib.finpay.sdk.uikit.view.telkom.TelkomTransactionActivity
-import lib.finpay.sdk.uikit.view.voucher.VoucherDealsActivity
+import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
+import lib.finpay.sdk.uikit.view.ppob.state.revenue.StateRevenueActivity
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomTransactionActivity
+import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
 import lib.finpay.sdk.uikit.utilities.extension.toJson
 
 class MoreActivity : AppCompatActivity() {
@@ -38,7 +40,7 @@ class MoreActivity : AppCompatActivity() {
     lateinit var btnMenuTelkom: LinearLayout
     lateinit var btnMenuCicilan: LinearLayout
 
-    lateinit var dataProduct: ProductModel
+    lateinit var dataProduct: Product
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,12 +116,7 @@ class MoreActivity : AppCompatActivity() {
         changeMenu("Telkom",btnMenuTelkom)
         changeMenu("Cicilan",btnMenuCicilan)
 
-        getListProduct {
-            values ->
-            dataProduct = values
-            println("data product " + dataProduct.toJson())
-        }
-
+        getListProduct()
 
     }
 
@@ -129,8 +126,8 @@ class MoreActivity : AppCompatActivity() {
             when(nameMenu){
                 "Finpay"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Finpay")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Finpay")
                         } as ArrayList<DetailProductModel>
                     println("dataFinpay : " + listRandom.toString())
                     val intent = Intent(this, FinpayActivity::class.java)
@@ -139,8 +136,8 @@ class MoreActivity : AppCompatActivity() {
                 }
                 "Alfamart"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Alfamart")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Alfamart")
                         } as ArrayList<DetailProductModel>
                     println("dataAlfamart : " + listRandom.toString())
                     val intent = Intent(this, AlfamartActivity::class.java)
@@ -149,8 +146,8 @@ class MoreActivity : AppCompatActivity() {
                 }
                 "Asuransi"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Asuransi")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Asuransi")
                         } as ArrayList<DetailProductModel>
                     println("dataAsuransi : " + listRandom.toString())
                     val intent = Intent(this, AlfamartActivity::class.java)
@@ -159,8 +156,8 @@ class MoreActivity : AppCompatActivity() {
                 }
                 "Best Telkomsel"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Best Telkomsel")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Best Telkomsel")
                         } as ArrayList<DetailProductModel>
                     println("dataBest Telkomsel : " + listRandom.toString())
                     val intent = Intent(this, AlfamartActivity::class.java)
@@ -169,8 +166,8 @@ class MoreActivity : AppCompatActivity() {
                 }
                 "Internet Tv Cable"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Best Telkomsel")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Best Telkomsel")
                         } as ArrayList<DetailProductModel>
                     println("dataBest Telkomsel : " + listRandom.toString())
                     val intent = Intent(this, AlfamartActivity::class.java)
@@ -179,18 +176,18 @@ class MoreActivity : AppCompatActivity() {
                 }
                 "Credit"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Data")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Data")
                         } as ArrayList<DetailProductModel>
                     println("dataCredit : " + listRandom.toString())
-                    val intent = Intent(this, CreditTransactionActivity::class.java)
+                    val intent = Intent(this, PulsaDataActivity::class.java)
                     intent.putExtra("dataCredit", listRandom.toJson())
                     startActivity(intent)
                 }
                 "BPJS"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("BPJS")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("BPJS")
                         } as ArrayList<DetailProductModel>
                     println("dataBPJS : " + listRandom.toString())
                     val intent = Intent(this, ChooseBpjsActivity::class.java)
@@ -199,8 +196,8 @@ class MoreActivity : AppCompatActivity() {
                 }
                 "Telkom"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Telkom")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Telkom")
                         } as ArrayList<DetailProductModel>
                     println("dataTelkom : " + listRandom.toString())
                     val intent = Intent(this, TelkomTransactionActivity::class.java)
@@ -209,8 +206,8 @@ class MoreActivity : AppCompatActivity() {
                 }
                 "Cicilan"->{
                     var listRandom =
-                        dataProduct.getDataProduct()!!.filter {
-                            it.getProductDesc()!!.contains("Cicilan")
+                        dataProduct.dataProduct!!.filter {
+                            it.productDesc!!.contains("Cicilan")
                         } as ArrayList<DetailProductModel>
                     println("DataInstallMent : " + listRandom.toString())
                     var intent = Intent(this, ChooseInstalmentActivity::class.java)
@@ -222,12 +219,13 @@ class MoreActivity : AppCompatActivity() {
         }
     }
 
-    fun getListProduct(
-        onResult: (ProductModel)-> Unit
-    ) {
-        FinpaySDK.getListProduct {
-            onResult(it)
-        }
+    fun getListProduct() {
+        FinpaySDK.getListProduct(this, {
+            dataProduct = it
+            println("data product " + dataProduct.toJson())
+        }, {
+            Toast.makeText(this@MoreActivity, it, Toast.LENGTH_LONG)
+        })
     }
 
 }

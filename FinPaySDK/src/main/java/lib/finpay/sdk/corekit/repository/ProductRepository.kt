@@ -4,9 +4,9 @@ import com.example.testing.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.OprProduct
-import lib.finpay.sdk.corekit.model.ProductModel
+import lib.finpay.sdk.corekit.model.Product
 import lib.finpay.sdk.corekit.model.SubProduct
-import lib.finpay.sdk.corekit.service.BaseService
+import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import okhttp3.Credentials
@@ -26,11 +26,11 @@ class ProductRepository()  {
         var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
-        private lateinit var signature: Signature
-
         fun getListProduct(
-            onResult: (ProductModel) -> Unit
+            onSuccess: (Product) -> Unit,
+            onFailed: (String) -> Unit
         ){
+            //create signature
             val sdf = SimpleDateFormat("yyyyMMdHHmmss")
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
@@ -38,51 +38,51 @@ class ProductRepository()  {
                 "reqDtime" to currentDate,
                 "transNumber" to currentDate
             )
-            signature = Signature()
-            val signatureID = signature.createSignature(mapJson,"daYumnMb")
-            val credential = Credentials.basic(
-                Constant.userName,
-                Constant.password
-            )
+            FinpaySDK.signature = Signature()
+            val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
+
+            //auth header
+            val credential = Credentials.basic(userName, password)
             var header : HashMap<String, String> = hashMapOf()
             header["Authorization"] = credential
+
+            //request body
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "getProduk"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = currentDate
             requestBody["transNumber"] = currentDate
 
-            val request = BaseService.getRetrofitInstance2().create(Api::class.java)
-
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getListProduct(requestBody).enqueue(object :
-                Callback<ProductModel> {
-                override fun onFailure(call: Call<ProductModel>, t: Throwable) {
-                    println("response failure")
-                    println(t.message)
+                Callback<Product> {
+                override fun onFailure(call: Call<Product>, t: Throwable) {
+                    onFailed(t.message.toString())
                 }
                 override fun onResponse(
-                    call: Call<ProductModel>,
-                    response: Response<ProductModel>
+                    call: Call<Product>,
+                    response: Response<Product>
                 ) {
                     if (response.code() == 200) {
-                        if (response.body()?.getStatusCode() == "000") {
-                            onResult(response.body()!!)
-//                            println("Data : " + response.body()!!.getDataProduct()!!.first().getProductDesc())
+                        if (response.body()?.statusCode == "000") {
+                            onSuccess(response.body()!!)
                         } else {
-                            println("statusCode != 200")
-                            println(response.body()?.getStatusDesc())
+                            onFailed(response.body()?.statusDesc.toString())
                         }
                     } else {
-                        println("response code != 200")
+                        onFailed(Constant.defaultErrorMessage)
                     }
                 }
             })
         }
 
         fun getListSubProduct(
+            phoneNumber: String,
             listOpr: ArrayList<String>,
-            onResult: (SubProduct) -> Unit
+            onSuccess: (SubProduct) -> Unit,
+            onFailed: (String) -> Unit
         ){
+            //create signature
             val sdf = SimpleDateFormat("yyyyMMdHHmmss")
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
@@ -93,12 +93,15 @@ class ProductRepository()  {
                 "phoneNumber" to phoneNumber,
                 "opr" to listOpr
             )
-            signature = Signature()
+            FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
-            val credential = Credentials.basic(userName, password)
 
+            //auth header
+            val credential = Credentials.basic(userName, password)
             var header : HashMap<String, String> = hashMapOf()
             header["Authorization"] = credential
+
+            //request body
             val requestBody : HashMap<String, Any> = hashMapOf()
             requestBody["requestType"] = "getDenom"
             requestBody["signature"] = signatureID
@@ -108,13 +111,11 @@ class ProductRepository()  {
             requestBody["tokenID"] = tokenID
             requestBody["opr"] = listOpr
 
-            val request = BaseService.getRetrofitInstance2().create(Api::class.java)
-
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getListSubProduct(requestBody).enqueue(object :
                 Callback<SubProduct> {
                 override fun onFailure(call: Call<SubProduct>, t: Throwable) {
-                    println("response failure")
-                    println(t.message)
+                    onFailed(t.message.toString())
                 }
                 override fun onResponse(
                     call: Call<SubProduct>,
@@ -122,23 +123,22 @@ class ProductRepository()  {
                 ) {
                     if (response.code() == 200) {
                         if (response.body()?.statusCode == "000") {
-                            onResult(response.body()!!)
-//                            println("Data : " + response.body()!!.getDataProduct()!!.first().getProductDesc())
+                            onSuccess(response.body()!!)
                         } else {
-                            println("statusCode != 200")
-                            println(response.body()?.statusCode)
+                            onFailed(response.body()?.statusDesc.toString())
                         }
                     } else {
-                        println("response code != 200")
+                       onFailed(Constant.defaultErrorMessage)
                     }
                 }
             })
         }
 
         fun getListOprProduct(
-            productCode:String,
-            onResult: (OprProduct) -> Unit
+            onSuccess: (OprProduct) -> Unit,
+            onFailed: (String) -> Unit
         ){
+            //create signature
             val sdf = SimpleDateFormat("yyyyMMdHHmmss")
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
@@ -146,9 +146,8 @@ class ProductRepository()  {
                 "reqDtime" to currentDate,
                 "transNumber" to currentDate
             )
-
-            signature = Signature()
-            val signatureID = signature.createSignature(mapJson, secretKey)
+            FinpaySDK.signature = Signature()
+            val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
             val credential = Credentials.basic(userName, password)
 
             var header : HashMap<String, String> = hashMapOf()
@@ -159,13 +158,11 @@ class ProductRepository()  {
             requestBody["reqDtime"] = currentDate
             requestBody["transNumber"] = currentDate
 
-            val request = BaseService.getRetrofitInstanceWithDynamicEndpoint(productCode).create(Api::class.java)
-
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getListOprProduct(requestBody).enqueue(object :
                 Callback<OprProduct> {
                 override fun onFailure(call: Call<OprProduct>, t: Throwable) {
-                    println("response failure")
-                    println(t.message)
+                    onFailed(t.message.toString())
                 }
                 override fun onResponse(
                     call: Call<OprProduct>,
@@ -173,14 +170,12 @@ class ProductRepository()  {
                 ) {
                     if (response.code() == 200) {
                         if (response.body()?.statusCode == "000") {
-                            onResult(response.body()!!)
-//                            println("Data : " + response.body()!!.getDataProduct()!!.first().getProductDesc())
+                            onSuccess(response.body()!!)
                         } else {
-                            println("statusCode != 200")
-                            println(response.body()?.statusCode)
+                            onFailed(response.body()?.statusDesc.toString())
                         }
                     } else {
-                        println("response code != 200")
+                        onFailed(Constant.defaultErrorMessage)
                     }
                 }
             })

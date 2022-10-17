@@ -34,7 +34,7 @@ interface Api {
     @POST("content/produk/")
     fun getListProduct(
         @Body body: HashMap<String, String>
-    ): Call<ProductModel>
+    ): Call<Product>
 
     @Headers("Content-Type:application/json")
     @POST("getDenom/")
@@ -49,10 +49,10 @@ interface Api {
     ): Call<OprProduct>
 
     @Headers("Content-Type:application/json")
-    @POST("getFee/")
+    @POST("getFee")
     fun getFee(
         @Body body: HashMap<String, String>
-    ): Call<ListFeePbob>
+    ): Call<GetFee>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
@@ -70,37 +70,37 @@ interface Api {
     @POST("api.php")
     fun transaction(
         @Body body: HashMap<String, String>
-    ): Call<TransactionModel>
+    ): Call<Transaction>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
     fun mutasiBallance(
         @Body body: HashMap<String, String>
-    ): Call<MutasiBallanceModel>
+    ): Call<MutasiBallance>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
     fun widgetProfile(
         @Body body: HashMap<String, String>
-    ): Call<WidgetProfileModel>
+    ): Call<WidgetProfile>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
     fun widgetTopUp(
         @Body body: HashMap<String, String>
-    ): Call<WidgetTopUpModel>
+    ): Call<WidgetTopUp>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
     fun regisAccMerchant(
         @Body body: HashMap<String, String>
-    ): Call<RegisAccMerchantModel>
+    ): Call<RegisAccMerchant>
 
     @Headers("Content-Type:application/json")
     @POST("api.php")
     fun unpair(
         @Body body: HashMap<String, String>
-    ): Call<UnpairModel>
+    ): Call<Unpair>
 
     @Headers("Content-Type:application/json")
     @POST("upgradeAccount")
@@ -136,5 +136,59 @@ interface Api {
     @POST("security/pin/auth")
     fun authPin(
         @Body body: HashMap<String, String>
-    ): Call<AuthPin>
+    ): Call<PinAuth>
+
+    @Headers("Content-Type:application/json")
+    @POST("transfer/sesama/inquiry")
+    fun transferOtherInquiry(
+        @Body body: HashMap<String, String>
+    ): Call<TransferOtherInquiry>
+
+    @Headers("Content-Type:application/json")
+    @POST("transfer/bank/inquiry")
+    fun transferBankInquiry(
+        @Body body: HashMap<String, String>
+    ): Call<TransferBankInquiry>
+
+    @Headers("Content-Type:application/json")
+    @POST("transfer/sesama/payment")
+    fun transferOtherPayment(
+        @Body body: HashMap<String, String>
+    ): Call<TransferOtherPayment>
+
+    @Headers("Content-Type:application/json")
+    @POST("transfer/bank/payment")
+    fun transferBankPayment(
+        @Body body: HashMap<String, String>
+    ): Call<TransferBankPayment>
+
+    @Headers("Content-Type:application/json")
+    @POST("content/bank")
+    fun getListBank(
+        @Body body: HashMap<String, String>
+    ): Call<Bank>
+
+    @Headers("Content-Type:application/json")
+    @POST("security/pin/reset")
+    fun resetPin(
+        @Body body: HashMap<String, String>
+    ): Call<PinReset>
+
+    @Headers("Content-Type:application/json")
+    @POST("security/pin/change/widget")
+    fun changePin(
+        @Body body: HashMap<String, String>
+    ): Call<PinChange>
+
+    @Headers("Content-Type:application/json")
+    @POST("widget/api/topup")
+    fun topup(
+        @Body body: HashMap<String, String>
+    ): Call<TopupInquiry>
+
+    @Headers("Content-Type:application/json")
+    @POST("checkProfile/")
+    fun checkProfile(
+        @Body body: HashMap<String, String>
+    ): Call<Profile>
 }

@@ -10,10 +10,13 @@ import android.widget.TextView
 import android.widget.Toast
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.corekit.model.Customer
+import lib.finpay.sdk.uikit.constant.PinType
 import lib.finpay.sdk.uikit.utilities.PinTypeKeys
 import lib.finpay.sdk.uikit.view.AppActivity
+import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailActivity
 
 class PinActivity : AppCompatActivity() {
@@ -60,7 +63,7 @@ class PinActivity : AppCompatActivity() {
                     if(pinType == "login") {
                         val intent = Intent(this, AppActivity::class.java)
                         startActivity(intent)
-                    } else if(pinType == "paymentQris") {
+                    } else if(pinType == PinType.paymentQRIS) {
                         paymenQris()
                     } else if(pinType == "otp_connect") {
                         otpConnectAccount()
@@ -108,12 +111,27 @@ class PinActivity : AppCompatActivity() {
         val amount: String? by lazy { intent.getStringExtra("amount") }
         val amountTips: String? by lazy { intent.getStringExtra("amountTips") }
         val reffFlag: String? by lazy { intent.getStringExtra("reffFlag") }
-        val pinToken: String? by lazy { intent.getStringExtra("pinToken") }
+//        val pinToken: String? by lazy { intent.getStringExtra("pinToken") }
         progressDialog.setTitle("Mohon Menunggu")
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        if(pinToken == pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5]) {
+//        FinpaySDK.authPin(
+//    this@PinActivity,
+//            amount!!, ProductCode.QRIS,{
+//                    val intent = Intent(this@PinActivity, PaymentActivity::class.java)
+//                    intent.putExtra("sof", "mc")
+//                    intent.putExtra("amount", "0")
+//                    intent.putExtra("amountTips", "0")
+//                    intent.putExtra("reffFlag", reffFlag)
+//                    intent.putExtra("widgetUrl", it.widgetURL)
+//                    startActivity(intent)
+//                }, {
+//                    progressDialog.dismiss()
+//                    println(it)
+//                    Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
+//                }
+//            )
             FinpaySDK.qrisPayment(
                 this@PinActivity,
                 sof!!,
@@ -130,9 +148,6 @@ class PinActivity : AppCompatActivity() {
                     Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
                 }
             )
-        } else {
-            Toast.makeText(this@PinActivity, "Pin yang Anda masukan salah", Toast.LENGTH_LONG)
-        }
     }
 
     fun otpConnectAccount() {

@@ -60,6 +60,36 @@ class DialogUtils {
             val title = view.findViewById<TextView>(R.id.txtTitle)
             val desc = view.findViewById<TextView>(R.id.txtDesc)
             val button = view.findViewById<Button>(R.id.btnDismiss)
+            img.setImageDrawable(context.resources.getDrawable(R.drawable.ic_failed))
+            if(titleDialog == "") {
+                title.visibility = View.GONE
+            } else {
+                title.visibility = View.VISIBLE
+                title.text = titleDialog
+            }
+            desc.text = descriptionDialog
+            builder.setView(view)
+            button.setOnClickListener {
+                builder.dismiss()
+            }
+            builder.setCanceledOnTouchOutside(false)
+            builder.show()
+        }
+
+        fun showDialogSuccess(
+            context: Context,
+            titleDialog: String,
+            descriptionDialog: String
+        ) {
+            val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val builder = AlertDialog.Builder(context,R.style.CustomAlertDialog).create()
+            val view = layoutInflater.inflate(R.layout.dialog_alert, null)
+            val img = view.findViewById<ImageView>(R.id.img)
+            val title = view.findViewById<TextView>(R.id.txtTitle)
+            val desc = view.findViewById<TextView>(R.id.txtDesc)
+            val button = view.findViewById<Button>(R.id.btnDismiss)
+
+            img.setImageDrawable(context.resources.getDrawable(R.drawable.ic_success))
             if(titleDialog == "") {
                 title.visibility = View.GONE
             } else {

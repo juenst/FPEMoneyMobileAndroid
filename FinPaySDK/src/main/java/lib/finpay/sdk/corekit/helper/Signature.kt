@@ -1,7 +1,5 @@
 package com.example.testing
 
-import lib.finpay.sdk.corekit.constant.Constant
-import lib.finpay.sdk.corekit.helper.PrefHelper
 import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
