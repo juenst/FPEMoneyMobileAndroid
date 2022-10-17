@@ -51,34 +51,31 @@ class PulsaDataActivity : AppCompatActivity() {
             intent.type = CommonDataKinds.Phone.CONTENT_TYPE
             startActivityForResult(intent, 1)
         }
-
-
-
-
-        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-            println("masuk sini 2")
-            if (requestCode == 1 && resultCode == RESULT_OK) {
-                var cursor: Cursor? = null
-                try {
-                    val uri: Uri? = data.data
-                    cursor = contentResolver.query(
-                        uri!!,
-                        arrayOf(CommonDataKinds.Phone.NUMBER),
-                        null,
-                        null,
-                        null
-                    )
-                    if (cursor != null && cursor.moveToNext()) {
-                        val phone: String = cursor.getString(0)
-                        // Do something with phone
-                        println("masuk sini")
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-        }
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+//        println("masuk sini 2")
+//        if (requestCode == 1 && resultCode == RESULT_OK) {
+//            var cursor: Cursor? = null
+//            try {
+//                val uri: Uri? = data.data
+//                cursor = contentResolver.query(
+//                    uri!!,
+//                    arrayOf(CommonDataKinds.Phone.NUMBER),
+//                    null,
+//                    null,
+//                    null
+//                )
+//                if (cursor != null && cursor.moveToNext()) {
+//                    val phone: String = cursor.getString(0)
+//                    // Do something with phone
+//                    println("masuk sini")
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
 
     fun getDenom() {
         FinpaySDK.getListSubProduct(

@@ -21,7 +21,7 @@ class BaseServices {
         }
 
         val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(
-        BasicAuthInterceptor(userName, password)
+        BasicAuthInterceptor("MT77764DKM83N", "YJV3AM0y")
         ).apply {
             this.addInterceptor(interceptor)
         }.build()
