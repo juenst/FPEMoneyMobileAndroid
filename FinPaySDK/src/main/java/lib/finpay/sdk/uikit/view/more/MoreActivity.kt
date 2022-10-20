@@ -58,6 +58,8 @@ class MoreActivity : AppCompatActivity() {
         val btnFinpay = findViewById<LinearLayout>(R.id.btnFinpay)
         val btnAsuransi = findViewById<LinearLayout>(R.id.btnAsuransi)
 
+        dataProduct = Product()
+
         btnFinpay.setOnClickListener {
             val intent = Intent(this, FinpayActivity::class.java)
             this.startActivity(intent)

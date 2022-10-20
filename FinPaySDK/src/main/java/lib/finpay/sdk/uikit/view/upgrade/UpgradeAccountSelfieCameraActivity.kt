@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import lib.finpay.sdk.R
 import lib.finpay.sdk.uikit.constant.Constant
+import lib.finpay.sdk.uikit.utilities.Utils
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,9 +36,8 @@ class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
     lateinit var progressDialog: ProgressDialog
     var activity: Activity? = null
 
-    val imgResultIdentity: String? by lazy {
-        intent.getStringExtra("imgResultIdentity")
-    }
+    val imgResultIdentity: String? by lazy { intent.getStringExtra("imgResultIdentity") }
+    val imgResultIdentityBase64: String? by lazy { intent.getStringExtra("imgResultIdentityBase64") }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,10 +93,12 @@ class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
-                    progressDialog.dismiss()
                     val intent = Intent(this@UpgradeAccountSelfieCameraActivity, UpgradeAccountSelfieResultActivity::class.java)
                     intent.putExtra("imgResultSelfie", "${saveUri}")
+//                    intent.putExtra("imgResultSelfieBase64", Utils.encodeImage(saveUri.toString()))
                     intent.putExtra("imgResultIdentity", imgResultIdentity)
+//                    intent.putExtra("imgResultIdentityBase64", imgResultIdentityBase64)
+                    progressDialog.dismiss()
                     startActivity(intent)
                     this@UpgradeAccountSelfieCameraActivity.finish()
                 }

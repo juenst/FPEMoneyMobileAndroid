@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
@@ -25,7 +26,7 @@ class DialogUtils {
         ) {
             val dialog = BottomSheetDialog(context)
             dialog.setContentView(R.layout.dialog_connect_account)
-            val btnConnect = dialog.findViewById<Button>(R.id.btnConnect)
+            val btnConnect = dialog.findViewById<CardView>(R.id.btnConnect)
 
             btnConnect?.setOnClickListener {
                 FinpaySDKUI.connectAccount(context, credential)

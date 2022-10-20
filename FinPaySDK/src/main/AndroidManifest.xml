@@ -41,6 +41,9 @@
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataActivity"
             android:exported="false" />
         <activity
+            android:name=".uikit.view.ppob.pulsa_data.PulsaDataResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".uikit.view.ppob.AsuransiActivity"
             android:exported="false"
             android:hardwareAccelerated="false"

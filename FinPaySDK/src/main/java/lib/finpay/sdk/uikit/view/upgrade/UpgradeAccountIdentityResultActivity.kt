@@ -18,9 +18,8 @@ class UpgradeAccountIdentityResultActivity : AppCompatActivity() {
     private lateinit var imgResult: ImageView
     var activity: Activity? = null
 
-    val imgResultIdentity: String? by lazy {
-        intent.getStringExtra("imgResultIdentity")
-    }
+    val imgResultIdentity: String? by lazy { intent.getStringExtra("imgResultIdentity") }
+    val imgResultIdentityBase64: String? by lazy { intent.getStringExtra("imgResultIdentityBase64") }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +40,7 @@ class UpgradeAccountIdentityResultActivity : AppCompatActivity() {
         btnNext.setOnClickListener{
             val intent = Intent(this, UpgradeAccountSelfieGuideActivity::class.java)
             intent.putExtra("imgResultIdentity", imgResultIdentity)
+            intent.putExtra("imgResultIdentityBase64", imgResultIdentityBase64)
             startActivity(intent)
         }
 

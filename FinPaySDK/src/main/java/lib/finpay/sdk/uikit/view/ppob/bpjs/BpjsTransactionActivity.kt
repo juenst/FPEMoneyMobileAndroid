@@ -1,15 +1,28 @@
 package lib.finpay.sdk.uikit.view.ppob.bpjs
 
+import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import lib.finpay.sdk.uikit.utilities.ButtonUtils
+import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.utilities.Utils
 
 class BpjsTransactionActivity : AppCompatActivity() {
+    lateinit var txtNomorPelanggan: EditText
+    lateinit var btnContact: ImageView
+    lateinit var btnNext: Button
     lateinit var btnChoosePeriodeTime: LinearLayout
     lateinit var periodeTime:TextView
 
@@ -19,25 +32,44 @@ class BpjsTransactionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bpjs_transaction)
         supportActionBar!!.hide()
 
+        txtNomorPelanggan = findViewById(R.id.txtNomorPelanggan)
+        btnContact = findViewById(R.id.btnContact)
+        btnNext = findViewById(R.id.btnNext)
         btnChoosePeriodeTime = findViewById(R.id.choosePeriodeTime)
         periodeTime = findViewById(R.id.selectedPeriodeMonth)
 
-        btnChoosePeriodeTime.setOnClickListener{
-            val dialog = BottomSheetDialog(this)
-            val monthArray = arrayOf(
-                "Oktober 2022", "November 2022", "Desember 2022", "Januari 2023",
-                "Februari 2023", "Maret 2023", "April 2023", "Mei 2023","Juni 2023","Juli 2023",
-                "Agustus 2023","September 2023"
-            )
+        btnContact.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
+            startActivityForResult(intent, 1)
+        }
+    }
 
-            val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog_bpjs, null)
-//            val adapter: ArrayAdapter<*> = ArrayAdapter(
-//                this,
-//                R.layout.activity_listview, monthArray
-//            )
-            dialog.setCancelable(true)
-            dialog.setContentView(view)
-            dialog.show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            var cursor: Cursor? = null
+            try {
+                val uri: Uri? = data!!.data
+                cursor = contentResolver.query(
+                    uri!!,
+                    arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
+                    null,
+                    null,
+                    null
+                )
+                if (cursor != null && cursor.moveToNext()) {
+                    val value: String = cursor.getString(0)
+                    if(value.length>=9) {
+                        txtNomorPelanggan.setText(value)
+                        btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
+                        ButtonUtils.checkButtonState(btnNext)
+                    } else {
+                        DialogUtils.showDialogError(this@BpjsTransactionActivity, "", "Nomor telepon minimal 9 karakter")
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

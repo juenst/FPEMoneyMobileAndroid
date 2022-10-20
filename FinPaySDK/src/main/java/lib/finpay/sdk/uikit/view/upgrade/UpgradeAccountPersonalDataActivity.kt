@@ -18,6 +18,7 @@ import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.utilities.Utils
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -32,13 +33,10 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
     var activity: Activity? = null
     lateinit var progressDialog: ProgressDialog
 
-    val imgResultSelfie: String? by lazy {
-        intent.getStringExtra("imgResultSelfie")
-    }
-
-    val imgResultIdentity: String? by lazy {
-        intent.getStringExtra("imgResultIdentity")
-    }
+    val imgResultSelfie: String? by lazy { intent.getStringExtra("imgResultSelfie") }
+    val imgResultIdentity: String? by lazy { intent.getStringExtra("imgResultIdentity") }
+    val imgResultIdentityBase64: String? by lazy { intent.getStringExtra("imgResultIdentityBase64") }
+    val imgResultSelfieBase64: String? by lazy { intent.getStringExtra("imgResultSelfieBase64") }
 
     private val resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -82,13 +80,13 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
 
-            var imageIdentity: String = encodeImage(imgResultIdentity!!)!!
-            var imageSelfie: String = encodeImage(imgResultSelfie!!)!!
+            var imageIdentity: String = Utils.encodeImage(imgResultIdentity!!)!!
+            var imageSelfie: String = Utils.encodeImage(imgResultSelfie!!)!!
 
             FinpaySDK.upgradeAccount(
                 this@UpgradeAccountPersonalDataActivity,
-                imageIdentity,
-                imageSelfie,
+                imageIdentity,//imgResultIdentityBase64!!,
+                imageSelfie,//imgResultSelfieBase64!!,
                 txtMotherName.text.toString(),
                 txtKK.text.toString(),
                 txtNationality.text.toString(),
@@ -130,18 +128,6 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
         }
     }
 
-    private fun encodeImage(path: String): String? {
-        val imgFile = File(path.replace("file://", ""))
-        if (imgFile.exists()) {
-            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            myBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
-            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
-            val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
-            return encoded
-        }
-        return ""
-    }
 
     fun checkForm() {
         if (

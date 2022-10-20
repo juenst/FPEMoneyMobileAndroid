@@ -3,12 +3,19 @@ package lib.finpay.sdk.uikit.utilities
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.DisplayMetrics
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.ln
+import kotlin.math.pow
 
 object Utils {
     const val CARD_TYPE_VISA = "VISA"
@@ -174,5 +181,89 @@ object Utils {
         return this.resources.openRawResource(file).bufferedReader().use {
             it.readText()
         }
+    }
+
+    fun encodeImage(path: String): String? {
+        val imgFile = File(path.replace("file://", ""))
+        if (imgFile.exists()) {
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            myBitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream)
+            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+            val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            return encoded
+        }
+        return ""
+    }
+
+    fun validateMobileNumber(phoneNumber: String): String {
+        val regex = Regex("[^0-9]")
+       var number:String = regex.replace(phoneNumber, "")
+        return number
+    }
+
+    fun getProviderMobile(phoneNumber: String): String {
+        var provider: String = ""
+        if(phoneNumber.substring(0,1) == "62") {
+            phoneNumber.replace("62", "0")
+        }
+        if(
+            phoneNumber.substring(0,3) == "0817" ||
+            phoneNumber.substring(0,3) == "0818" ||
+            phoneNumber.substring(0,3) == "0819" ||
+            phoneNumber.substring(0,3) == "0859" ||
+            phoneNumber.substring(0,3) == "0877" ||
+            phoneNumber.substring(0,3) == "0878"
+        ) {
+            provider = "XL"
+        } else if(
+            phoneNumber.substring(0,3) == "0811" ||
+            phoneNumber.substring(0,3) == "0812" ||
+            phoneNumber.substring(0,3) == "0813" ||
+            phoneNumber.substring(0,3) == "0852" ||
+            phoneNumber.substring(0,3) == "0853"
+        ) {
+            provider = "TELKOMSEL"
+        } else if(
+            phoneNumber.substring(0,3) == "0814" ||
+            phoneNumber.substring(0,3) == "0815" ||
+            phoneNumber.substring(0,3) == "0816" ||
+            phoneNumber.substring(0,3) == "0855" ||
+            phoneNumber.substring(0,3) == "0856" ||
+            phoneNumber.substring(0,3) == "0857" ||
+            phoneNumber.substring(0,3) == "0858"
+        ) {
+            provider = "INDOSAT"
+        } else if(
+            phoneNumber.substring(0,3) == "0831" ||
+            phoneNumber.substring(0,3) == "0832" ||
+            phoneNumber.substring(0,3) == "0838"
+        ) {
+            provider = "AXIS"
+        } else if (
+            phoneNumber.substring(0,3) == "0898" ||
+            phoneNumber.substring(0,3) == "0899"
+        ){
+            provider = "THREE"
+        } else if (
+            phoneNumber.substring(0,3) == "0888" ||
+            phoneNumber.substring(0,3) == "0889" ||
+            phoneNumber.substring(0,3) == "0881" ||
+            phoneNumber.substring(0,3) == "0887"
+        ){
+            provider = "SMARTFREN"
+        }else {
+            provider = "UNKNOWN"
+        }
+
+        return provider
+    }
+
+    fun getFormatedNumber(count: Long): String {
+        if (count < 1000) return "" + count
+        val exp = (ln(count.toDouble()) / ln(1000.0)).toInt()
+        val number: String = String.format("%.1f %c", count / 1000.0.pow(exp.toDouble()), "kMGTPE"[exp - 1])
+        val split = number.split(",")
+        return split[0]+"rb"
     }
 }

@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import lib.finpay.sdk.R
 import lib.finpay.sdk.uikit.constant.Constant
+import lib.finpay.sdk.uikit.utilities.Utils
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -90,9 +91,10 @@ class UpgradeAccountIdentityCameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
-                    progressDialog.dismiss()
                     val intent = Intent(this@UpgradeAccountIdentityCameraActivity, UpgradeAccountIdentityResultActivity::class.java)
                     intent.putExtra("imgResultIdentity", "${saveUri}")
+                    //intent.putExtra("imgResultIdentityBase64", Utils.encodeImage(saveUri.toString()))
+                    progressDialog.dismiss()
                     startActivity(intent)
                     this@UpgradeAccountIdentityCameraActivity.finish()
                 }
