@@ -18,7 +18,7 @@ class ChooseBpjsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choose_bpjs)
+        setContentView(R.layout.activity_bpjs_choose)
         supportActionBar!!.hide()
 
         btnBack = findViewById(R.id.btnBack)
@@ -47,7 +47,7 @@ class ChooseBpjsActivity : AppCompatActivity() {
 
         listBPJS.setOnItemClickListener { parent, view, position, id ->
             val myItem = parent.getItemAtPosition(position) as DetailProductModel
-            val intent = Intent(this, BpjsTransactionActivity::class.java)
+            val intent = Intent(this, BpjsKesehatanActivity::class.java)
             startActivity(intent)
         }
 

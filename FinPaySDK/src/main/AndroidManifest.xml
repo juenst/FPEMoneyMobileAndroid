@@ -32,7 +32,7 @@
             android:name=".uikit.view.ppob.bpjs.ChooseBpjsActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.ppob.bpjs.BpjsTransactionActivity"
+            android:name=".uikit.view.ppob.bpjs.BpjsKesehatanActivity"
             android:exported="false" />
         <activity
             android:name=".uikit.view.ppob.telkom.TelkomTransactionActivity"

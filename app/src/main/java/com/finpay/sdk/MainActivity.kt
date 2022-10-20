@@ -11,11 +11,8 @@ import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.FinpaySDKUI
-import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
-import lib.finpay.sdk.uikit.view.pin.PinActivity
-import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
-import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -55,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         btnTransfer.setOnClickListener {
 //            FinpaySDKUI.openTransfer(this@MainActivity, credential())
-            val intent = Intent(this, PulsaDataActivity::class.java)
+            val intent = Intent(this, BpjsKesehatanActivity::class.java)
             this.startActivity(intent)
         }
 
