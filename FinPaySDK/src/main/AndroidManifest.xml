@@ -222,6 +222,10 @@
             android:name=".uikit.view.payment.PaymentActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.pln.PLNActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
     </application>
 
 </manifest>

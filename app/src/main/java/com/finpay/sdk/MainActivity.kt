@@ -13,6 +13,7 @@ import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
+import lib.finpay.sdk.uikit.view.ppob.pln.PLNActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         btnTransfer.setOnClickListener {
 //            FinpaySDKUI.openTransfer(this@MainActivity, credential())
-            val intent = Intent(this, BpjsKesehatanActivity::class.java)
+            val intent = Intent(this, PLNActivity::class.java)
             this.startActivity(intent)
         }
 

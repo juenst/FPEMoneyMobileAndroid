@@ -54,8 +54,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:background="@drawable/shape_edittext_outline"
-            android:padding="16dp"
+            android:padding="10dp"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_height="wrap_content">
 
             <EditText
@@ -65,6 +66,7 @@
                 android:textColor="@color/black"
                 android:digits="0123456789"
                 android:inputType="phone"
+                android:textSize="14sp"
                 android:layout_weight="1"
                 android:background="@null" />
 
@@ -78,7 +80,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="24dp"/>
+            android:layout_height="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,14 +95,16 @@
             android:id="@+id/choosePeriodeTime"
             android:layout_width="match_parent"
             android:background="@drawable/shape_edittext_outline"
-            android:padding="16dp"
+            android:padding="10dp"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/selectedPeriodeMonth"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
+                android:textSize="14sp"
                 android:layout_height="wrap_content"
                 android:text="Pilih Periode"/>
 
@@ -111,7 +115,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_chevron_right"
+                android:src="@drawable/ic_chevron_down"
                 app:tint="#00ACBA" />
 
         </LinearLayout>

@@ -12,6 +12,7 @@ import androidx.core.widget.doOnTextChanged
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.corekit.model.DataSubProduct
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
@@ -44,6 +45,12 @@ class BpjsKesehatanActivity : AppCompatActivity() {
         txtPeriode = findViewById(R.id.selectedPeriodeMonth)
         progressDialog = ProgressDialog(this@BpjsKesehatanActivity)
 
+        ButtonUtils.checkButtonState(btnNext)
+        txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
+            btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9 && periodeTime != "")
+            ButtonUtils.checkButtonState(btnNext)
+        }
+
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9 && periodeTime != "")
             ButtonUtils.checkButtonState(btnNext)
@@ -66,11 +73,12 @@ class BpjsKesehatanActivity : AppCompatActivity() {
             progressDialog.show()
             FinpaySDK.ppobInquiry(
                 this@BpjsKesehatanActivity,
-                "",
-                "",
+                txtNomorPelanggan.text.toString(),
+                ProductCode.BPJS_KESEHATAN,
                 "", {
                     progressDialog.dismiss()
                 }, {
+                    progressDialog.dismiss()
                     DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", it)
                 }
             )
@@ -97,7 +105,7 @@ class BpjsKesehatanActivity : AppCompatActivity() {
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9 && periodeTime != "")
                         ButtonUtils.checkButtonState(btnNext)
                     } else {
-                        DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", "Nomor telepon minimal 9 karakter")
+                        DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", "Format Nomor tidak sesuai")
                     }
                 }
             } catch (e: Exception) {
