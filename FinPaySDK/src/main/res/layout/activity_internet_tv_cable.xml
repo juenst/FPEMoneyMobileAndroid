@@ -29,7 +29,7 @@
                 android:textFontWeight="600"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="INTERNET &amp; TV KABEL" />
+                android:text="Internet &amp; TV Kabel" />
 
         </FrameLayout>
 
@@ -42,10 +42,11 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/bpjsMenu1"
+            android:id="@+id/lnIndihome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
             android:padding="16dp">
 
             <ImageView
@@ -72,10 +73,11 @@
             android:background="#dedede"/>
 
         <LinearLayout
-            android:id="@+id/bpjsMenu2"
+            android:id="@+id/lnMNCVision"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
             android:padding="16dp">
 
             <ImageView

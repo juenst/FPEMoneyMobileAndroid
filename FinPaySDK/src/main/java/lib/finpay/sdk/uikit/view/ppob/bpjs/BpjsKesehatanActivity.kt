@@ -51,11 +51,6 @@ class BpjsKesehatanActivity : AppCompatActivity() {
             ButtonUtils.checkButtonState(btnNext)
         }
 
-        txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
-            btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9 && periodeTime != "")
-            ButtonUtils.checkButtonState(btnNext)
-        }
-
         btnContact.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
             intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE

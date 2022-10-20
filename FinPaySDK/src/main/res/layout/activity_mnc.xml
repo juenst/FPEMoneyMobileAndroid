@@ -25,12 +25,12 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textFontWeight="600"
+                android:layout_height="match_parent"
                 android:gravity="center"
+                android:text="MNC Vision"
                 android:textColor="@color/white"
-                android:text="BPJS Kesehatan" />
+                android:textFontWeight="600"
+                android:textSize="18sp" />
 
         </FrameLayout>
 
@@ -78,49 +78,6 @@
                 android:src="@drawable/ic_contact" />
 
         </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bayar Hingga Periode" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp"/>
-
-        <LinearLayout
-            android:id="@+id/choosePeriodeTime"
-            android:layout_width="match_parent"
-            android:background="@drawable/shape_edittext_outline"
-            android:padding="10dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/selectedPeriodeMonth"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:layout_height="wrap_content"
-                android:text="Pilih Periode"/>
-
-            <Space
-                android:layout_width="12dp"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_chevron_down"
-                app:tint="#00ACBA" />
-
-        </LinearLayout>
-
 
     </LinearLayout>
 

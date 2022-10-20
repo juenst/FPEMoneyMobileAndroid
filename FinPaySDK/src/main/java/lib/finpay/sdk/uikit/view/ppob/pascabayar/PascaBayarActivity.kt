@@ -1,67 +1,46 @@
-package lib.finpay.sdk.uikit.view.ppob.pdam
+package lib.finpay.sdk.uikit.view.ppob.pascabayar
 
 import android.app.ProgressDialog
-import android.os.Bundle
-import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
-import lib.finpay.sdk.R
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.provider.ContactsContract
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.*
 import androidx.core.widget.doOnTextChanged
+import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
-import lib.finpay.sdk.corekit.model.DetailProductModel
-import lib.finpay.sdk.corekit.model.Product
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
-import lib.finpay.sdk.uikit.view.upgrade.CitizenshipActivity
-import java.util.*
 
-class PDAMActivity : AppCompatActivity() {
+class PascaBayarActivity : AppCompatActivity() {
+    lateinit var txtNomorPelanggan: EditText
+    lateinit var btnContact: ImageView
+    lateinit var btnNext: Button
     lateinit var btnBack: ImageView
-    private lateinit var txtNomorPelanggan: EditText
-    private lateinit var btnNext: Button
-    private lateinit var btnContact: ImageView
-    private lateinit var chooseWilayah: LinearLayout
-    private lateinit var selectedWilayah: TextView
     lateinit var progressDialog: ProgressDialog
-    var region: String = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pdam)
+        setContentView(R.layout.activity_pascabayar)
         supportActionBar!!.hide()
 
-        btnBack = findViewById(R.id.btnBack)
-        btnNext = findViewById(R.id.btnNext)
-        btnContact = findViewById(R.id.btnContact)
         txtNomorPelanggan = findViewById(R.id.txtNomorPelanggan)
-        chooseWilayah = findViewById(R.id.chooseWilayah)
-        selectedWilayah = findViewById(R.id.selectedWilayah)
-        progressDialog = ProgressDialog(this@PDAMActivity)
-
-        btnBack.setOnClickListener {
-            onBackPressed()
-        }
-
-        chooseWilayah.setOnClickListener {
-            val intent = Intent(this, PDAMSearchActivity::class.java)
-            startActivityForResult(intent, 2)
-        }
+        btnContact = findViewById(R.id.btnContact)
+        btnNext = findViewById(R.id.btnNext)
+        btnBack = findViewById(R.id.btnBack)
+        progressDialog = ProgressDialog(this@PascaBayarActivity)
 
         ButtonUtils.checkButtonState(btnNext)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
-            btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9 && region != "")
+            btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9)
             ButtonUtils.checkButtonState(btnNext)
+        }
+
+        btnBack.setOnClickListener {
+            onBackPressed()
         }
 
         btnContact.setOnClickListener {
@@ -76,14 +55,14 @@ class PDAMActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                this@PDAMActivity,
+                this@PascaBayarActivity,
                 txtNomorPelanggan.text.toString(),
-                ProductCode.PDAM,
+                ProductCode.TELKOM,
                 "", {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@PDAMActivity, "", it)
+                    DialogUtils.showDialogError(this@PascaBayarActivity, "", it)
                 }
             )
         }
@@ -105,21 +84,14 @@ class PDAMActivity : AppCompatActivity() {
                     val value: String = cursor.getString(0)
                     if(value.length>=9) {
                         txtNomorPelanggan.setText(value)
-                        btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9 && region != "")
+                        btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
                         ButtonUtils.checkButtonState(btnNext)
                     } else {
-                        DialogUtils.showDialogError(this@PDAMActivity, "", "Format Nomor tidak sesuai")
+                        DialogUtils.showDialogError(this@PascaBayarActivity, "", "Format Nomor tidak sesuai")
                     }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-            }
-        } else if(requestCode == 2 && resultCode == RESULT_OK) {
-            data?.getStringExtra("pdamSelectedResult")?.let {
-                selectedWilayah.setText(it.uppercase())
-                region = it.uppercase()
-                btnNext.isEnabled = (!txtNomorPelanggan.text.isNullOrBlank() && txtNomorPelanggan.text.length>=9 && region != "")
-                ButtonUtils.checkButtonState(btnNext)
             }
         }
     }

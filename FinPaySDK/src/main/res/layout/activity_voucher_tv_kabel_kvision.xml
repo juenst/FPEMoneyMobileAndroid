@@ -30,7 +30,7 @@
                 android:textFontWeight="600"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="BPJS Kesehatan" />
+                android:text="K-Vision" />
 
         </FrameLayout>
 
@@ -86,14 +86,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bayar Hingga Periode" />
+            android:text="Voucher Dipilih" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="12dp"/>
 
         <LinearLayout
-            android:id="@+id/choosePeriodeTime"
+            android:id="@+id/chooseVoucher"
             android:layout_width="match_parent"
             android:background="@drawable/shape_edittext_outline"
             android:padding="10dp"
@@ -102,12 +102,12 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/selectedPeriodeMonth"
+                android:id="@+id/selectedVoucher"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:text="Pilih Periode"/>
+                android:text="Pilih voucher"/>
 
             <Space
                 android:layout_width="12dp"

@@ -1,6 +1,5 @@
 package lib.finpay.sdk.uikit.view.more
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
@@ -22,7 +21,7 @@ import lib.finpay.sdk.uikit.view.ppob.AsuransiActivity
 import lib.finpay.sdk.uikit.view.ppob.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
 import lib.finpay.sdk.uikit.view.ppob.state.revenue.StateRevenueActivity
-import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomTransactionActivity
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
 import lib.finpay.sdk.uikit.utilities.extension.toJson
 
@@ -202,7 +201,7 @@ class MoreActivity : AppCompatActivity() {
                             it.productDesc!!.contains("Telkom")
                         } as ArrayList<DetailProductModel>
                     println("dataTelkom : " + listRandom.toString())
-                    val intent = Intent(this, TelkomTransactionActivity::class.java)
+                    val intent = Intent(this, TelkomActivity::class.java)
                     intent.putExtra("dataTelkom", listRandom.toJson())
                     startActivity(intent)
                 }

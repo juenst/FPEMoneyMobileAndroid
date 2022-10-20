@@ -17,10 +17,10 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".uikit.view.ppob.internettvkabel.InternetCableTransactionActivity"
+            android:name=".uikit.view.ppob.internettvcable.InternetCableTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.ppob.internettvkabel.ChooseInternetCableActivity"
+            android:name=".uikit.view.ppob.internettvcable.InternetTvCableActivity"
             android:exported="false" />
         <activity
             android:name=".uikit.view.ppob.instalment.ChooseInstalmentActivity"
@@ -35,7 +35,7 @@
             android:name=".uikit.view.ppob.bpjs.BpjsKesehatanActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.ppob.telkom.TelkomTransactionActivity"
+            android:name=".uikit.view.ppob.telkom.TelkomActivity"
             android:exported="false" />
         <activity
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataActivity"
@@ -212,7 +212,10 @@
         <activity
             android:name=".uikit.view.ppob.pdam.PDAMActivity"
             android:exported="false"
-            android:label="Voucher TV Kabel"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.pdam.PDAMSearchActivity"
+            android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.voucher.VoucherDealsActivity"
