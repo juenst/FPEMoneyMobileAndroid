@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
@@ -42,6 +43,11 @@ class BpjsKesehatanActivity : AppCompatActivity() {
         btnChoosePeriodeTime = findViewById(R.id.choosePeriodeTime)
         txtPeriode = findViewById(R.id.selectedPeriodeMonth)
         progressDialog = ProgressDialog(this@BpjsKesehatanActivity)
+
+        txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
+            btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9 && periodeTime != "")
+            ButtonUtils.checkButtonState(btnNext)
+        }
 
         btnContact.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
@@ -88,7 +94,7 @@ class BpjsKesehatanActivity : AppCompatActivity() {
                     val value: String = cursor.getString(0)
                     if(value.length>=9) {
                         txtNomorPelanggan.setText(value)
-                        btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
+                        btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9 && periodeTime != "")
                         ButtonUtils.checkButtonState(btnNext)
                     } else {
                         DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", "Nomor telepon minimal 9 karakter")
@@ -119,6 +125,8 @@ class BpjsKesehatanActivity : AppCompatActivity() {
             val selectedItem = adapter.getItemAtPosition(position) as String
             txtPeriode.text = selectedItem
             periodeTime = selectedItem
+            btnNext.isEnabled = (!txtNomorPelanggan.text.isNullOrBlank() && txtNomorPelanggan.text.length>=9 && periodeTime != "")
+            ButtonUtils.checkButtonState(btnNext)
             dialog.dismiss()
         }
         dialog.show()
