@@ -55,8 +55,6 @@ class PulsaDataActivity : AppCompatActivity() {
         }
     }
 
-    //0000073482748 --> nomor bpjs widi
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             var cursor: Cursor? = null

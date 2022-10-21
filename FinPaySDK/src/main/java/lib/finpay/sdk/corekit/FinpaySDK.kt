@@ -1,7 +1,7 @@
 package lib.finpay.sdk.corekit
 
 import android.content.Context
-import com.example.testing.Signature
+import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.*
 import lib.finpay.sdk.corekit.repository.*
@@ -152,11 +152,8 @@ public class FinpaySDK {
             })
         }
 
-        fun getListSubProduct(context: Context, phoneNumber: String, onSuccess: (SubProduct) -> Unit, onFailed: (String) -> Unit){
+        fun getListSubProduct(context: Context, phoneNumber: String, listOpr: ArrayList<String>, onSuccess: (SubProduct) -> Unit, onFailed: (String) -> Unit){
             init(context)
-            val listOpr: ArrayList<String>
-            listOpr = ArrayList()
-            listOpr.add("XL")
             ProductRepository.getListSubProduct(
                 phoneNumber,
                 listOpr, {

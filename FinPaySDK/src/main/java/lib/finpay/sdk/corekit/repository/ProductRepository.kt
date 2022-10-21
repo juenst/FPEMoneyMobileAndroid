@@ -1,6 +1,6 @@
 package lib.finpay.sdk.corekit.repository
 
-import com.example.testing.Signature
+import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.OprProduct
@@ -9,6 +9,7 @@ import lib.finpay.sdk.corekit.model.SubProduct
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
+import lib.finpay.sdk.uikit.utilities.extension.toJson
 import okhttp3.Credentials
 import retrofit2.Call
 import retrofit2.Callback
@@ -91,8 +92,10 @@ class ProductRepository()  {
                 "transNumber" to currentDate,
                 "tokenID" to tokenID,
                 "phoneNumber" to phoneNumber,
-                "opr" to listOpr
+                "opr" to listOpr.toJson()
             )
+            println("masuk sini")
+            println(mapJson)
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
 

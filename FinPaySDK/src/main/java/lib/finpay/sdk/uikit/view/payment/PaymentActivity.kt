@@ -3,7 +3,6 @@ package lib.finpay.sdk.uikit.view.payment
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
-import lib.finpay.sdk.uikit.constant.PinType
+import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailActivity
 
 
@@ -22,11 +21,16 @@ class PaymentActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
     lateinit var toolbar: Toolbar
     val widgetUrl: String? by lazy { intent.getStringExtra("widgetURL") }
-    val pinType: String? by lazy { intent.getStringExtra("pinType") }
+    val paymentType: String? by lazy { intent.getStringExtra("paymentType") }
     val sof: String? by lazy { intent.getStringExtra("sof") }
     val amount: String? by lazy { intent.getStringExtra("amount") }
     val amountTips: String? by lazy { intent.getStringExtra("amountTips") }
     val reffFlag: String? by lazy { intent.getStringExtra("reffFlag") }
+    val denom: String? by lazy { intent.getStringExtra("denom") }
+    val productCode: String? by lazy { intent.getStringExtra("productCode") }
+    val billingId: String? by lazy { intent.getStringExtra("billingId") }
+    val activationDate: String? by lazy { intent.getStringExtra("activationDate") }
+    val payType: String? by lazy { intent.getStringExtra("payType") }
 
     lateinit var progressDialog: ProgressDialog
 
@@ -69,7 +73,7 @@ class PaymentActivity : AppCompatActivity() {
                     progressDialog.setMessage("Sedang Memuat ...")
                     progressDialog.setCancelable(false) // blocks UI interaction
                     progressDialog.show()
-                    if(pinType == PinType.paymentQRIS) {
+                    if(paymentType == PaymentType.paymentQRIS) {
                         FinpaySDK.qrisPayment(
                             this@PaymentActivity,
                             sof!!,
@@ -104,6 +108,22 @@ class PaymentActivity : AppCompatActivity() {
                                 this@PaymentActivity.finish()
                             }
                         )
+                    } else if(paymentType == PaymentType.paymentPulsaData) {
+                        FinpaySDK.ppobPayment(
+                            this@PaymentActivity,
+                            sof!!,
+                            payType!!,
+                            denom!!,
+                            amount!!,
+                            billingId!!,
+                            productCode!!,
+                            reffFlag!!,
+                            activationDate!!, pinToken, {
+                                                        
+                            },{}
+                        )
+                    } else {
+                        progressDialog.dismiss()
                     }
                 }
             }

@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -13,15 +12,12 @@ import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.corekit.FinpaySDK
-import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.constant.ProductCode
-import lib.finpay.sdk.uikit.constant.PinType
+import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText
-import lib.finpay.sdk.uikit.utilities.widget.NumberEditText
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
-import lib.finpay.sdk.uikit.view.pin.PinActivity
 
 
 class QRISResultActivity : AppCompatActivity() {
@@ -68,11 +64,17 @@ class QRISResultActivity : AppCompatActivity() {
         FinpaySDK.qrisInquiry(
             this@QRISResultActivity,
             stringQris!!, {
+                var fee: String = "0"
+                for(data in it.fee) {
+                    if(data.sof == "mc") {
+                        fee = data.fee.toString()
+                    }
+                }
                 merchantName.text = it.bit61Parse!!.merchantName
                 txtTotalBayar.text = TextUtils.formatRupiah(it.tagihan!!.toDouble())
                 _tagihan = TextUtils.formatRupiah(it.tagihan!!.toDouble())
-                _biayaLayanan = TextUtils.formatRupiah(it.fee[0].fee!!.toDouble())
-                _totalBayar = TextUtils.formatRupiah(it.fee[0].total!!.toDouble())
+                _biayaLayanan = TextUtils.formatRupiah(fee.toDouble())
+                _totalBayar = TextUtils.formatRupiah((fee.toInt() + it.tagihan!!.toInt()).toDouble())
                 _reffFlag = it.conf.toString()
                 progressDialog.dismiss()
             }, {
@@ -140,7 +142,7 @@ class QRISResultActivity : AppCompatActivity() {
                 txtAmount.text.toString(), ProductCode.QRIS,{
                     progressDialog.dismiss()
                     val intent = Intent(this@QRISResultActivity, PaymentActivity::class.java)
-                    intent.putExtra("pinType", PinType.paymentQRIS)
+                    intent.putExtra("paymentType", PaymentType.paymentQRIS)
                     intent.putExtra("sof", "mc")
                     intent.putExtra("amount", totalBayar.replace("Rp", "").replace(",",""))
                     intent.putExtra("amountTips", "0")

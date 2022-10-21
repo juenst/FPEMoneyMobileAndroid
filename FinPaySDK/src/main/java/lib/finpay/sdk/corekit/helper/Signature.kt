@@ -1,4 +1,4 @@
-package com.example.testing
+package lib.finpay.sdk.corekit.helper
 
 import java.util.*
 import javax.crypto.Mac

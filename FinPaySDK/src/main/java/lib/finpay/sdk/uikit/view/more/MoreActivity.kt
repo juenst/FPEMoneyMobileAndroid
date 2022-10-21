@@ -112,12 +112,12 @@ class MoreActivity : AppCompatActivity() {
             finish()
         }
 
-        changeMenu("Credit",btnMenuCredit)
-        changeMenu("BPJS",btnMenuBpjs)
-        changeMenu("Telkom",btnMenuTelkom)
-        changeMenu("Cicilan",btnMenuCicilan)
+//        changeMenu("Credit",btnMenuCredit)
+//        changeMenu("BPJS",btnMenuBpjs)
+//        changeMenu("Telkom",btnMenuTelkom)
+//        changeMenu("Cicilan",btnMenuCicilan)
 
-        getListProduct()
+//        getListProduct()
 
     }
 

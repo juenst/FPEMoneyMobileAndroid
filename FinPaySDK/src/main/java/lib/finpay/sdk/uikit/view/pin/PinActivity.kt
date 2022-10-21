@@ -4,19 +4,13 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
-import lib.finpay.sdk.corekit.constant.ProductCode
-import lib.finpay.sdk.corekit.model.Credential
-import lib.finpay.sdk.corekit.model.Customer
-import lib.finpay.sdk.uikit.constant.PinType
-import lib.finpay.sdk.uikit.utilities.PinTypeKeys
+import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.view.AppActivity
-import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailActivity
 
 class PinActivity : AppCompatActivity() {
@@ -63,7 +57,7 @@ class PinActivity : AppCompatActivity() {
                     if(pinType == "login") {
                         val intent = Intent(this, AppActivity::class.java)
                         startActivity(intent)
-                    } else if(pinType == PinType.paymentQRIS) {
+                    } else if(pinType == PaymentType.paymentQRIS) {
                         paymenQris()
                     } else if(pinType == "otp_connect") {
                         otpConnectAccount()

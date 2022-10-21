@@ -2,31 +2,27 @@ package lib.finpay.sdk.uikit.view.ppob.pulsa_data
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds
-import android.provider.ContactsContract.Contacts
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.view.allViews
-import androidx.core.view.iterator
-import androidx.core.widget.doOnTextChanged
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.corekit.model.DataSubProduct
-import lib.finpay.sdk.uikit.constant.PinType
+import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.utilities.Utils
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.adapter.PulsaDataAdapter
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class PulsaDataResultActivity : AppCompatActivity() {
@@ -96,7 +92,6 @@ class PulsaDataResultActivity : AppCompatActivity() {
         }
         txtPhoneNumber.text = "Topup ke nomor "+phoneNumber
         getDenom()
-        getUserBallance()
     }
 
     fun getUserBallance() {
@@ -108,12 +103,36 @@ class PulsaDataResultActivity : AppCompatActivity() {
     }
 
     fun getDenom() {
-        dataSubProduct.add(DataSubProduct("12000/12000","INDOSAT/01400812000", "Pulsa INDOSAT12000"))
-        dataSubProduct.add(DataSubProduct("15000/16500","TELKOMSEL/01010415000", "Pulsa TELKOMSEL15000"))
-        dataSubProduct.add(DataSubProduct("25000/26500","TELKOMSEL/01010425000", "Pulsa TELKOMSEL25000"))
-        dataSubProduct.add(DataSubProduct("75000/76500","TELKOMSEL/01010475000", "Pulsa TELKOMSEL75000"))
-        listDenom.adapter = PulsaDataAdapter(this, R.layout.item_pulsa_data, dataSubProduct)
+//        dataSubProduct.add(DataSubProduct("12000/12000","INDOSAT/01400812000", "Pulsa INDOSAT12000"))
+//        dataSubProduct.add(DataSubProduct("15000/16500","TELKOMSEL/01010415000", "Pulsa TELKOMSEL15000"))
+//        dataSubProduct.add(DataSubProduct("25000/26500","TELKOMSEL/01010425000", "Pulsa TELKOMSEL25000"))
+//        dataSubProduct.add(DataSubProduct("75000/76500","TELKOMSEL/01010475000", "Pulsa TELKOMSEL75000"))
+//        listDenom.adapter = PulsaDataAdapter(this, R.layout.item_pulsa_data, dataSubProduct)
+//
+//        val provider: String = Utils.getProviderMobile(phoneNumber!!)
+//        if(provider == "TELKOMSEL") {
+//            logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_telkomsel))
+//        } else if(provider == "XL") {
+//            logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_xl))
+//        } else if(provider == "AXIS") {
+//            logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_axis))
+//        } else if(provider == "INDOSAT") {
+//            logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_indosat))
+//        } else if(provider == "THREE") {
+//            logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_three))
+//        } else {
+//            logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.icon_top_qr))
+//        }
+//        if(dataSubProduct.isEmpty() || dataSubProduct.count() == 0){
+//            content.visibility = View.GONE
+//            emptyState.visibility = View.VISIBLE
+//        }  else {
+//            content.visibility = View.VISIBLE
+//            emptyState.visibility = View.GONE
+//        }
 
+
+        val listOpr: ArrayList<String> = ArrayList<String>()
         val provider: String = Utils.getProviderMobile(phoneNumber!!)
         if(provider == "TELKOMSEL") {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_telkomsel))
@@ -128,34 +147,30 @@ class PulsaDataResultActivity : AppCompatActivity() {
         } else {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.icon_top_qr))
         }
-        if(dataSubProduct.isEmpty() || dataSubProduct.count() == 0){
-            content.visibility = View.GONE
-            emptyState.visibility = View.VISIBLE
-        }  else {
-            content.visibility = View.VISIBLE
-            emptyState.visibility = View.GONE
-        }
-//        progressDialog.setTitle("Mohon Menunggu")
-//        progressDialog.setMessage("Sedang Memuat ...")
-//        progressDialog.setCancelable(false)
-//        progressDialog.show()
-//        FinpaySDK.getListSubProduct(
-//            this@PulsaDataActivity,
-//            txtPhoneNumber.text.toString(), {
-//                if(it.dataSubProduct.isEmpty() || it.dataSubProduct.count() == 0) {
-//                    listDenom.visibility = View.GONE
-//                    //emptyState.visibility = View.VISIBLE
-//                } else {
-//                    listDenom.visibility = View.VISIBLE
-//                    //emptyState.visibility = View.GONE
-//                }
-//                listDenom.adapter = PulsaDataAdapter(this, R.layout.item_pulsa_data, it.dataSubProduct)
-//                progressDialog.dismiss()
-//            }, {
-//                DialogUtils.showDialogError(this@PulsaDataActivity, "", it)
-//                progressDialog.dismiss()
-//            }
-//        )
+        listOpr.add(provider)
+
+        progressDialog.setTitle("Mohon Menunggu")
+        progressDialog.setMessage("Sedang Memuat ...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+        FinpaySDK.getListSubProduct(
+            this@PulsaDataResultActivity,
+            phoneNumber!!, listOpr, {
+                listDenom.adapter = PulsaDataAdapter(this, R.layout.item_pulsa_data, it.dataSubProduct)
+                if(it.dataSubProduct.isEmpty() || it.dataSubProduct.count() == 0) {
+                    content.visibility = View.GONE
+                    emptyState.visibility = View.VISIBLE
+                } else {
+                    content.visibility = View.VISIBLE
+                    emptyState.visibility = View.GONE
+                }
+                getUserBallance()
+                progressDialog.dismiss()
+            }, {
+                progressDialog.dismiss()
+                DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
+            }
+        )
     }
 
     fun showDialogConfirmPayment(
@@ -194,22 +209,45 @@ class PulsaDataResultActivity : AppCompatActivity() {
                 progressDialog.setMessage("Sedang Memuat ...")
                 progressDialog.setCancelable(false) // blocks UI interaction
                 progressDialog.show()
-                FinpaySDK.authPin(
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val currentDate = sdf.format(Date())
+                FinpaySDK.ppobInquiry(
                     this@PulsaDataResultActivity,
-                    price, ProductCode.PULSA_DATA,{
+                    phoneNumber!!,
+                    ProductCode.PULSA_DATA,
+                    price,
+                    {
+                        val reffId: String = it.bit61Parse?.billInfo1?.nomorReferensi!!
+                        var fee: String = "0"
+                        for(data in it.fee) {
+                            if(data.sof == "mc") {
+                                fee = data.fee.toString()
+                            }
+                        }
+                        FinpaySDK.authPin(
+                            this@PulsaDataResultActivity,
+                            price, ProductCode.PULSA_DATA,{
+                                progressDialog.dismiss()
+                                val intent = Intent(this@PulsaDataResultActivity, PaymentActivity::class.java)
+                                intent.putExtra("paymentType", PaymentType.paymentPulsaData)
+                                intent.putExtra("sof", "mc")
+                                intent.putExtra("amount", price.toInt() + biayaLayanan.toInt())
+                                intent.putExtra("amountTips", fee)
+                                intent.putExtra("reffFlag", reffId)
+                                intent.putExtra("billingId", phoneNumber)
+                                intent.putExtra("productCode", ProductCode.PULSA_DATA)
+                                intent.putExtra("activationDate", currentDate)
+                                intent.putExtra("payType", "billpayment")
+                                intent.putExtra("widgetURL", it.widgetURL)
+                                startActivity(intent)
+                            }, {
+                                progressDialog.dismiss()
+                                DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
+                            }
+                        )
+                    },{
                         progressDialog.dismiss()
-                        val intent = Intent(this@PulsaDataResultActivity, PaymentActivity::class.java)
-                        intent.putExtra("pinType", PinType.paymentPulsaData)
-                        intent.putExtra("sof", "mc")
-                        intent.putExtra("amount", price.toInt() + biayaLayanan.toInt())
-                        intent.putExtra("amountTips", "0")
-                        intent.putExtra("reffFlag", "")
-                        intent.putExtra("widgetURL", it.widgetURL)
-                        startActivity(intent)
-                    }, {
-                        progressDialog.dismiss()
-                        println(it)
-                        Toast.makeText(this@PulsaDataResultActivity, it, Toast.LENGTH_LONG)
+                        DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
                     }
                 )
             }

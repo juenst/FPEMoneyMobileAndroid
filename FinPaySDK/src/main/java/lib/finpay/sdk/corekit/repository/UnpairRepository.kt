@@ -1,6 +1,6 @@
 package lib.finpay.sdk.corekit.repository
 
-import com.example.testing.Signature
+import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.Unpair
