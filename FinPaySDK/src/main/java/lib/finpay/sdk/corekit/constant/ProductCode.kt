@@ -13,5 +13,7 @@ class ProductCode {
         var PNBP: String = "50017"
         var PAJAK_ONLINE: String = "50017"
         var BEA_CUKAI: String = "50017"
+        var FINANCE_BUSSAN: String = "20027"
+        var FINANCE_SMART: String = "20027"
     }
 }

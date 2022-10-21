@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".uikit.view.ppob.instalment.InstalmentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#00ACBA"
-        android:paddingLeft="20dp">
+        android:paddingHorizontal="20dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -24,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Internet &amp; TV Kabel"
+                android:text="Cicilan"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18sp" />
@@ -40,7 +42,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/lnIndihome"
+            android:id="@+id/lnBussanAF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -50,17 +52,17 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_indihome" />
+                android:src="@drawable/ic_bussan_logo" />
 
             <Space
                 android:layout_width="12dp"
                 android:layout_height="match_parent" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Indihome" />
+                android:text="Bussan Auto Finance" />
 
 
         </LinearLayout>
@@ -71,7 +73,7 @@
             android:background="#dedede" />
 
         <LinearLayout
-            android:id="@+id/lnMNCVision"
+            android:id="@+id/lnSmartF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -81,17 +83,17 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/logo_mnc" />
+                android:src="@drawable/ic_smart_finance" />
 
             <Space
                 android:layout_width="12dp"
                 android:layout_height="match_parent" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="MNC Vission" />
+                android:text="Smart Finance" />
 
         </LinearLayout>
 
@@ -102,6 +104,5 @@
 
 
     </LinearLayout>
-
 
 </LinearLayout>

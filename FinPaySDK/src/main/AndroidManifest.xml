@@ -10,6 +10,27 @@
 
     <application>
         <activity
+            android:name=".uikit.view.ppob.instalment.SmartFinanceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.instalment.BussanAutoFinanceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.instalment.InstalmentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".uikit.view.upgrade.CitizenshipActivity"
             android:exported="false">
             <meta-data
@@ -17,16 +38,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".uikit.view.ppob.internettvcable.InternetCableTransactionActivity"
-            android:exported="false" />
-        <activity
             android:name=".uikit.view.ppob.internettvcable.InternetTvCableActivity"
-            android:exported="false" />
-        <activity
-            android:name=".uikit.view.ppob.instalment.ChooseInstalmentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".uikit.view.ppob.instalment.InstalmentTransactionActivity"
             android:exported="false" />
         <activity
             android:name=".uikit.view.ppob.bpjs.ChooseBpjsActivity"
@@ -66,7 +78,7 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.ppob.TagihanHaloActivity"
+            android:name=".uikit.view.ppob.pascabayar.PascaBayarActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
