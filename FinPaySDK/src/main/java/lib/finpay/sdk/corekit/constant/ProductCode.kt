@@ -10,5 +10,8 @@ class ProductCode {
         var PDAM: String = "503000"
         var TELKOM: String = ""
         var INDIHOME: String = ""
+        var PNBP: String = "50017"
+        var PAJAK_ONLINE: String = "50017"
+        var BEA_CUKAI: String = "50017"
     }
 }
