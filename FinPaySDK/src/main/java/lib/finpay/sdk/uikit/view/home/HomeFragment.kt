@@ -29,6 +29,7 @@ import lib.finpay.sdk.uikit.constant.Credential
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.more.MoreActivity
+import lib.finpay.sdk.uikit.view.ppob.pln.PLNActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
 import lib.finpay.sdk.uikit.view.transfer.TransferActivity
@@ -59,6 +60,7 @@ class HomeFragment : Fragment() {
 
 
     private lateinit var btnPulsaData: LinearLayout
+    private lateinit var btnPLN: LinearLayout
     private lateinit var btnMore: LinearLayout
 
     var saldo: String = "Rp0"
@@ -92,6 +94,7 @@ class HomeFragment : Fragment() {
         btnWallet = binding.btnWallet
 
         btnPulsaData = binding.btnPulsaData
+        btnPLN = binding.btnPLN
         btnMore = binding.btnMore
 
         txtSaldo.text = saldo
@@ -200,6 +203,12 @@ class HomeFragment : Fragment() {
         btnPulsaData.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
             val intent = Intent(requireContext(), PulsaDataActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnPLN.setOnClickListener {
+            //FinPaySDK().openMore(requireContext())
+            val intent = Intent(requireContext(), PLNActivity::class.java)
             this.startActivity(intent)
         }
 

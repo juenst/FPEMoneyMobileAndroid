@@ -88,10 +88,34 @@ class PulsaDataResultActivity : AppCompatActivity() {
         }
 
         btnNext.setOnClickListener {
-            showDialogConfirmPayment(denom, price, "0", saldo)
+            progressDialog.setTitle("Mohon Menunggu")
+            progressDialog.setMessage("Sedang Memuat ...")
+            progressDialog.setCancelable(false) // blocks UI interaction
+            progressDialog.show()
+            FinpaySDK.ppobInquiry(
+        this@PulsaDataResultActivity,
+                phoneNumber!!,
+                subProductCode,
+                price, {
+                    val reffId: String = it.bit61Parse?.billInfo1?.nomorReferensi!!
+                    var fee: String = "0"
+                    for (data in it.fee) {
+                        if (data.sof == "mc") {
+                            fee = data.fee.toString()
+                        }
+                    }
+                    progressDialog.dismiss()
+                    showDialogConfirmPayment(reffId, fee)
+                }, {
+                    progressDialog.dismiss()
+                    DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
+                }
+            )
         }
+
         txtPhoneNumber.text = "Topup ke nomor "+phoneNumber
         getDenom()
+        getUserBallance()
     }
 
     fun getUserBallance() {
@@ -164,7 +188,6 @@ class PulsaDataResultActivity : AppCompatActivity() {
                     content.visibility = View.VISIBLE
                     emptyState.visibility = View.GONE
                 }
-                getUserBallance()
                 progressDialog.dismiss()
             }, {
                 progressDialog.dismiss()
@@ -174,10 +197,8 @@ class PulsaDataResultActivity : AppCompatActivity() {
     }
 
     fun showDialogConfirmPayment(
-        denom: String,
-        price: String,
-        biayaLayanan: String,
-        saldo: String
+        reffId: String,
+        fee: String
     ) {
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(R.layout.dialog_confirm_payment_ppob)
@@ -190,19 +211,19 @@ class PulsaDataResultActivity : AppCompatActivity() {
         val txtSaldo= dialog.findViewById<TextView>(R.id.saldo)
         val cardWarning= dialog.findViewById<CardView>(R.id.cardWarning)
 
-        if(saldo.toInt() < (price.toInt() + biayaLayanan.toInt())){
+        if(saldo.toInt() < (price.toInt() + fee.toInt())){
             cardWarning!!.visibility = View.VISIBLE
             txtBtnPay!!.text = "Isi Saldo"
         }
 
         txtDenom!!.text = "Pulsa Denom "+TextUtils.formatRupiah(denom.toDouble())
         txtPrice!!.text = TextUtils.formatRupiah(price.toDouble())
-        txtBiayaLayanan!!.text = TextUtils.formatRupiah(biayaLayanan.toDouble())
-        txtTotalBayar!!.text = TextUtils.formatRupiah((price.toInt() + biayaLayanan.toInt()).toDouble())
+        txtBiayaLayanan!!.text = TextUtils.formatRupiah(fee.toDouble())
+        txtTotalBayar!!.text = TextUtils.formatRupiah((price.toInt() + fee.toInt()).toDouble())
         txtSaldo!!.text = TextUtils.formatRupiah(saldo.toDouble())
 
         btnPay?.setOnClickListener {
-            if(saldo.toInt() < (price.toInt() + biayaLayanan.toInt())){
+            if(saldo.toInt() < (price.toInt() + fee.toInt())){
                 //open top up
             } else {
                 progressDialog.setTitle("Mohon Menunggu")
@@ -211,41 +232,23 @@ class PulsaDataResultActivity : AppCompatActivity() {
                 progressDialog.show()
                 val sdf = SimpleDateFormat("yyyyMMdHHmmss")
                 val currentDate = sdf.format(Date())
-                FinpaySDK.ppobInquiry(
+                FinpaySDK.authPin(
                     this@PulsaDataResultActivity,
-                    phoneNumber!!,
-                    ProductCode.PULSA_DATA,
-                    price,
-                    {
-                        val reffId: String = it.bit61Parse?.billInfo1?.nomorReferensi!!
-                        var fee: String = "0"
-                        for(data in it.fee) {
-                            if(data.sof == "mc") {
-                                fee = data.fee.toString()
-                            }
-                        }
-                        FinpaySDK.authPin(
-                            this@PulsaDataResultActivity,
-                            price, ProductCode.PULSA_DATA,{
-                                progressDialog.dismiss()
-                                val intent = Intent(this@PulsaDataResultActivity, PaymentActivity::class.java)
-                                intent.putExtra("paymentType", PaymentType.paymentPulsaData)
-                                intent.putExtra("sof", "mc")
-                                intent.putExtra("amount", price.toInt() + biayaLayanan.toInt())
-                                intent.putExtra("amountTips", fee)
-                                intent.putExtra("reffFlag", reffId)
-                                intent.putExtra("billingId", phoneNumber)
-                                intent.putExtra("productCode", ProductCode.PULSA_DATA)
-                                intent.putExtra("activationDate", currentDate)
-                                intent.putExtra("payType", "billpayment")
-                                intent.putExtra("widgetURL", it.widgetURL)
-                                startActivity(intent)
-                            }, {
-                                progressDialog.dismiss()
-                                DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
-                            }
-                        )
-                    },{
+                    price, subProductCode,{
+                        progressDialog.dismiss()
+                        val intent = Intent(this@PulsaDataResultActivity, PaymentActivity::class.java)
+                        intent.putExtra("paymentType", PaymentType.paymentPPOB)
+                        intent.putExtra("sof", "mc")
+                        intent.putExtra("amount", (price.toInt() + fee.toInt()).toString())
+                        intent.putExtra("denom", denom)
+                        intent.putExtra("reffFlag", reffId)
+                        intent.putExtra("billingId", phoneNumber)
+                        intent.putExtra("productCode", subProductCode)
+                        intent.putExtra("activationDate", currentDate)
+                        intent.putExtra("payType", "billpayment")
+                        intent.putExtra("widgetURL", it.widgetURL)
+                        startActivity(intent)
+                    }, {
                         progressDialog.dismiss()
                         DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
                     }

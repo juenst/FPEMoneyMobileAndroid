@@ -59,9 +59,6 @@ class PLNActivity: AppCompatActivity() {
         btnContactTagihan = findViewById(R.id.btnContactTagihan)
         progressDialog = ProgressDialog(this@PLNActivity)
 
-        //20rb, 50rb, 100rb, 200rb, 500rb, 1jt, 5jt
-        //pln tagihan 537514569786
-
         cardToken.setBackgroundColor(Integer.parseUnsignedInt("FFFFFFFF", 16))
         cardTagihan.setBackgroundColor(Integer.parseUnsignedInt("FFEEF2F6", 16))
         contentToken.visibility = View.VISIBLE
@@ -136,6 +133,7 @@ class PLNActivity: AppCompatActivity() {
                 txtNomorPelangganTagihan.text.toString(),
                 ProductCode.PLN_PREPAID,
                 "", {
+                    println("success")
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

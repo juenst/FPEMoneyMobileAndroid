@@ -108,7 +108,7 @@ class PaymentActivity : AppCompatActivity() {
                                 this@PaymentActivity.finish()
                             }
                         )
-                    } else if(paymentType == PaymentType.paymentPulsaData) {
+                    } else if(paymentType == PaymentType.paymentPPOB) {
                         FinpaySDK.ppobPayment(
                             this@PaymentActivity,
                             sof!!,
@@ -119,8 +119,10 @@ class PaymentActivity : AppCompatActivity() {
                             productCode!!,
                             reffFlag!!,
                             activationDate!!, pinToken, {
-                                                        
-                            },{}
+                                println("success")
+                            },{
+                                println("failed")
+                            }
                         )
                     } else {
                         progressDialog.dismiss()
