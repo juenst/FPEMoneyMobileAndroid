@@ -10,7 +10,7 @@
 
     <application>
         <activity
-            android:name=".CarLifeActivity"
+            android:name=".uikit.view.ppob.insurance.CarLifeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -60,12 +60,6 @@
         </activity>
         <activity
             android:name=".uikit.view.ppob.internettvcable.InternetTvCableActivity"
-            android:exported="false" />
-        <activity
-            android:name=".uikit.view.ppob.instalment.ChooseInstalmentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".uikit.view.ppob.instalment.InstalmentTransactionActivity"
             android:exported="false" />
         <activity
             android:name=".uikit.view.ppob.bpjs.BpjsActivity"
