@@ -66,6 +66,7 @@
             android:layout_height="20dp" />
 
         <LinearLayout
+            android:id="@+id/btnToOther"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -126,6 +127,7 @@
             android:layout_height="20dp" />
 
         <LinearLayout
+            android:id="@+id/btnToBank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"

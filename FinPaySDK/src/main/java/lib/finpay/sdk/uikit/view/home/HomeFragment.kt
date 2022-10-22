@@ -29,6 +29,9 @@ import lib.finpay.sdk.uikit.constant.Credential
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.more.MoreActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
+import lib.finpay.sdk.uikit.view.ppob.pascabayar.PascaBayarActivity
 import lib.finpay.sdk.uikit.view.ppob.pln.PLNActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
@@ -61,6 +64,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var btnPulsaData: LinearLayout
     private lateinit var btnPLN: LinearLayout
+    private lateinit var btnPascaBayar: LinearLayout
+    private lateinit var btnBpjs: LinearLayout
     private lateinit var btnMore: LinearLayout
 
     var saldo: String = "Rp0"
@@ -95,6 +100,8 @@ class HomeFragment : Fragment() {
 
         btnPulsaData = binding.btnPulsaData
         btnPLN = binding.btnPLN
+        btnPascaBayar = binding.btnPascaBayar
+        btnBpjs = binding.btnBpjs
         btnMore = binding.btnMore
 
         txtSaldo.text = saldo
@@ -206,9 +213,21 @@ class HomeFragment : Fragment() {
             this.startActivity(intent)
         }
 
+        btnPascaBayar.setOnClickListener {
+            //FinPaySDK().openMore(requireContext())
+            val intent = Intent(requireContext(), PascaBayarActivity::class.java)
+            this.startActivity(intent)
+        }
+
         btnPLN.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
             val intent = Intent(requireContext(), PLNActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnBpjs.setOnClickListener {
+            //FinPaySDK().openMore(requireContext())
+            val intent = Intent(requireContext(), BpjsKesehatanActivity::class.java)
             this.startActivity(intent)
         }
 

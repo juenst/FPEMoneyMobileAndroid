@@ -29,7 +29,7 @@
             android:name=".uikit.view.ppob.instalment.InstalmentTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.ppob.bpjs.ChooseBpjsActivity"
+            android:name=".uikit.view.ppob.bpjs.BpjsActivity"
             android:exported="false" />
         <activity
             android:name=".uikit.view.ppob.bpjs.BpjsKesehatanActivity"
