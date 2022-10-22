@@ -7,23 +7,22 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
-
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.DetailProductModel
 import lib.finpay.sdk.corekit.model.Product
+import lib.finpay.sdk.uikit.utilities.extension.toJson
+import lib.finpay.sdk.uikit.view.ppob.AsuransiActivity
+import lib.finpay.sdk.uikit.view.ppob.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.alfamart.AlfamartActivity
 import lib.finpay.sdk.uikit.view.ppob.best.telkomsel.`package`.BestTelkomselPackageActivity
 import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsActivity
 import lib.finpay.sdk.uikit.view.ppob.instalment.ChooseInstalmentActivity
 import lib.finpay.sdk.uikit.view.ppob.internet.tv.cable.InternetTvCableActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
-import lib.finpay.sdk.uikit.view.ppob.AsuransiActivity
-import lib.finpay.sdk.uikit.view.ppob.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
 import lib.finpay.sdk.uikit.view.ppob.state.revenue.StateRevenueActivity
 import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
-import lib.finpay.sdk.uikit.utilities.extension.toJson
 
 class MoreActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
@@ -34,12 +33,14 @@ class MoreActivity : AppCompatActivity() {
     private lateinit var btnPDAM: LinearLayout
     private lateinit var btnVoucherDeals: LinearLayout
 
-    lateinit var btnMenuCredit: LinearLayout
-    lateinit var btnMenuBpjs: LinearLayout
-    lateinit var btnMenuTelkom: LinearLayout
-    lateinit var btnMenuCicilan: LinearLayout
+    private lateinit var btnMenuCredit: LinearLayout
+    private lateinit var btnMenuBpjs: LinearLayout
+    private lateinit var btnMenuTelkom: LinearLayout
+    private lateinit var btnInstalment: LinearLayout
+    private lateinit var btnFinpay: LinearLayout
+    private lateinit var btnAsuransi: LinearLayout
 
-    lateinit var dataProduct: Product
+    private lateinit var dataProduct: Product
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,10 +55,18 @@ class MoreActivity : AppCompatActivity() {
         btnPDAM = findViewById(R.id.btn_pdam)
         btnStateRevenue = findViewById(R.id.btn_state_revenue)
         btnVoucherDeals = findViewById(R.id.btn_voucher_deals)
-        val btnFinpay = findViewById<LinearLayout>(R.id.btnFinpay)
-        val btnAsuransi = findViewById<LinearLayout>(R.id.btnAsuransi)
+        btnMenuCredit = findViewById(R.id.menuCredit)
+        btnMenuBpjs = findViewById(R.id.menuBpjs)
+        btnMenuTelkom = findViewById(R.id.menuTelkom)
+        btnInstalment = findViewById(R.id.menuCicilan)
+        btnFinpay = findViewById(R.id.btnFinpay)
+        btnAsuransi = findViewById(R.id.btnAsuransi)
 
         dataProduct = Product()
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         btnFinpay.setOnClickListener {
             val intent = Intent(this, FinpayActivity::class.java)
@@ -67,10 +76,6 @@ class MoreActivity : AppCompatActivity() {
         btnAsuransi.setOnClickListener {
             val intent = Intent(this, AsuransiActivity::class.java)
             this.startActivity(intent)
-        }
-
-        btnBack.setOnClickListener {
-            finish()
         }
 
         btnAlfamart.setOnClickListener {
@@ -103,29 +108,18 @@ class MoreActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        btnMenuCredit = findViewById(R.id.menuCredit)
-        btnMenuBpjs = findViewById(R.id.menuBpjs)
-        btnMenuTelkom = findViewById(R.id.menuTelkom)
-        btnMenuCicilan = findViewById(R.id.menuCicilan)
-
-        btnBack.setOnClickListener{
-            finish()
+        btnInstalment.setOnClickListener {
+            val intent = Intent(this, InstalmentActivity::class.java)
+            this.startActivity(intent)
         }
-
-//        changeMenu("Credit",btnMenuCredit)
-//        changeMenu("BPJS",btnMenuBpjs)
-//        changeMenu("Telkom",btnMenuTelkom)
-//        changeMenu("Cicilan",btnMenuCicilan)
-
-//        getListProduct()
 
     }
 
-    fun changeMenu(nameMenu:String,button:LinearLayout){
+    fun changeMenu(nameMenu: String, button: LinearLayout) {
 
-        button.setOnClickListener{
-            when(nameMenu){
-                "Finpay"->{
+        button.setOnClickListener {
+            when (nameMenu) {
+                "Finpay" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Finpay")
@@ -135,7 +129,7 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataFinpay", listRandom.toJson())
                     startActivity(intent)
                 }
-                "Alfamart"->{
+                "Alfamart" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Alfamart")
@@ -145,7 +139,7 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataAlfamart", listRandom.toJson())
                     startActivity(intent)
                 }
-                "Asuransi"->{
+                "Asuransi" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Asuransi")
@@ -155,7 +149,7 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataAsuransi", listRandom.toJson())
                     startActivity(intent)
                 }
-                "Best Telkomsel"->{
+                "Best Telkomsel" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Best Telkomsel")
@@ -165,7 +159,7 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataBest Telkomsel", listRandom.toJson())
                     startActivity(intent)
                 }
-                "Internet Tv Cable"->{
+                "Internet Tv Cable" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Best Telkomsel")
@@ -175,7 +169,7 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataBest Telkomsel", listRandom.toJson())
                     startActivity(intent)
                 }
-                "Credit"->{
+                "Credit" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Data")
@@ -185,7 +179,7 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataCredit", listRandom.toJson())
                     startActivity(intent)
                 }
-                "BPJS"->{
+                "BPJS" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("BPJS")
@@ -195,7 +189,7 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataBPJS", listRandom.toJson())
                     startActivity(intent)
                 }
-                "Telkom"->{
+                "Telkom" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Telkom")
@@ -205,13 +199,13 @@ class MoreActivity : AppCompatActivity() {
                     intent.putExtra("dataTelkom", listRandom.toJson())
                     startActivity(intent)
                 }
-                "Cicilan"->{
+                "Cicilan" -> {
                     var listRandom =
                         dataProduct.dataProduct!!.filter {
                             it.productDesc!!.contains("Cicilan")
                         } as ArrayList<DetailProductModel>
                     println("DataInstallMent : " + listRandom.toString())
-                    var intent = Intent(this, ChooseInstalmentActivity::class.java)
+                    var intent = Intent(this, InstalmentActivity::class.java)
                     intent.putExtra("dataInstalment", listRandom.toJson())
                     startActivity(intent)
 
