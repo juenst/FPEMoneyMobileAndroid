@@ -135,7 +135,11 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.ppob.FinpayActivity"
+            android:name=".uikit.view.ppob.pln.PLNResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.pascabayar.PascaBayarResultActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
