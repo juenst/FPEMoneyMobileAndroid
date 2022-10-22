@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".uikit.view.ppob.instalment.BussanAutoFinanceActivity">
+    tools:context=".uikit.view.ppob.revenue.PajakOnlineActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Bussan Auto Finance"
+                android:text="PNBP"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18sp" />
@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nomor Pelanggan" />
+            android:text="Kode Billing" />
 
         <Space
             android:layout_width="match_parent"
@@ -78,6 +78,37 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_info"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_info_24" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pembayaran kode billing tagihan terakhir adalah jam 23.30 WIB setiap harinya. Pembayaran akan dibuka kembali pada jam 02.00 WIB"
+                android:textSize="8sp" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <Space
@@ -102,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Pagi makan ketan, malam dikejar setan"
+            android:text="Pagi makan Rujak, malam dikejar setan"
             android:textColor="#121926"
             android:textFontWeight="600"
             android:textSize="18sp" />
@@ -115,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Belum bayar cicilan Bussan? yuk masukin nomor pelanggan"
+            android:text="Mau bayar pajak? yuk masukin nomor pelanggan"
             android:textColor="#4B5565"
             android:textFontWeight="400"
             android:textSize="14sp" />
@@ -130,4 +161,5 @@
         android:layout_marginVertical="20dp"
         android:enabled="false"
         android:text="Lanjut" />
+
 </LinearLayout>

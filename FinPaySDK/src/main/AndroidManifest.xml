@@ -10,6 +10,41 @@
 
     <application>
         <activity
+            android:name=".uikit.view.ppob.revenue.PajakOnlineActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.revenue.BeaCukaiActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.revenue.PnbpActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.revenue.RevenueActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.finpay.FinpayActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".uikit.view.ppob.insurance.CarLifeActivity"
             android:exported="false">
             <meta-data
@@ -76,18 +111,6 @@
         <activity
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataResultActivity"
             android:exported="false" />
-        <activity
-            android:name=".uikit.view.ppob.PegadaianActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".uikit.view.ppob.UlangGadaiActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".uikit.view.ppob.FinpayActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pascabayar.PascaBayarActivity"
             android:exported="false"
@@ -211,16 +234,6 @@
             android:name=".uikit.view.ppob.best.telkomsel.package.BestTelkomselPackageDetailActivity"
             android:exported="false"
             android:label="Paket Terbaik Telkomsel"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".uikit.view.ppob.state.revenue.StateRevenueActivity"
-            android:exported="false"
-            android:label="Penerimaan Negara"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".uikit.view.ppob.state.revenue.StateRevenueDetailActivity"
-            android:exported="false"
-            android:label="Penerimaan Negara"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.internet.tv.cable.InternetTvCableActivity"

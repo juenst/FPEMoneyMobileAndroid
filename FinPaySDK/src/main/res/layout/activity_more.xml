@@ -765,7 +765,7 @@
                     android:baselineAligned="false">
 
                     <LinearLayout
-                        android:id="@+id/btn_state_revenue"
+                        android:id="@+id/btnStateRevenue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
