@@ -6,8 +6,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
-import lib.finpay.sdk.uikit.view.ppob.instalment.BussanAutoFinanceActivity
-import lib.finpay.sdk.uikit.view.ppob.instalment.SmartFinanceActivity
 
 class InsuranceActivity : AppCompatActivity() {
     private lateinit var btnBack: ImageView
@@ -22,7 +20,7 @@ class InsuranceActivity : AppCompatActivity() {
 
         btnBack = findViewById(R.id.btnBack)
         lnTokioMarineI = findViewById(R.id.lnTokioI)
-//        lnSmartF = findViewById(R.id.lnSmartF)
+        lnCarLifeI = findViewById(R.id.lnCarLifeI)
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -33,9 +31,9 @@ class InsuranceActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        lnSmartF.setOnClickListener {
-//            val intent = Intent(this, SmartFinanceActivity::class.java)
-//            startActivity(intent)
-//        }
+        lnCarLifeI.setOnClickListener {
+            val intent = Intent(this, CarLifeActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
