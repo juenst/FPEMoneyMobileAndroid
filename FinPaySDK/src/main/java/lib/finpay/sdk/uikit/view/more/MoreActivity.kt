@@ -10,7 +10,9 @@ import lib.finpay.sdk.corekit.model.Product
 import lib.finpay.sdk.uikit.view.ppob.alfamart.AlfamartActivity
 import lib.finpay.sdk.uikit.view.ppob.best.telkomsel.`package`.BestTelkomselPackageActivity
 import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsActivity
+import lib.finpay.sdk.uikit.view.ppob.finpay.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.instalment.InstalmentActivity
+import lib.finpay.sdk.uikit.view.ppob.insurance.InsuranceActivity
 import lib.finpay.sdk.uikit.view.ppob.internet.tv.cable.InternetTvCableActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
 import lib.finpay.sdk.uikit.view.ppob.revenue.RevenueActivity
