@@ -105,5 +105,18 @@ class DialogUtils {
             builder.setCanceledOnTouchOutside(false)
             builder.show()
         }
+
+        fun showDialogComingSoon(
+            context: Context
+        ) {
+            val dialog = BottomSheetDialog(context)
+            dialog.setContentView(R.layout.dialog_coming_soon)
+            val btnClose = dialog.findViewById<CardView>(R.id.btnClose)
+
+            btnClose?.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
     }
 }

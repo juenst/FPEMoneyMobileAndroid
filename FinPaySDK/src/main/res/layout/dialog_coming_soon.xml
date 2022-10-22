@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    style="@style/AppTheme.finpayTheme"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img_maintenance"
+                android:textSize="24sp"/>
+
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="Layanan Segera Hadir"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="6dp" />
+
+            <TextView
+                android:id="@+id/txtDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:text="Layanan ini akan segera hadir di Finpay"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="30dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnClose"
+            app:cardBackgroundColor="#00ACBA"
+            android:layout_weight="1"
+            app:cardCornerRadius="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="16dp"
+                android:textFontWeight="600"
+                android:text="Tutup"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

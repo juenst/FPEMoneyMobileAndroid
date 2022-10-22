@@ -11,7 +11,7 @@ import lib.finpay.sdk.corekit.model.DetailProductModel
 import lib.finpay.sdk.uikit.view.ppob.bpjs.adapter.BPJSAdapter
 import org.json.JSONArray
 
-class ChooseBpjsActivity : AppCompatActivity() {
+class BpjsActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
 
     lateinit var listBPJS: ListView
