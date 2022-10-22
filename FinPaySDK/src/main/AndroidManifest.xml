@@ -10,6 +10,27 @@
 
     <application>
         <activity
+            android:name=".CarLifeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.insurance.TokioMarineActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".uikit.view.ppob.insurance.InsuranceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".uikit.view.ppob.instalment.SmartFinanceActivity"
             android:exported="false">
             <meta-data
@@ -56,17 +77,7 @@
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataResultActivity"
             android:exported="false" />
         <activity
-            android:name=".uikit.view.ppob.AsuransiActivity"
-            android:exported="false"
-            android:hardwareAccelerated="false"
-            android:largeHeap="true"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
             android:name=".uikit.view.ppob.PegadaianActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".uikit.view.ppob.CarLifeInsuranceActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity

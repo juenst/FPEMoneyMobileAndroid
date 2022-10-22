@@ -11,12 +11,12 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.DetailProductModel
 import lib.finpay.sdk.corekit.model.Product
 import lib.finpay.sdk.uikit.utilities.extension.toJson
-import lib.finpay.sdk.uikit.view.ppob.AsuransiActivity
 import lib.finpay.sdk.uikit.view.ppob.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.alfamart.AlfamartActivity
 import lib.finpay.sdk.uikit.view.ppob.best.telkomsel.`package`.BestTelkomselPackageActivity
 import lib.finpay.sdk.uikit.view.ppob.bpjs.ChooseBpjsActivity
 import lib.finpay.sdk.uikit.view.ppob.instalment.InstalmentActivity
+import lib.finpay.sdk.uikit.view.ppob.insurance.InsuranceActivity
 import lib.finpay.sdk.uikit.view.ppob.internet.tv.cable.InternetTvCableActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
@@ -38,7 +38,7 @@ class MoreActivity : AppCompatActivity() {
     private lateinit var btnMenuTelkom: LinearLayout
     private lateinit var btnInstalment: LinearLayout
     private lateinit var btnFinpay: LinearLayout
-    private lateinit var btnAsuransi: LinearLayout
+    private lateinit var btnInsurance: LinearLayout
 
     private lateinit var dataProduct: Product
 
@@ -60,7 +60,7 @@ class MoreActivity : AppCompatActivity() {
         btnMenuTelkom = findViewById(R.id.menuTelkom)
         btnInstalment = findViewById(R.id.menuCicilan)
         btnFinpay = findViewById(R.id.btnFinpay)
-        btnAsuransi = findViewById(R.id.btnAsuransi)
+        btnInsurance = findViewById(R.id.btnInsurance)
 
         dataProduct = Product()
 
@@ -73,8 +73,8 @@ class MoreActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        btnAsuransi.setOnClickListener {
-            val intent = Intent(this, AsuransiActivity::class.java)
+        btnInsurance.setOnClickListener {
+            val intent = Intent(this, InsuranceActivity::class.java)
             this.startActivity(intent)
         }
 

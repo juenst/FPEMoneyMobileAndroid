@@ -1,43 +1,53 @@
-package lib.finpay.sdk.uikit.view.ppob.instalment
+package lib.finpay.sdk.uikit.view.ppob.insurance
 
 import android.app.ProgressDialog
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.*
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.view.ppob.insurance.adapter.PeriodAdapter
 
-class SmartFinanceActivity : AppCompatActivity() {
+class CarLifeActivity : AppCompatActivity() {
     private lateinit var txtNomorPelanggan: EditText
     private lateinit var btnContact: ImageView
     private lateinit var btnNext: Button
     private lateinit var btnBack: ImageView
     private lateinit var progressDialog: ProgressDialog
 
+    lateinit var txtPeriode: TextView
+    private lateinit var btnChoosePeriodeTime: LinearLayout
+    var periodeTime: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_smart_finance)
+        setContentView(R.layout.activity_car_life)
+
         supportActionBar!!.hide()
 
         txtNomorPelanggan = findViewById(R.id.txtNomorPelanggan)
         btnContact = findViewById(R.id.btnContact)
         btnNext = findViewById(R.id.btnNext)
         btnBack = findViewById(R.id.btnBack)
-        progressDialog = ProgressDialog(this@SmartFinanceActivity)
+
+        btnChoosePeriodeTime = findViewById(R.id.choosePeriodeTime)
+        txtPeriode = findViewById(R.id.selectedPeriodeMonth)
+
+
+        progressDialog = ProgressDialog(this@CarLifeActivity)
 
         ButtonUtils.checkButtonState(btnNext)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
-            btnNext.isEnabled = (!text.isNullOrBlank() && text.length >= 9)
+            btnNext.isEnabled = (!text.isNullOrBlank() && text.length >= 9 && periodeTime != "")
             ButtonUtils.checkButtonState(btnNext)
         }
 
@@ -51,20 +61,24 @@ class SmartFinanceActivity : AppCompatActivity() {
             startActivityForResult(intent, 1)
         }
 
+        btnChoosePeriodeTime.setOnClickListener {
+            showDialogMonth()
+        }
+
         btnNext.setOnClickListener {
             progressDialog.setTitle("Mohon Menunggu")
             progressDialog.setMessage("Sedang Memuat ...")
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                this@SmartFinanceActivity,
+                this@CarLifeActivity,
                 txtNomorPelanggan.text.toString(),
-                ProductCode.FINANCE_SMART,
+                ProductCode.INSURANCE_CAR,
                 "", {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@SmartFinanceActivity, "", it)
+                    DialogUtils.showDialogError(this@CarLifeActivity, "", it)
                 }
             )
         }
@@ -90,7 +104,7 @@ class SmartFinanceActivity : AppCompatActivity() {
                         ButtonUtils.checkButtonState(btnNext)
                     } else {
                         DialogUtils.showDialogError(
-                            this@SmartFinanceActivity,
+                            this@CarLifeActivity,
                             "",
                             "Format Nomor tidak sesuai"
                         )
@@ -100,5 +114,29 @@ class SmartFinanceActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun showDialogMonth() {
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(R.layout.dialog_choose_period)
+        val listNominal = dialog.findViewById<ListView>(R.id.listPeriod)
+
+        val list = mutableListOf<String>()
+        list.add("1 Bulan")
+        list.add("1 Tahun")
+
+        listNominal!!.adapter = PeriodAdapter(this@CarLifeActivity, R.layout.item_period, list)
+
+        listNominal.setOnItemClickListener { adapter, view, position, id ->
+            val selectedItem = adapter.getItemAtPosition(position) as String
+            txtPeriode.text = selectedItem
+            periodeTime = selectedItem
+            btnNext.isEnabled =
+                (!txtNomorPelanggan.text.isNullOrBlank() && txtNomorPelanggan.text.length >= 9 && periodeTime != "")
+            ButtonUtils.checkButtonState(btnNext)
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
