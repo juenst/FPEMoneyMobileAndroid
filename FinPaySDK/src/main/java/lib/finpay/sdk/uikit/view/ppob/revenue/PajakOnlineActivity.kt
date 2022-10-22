@@ -1,4 +1,4 @@
-package lib.finpay.sdk.uikit.view.ppob.instalment
+package lib.finpay.sdk.uikit.view.ppob.revenue
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -17,7 +17,7 @@ import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 
-class SmartFinanceActivity : AppCompatActivity() {
+class PajakOnlineActivity : AppCompatActivity() {
     private lateinit var txtNomorPelanggan: EditText
     private lateinit var btnContact: ImageView
     private lateinit var btnNext: Button
@@ -26,14 +26,14 @@ class SmartFinanceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_smart_finance)
+        setContentView(R.layout.activity_pajak_online)
         supportActionBar!!.hide()
 
         txtNomorPelanggan = findViewById(R.id.txtNomorPelanggan)
         btnContact = findViewById(R.id.btnContact)
         btnNext = findViewById(R.id.btnNext)
         btnBack = findViewById(R.id.btnBack)
-        progressDialog = ProgressDialog(this@SmartFinanceActivity)
+        progressDialog = ProgressDialog(this@PajakOnlineActivity)
 
         ButtonUtils.checkButtonState(btnNext)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
@@ -57,14 +57,14 @@ class SmartFinanceActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                this@SmartFinanceActivity,
+                this@PajakOnlineActivity,
                 txtNomorPelanggan.text.toString(),
-                ProductCode.FINANCE_SMART,
+                ProductCode.REVENUE_ONLINE,
                 "", {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@SmartFinanceActivity, "", it)
+                    DialogUtils.showDialogError(this@PajakOnlineActivity, "", it)
                 }
             )
         }
@@ -90,7 +90,7 @@ class SmartFinanceActivity : AppCompatActivity() {
                         ButtonUtils.checkButtonState(btnNext)
                     } else {
                         DialogUtils.showDialogError(
-                            this@SmartFinanceActivity,
+                            this@PajakOnlineActivity,
                             "",
                             "Format Nomor tidak sesuai"
                         )

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".uikit.view.ppob.revenue.RevenueActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#00ACBA"
-        android:paddingLeft="20dp">
+        android:paddingHorizontal="20dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="PENERIMAAN NEGARA"
+                android:text="Cicilan"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18sp" />
@@ -38,139 +38,128 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/btn_pnbp"
+            android:id="@+id/lnPnbp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_edittext_outline"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="16dp">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_pajak" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_pnbp" />
 
             <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="12dp"
+                android:layout_height="match_parent" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Penerimaan Negara Bukan Pajak (PNBP)"
-                    android:textColor="#121926"
-                    android:textFontWeight="600"
-                    android:textSize="12dp" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp" />
+                    android:textFontWeight="600" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Pembayaran Perpanjangan SIM, Paspor dan KUA"
-                    android:textColor="#202939"
-                    android:textSize="12dp" />
-
+                    android:textSize="11sp" />
             </LinearLayout>
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dedede" />
+
         <LinearLayout
-            android:id="@+id/btn_bea_cukai"
+            android:id="@+id/lnBeacukai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_edittext_outline"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="16dp">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_pajak" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_beacukai" />
 
             <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="12dp"
+                android:layout_height="match_parent" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Bea Cukai"
-                android:textColor="#121926"
-                android:textFontWeight="600"
-                android:textSize="12dp" />
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
+                android:textFontWeight="600" />
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dedede" />
+
         <LinearLayout
-            android:id="@+id/btn_pajak_online"
+            android:id="@+id/lnPajakOnline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_edittext_outline"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="16dp">
 
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_pajak" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_djp" />
 
             <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="12dp"
+                android:layout_height="match_parent" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pajak Online"
-                    android:textColor="#121926"
-                    android:textFontWeight="600"
-                    android:textSize="12dp" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp" />
+                    android:textFontWeight="600" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Pembayaran Pajak Pph21, Pph23, Pph25 dan Pajak lainnya"
-                    android:textColor="#202939"
-                    android:textSize="12dp" />
-
+                    android:layout_height="wrap_content"
+                    android:text="Pembayaran Pph21, Pph23, Pph25 dan Pajak Lainnya"
+                    android:textSize="11sp" />
             </LinearLayout>
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dedede" />
+
 
     </LinearLayout>
 

@@ -1,114 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5"
-    tools:context=".view.ppob.FinpayActivity">
+    tools:context=".uikit.view.ppob.finpay.FinpayActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:paddingLeft="20dp"
-        android:background="#00ACBA">
+        android:background="#00ACBA"
+        android:paddingHorizontal="20dp">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/btnBack"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_left" />
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textFontWeight="600"
+                android:layout_height="match_parent"
                 android:gravity="center"
+                android:text="Finpay"
                 android:textColor="@color/white"
-                android:text="Finpay" />
+                android:textFontWeight="600"
+                android:textSize="18sp" />
+
         </FrameLayout>
+
     </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
-        android:background="@color/white"
-        android:elevation="0.5dp"
-        android:paddingVertical="20dp"
-        android:paddingHorizontal="16dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="8dp"/>
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
         <TextView
-            android:text="Nomor Pelanggan"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Nomor Pelanggan" />
+
         <Space
-            android:layout_width="0dp"
-            android:layout_height="8dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
         <LinearLayout
-            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/shape_edittext_outline"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
             <EditText
-                android:paddingHorizontal="8dp"
-                android:id="@+id/noPelangganField"
+                android:id="@+id/txtNomorPelanggan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparant"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:background="@null"
+                android:digits="0123456789"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <ImageView
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ic_contact"
+                android:id="@+id/btnContact"
                 android:layout_width="24dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="24dp"
+                android:src="@drawable/ic_contact" />
+
         </LinearLayout>
+
     </LinearLayout>
+
     <Space
-        android:layout_width="0dp"
-        android:layout_height="8dp"/>
-    <LinearLayout
-        android:layout_weight="1"
-        android:background="@color/white"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="16dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_weight="1"
-            android:orientation="vertical"
+        android:layout_height="12dp" />
+
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/img_history_empty" />
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textStyle="bold"
-                android:text="Pilih Nomor dari Transaksi Terakhir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="32dp"/>
-            <ImageView
-                android:layout_gravity="center"
-                android:src="@drawable/img_history_empty"
-                android:layout_width="200dp"
-                android:layout_height="200dp"/>
-            <TextView
-                android:layout_gravity="center"
-                android:textSize="12sp"
-                android:text="Belum ada transaksi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnLanjut"
-            android:text="LANJUT"
-            android:enabled="false"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Pagi makan ketan, malam dikejar setan"
+            android:textColor="#121926"
+            android:textFontWeight="600"
+            android:textSize="18sp" />
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="60dp"/>
+            android:layout_height="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Belum bayar Finpay? yuk masukin nomor pelanggan"
+            android:textColor="#4B5565"
+            android:textFontWeight="400"
+            android:textSize="14sp" />
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="20dp"
+        android:enabled="false"
+        android:text="Lanjut" />
+
 </LinearLayout>

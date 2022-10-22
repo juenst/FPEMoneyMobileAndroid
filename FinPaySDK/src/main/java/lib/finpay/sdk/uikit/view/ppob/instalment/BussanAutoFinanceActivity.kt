@@ -18,11 +18,11 @@ import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 
 class BussanAutoFinanceActivity : AppCompatActivity() {
-    lateinit var txtNomorPelanggan: EditText
-    lateinit var btnContact: ImageView
-    lateinit var btnNext: Button
-    lateinit var btnBack: ImageView
-    lateinit var progressDialog: ProgressDialog
+    private lateinit var txtNomorPelanggan: EditText
+    private lateinit var btnContact: ImageView
+    private lateinit var btnNext: Button
+    private lateinit var btnBack: ImageView
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

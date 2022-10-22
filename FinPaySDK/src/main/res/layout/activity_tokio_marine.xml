@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".uikit.view.ppob.instalment.BussanAutoFinanceActivity">
+    tools:context=".uikit.view.ppob.insurance.TokioMarineActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Bussan Auto Finance"
+                android:text="Tokio Marine"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18sp" />
@@ -78,6 +79,48 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Periode Bayar" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp" />
+
+        <LinearLayout
+            android:id="@+id/choosePeriodeTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edittext_outline"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/selectedPeriodeMonth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pilih Periode"
+                android:textSize="14sp" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_chevron_down"
+                app:tint="#00ACBA" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <Space
@@ -115,11 +158,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Belum bayar cicilan Bussan? yuk masukin nomor pelanggan"
+            android:text="Bayar BPJS Kesehatan? yuk masukin nomor pelanggan"
             android:textColor="#4B5565"
             android:textFontWeight="400"
             android:textSize="14sp" />
     </LinearLayout>
+
 
     <Button
         android:id="@+id/btnNext"
@@ -130,4 +174,5 @@
         android:layout_marginVertical="20dp"
         android:enabled="false"
         android:text="Lanjut" />
+
 </LinearLayout>
