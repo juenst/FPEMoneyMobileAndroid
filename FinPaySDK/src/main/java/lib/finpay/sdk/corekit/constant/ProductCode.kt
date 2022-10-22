@@ -19,5 +19,17 @@ class ProductCode {
         var INSURANCE_TOKIO: String = "080017"
         var INSURANCE_CAR: String = "080016"
 
+        var PNBP: String = "50017"
+        var PAJAK_ONLINE: String = "50017"
+        var BEA_CUKAI: String = "50017"
+        var FINANCE_BUSSAN: String = "20027"
+        var FINANCE_SMART: String = "20027"
+        var INSURANCE_TOKIO: String = "80017"
+        var INSURANCE_CAR: String = "80016"
+        var ULANG_GADAI: String = "020018"
+        var ANGSURAN_MIKRO: String = "020025"
+        var CICIL_GADAI: String = "020019"
+        var GADAI_TEBUS: String = "020020"
+        var TABUNGAN_EMAS: String = "021001"
     }
 }

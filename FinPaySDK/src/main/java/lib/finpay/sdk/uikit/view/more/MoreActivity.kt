@@ -16,6 +16,10 @@ import lib.finpay.sdk.uikit.view.ppob.insurance.InsuranceActivity
 import lib.finpay.sdk.uikit.view.ppob.internet.tv.cable.InternetTvCableActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
 import lib.finpay.sdk.uikit.view.ppob.revenue.RevenueActivity
+import lib.finpay.sdk.uikit.view.ppob.pegadaian.PegadaianActivity
+import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
+import lib.finpay.sdk.uikit.view.ppob.state.revenue.StateRevenueActivity
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
 
 class MoreActivity : AppCompatActivity() {
@@ -33,6 +37,7 @@ class MoreActivity : AppCompatActivity() {
     private lateinit var btnInstalment: LinearLayout
     private lateinit var btnFinpay: LinearLayout
     private lateinit var btnInsurance: LinearLayout
+    private lateinit var btnPegadaian: LinearLayout
 
     private lateinit var dataProduct: Product
 
@@ -55,6 +60,7 @@ class MoreActivity : AppCompatActivity() {
         btnInstalment = findViewById(R.id.menuCicilan)
         btnFinpay = findViewById(R.id.btnFinpay)
         btnInsurance = findViewById(R.id.btnInsurance)
+        btnPegadaian = findViewById(R.id.btnPegadaian)
 
         dataProduct = Product()
 
@@ -104,6 +110,11 @@ class MoreActivity : AppCompatActivity() {
 
         btnInstalment.setOnClickListener {
             val intent = Intent(this, InstalmentActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnPegadaian.setOnClickListener {
+            val intent = Intent(this, PegadaianActivity::class.java)
             this.startActivity(intent)
         }
 

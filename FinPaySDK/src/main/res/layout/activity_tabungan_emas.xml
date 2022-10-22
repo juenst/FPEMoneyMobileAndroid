@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F5F5F5"
-    tools:context=".uikit.view.ppob.pegadaian.UlangGadaiActivity">
+    tools:context=".uikit.view.ppob.pegadaian.TabunganEmasActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -27,7 +27,7 @@
                 android:textFontWeight="600"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="Ulang Gadai" />
+                android:text="Beli Tabungan Emas" />
         </FrameLayout>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
@@ -106,6 +106,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <Button
+            android:layout_alignParentBottom="true"
             android:id="@+id/btnLanjut"
             android:text="LANJUT"
             android:enabled="false"
