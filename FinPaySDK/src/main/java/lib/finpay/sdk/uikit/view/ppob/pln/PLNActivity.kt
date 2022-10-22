@@ -20,6 +20,7 @@ import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.ppob.bpjs.adapter.MonthAdapter
+import lib.finpay.sdk.uikit.view.ppob.internettvcable.IndihomeActivity
 import lib.finpay.sdk.uikit.view.ppob.pln.adapter.NominalAdapter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -115,6 +116,10 @@ class PLNActivity: AppCompatActivity() {
                 txtNomorPelangganToken.text.toString(),
                 ProductCode.PLN_POSTPAID,
                 nominal, {
+                    val intent = Intent(this, PLNResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
@@ -133,7 +138,6 @@ class PLNActivity: AppCompatActivity() {
                 txtNomorPelangganTagihan.text.toString(),
                 ProductCode.PLN_PREPAID,
                 "", {
-                    println("success")
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
