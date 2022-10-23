@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingLeft="20dp"
+        android:background="#00ACBA">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_left" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textFontWeight="600"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Bukti Transaksi" />
+
+        </FrameLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="#00ACBA"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:padding="20dp"
+                app:cardCornerRadius="20dp"
+                android:background="@drawable/shape_receipt"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="10sp"
+                        android:text="24 Okt 2022 - 15:06" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textSize="10sp"
+                        android:text="Finpay ID 083815613839" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#CCC" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_circle_check" />
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0dp" />
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="Transaksi berhasil" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#CCEEF1"
+                    app:cardCornerRadius="5dp"
+                    android:padding="8dp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:text="Total Bayar" />
+
+                            <TextView
+                                android:id="@+id/txtTotalBayar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:gravity="end"
+                                android:text="Rp0" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="12sp"
+                                android:text="Harga" />
+
+                            <TextView
+                                android:id="@+id/txtPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="12sp"
+                                android:gravity="end"
+                                android:text="Rp0" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="12sp"
+                                android:text="Biaya Layanan" />
+
+                            <TextView
+                                android:id="@+id/txtBiayaLayanan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="12sp"
+                                android:gravity="end"
+                                android:text="Rp0" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Transaksi"
+                    android:textStyle="bold"
+                    android:textSize="16dp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Waktu"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtTanggal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jenis Transaksi"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": Pay QR (QRIS)"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No. Transaksi"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtNoTrans"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Acruirer"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": Finpay Money"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Merchant"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtMerchantName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lokasi Merchant"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtLocationMerchant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Terminal ID"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtTerminalID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Reff ID (RRN)"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtReffID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Customer PAN"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtCustomerPAN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Merchant PAN"
+                        android:layout_weight="2"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/txtMerchantPAN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=": -"
+                        android:layout_weight="1"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Instrumen Bayar"
+                    android:textStyle="bold"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#EEE"
+                    app:cardCornerRadius="5dp"
+                    android:padding="8dp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/logo_color"/>
+
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="0dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Finpay Money"
+                            android:textStyle="bold"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PT. Finnet Indonesia"
+                    android:textStyle="bold"
+                    android:textSize="14dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Telkom Landmark Tower Lantai 28\nJl.Jend. Gatot Subroto Kav 52 Jakarta Selatan\nNPWP 02.479.391.1-062.000"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

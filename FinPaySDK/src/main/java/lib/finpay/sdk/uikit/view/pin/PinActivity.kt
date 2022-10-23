@@ -11,7 +11,7 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.view.AppActivity
-import lib.finpay.sdk.uikit.view.transaction.TransactionDetailActivity
+import lib.finpay.sdk.uikit.view.transaction.TransactionDetailQrisActivity
 
 class PinActivity : AppCompatActivity() {
     val pinType: String? by lazy {
@@ -134,7 +134,7 @@ class PinActivity : AppCompatActivity() {
                 reffFlag!!,
                 pin[0] + pin[1] + pin[2] + pin[3] + pin[4] + pin[5], {
                     progressDialog.dismiss()
-                    val intent = Intent(this@PinActivity, TransactionDetailActivity::class.java)
+                    val intent = Intent(this@PinActivity, TransactionDetailQrisActivity::class.java)
                     startActivity(intent)
                 }, {
                     progressDialog.dismiss()

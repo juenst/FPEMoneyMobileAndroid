@@ -17,9 +17,6 @@ import lib.finpay.sdk.uikit.view.ppob.internet.tv.cable.InternetTvCableActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
 import lib.finpay.sdk.uikit.view.ppob.revenue.RevenueActivity
 import lib.finpay.sdk.uikit.view.ppob.pegadaian.PegadaianActivity
-import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
-import lib.finpay.sdk.uikit.view.ppob.state.revenue.StateRevenueActivity
-import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
 
 class MoreActivity : AppCompatActivity() {

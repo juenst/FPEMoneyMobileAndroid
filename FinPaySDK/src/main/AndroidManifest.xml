@@ -248,7 +248,7 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.transaction.TransactionDetailActivity"
+            android:name=".uikit.view.transaction.TransactionDetailQrisActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity

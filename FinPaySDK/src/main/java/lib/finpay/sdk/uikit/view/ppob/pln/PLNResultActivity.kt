@@ -27,8 +27,13 @@ import kotlin.collections.ArrayList
 
 
 class PLNResultActivity : AppCompatActivity() {
-    val inquiry = intent.getSerializableExtra("result") as? PpobInquiry
+//    val inquiry = intent.getSerializableExtra("result") as? PpobInquiry
     val noPelanggan: String? by lazy { intent.getStringExtra("noPelanggan") }
+    val customerName: String? by lazy { intent.getStringExtra("customerName") }
+    val customerId: String? by lazy { intent.getStringExtra("customerId") }
+    val tagihan: String? by lazy { intent.getStringExtra("tagihan") }
+    val nomorReferensi: String? by lazy { intent.getStringExtra("nomorReferensi") }
+    val fee: String? by lazy { intent.getStringExtra("fee") }
     lateinit var txtCustName: TextView
     lateinit var txtCustPhoneNumber: TextView
     lateinit var txtCustId: TextView
@@ -55,11 +60,11 @@ class PLNResultActivity : AppCompatActivity() {
         btnConfirm = findViewById(R.id.btnConfirm)
         progressDialog = ProgressDialog(this@PLNResultActivity)
 
-        txtCustName.text = inquiry?.bit61Parse?.customerName
+        txtCustName.text = customerName
         txtCustPhoneNumber.text = noPelanggan
-        txtCustId.text = inquiry?.bit61Parse?.customerId
+        txtCustId.text = customerId
         txtDaya.text = "-"
-        txtTagihan.text = TextUtils.formatRupiah(inquiry?.tagihan!!.toDouble())
+        txtTagihan.text = TextUtils.formatRupiah(tagihan!!.toDouble())
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -69,13 +74,20 @@ class PLNResultActivity : AppCompatActivity() {
             showDialogConfirmPayment()
         }
 
+        getUserBallance()
     }
 
     fun getUserBallance() {
+        progressDialog.setTitle("Mohon Menunggu")
+        progressDialog.setMessage("Sedang Memuat ...")
+        progressDialog.setCancelable(false) // blocks UI interaction
+        progressDialog.show()
         FinpaySDK.getUserBallance(this@PLNResultActivity, {
             saldo = it.amount!!
+            progressDialog.dismiss()
         },{
-            Toast.makeText(this@PLNResultActivity, it, Toast.LENGTH_LONG)
+            progressDialog.dismiss()
+            DialogUtils.showDialogError(this@PLNResultActivity, "", it)
         })
     }
 
@@ -90,29 +102,22 @@ class PLNResultActivity : AppCompatActivity() {
         val txtTotalBayar= dialog.findViewById<TextView>(R.id.txtTotalBayar)
         val txtSaldo= dialog.findViewById<TextView>(R.id.saldo)
         val cardWarning= dialog.findViewById<CardView>(R.id.cardWarning)
-
-        val reffId: String = inquiry?.bit61Parse?.billInfo1!!.nomorReferensi!!
-        var fee: String = "0"
-        for (data in inquiry.fee) {
-            if (data.sof == "mc") {
-                fee = data.fee.toString()
-            }
-        }
+        val logoProvider= dialog.findViewById<CardView>(R.id.logoProvider)
 
 
-        if(saldo.toInt() < (inquiry.tagihan!!.toInt() + fee.toInt())){
+        if(saldo.toInt() < (tagihan!!.toInt() + fee!!.toInt())){
             cardWarning!!.visibility = View.VISIBLE
             txtBtnPay!!.text = "Isi Saldo"
         }
-
-        txtDenom!!.text = "Token PLN "+TextUtils.formatRupiah(inquiry.tagihan!!.toDouble())
-        txtPrice!!.text = TextUtils.formatRupiah(inquiry.tagihan!!.toDouble())
-        txtBiayaLayanan!!.text = TextUtils.formatRupiah(fee.toDouble())
-        txtTotalBayar!!.text = TextUtils.formatRupiah((inquiry.tagihan!!.toInt() + fee.toInt()).toDouble())
+        logoProvider!!.visibility = View.GONE
+        txtDenom!!.text = "Token PLN "+TextUtils.formatRupiah(tagihan!!.toDouble())
+        txtPrice!!.text = TextUtils.formatRupiah(tagihan!!.toDouble())
+        txtBiayaLayanan!!.text = TextUtils.formatRupiah(fee!!.toDouble())
+        txtTotalBayar!!.text = TextUtils.formatRupiah((tagihan!!.toInt() + fee!!.toInt()).toDouble())
         txtSaldo!!.text = TextUtils.formatRupiah(saldo.toDouble())
 
         btnPay?.setOnClickListener {
-            if(saldo.toInt() < (inquiry.tagihan!!.toInt() + fee.toInt())){
+            if(saldo.toInt() < (tagihan!!.toInt() + fee!!.toInt())){
                 //open top up
             } else {
                 progressDialog.setTitle("Mohon Menunggu")
@@ -123,14 +128,14 @@ class PLNResultActivity : AppCompatActivity() {
                 val currentDate = sdf.format(Date())
                 FinpaySDK.authPin(
                     this@PLNResultActivity,
-                    inquiry.tagihan!!.toString(), ProductCode.PLN_POSTPAID,{
+                    tagihan!!.toString(), ProductCode.PLN_POSTPAID,{
                         progressDialog.dismiss()
                         val intent = Intent(this@PLNResultActivity, PaymentActivity::class.java)
                         intent.putExtra("paymentType", PaymentType.paymentPPOB)
                         intent.putExtra("sof", "mc")
-                        intent.putExtra("amount", (inquiry.tagihan!!.toInt() + fee.toInt()).toString())
-                        intent.putExtra("denom", inquiry.tagihan!!)
-                        intent.putExtra("reffFlag", reffId)
+                        intent.putExtra("amount", (tagihan!!.toInt() + fee!!.toInt()).toString())
+                        intent.putExtra("denom", tagihan!!)
+                        intent.putExtra("reffFlag", nomorReferensi)
                         intent.putExtra("billingId", noPelanggan)
                         intent.putExtra("productCode", ProductCode.PLN_POSTPAID)
                         intent.putExtra("activationDate", currentDate)

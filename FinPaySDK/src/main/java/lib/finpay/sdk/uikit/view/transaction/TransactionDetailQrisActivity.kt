@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
 import lib.finpay.sdk.uikit.utilities.TextUtils
 
-class TransactionDetailActivity : AppCompatActivity()  {
+class TransactionDetailQrisActivity : AppCompatActivity()  {
     lateinit var btnBack: ImageView
     lateinit var txtTanggal: TextView
     lateinit var txtTotalBayar: TextView
@@ -18,6 +18,9 @@ class TransactionDetailActivity : AppCompatActivity()  {
     lateinit var txtReffID: TextView
     lateinit var txtCustomerPAN: TextView
     lateinit var txtMerchantPAN: TextView
+    lateinit var txtPrice: TextView
+    lateinit var txtBiayaLayanan: TextView
+    lateinit var status: TextView
 
     val merchantName: String? by lazy { intent.getStringExtra("merchantName") }
     val merchantId: String? by lazy { intent.getStringExtra("merchantId") }
@@ -36,10 +39,12 @@ class TransactionDetailActivity : AppCompatActivity()  {
     val customerPAN: String? by lazy { intent.getStringExtra("customerPAN") }
     val invoice: String? by lazy { intent.getStringExtra("invoice") }
     val reffID: String? by lazy { intent.getStringExtra("reffID") }
+    val statusDesc: String? by lazy { intent.getStringExtra("statusDesc") }
+//    val result = intent.getSerializableExtra("result") as? QrisPayment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transaction_detail)
+        setContentView(R.layout.activity_transaction_detail_qris)
         supportActionBar!!.hide()
 
         btnBack = findViewById(R.id.btnBack)
@@ -52,8 +57,24 @@ class TransactionDetailActivity : AppCompatActivity()  {
         txtReffID = findViewById(R.id.txtReffID)
         txtCustomerPAN = findViewById(R.id.txtCustomerPAN)
         txtMerchantPAN = findViewById(R.id.txtMerchantPAN)
+        txtPrice = findViewById(R.id.txtPrice)
+        txtBiayaLayanan = findViewById(R.id.txtBiayaLayanan)
+        status = findViewById(R.id.status)
+
+        status.text = if(statusDesc!!.uppercase() == "BERHASIL") "Transaksi Berhasil" else "Transaksi Gagal"
+
+//        txtTotalBayar.text = TextUtils.formatRupiah((if(result?.bit61Parse?.amount == null || result.bit61Parse?.amount == "") "0" else result.bit61Parse?.amount)!!.toDouble())
+//        txtTanggal.text = ": -"
+//        txtNoTrans.text = ": "+result?.bit61Parse?.invoice
+//        txtMerchantName.text = ": "+result?.bit61Parse?.merchantName
+//        txtLocationMerchant.text = ": "+result?.bit61Parse?.merchantLocation
+//        txtTerminalID.text = ": "+result?.bit61Parse?.terminalID
+//        txtReffID.text = ": "+reffID
+//        txtCustomerPAN.text = ": "+result?.bit61Parse?.customerPAN
+//        txtMerchantPAN.text = ": "+result?.bit61Parse?.merchantPAN
 
         txtTotalBayar.text = TextUtils.formatRupiah((if(amount == null || amount == "") "0" else amount)!!.toDouble())
+        txtPrice.text = TextUtils.formatRupiah((if(amount == null || amount == "") "0" else amount)!!.toDouble())
         txtTanggal.text = ": -"
         txtNoTrans.text = ": "+invoice
         txtMerchantName.text = ": "+merchantName
@@ -62,6 +83,7 @@ class TransactionDetailActivity : AppCompatActivity()  {
         txtReffID.text = ": "+reffID
         txtCustomerPAN.text = ": "+customerPAN
         txtMerchantPAN.text = ": "+merchantPAN
+        txtBiayaLayanan.text = "Rp0"
 
         btnBack.setOnClickListener{
             finish()

@@ -117,8 +117,19 @@ class PLNActivity: AppCompatActivity() {
                 ProductCode.PLN_POSTPAID,
                 nominal, {
                     val intent = Intent(this, PLNResultActivity::class.java)
-                    intent.putExtra("result", it)
+//                    intent.putExtra("result", it)
                     intent.putExtra("noPelanggan", txtNomorPelangganToken.text)
+                    intent.putExtra("customerName", it.bit61Parse?.customerName)
+                    intent.putExtra("customerId", it.bit61Parse?.customerId)
+                    intent.putExtra("tagihan", it.tagihan)
+                    intent.putExtra("tagihan", it.bit61Parse?.billInfo1?.nomorReferensi)
+                    var fee: String = "0"
+                    for (data in it.fee) {
+                        if (data.sof == "mc") {
+                            fee = data.fee.toString()
+                        }
+                    }
+                    intent.putExtra("fee", it.fee)
                     startActivity(intent)
                     progressDialog.dismiss()
                 }, {

@@ -13,7 +13,9 @@ import androidx.appcompat.widget.Toolbar
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.uikit.constant.PaymentType
-import lib.finpay.sdk.uikit.view.transaction.TransactionDetailActivity
+import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.view.transaction.TransactionDetailPpobActivity
+import lib.finpay.sdk.uikit.view.transaction.TransactionDetailQrisActivity
 
 
 class PaymentActivity : AppCompatActivity() {
@@ -82,7 +84,8 @@ class PaymentActivity : AppCompatActivity() {
                             reffFlag!!,
                             pinToken, {
                                 progressDialog.dismiss()
-                                val intent = Intent(this@PaymentActivity, TransactionDetailActivity::class.java)
+                                val intent = Intent(this@PaymentActivity, TransactionDetailQrisActivity::class.java)
+//                                intent.putExtra("result", it)
                                 intent.putExtra("merchantName", it.bit61Parse!!.merchantName)
                                 intent.putExtra("merchantId", it.bit61Parse!!.merchantId)
                                 intent.putExtra("nevaNumber", it.bit61Parse!!.nevaNumber)
@@ -100,12 +103,13 @@ class PaymentActivity : AppCompatActivity() {
                                 intent.putExtra("customerPAN", it.bit61Parse!!.customerPAN)
                                 intent.putExtra("invoice", it.bit61Parse!!.invoice)
                                 intent.putExtra("reffID", reffFlag)
+                                intent.putExtra("statusDesc", it.statusDesc)
                                 startActivity(intent)
                                 this@PaymentActivity.finish()
                             }, {
                                 progressDialog.dismiss()
                                 Toast.makeText(this@PaymentActivity, it, Toast.LENGTH_LONG)
-                                this@PaymentActivity.finish()
+                                DialogUtils.showDialogError(this@PaymentActivity, "", it)
                             }
                         )
                     } else if(paymentType == PaymentType.paymentPPOB) {
@@ -119,9 +123,26 @@ class PaymentActivity : AppCompatActivity() {
                             productCode!!,
                             reffFlag!!,
                             activationDate!!, pinToken, {
-                                println("success")
+                                progressDialog.dismiss()
+                                val intent = Intent(this@PaymentActivity, TransactionDetailPpobActivity::class.java)
+                                intent.putExtra("amountDpp", it.pajak!!.amountDpp.toString())
+                                intent.putExtra("amountPpn", it.pajak!!.amountPpn.toString())
+                                intent.putExtra("ppn", it.pajak!!.ppn)
+                                intent.putExtra("nomorReferensi", it.bit61Parse!!.billInfo1!!.nomorReferensi)
+                                intent.putExtra("nilaiTagihan", it.bit61Parse!!.billInfo1!!.nilaiTagihan)
+                                intent.putExtra("customerId", it.bit61Parse!!.customerId)
+                                intent.putExtra("customerName", it.bit61Parse!!.customerName)
+                                intent.putExtra("npwp", it.bit61Parse!!.npwp)
+                                intent.putExtra("kodeDivre", it.bit61Parse!!.kodeDivre)
+                                intent.putExtra("kodeDatel", it.bit61Parse!!.kodeDatel)
+                                intent.putExtra("jumlahBill", it.bit61Parse!!.jumlahBill)
+                                intent.putExtra("statusDesc", it.statusDesc)
+
+                                startActivity(intent)
+                                this@PaymentActivity.finish()
                             },{
-                                println("failed")
+                                progressDialog.dismiss()
+                                DialogUtils.showDialogError(this@PaymentActivity, "", it)
                             }
                         )
                     } else {
