@@ -225,6 +225,11 @@
             android:label="Wallet"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
+            android:name=".uikit.view.wallet.WalletSDKActivity"
+            android:exported="false"
+            android:label="Wallet"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
             android:name=".uikit.view.transaction.TransactionHistoryActivity"
             android:exported="false"
             android:label="History Transaksi"

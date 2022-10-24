@@ -20,6 +20,7 @@ import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
 import lib.finpay.sdk.uikit.view.transfer.TransferActivity
 import lib.finpay.sdk.uikit.view.upgrade.UpgradeAccountActivity
 import lib.finpay.sdk.uikit.view.wallet.WalletActivity
+import lib.finpay.sdk.uikit.view.wallet.WalletSDKActivity
 
 class FinpaySDKUI {
 
@@ -55,7 +56,13 @@ class FinpaySDKUI {
                             if(it.custStatusCode == "003") {
                                 progressDialog.dismiss()
                                 FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
-                                DialogUtils.showDialogSuccess(context, "Aktivasi Sukses", "Aktivasi akun berhasil, silahkan hubungkan kembali")
+                                DialogUtils.showDialogSuccess(
+                                    context, "Aktivasi Sukses",
+                                    "Aktivasi akun berhasil, silahkan hubungkan kembali",
+                                    {
+                                        openWallet(context, credential)
+                                    }
+                                )
                             } else {
                                 progressDialog.dismiss()
                                 val intent = Intent(context, PinActivity::class.java)
@@ -77,15 +84,14 @@ class FinpaySDKUI {
             })
         }
 
-        fun logout(context: Context) {
-            progressDialog = ProgressDialog(context)
-            progressDialog.setTitle("Mohon Menunggu")
-            progressDialog.setMessage("Sedang Memuat ...")
-            progressDialog.setCancelable(false)
-            progressDialog.show()
+        fun logout(context: Context, onSuccess: () -> Unit) {
             FinpaySDK.init(context)
             FinpaySDK.prefHelper.clearDataLogout()
-            progressDialog.dismiss()
+            if(FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT) != true) {
+                onSuccess()
+                println("masuk sini")
+                println(FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID))
+            }
         }
 
 
@@ -115,7 +121,7 @@ class FinpaySDKUI {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
-                val intent = Intent(context, WalletActivity::class.java)
+                val intent = Intent(context, WalletSDKActivity::class.java)
                 context.startActivity(intent)
             } else {
                 DialogUtils.showDialogConnectAccount(context, credential)

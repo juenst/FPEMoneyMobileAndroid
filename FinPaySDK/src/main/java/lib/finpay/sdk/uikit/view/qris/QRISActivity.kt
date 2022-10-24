@@ -31,6 +31,7 @@ import com.google.zxing.MultiFormatReader
 import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 import lib.finpay.sdk.databinding.ActivityQrisBinding
+import lib.finpay.sdk.uikit.utilities.DialogUtils
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileInputStream
@@ -74,41 +75,41 @@ class QRISActivity : AppCompatActivity() {
 
 
     private fun setupControls() {
-        barcodeDetector = BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build()
-        cameraSource = CameraSource.Builder(this, barcodeDetector)
-            .setRequestedPreviewSize(1920, 1080)
-            .setAutoFocusEnabled(true) //you should add this feature
-            .build()
+//        barcodeDetector = BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build()
+//        cameraSource = CameraSource.Builder(this, barcodeDetector)
+//            .setRequestedPreviewSize(1920, 1080)
+//            .setAutoFocusEnabled(true) //you should add this feature
+//            .build()
 
-        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
-            @SuppressLint("MissingPermission")
-            override fun surfaceCreated(holder: SurfaceHolder) {
-                try {
-                    //Start preview after 1s delay
-                    cameraSource.start(holder)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-            }
-
-            @SuppressLint("MissingPermission")
-            override fun surfaceChanged(
-                holder: SurfaceHolder,
-                format: Int,
-                width: Int,
-                height: Int
-            ) {
-                try {
-                    cameraSource.start(holder)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun surfaceDestroyed(holder: SurfaceHolder) {
-                cameraSource.stop()
-            }
-        })
+//        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
+//            @SuppressLint("MissingPermission")
+//            override fun surfaceCreated(holder: SurfaceHolder) {
+//                try {
+//                    //Start preview after 1s delay
+//                    cameraSource.start(holder)
+//                } catch (e: IOException) {
+//                    e.printStackTrace()
+//                }
+//            }
+//
+//            @SuppressLint("MissingPermission")
+//            override fun surfaceChanged(
+//                holder: SurfaceHolder,
+//                format: Int,
+//                width: Int,
+//                height: Int
+//            ) {
+//                try {
+//                    cameraSource.start(holder)
+//                } catch (e: IOException) {
+//                    e.printStackTrace()
+//                }
+//            }
+//
+//            override fun surfaceDestroyed(holder: SurfaceHolder) {
+//                cameraSource.stop()
+//            }
+//        })
 
 
 //        barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
@@ -139,13 +140,13 @@ class QRISActivity : AppCompatActivity() {
 ////                        progressDialog.dismiss()
 //                        cameraSource.stop()
 //                        this@QRISActivity.finish()
-//                        Toast.makeText(this@QRISActivity, "Format QRIS salah", Toast.LENGTH_SHORT).show()
+//                        DialogUtils.showDialogError(this@QRISActivity, "", "Format QRIS salah")
 //                    }
 //                }else {
 ////                    progressDialog.dismiss()
 //                    cameraSource.stop()
 //                    this@QRISActivity.finish()
-//                    Toast.makeText(this@QRISActivity, "value- else", Toast.LENGTH_SHORT).show()
+//                    DialogUtils.showDialogError(this@QRISActivity, "", "value- else")
 //                }
 //            }
 //        })
@@ -176,7 +177,7 @@ class QRISActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraSource.stop()
+//        cameraSource.stop()
     }
 
     private fun openGallery() {
@@ -221,7 +222,7 @@ class QRISActivity : AppCompatActivity() {
         val source: LuminanceSource = RGBLuminanceSource(bMap.width, bMap.height, intArray)
         val bitmap = BinaryBitmap(HybridBinarizer(source))
         val reader: MultiFormatReader = MultiFormatReader()
-        cameraSource.stop()
+//        cameraSource.stop()
         try {
             val result: com.google.zxing.Result = reader.decode(bitmap)
             contents = result.text
@@ -232,7 +233,7 @@ class QRISActivity : AppCompatActivity() {
             this@QRISActivity.finish()
         } catch (e: Exception) {
             Log.e("QrTest", "Error decoding qr code", e)
-            Toast.makeText(this, "Error decoding QR Code, Mohon pilih gambar QR Code yang benar!", Toast.LENGTH_SHORT).show()
+            DialogUtils.showDialogError(this, "", "Error decoding QR Code, Mohon pilih gambar QR Code yang benar!")
         }
         return contents
     }
