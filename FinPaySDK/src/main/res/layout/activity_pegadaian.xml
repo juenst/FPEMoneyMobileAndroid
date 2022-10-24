@@ -26,12 +26,12 @@
                 android:textSize="18sp"
                 android:textFontWeight="600"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="#FFFFFF"
                 android:text="Pegadaian" />
         </FrameLayout>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"
         android:orientation="vertical"
@@ -63,7 +63,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#dedede"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -93,7 +93,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#dedede"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -123,7 +123,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#dedede"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -153,7 +153,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#dedede"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -183,7 +183,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#dedede"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
