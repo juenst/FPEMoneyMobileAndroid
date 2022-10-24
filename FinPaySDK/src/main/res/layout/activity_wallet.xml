@@ -39,7 +39,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:paddingLeft="20dp"
-                        android:background="@color/transparant">
+                        android:background="@color/transparent">
 
                         <ImageView
                             android:id="@+id/btnBack"

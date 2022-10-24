@@ -1,5 +1,6 @@
 package com.finpay.sdk
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
@@ -19,6 +21,7 @@ import lib.finpay.sdk.uikit.view.ppob.pln.PLNActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var finPaySDK: FinpaySDK
+    lateinit var progressDialog: ProgressDialog
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,28 +29,49 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var textTokenId = findViewById(R.id.tokenId) as TextView
         var textSaldo = findViewById(R.id.saldo) as TextView
-        var btnCallSDK = findViewById(R.id.btn_call_sdk) as Button
-        var btnCallWallet = findViewById(R.id.btn_call_wallet) as Button
-        val btnOpenDialogQr = findViewById<Button>(R.id.btn_open_dialog_qr)
-        val btnTransfer = findViewById<Button>(R.id.btn_transfer)
-        val btnLogout = findViewById<Button>(R.id.btn_logout)
+        var btnCorekit = findViewById(R.id.btnCorekit) as Button
+        var btnPairing = findViewById(R.id.btnPairing) as Button
+        val btnUpgradeAccount = findViewById<Button>(R.id.btnUpgradeAccount)
+        val btnQris = findViewById<Button>(R.id.btnQris)
+        val btnTransfer = findViewById<Button>(R.id.btnTransfer)
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
         finPaySDK = FinpaySDK()
+        progressDialog = ProgressDialog(this)
 
-        btnCallSDK.setOnClickListener {
-
+        btnCorekit.setOnClickListener {
+            progressDialog = ProgressDialog(this)
+            progressDialog.setTitle("Mohon Menunggu")
+            progressDialog.setMessage("Sedang Memuat ...")
+            progressDialog.setCancelable(false)
+            progressDialog.show()
+            FinpaySDK.getToken(
+                this,
+                {
+                    textTokenId.setText(it.tokenID)
+                    textSaldo.setText(it.statusDesc)
+                    progressDialog.dismiss()
+                },{
+                    progressDialog.dismiss()
+                    DialogUtils.showDialogError(this@MainActivity, "", it)
+                }
+            )
         }
 
 
-        btnCallWallet.setOnClickListener {
+        btnPairing.setOnClickListener {
             FinpaySDKUI.openApplication(this@MainActivity, credential())
         }
 
-        btnOpenDialogQr.setOnClickListener {
-
+        btnUpgradeAccount.setOnClickListener {
+            FinpaySDKUI.openUpgradeAccount(this@MainActivity, credential())
         }
 
         btnLogout.setOnClickListener {
             FinpaySDKUI.logout(this@MainActivity, {})
+        }
+
+        btnQris.setOnClickListener {
+            FinpaySDKUI.openQris(this@MainActivity, credential())
         }
 
         btnTransfer.setOnClickListener {

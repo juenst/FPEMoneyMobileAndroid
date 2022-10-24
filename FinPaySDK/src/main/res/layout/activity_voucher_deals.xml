@@ -59,7 +59,7 @@
                 android:layout_weight="1"
                 android:hint="Cari merchant"
                 android:textSize="14dp"
-                android:background="@color/transparant"
+                android:background="@color/transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
         </LinearLayout>

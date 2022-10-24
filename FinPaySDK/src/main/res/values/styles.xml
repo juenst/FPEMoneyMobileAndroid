@@ -85,13 +85,6 @@
         <item name="android:background">@drawable/shape_two</item>
     </style>
 
-    <style name="ActionBar.SemiTransp" parent="Base.Widget.AppCompat.ActionBar">
-        <item name="displayOptions">showHome</item>
-        <item name="background">@color/md_white_1000</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingTop">5dp</item>
-    </style>
-
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
@@ -105,15 +98,6 @@
     <style name="Stepper.CardView" parent="CardView">
         <item name="cardElevation">@dimen/card_elevation_medium</item>
         <item name="cardCornerRadius">@dimen/card_radius_default</item>
-    </style>
-
-    <style name="Widget.Theme.FinPaySDK.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
-    </style>
-
-    <style name="Widget.Theme.FinPaySDK.ButtonBar.Fullscreen" parent="">
-        <item name="android:background">@color/black_overlay</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
 
     <style name="ProgressHUD" parent="@android:style/Theme.Dialog">

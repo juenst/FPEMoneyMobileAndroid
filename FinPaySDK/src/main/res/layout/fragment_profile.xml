@@ -276,7 +276,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/md_grey_200" />
+                            android:background="#EEE" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -415,7 +415,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/md_grey_200" />
+                            android:background="#EEE" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -458,7 +458,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/md_grey_200" />
+                            android:background="#EEE" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -501,7 +501,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/md_grey_200" />
+                            android:background="#EEE" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -569,7 +569,7 @@
             android:layout_margin="20dp"
             android:gravity="center"
             android:background="@color/white"
-            android:textColor="@color/red_notive"
+            android:textColor="#EA4335"
             android:text="KELUAR" />
         <Space
             android:layout_width="0dp"
