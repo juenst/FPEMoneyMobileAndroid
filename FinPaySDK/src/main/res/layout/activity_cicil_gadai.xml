@@ -26,12 +26,12 @@
                 android:textSize="18sp"
                 android:textFontWeight="600"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="#FFFFFF"
                 android:text="Cicil Gadai" />
         </FrameLayout>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:elevation="0.5dp"
         android:paddingVertical="20dp"
         android:paddingHorizontal="16dp"
@@ -58,7 +58,7 @@
                 android:paddingHorizontal="8dp"
                 android:id="@+id/noKreditField"
                 android:layout_weight="1"
-                android:background="@color/transparent"
+                android:background="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
             <ImageView
