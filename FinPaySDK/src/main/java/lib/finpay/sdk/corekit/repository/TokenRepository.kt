@@ -5,6 +5,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
 import lib.finpay.sdk.corekit.model.Token
 import lib.finpay.sdk.corekit.service.BaseServices
+import lib.finpay.sdk.corekit.service.CallbackTokenWithRetry
 import lib.finpay.sdk.corekit.service.network.Api
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import okhttp3.Credentials
@@ -49,7 +50,9 @@ class TokenRepository() {
                 requestBody["transNumber"] = currentDate
 
                 val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
-                request.getToken(requestBody).enqueue(object : Callback<Token> {
+
+
+                request.getToken(requestBody).enqueue(object : CallbackTokenWithRetry<Token>(request.getToken(requestBody)) {
                     override fun onFailure(call: Call<Token>, t: Throwable) {
                         onFailed(t.message.toString())
                     }
