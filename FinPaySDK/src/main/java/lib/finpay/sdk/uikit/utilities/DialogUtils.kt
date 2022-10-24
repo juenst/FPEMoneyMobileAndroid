@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.Nullable
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -80,7 +81,8 @@ class DialogUtils {
         fun showDialogSuccess(
             context: Context,
             titleDialog: String,
-            descriptionDialog: String
+            descriptionDialog: String,
+            onTap: () -> Unit
         ) {
             val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val builder = AlertDialog.Builder(context,R.style.CustomAlertDialog).create()
@@ -101,6 +103,7 @@ class DialogUtils {
             builder.setView(view)
             button.setOnClickListener {
                 builder.dismiss()
+                onTap()
             }
             builder.setCanceledOnTouchOutside(false)
             builder.show()

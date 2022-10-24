@@ -43,19 +43,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnOpenDialogQr.setOnClickListener {
-//            FinpaySDKUI.openQris(this@MainActivity, credential())
-            val intent = Intent(this@MainActivity, PaymentActivity::class.java)
-            startActivity(intent)
+
         }
 
         btnLogout.setOnClickListener {
-            FinpaySDKUI.logout(this@MainActivity)
+            FinpaySDKUI.logout(this@MainActivity, {})
         }
 
         btnTransfer.setOnClickListener {
-//            FinpaySDKUI.openTransfer(this@MainActivity, credential())
-            val intent = Intent(this, PDAMActivity::class.java)
-            this.startActivity(intent)
+            FinpaySDKUI.openTransfer(this@MainActivity, credential())
         }
 
     }

@@ -15,6 +15,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
+import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
@@ -79,7 +80,7 @@ class QRISResultActivity : AppCompatActivity() {
                 progressDialog.dismiss()
             }, {
                 progressDialog.dismiss()
-                Toast.makeText(this@QRISResultActivity, it, Toast.LENGTH_LONG)
+                DialogUtils.showDialogError(this@QRISResultActivity, "", it)
             }
         )
 
@@ -87,7 +88,7 @@ class QRISResultActivity : AppCompatActivity() {
             txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
             _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
         },{
-            Toast.makeText(this@QRISResultActivity, it, Toast.LENGTH_LONG)
+            DialogUtils.showDialogError(this@QRISResultActivity, "", it)
         })
 
         txtAmount.doOnTextChanged { text, start, before, count ->
@@ -152,7 +153,7 @@ class QRISResultActivity : AppCompatActivity() {
                 }, {
                     progressDialog.dismiss()
                     println(it)
-                    Toast.makeText(this@QRISResultActivity, it, Toast.LENGTH_LONG)
+                    DialogUtils.showDialogError(this@QRISResultActivity, "", it)
                 }
             )
         }
