@@ -9,10 +9,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class BaseServices {
-    companion object {
-        var userName: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_USERNAME)!!
-        var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
+    var userName: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_USERNAME)!!
+    var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
 
+//    println("base service userName : ${userName}")
+//    println("base service password : ${password}")
+
+    companion object {
         val BASE_URL: String = "https://demos.finnet.co.id/emondev/"
         val BASE_URL_COBRAND: String = "https://demos.finnet.co.id/apicobrand/"
 

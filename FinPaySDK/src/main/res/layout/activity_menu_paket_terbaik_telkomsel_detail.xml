@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5"
     android:orientation="vertical"
-    tools:context=".uikit.view.ppob.best.telkomsel.package.BestTelkomselPackageActivity">
+    tools:context=".uikit.view.ppob.telkomsel.BestTelkomselPackageActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="PAKET TERBAIK TELKOMSEL"
+                android:text="Paket Terbaik Telkomsel"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18sp" />

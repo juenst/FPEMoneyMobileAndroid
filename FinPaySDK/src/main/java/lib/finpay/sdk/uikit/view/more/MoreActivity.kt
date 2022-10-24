@@ -8,15 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.model.Product
 import lib.finpay.sdk.uikit.view.ppob.alfamart.AlfamartActivity
-import lib.finpay.sdk.uikit.view.ppob.best.telkomsel.`package`.BestTelkomselPackageActivity
-import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsActivity
+import lib.finpay.sdk.uikit.view.ppob.telkomsel.BestTelkomselPackageActivity
 import lib.finpay.sdk.uikit.view.ppob.finpay.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.instalment.InstalmentActivity
 import lib.finpay.sdk.uikit.view.ppob.insurance.InsuranceActivity
-import lib.finpay.sdk.uikit.view.ppob.internet.tv.cable.InternetTvCableActivity
+import lib.finpay.sdk.uikit.view.ppob.internettvcable.InternetTvCableActivity
+import lib.finpay.sdk.uikit.view.ppob.pascabayar.PascaBayarActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
 import lib.finpay.sdk.uikit.view.ppob.revenue.RevenueActivity
 import lib.finpay.sdk.uikit.view.ppob.pegadaian.PegadaianActivity
+import lib.finpay.sdk.uikit.view.ppob.pln.PLNActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
 
 class MoreActivity : AppCompatActivity() {
@@ -35,6 +36,8 @@ class MoreActivity : AppCompatActivity() {
     private lateinit var btnFinpay: LinearLayout
     private lateinit var btnInsurance: LinearLayout
     private lateinit var btnPegadaian: LinearLayout
+    private lateinit var btnPln: LinearLayout
+    private lateinit var btnPascaBayar: LinearLayout
 
     private lateinit var dataProduct: Product
 
@@ -58,6 +61,8 @@ class MoreActivity : AppCompatActivity() {
         btnFinpay = findViewById(R.id.btnFinpay)
         btnInsurance = findViewById(R.id.btnInsurance)
         btnPegadaian = findViewById(R.id.btnPegadaian)
+        btnPln = findViewById(R.id.btn_pln)
+        btnPascaBayar = findViewById(R.id.btn_pascabayar)
 
         dataProduct = Product()
 
@@ -115,6 +120,15 @@ class MoreActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        btnPln.setOnClickListener {
+            val intent = Intent(this, PLNActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnPascaBayar.setOnClickListener {
+            val intent = Intent(this, PascaBayarActivity::class.java)
+            this.startActivity(intent)
+        }
     }
 
 //    fun changeMenu(nameMenu: String, button: LinearLayout) {

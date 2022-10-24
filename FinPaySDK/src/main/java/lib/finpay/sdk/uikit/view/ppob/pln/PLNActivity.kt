@@ -15,17 +15,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
-import lib.finpay.sdk.corekit.model.DataSubProduct
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
-import lib.finpay.sdk.uikit.view.ppob.bpjs.adapter.MonthAdapter
-import lib.finpay.sdk.uikit.view.ppob.internettvcable.IndihomeActivity
 import lib.finpay.sdk.uikit.view.ppob.pln.adapter.NominalAdapter
-import java.text.SimpleDateFormat
-import java.util.*
 
 class PLNActivity: AppCompatActivity() {
+    lateinit var btnBack: ImageView
     lateinit var txtNomorPelangganToken: EditText
     lateinit var txtNomorPelangganTagihan: EditText
     lateinit var btnNextToken: Button
@@ -59,11 +55,16 @@ class PLNActivity: AppCompatActivity() {
         btnContact = findViewById(R.id.btnContact)
         btnContactTagihan = findViewById(R.id.btnContactTagihan)
         progressDialog = ProgressDialog(this@PLNActivity)
+        btnBack = findViewById(R.id.btnBack)
 
         cardToken.setBackgroundColor(Integer.parseUnsignedInt("FFFFFFFF", 16))
         cardTagihan.setBackgroundColor(Integer.parseUnsignedInt("FFEEF2F6", 16))
         contentToken.visibility = View.VISIBLE
         contentTagihan.visibility = View.GONE
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         cardToken.setOnClickListener {
             cardToken.setBackgroundColor(Integer.parseUnsignedInt("FFFFFFFF", 16))
