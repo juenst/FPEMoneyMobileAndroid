@@ -63,7 +63,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#EEE"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -93,7 +93,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#EEE"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -123,7 +123,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#EEE"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -153,7 +153,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#EEE"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>
@@ -183,7 +183,7 @@
             </LinearLayout>
             <View
                 android:layout_marginTop="12dp"
-                android:background="@color/md_grey_200"
+                android:background="#EEE"
                 android:layout_width="match_parent"
                 android:layout_height="1.7dp"/>
         </LinearLayout>

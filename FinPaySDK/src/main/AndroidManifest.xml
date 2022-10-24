@@ -44,6 +44,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
             android:name=".uikit.view.ppob.pegadaian.TabunganEmasActivity"
             android:theme="@style/AppTheme.finpayTheme"
             android:exported="false" />

@@ -80,7 +80,7 @@
                 android:layout_marginVertical="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/md_grey_200" />
+                android:background="#EEE" />
 
             <TextView
                 android:id="@+id/txtUsername"
@@ -157,7 +157,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/md_grey_200" />
+                            android:background="#EEE" />
                     </LinearLayout>
                 </LinearLayout>
 

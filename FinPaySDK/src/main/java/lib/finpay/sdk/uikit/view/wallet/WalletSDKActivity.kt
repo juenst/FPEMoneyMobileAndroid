@@ -30,6 +30,7 @@ import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
 import lib.finpay.sdk.uikit.view.transaction.adapter.WalletHistoryAdapter
 import lib.finpay.sdk.uikit.view.transfer.TransferActivity
+import lib.finpay.sdk.uikit.view.upgrade.UpgradeAccountActivity
 import java.util.*
 
 
@@ -128,6 +129,11 @@ class WalletSDKActivity : AppCompatActivity() {
 
         btnMore.setOnClickListener {
             showPopUp.show()
+        }
+
+        sectionUpgradeAccount.setOnClickListener {
+            val intent = Intent(this, UpgradeAccountActivity::class.java)
+            this.startActivity(intent)
         }
     }
 

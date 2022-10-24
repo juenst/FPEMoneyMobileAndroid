@@ -70,7 +70,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/md_grey_200" />
+                    android:background="#EEE" />
             </LinearLayout>
 
             <Space
@@ -125,7 +125,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/md_grey_200" />
+                    android:background="#EEE" />
             </LinearLayout>
 
             <Space

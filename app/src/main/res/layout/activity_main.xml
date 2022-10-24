@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Saldo :"
+        android:text="Status :"
         android:textAlignment="center"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="175dp"
@@ -39,30 +39,38 @@
         android:id="@+id/saldo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:text="-"
         android:textAlignment="center"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="175dp"
         tools:layout_editor_absoluteY="355dp" />
 
     <Button
-        android:id="@+id/btn_call_sdk"
+        android:id="@+id/btnCorekit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call API token From SDK"
+        android:text="Call SDK Corekit"
         android:textAlignment="center"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/btn_call_wallet"
+        android:id="@+id/btnPairing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call Activity Wallet SDK"
+        android:text="PAIRING"
         android:textAlignment="center"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/btn_open_dialog_qr"
+        android:id="@+id/btnUpgradeAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upgrade Account"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnQris"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="QRIS"
@@ -70,7 +78,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/btn_transfer"
+        android:id="@+id/btnTransfer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Transfer"
@@ -78,7 +86,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/btn_logout"
+        android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Logout Session Data"

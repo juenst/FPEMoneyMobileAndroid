@@ -130,7 +130,7 @@
                     android:lines="1"
                     android:singleLine="true"
                     android:background="@drawable/shape_edittext_outline"
-                    android:textColorHint="@color/md_grey_300">
+                    android:textColorHint="#EEE">
 
                     <requestFocus />
                 </lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText>
