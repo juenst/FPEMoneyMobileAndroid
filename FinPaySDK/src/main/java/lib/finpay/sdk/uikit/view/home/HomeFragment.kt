@@ -23,6 +23,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.model.*
 import lib.finpay.sdk.databinding.FragmentHomeBinding
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.Credential
@@ -107,6 +108,7 @@ class HomeFragment : Fragment() {
         txtSaldo.text = saldo
         onCreateFragmentUI()
         getBalance()
+        getListProduct()
 
         val imageSlider: ArrayList<SlideModel> = arrayListOf(
             SlideModel(
@@ -162,6 +164,49 @@ class HomeFragment : Fragment() {
         })
     }
 
+    fun getListProduct() {
+        FinpaySDK.getListProduct(requireContext(), { values ->
+            clearListProduct()
+            values.dataProduct!!.forEach { detailProduct ->
+                if (detailProduct.productDesc!! == "") {
+                    ProductPulsa().listData!!.add(
+                        detailProduct
+                    )
+                }
+                if (detailProduct.productDesc!!.contains("Finance")) {
+                    ProductInstalment().listData!!.add(
+                        detailProduct
+                    )
+                }
+                if (detailProduct.productDesc!!.contains("Pajak")) {
+                    ProductStateRevenue().listData!!.add(
+                        detailProduct
+                    )
+                }
+
+                println("Name:$detailProduct")
+            }
+
+        }, {
+            Toast.makeText(requireContext(), "....", Toast.LENGTH_LONG)
+        })
+    }
+
+    private fun clearListProduct() {
+        ProductPulsa().listData!!.clear()
+        ProductInstalment().listData!!.clear()
+        ProductBpjs().listData!!.clear()
+        ProductAlfamart().listData!!.clear()
+        ProductBestTelkomselPackage().listData!!.clear()
+        ProductInsurance().listData!!.clear()
+        ProductInternetTVCable().listData!!.clear()
+        ProductPDAM().listData!!.clear()
+        ProductPLN().listData!!.clear()
+        ProductPascaBayar().listData!!.clear()
+        ProductStateRevenue().listData!!.clear()
+        ProductVoucher().listData!!.clear()
+    }
+
     private fun onCreateFragmentUI() {
         //crdWarning.setOnClickListener(this)
         setSpanText(
@@ -198,7 +243,10 @@ class HomeFragment : Fragment() {
         }
 
         btnHistoryTransaction.setOnClickListener {
-            FinpaySDKUI.openHistoryTransaction(requireContext(), Credential.credential(requireContext()))
+            FinpaySDKUI.openHistoryTransaction(
+                requireContext(),
+                Credential.credential(requireContext())
+            )
         }
 
         btnMore.setOnClickListener {
@@ -232,7 +280,10 @@ class HomeFragment : Fragment() {
         }
 
         sectionUpgradeAccount.setOnClickListener {
-            FinpaySDKUI.openUpgradeAccount(requireContext(), Credential.credential(requireContext()))
+            FinpaySDKUI.openUpgradeAccount(
+                requireContext(),
+                Credential.credential(requireContext())
+            )
         }
     }
 

@@ -3,34 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="FinPaySDK/src/main/res/drawable-v24/shape_text_input.xml" value="0.187" />
         <entry key="FinPaySDK/src/main/res/layout/activity_angsuran_mikro.xml" value="0.2375" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_app.xml" value="0.1494335850925309" />
         <entry key="FinPaySDK/src/main/res/layout/activity_cicil_gadai.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_credit_transaction.xml" value="0.4556615193684896" />
         <entry key="FinPaySDK/src/main/res/layout/activity_gadai_tebus.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_mains.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_menu_internet_tv_cable.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_menu_paket_terbaik_telkomsel.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_menu_paket_terbaik_telkomsel_detail.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_menu_voucher_deals.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_more.xml" value="0.28216400146484377" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_onboarding.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_payment.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_pdam.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_pdam_search.xml" value="0.2375" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_more.xml" value="0.1" />
         <entry key="FinPaySDK/src/main/res/layout/activity_pegadaian.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_pln.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_pln_result.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_pnbp.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_profile.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_pulsa_data.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_pulsa_data_result.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_qris.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_qris_result.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_register.xml" value="0.2375" />
-        <entry key="FinPaySDK/src/main/res/layout/activity_revenue.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_tabungan_emas.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_telkom.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_ulang_gadai.xml" value="0.2375" />
+        <entry key="FinPaySDK/src/main/res/layout/fragment_home.xml" value="0.15070921985815602" />
         <entry key="FinPayWallet/src/main/res/drawable/corner_radius_horizontal_left_large.xml" value="0.187" />
         <entry key="FinPayWallet/src/main/res/drawable/corner_radius_vertical_top_small.xml" value="0.187" />
         <entry key="FinPayWallet/src/main/res/layout/activity_bpjs_transaction.xml" value="0.28657790114638126" />
@@ -57,6 +41,8 @@
         <entry key="FinPayWallet/src/main/res/layout/item_instalment.xml" value="0.375" />
         <entry key="FinPayWallet/src/main/res/layout/item_periode_bpjs.xml" value="0.1431159420289855" />
         <entry key="FinPayWallet/src/main/res/layout/item_spinner_result.xml" value="0.1431159420289855" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.187" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14336372847011145" />
       </map>
     </option>
   </component>

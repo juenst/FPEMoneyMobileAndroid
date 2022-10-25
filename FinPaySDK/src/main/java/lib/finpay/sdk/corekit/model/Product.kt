@@ -22,105 +22,53 @@ class DetailProductModel {
 }
 
 class ProductPulsa {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductAlfamart {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductBestTelkomselPackage {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductBpjs {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductInstalment {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductInsurance {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductInternetTVCable {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductPascaBayar {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductPDAM {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductPLN {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductStateRevenue {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductTelkom {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }
 
 class ProductVoucher {
-    @SerializedName("productCode")
-    var productCode: String? = null
-
-    @SerializedName("productDesc")
-    var productDesc: String? = null
+    var listData : MutableList<DetailProductModel>? = null
 }

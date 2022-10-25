@@ -20,9 +20,9 @@ class ProductCode {
         var INSURANCE_TOKIO: String = "080017"
         var INSURANCE_CAR: String = "080016"
 
-        var PNBP: String = "50017"
-        var PAJAK_ONLINE: String = "50017"
-        var BEA_CUKAI: String = "50017"
+        var PNBP: String = "050017"
+        var PAJAK_ONLINE: String = "050017"
+        var BEA_CUKAI: String = "050017"
         var ULANG_GADAI: String = "020018"
         var ANGSURAN_MIKRO: String = "020025"
         var CICIL_GADAI: String = "020019"
