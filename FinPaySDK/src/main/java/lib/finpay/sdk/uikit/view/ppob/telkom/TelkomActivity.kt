@@ -14,6 +14,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.view.ppob.pln.PLNResultActivity
 
 class TelkomActivity : AppCompatActivity() {
     lateinit var txtNomorPelanggan: EditText
@@ -61,6 +62,20 @@ class TelkomActivity : AppCompatActivity() {
                 txtNomorPelanggan.text.toString(),
                 ProductCode.TELKOM,
                 "", {
+                    val intent = Intent(this, TelkomResultActivity::class.java)
+                    intent.putExtra("noPelanggan", txtNomorPelanggan.text.toString())
+                    intent.putExtra("customerName", it.bit61Parse?.customerName)
+                    intent.putExtra("customerId", it.bit61Parse?.customerId)
+                    intent.putExtra("tagihan", it.bit61Parse?.billInfo1?.nilaiTagihan)
+                    intent.putExtra("nomorReferensi", it.bit61Parse?.billInfo1?.nomorReferensi)
+                    var fee: String = "0"
+                    for (data in it.fee) {
+                        if (data.sof == "mc") {
+                            fee = data.fee.toString()
+                        }
+                    }
+                    intent.putExtra("fee", fee)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

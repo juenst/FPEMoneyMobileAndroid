@@ -125,7 +125,7 @@ class PLNActivity: AppCompatActivity() {
                     intent.putExtra("customerName", it.bit61Parse?.customerName)
                     intent.putExtra("customerId", it.bit61Parse?.customerId)
                     intent.putExtra("tagihan", it.tagihan)
-                    intent.putExtra("tagihan", it.bit61Parse?.billInfo1?.nomorReferensi)
+                    intent.putExtra("nomorReferensi", it.bit61Parse?.billInfo1?.nomorReferensi)
                     var fee: String = "0"
                     for (data in it.fee) {
                         if (data.sof == "mc") {

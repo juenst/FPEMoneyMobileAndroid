@@ -59,7 +59,7 @@ class PascaBayarActivity : AppCompatActivity() {
             FinpaySDK.ppobInquiry(
                 this@PascaBayarActivity,
                 txtNomorPelanggan.text.toString(),
-                ProductCode.TELKOM_PASCABAYAR,
+                ProductCode.PASCABAYAR,
                 "", {
                     progressDialog.dismiss()
                 }, {

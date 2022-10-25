@@ -98,42 +98,56 @@
         </activity>
         <activity
             android:name=".uikit.view.ppob.instalment.InstalmentActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".uikit.view.upgrade.CitizenshipActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".uikit.view.ppob.internettvcable.InternetTvCableActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.internettvcable.IndihomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.internettvcable.MNCActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.bpjs.BpjsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.bpjs.BpjsKesehatanActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.telkom.TelkomActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.telkom.TelkomResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pegadaian.PegadaianActivity"
             android:exported="false"
