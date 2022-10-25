@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    android:orientation="vertical"
-    tools:context=".uikit.view.ppob.pdam.PDAMActivity">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -26,9 +25,9 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Token PLN"
+                android:text="Tagihan HALO"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18sp" />
@@ -75,7 +74,7 @@
                         android:id="@+id/txtCustName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Widiyanto Ramadhan"
+                        android:text="-"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
 
@@ -87,7 +86,7 @@
                         android:id="@+id/txtCustPhoneNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="083815613839" />
+                        android:text="-" />
 
                 </LinearLayout>
 
@@ -115,33 +114,7 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:textStyle="bold"
-                    android:text="543300923957" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="10dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Tarif/Daya" />
-
-                <TextView
-                    android:id="@+id/txtDaya"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:text="R1/1300VA" />
+                    android:text="-" />
 
             </LinearLayout>
 
@@ -167,7 +140,7 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:textStyle="bold"
-                    android:text="Rp20.000" />
+                    android:text="Rp0" />
 
             </LinearLayout>
 

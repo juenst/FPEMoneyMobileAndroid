@@ -1,7 +1,8 @@
-package lib.finpay.sdk.uikit.view.ppob.pascabayar
+package lib.finpay.sdk.uikit.view.ppob.telkom
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -12,15 +13,19 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.corekit.model.Credential
+import lib.finpay.sdk.corekit.model.DataSubProduct
+import lib.finpay.sdk.corekit.model.PpobInquiry
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.utilities.*
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
+import lib.finpay.sdk.uikit.view.ppob.pulsa_data.adapter.PulsaDataAdapter
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class PascaBayarResultActivity : AppCompatActivity() {
+class TelkomResultActivity : AppCompatActivity() {
     val noPelanggan: String? by lazy { intent.getStringExtra("noPelanggan") }
     val customerName: String? by lazy { intent.getStringExtra("customerName") }
     val customerId: String? by lazy { intent.getStringExtra("customerId") }
@@ -40,7 +45,7 @@ class PascaBayarResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pascabayar_result)
+        setContentView(R.layout.activity_telkom_result)
         supportActionBar!!.hide()
 
         txtCustName = findViewById(R.id.txtCustName)
@@ -49,7 +54,7 @@ class PascaBayarResultActivity : AppCompatActivity() {
         txtTagihan = findViewById(R.id.txtTagihan)
         btnBack = findViewById(R.id.btnBack)
         btnConfirm = findViewById(R.id.btnConfirm)
-        progressDialog = ProgressDialog(this@PascaBayarResultActivity)
+        progressDialog = ProgressDialog(this@TelkomResultActivity)
 
         FinpaySDK.init(this)
         txtCustName.text = customerName
@@ -73,12 +78,12 @@ class PascaBayarResultActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK.getUserBallance(this@PascaBayarResultActivity, {
+        FinpaySDK.getUserBallance(this@TelkomResultActivity, {
             saldo = it.amount!!
             progressDialog.dismiss()
         },{
             progressDialog.dismiss()
-            DialogUtils.showDialogError(this@PascaBayarResultActivity, "", it)
+            DialogUtils.showDialogError(this@TelkomResultActivity, "", it)
         })
     }
 
@@ -101,7 +106,7 @@ class PascaBayarResultActivity : AppCompatActivity() {
             txtBtnPay!!.text = "Isi Saldo"
         }
         logoProvider!!.visibility = View.GONE
-        txtDenom!!.text = "Tagihan HALO "+TextUtils.formatRupiah(tagihan!!.toDouble())
+        txtDenom!!.text = "Tagihan Telkom "+TextUtils.formatRupiah(tagihan!!.toDouble())
         txtPrice!!.text = TextUtils.formatRupiah(tagihan!!.toDouble())
         txtBiayaLayanan!!.text = TextUtils.formatRupiah(fee!!.toDouble())
         txtTotalBayar!!.text = TextUtils.formatRupiah((tagihan!!.toInt() + fee!!.toInt()).toDouble())
@@ -118,11 +123,11 @@ class PascaBayarResultActivity : AppCompatActivity() {
                 val sdf = SimpleDateFormat("yyyyMMdHHmmss")
                 val currentDate = sdf.format(Date())
                 FinpaySDK.authPin(
-                    this@PascaBayarResultActivity,
-                    tagihan!!.toString(), ProductCode.PASCABAYAR,{
+                    this@TelkomResultActivity,
+                    tagihan!!.toString(), ProductCode.TELKOM,{
                         progressDialog.dismiss()
                         dialog.dismiss()
-                        val intent = Intent(this@PascaBayarResultActivity, PaymentActivity::class.java)
+                        val intent = Intent(this@TelkomResultActivity, PaymentActivity::class.java)
                         intent.putExtra("paymentType", PaymentType.paymentPPOB)
                         intent.putExtra("sof", "mc")
                         intent.putExtra("amount", (tagihan!!.toInt() + fee!!.toInt()).toString())
@@ -137,7 +142,7 @@ class PascaBayarResultActivity : AppCompatActivity() {
                         startActivity(intent)
                     }, {
                         progressDialog.dismiss()
-                        DialogUtils.showDialogError(this@PascaBayarResultActivity, "", it)
+                        DialogUtils.showDialogError(this@TelkomResultActivity, "", it)
                     }
                 )
             }

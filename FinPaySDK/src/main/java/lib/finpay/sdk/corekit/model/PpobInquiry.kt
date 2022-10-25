@@ -20,7 +20,7 @@ class PpobInquiry {
     @SerializedName("tagihan")
     var tagihan: Int? = null
     @SerializedName("traxId")
-    var traxId: Int? = null
+    var traxId: String? = null
     @SerializedName("processingTime")
     var processingTime: Double? = null
 }
@@ -63,6 +63,10 @@ class Bit61ParsePPob {
     var customerId: String? = null
     @SerializedName("customerName")
     var customerName: String? = null
-    @SerializedName("npwp")
-    var npwp: String? = null
+    @SerializedName("bill")
+    var bill: String? = null
+    @SerializedName("billRef")
+    var billRef: String? = null
+    @SerializedName("billAmount")
+    var billAmount: String? = null
 }

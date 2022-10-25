@@ -1,4 +1,4 @@
-package lib.finpay.sdk.uikit.view.ppob.best.telkomsel.`package`
+package lib.finpay.sdk.uikit.view.ppob.telkomsel
 
 import android.os.Bundle
 import android.widget.Button

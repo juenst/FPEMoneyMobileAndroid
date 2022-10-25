@@ -1,3 +1,13 @@
 
-Kkotlin:S1481".Remove this unused "textSaldo" local variable.(§¿›Íûÿÿÿÿ
-Mkotlin:S1481"0Remove this unused "textTokenId" local variable.(Ç”†¿úÿÿÿÿ
+,kotlin:S1128"Remove unused import.(Ş‚½
+2kotlin:S1128"Remove unused import.(ÎüÅ‰úÿÿÿÿ
+2kotlin:S1128"Remove unused import.(¤ÍÚÔÿÿÿÿÿ
+,kotlin:S1128"Remove unused import.(Éî‘3
+2kotlin:S1128"Remove unused import.(ÁøÚ¯şÿÿÿÿ
+;kotlin:S1874'"#Deprecated code should not be used.(¨ëî”
+;kotlin:S1874*"#Deprecated code should not be used.(¨ëî”
+@kotlin:S1874,"#Deprecated code should not be used.(úºµªúÿÿÿÿ
+@kotlin:S1874"#Deprecated code should not be used.(·•¥¦ûÿÿÿÿ
+@kotlin:S1874"#Deprecated code should not be used.(ù¢íüÿÿÿÿ
+;kotlin:S1874'"#Deprecated code should not be used.(¨ëî”
+;kotlin:S1874*"#Deprecated code should not be used.(¨ëî”

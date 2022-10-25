@@ -88,29 +88,30 @@ class PulsaDataResultActivity : AppCompatActivity() {
         }
 
         btnNext.setOnClickListener {
-            progressDialog.setTitle("Mohon Menunggu")
-            progressDialog.setMessage("Sedang Memuat ...")
-            progressDialog.setCancelable(false) // blocks UI interaction
-            progressDialog.show()
-            FinpaySDK.ppobInquiry(
-        this@PulsaDataResultActivity,
-                phoneNumber!!,
-                subProductCode,
-                price, {
-                    val reffId: String = it.bit61Parse?.billInfo1?.nomorReferensi!!
-                    var fee: String = "0"
-                    for (data in it.fee) {
-                        if (data.sof == "mc") {
-                            fee = data.fee.toString()
-                        }
-                    }
-                    progressDialog.dismiss()
-                    showDialogConfirmPayment(reffId, fee)
-                }, {
-                    progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
-                }
-            )
+//            progressDialog.setTitle("Mohon Menunggu")
+//            progressDialog.setMessage("Sedang Memuat ...")
+//            progressDialog.setCancelable(false) // blocks UI interaction
+//            progressDialog.show()
+            showDialogConfirmPayment("", "0")
+//            FinpaySDK.ppobInquiry(
+//        this@PulsaDataResultActivity,
+//                phoneNumber!!,
+//                subProductCode,x
+//                price, {
+//                    val reffId: String = it.bit61Parse?.billInfo1?.nomorReferensi!!
+//                    var fee: String = "0"
+//                    for (data in it.fee) {
+//                        if (data.sof == "mc") {
+//                            fee = data.fee.toString()
+//                        }
+//                    }
+//                    progressDialog.dismiss()
+//                    showDialogConfirmPayment(reffId, fee)
+//                }, {
+//                    progressDialog.dismiss()
+//                    DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it)
+//                }
+//            )
         }
 
         txtPhoneNumber.text = "Topup ke nomor "+phoneNumber
@@ -247,6 +248,7 @@ class PulsaDataResultActivity : AppCompatActivity() {
                         intent.putExtra("activationDate", currentDate)
                         intent.putExtra("payType", "billpayment")
                         intent.putExtra("widgetURL", it.widgetURL)
+                        intent.putExtra("phoneNumber", phoneNumber)
                         startActivity(intent)
                     }, {
                         progressDialog.dismiss()

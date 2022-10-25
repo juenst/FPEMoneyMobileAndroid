@@ -132,10 +132,10 @@ public class FinpaySDK {
             )
         }
 
-        fun ppobPayment(context: Context, sof: String, payType: String, denom: String, amount: String, billingId: String, productCode: String, reffFlag: String, activationDate: String, pinToken: String, onSuccess: (PpobPayment) -> Unit, onFailed: (String) -> Unit)  {
+        fun ppobPayment(context: Context, phoneNumber: String, sof: String, payType: String, denom: String, amount: String, billingId: String, productCode: String, reffFlag: String, activationDate: String, pinToken: String, onSuccess: (PpobPayment) -> Unit, onFailed: (String) -> Unit)  {
             init(context)
             PpobRepository.payment(
-                sof, payType, denom, amount, billingId, productCode, reffFlag,activationDate, pinToken, {
+                phoneNumber, sof, payType, denom, amount, billingId, productCode, reffFlag,activationDate, pinToken, {
                     onSuccess(it)
                 }, {
                     onFailed(it)
