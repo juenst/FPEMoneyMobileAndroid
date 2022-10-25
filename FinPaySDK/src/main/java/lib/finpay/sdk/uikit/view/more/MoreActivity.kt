@@ -18,6 +18,7 @@ import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
 import lib.finpay.sdk.uikit.view.ppob.revenue.RevenueActivity
 import lib.finpay.sdk.uikit.view.ppob.pegadaian.PegadaianActivity
 import lib.finpay.sdk.uikit.view.ppob.pln.PLNActivity
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
 
 class MoreActivity : AppCompatActivity() {
@@ -127,6 +128,11 @@ class MoreActivity : AppCompatActivity() {
 
         btnPascaBayar.setOnClickListener {
             val intent = Intent(this, PascaBayarActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnMenuTelkom.setOnClickListener {
+            val intent = Intent(this, TelkomActivity::class.java)
             this.startActivity(intent)
         }
     }

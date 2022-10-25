@@ -20,7 +20,7 @@ class PpobInquiry {
     @SerializedName("tagihan")
     var tagihan: Int? = null
     @SerializedName("traxId")
-    var traxId: Int? = null
+    var traxId: String? = null
     @SerializedName("processingTime")
     var processingTime: Double? = null
 }

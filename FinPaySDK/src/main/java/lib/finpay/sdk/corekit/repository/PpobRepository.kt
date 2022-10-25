@@ -87,6 +87,7 @@ class PpobRepository() {
         }
 
         fun payment(
+            phoneNumber: String,
             sof: String,
             payType: String,
             denom: String,
@@ -127,7 +128,7 @@ class PpobRepository() {
 
                 //request body
                 val requestBody : HashMap<String, String> = hashMapOf()
-                requestBody["requestType"] = "inquiryQrisMPM"
+                requestBody["requestType"] = "paymentConf"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = currentDate
                 requestBody["transNumber"] = currentDate

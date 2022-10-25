@@ -22,6 +22,8 @@ class TelkomActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
     lateinit var progressDialog: ProgressDialog
 
+    //nomor test 0122527200001
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_telkom)

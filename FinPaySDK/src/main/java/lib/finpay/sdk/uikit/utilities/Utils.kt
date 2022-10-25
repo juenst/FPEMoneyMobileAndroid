@@ -254,7 +254,7 @@ object Utils {
         ){
             provider = "SMARTFREN"
         }else {
-            provider = "UNKNOWN"
+            provider = "TELKOMSEL"
         }
 
         return provider

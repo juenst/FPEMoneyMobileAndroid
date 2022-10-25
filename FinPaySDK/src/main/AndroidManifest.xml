@@ -9,6 +9,7 @@
         android:required="true" />
 
     <application>
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <activity
             android:name=".uikit.view.ppob.revenue.PajakOnlineActivity"
             android:exported="false">

@@ -37,6 +37,8 @@ class PLNActivity: AppCompatActivity() {
     lateinit var progressDialog: ProgressDialog
     var nominal: String = "0"
 
+    //nomor testing token 512233350020
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pln)
@@ -115,7 +117,7 @@ class PLNActivity: AppCompatActivity() {
             FinpaySDK.ppobInquiry(
                 this@PLNActivity,
                 txtNomorPelangganToken.text.toString(),
-                ProductCode.PLN_POSTPAID,
+                ProductCode.PLN_PREPAID,
                 nominal, {
                     val intent = Intent(this, PLNResultActivity::class.java)
 //                    intent.putExtra("result", it)
@@ -148,7 +150,7 @@ class PLNActivity: AppCompatActivity() {
             FinpaySDK.ppobInquiry(
                 this@PLNActivity,
                 txtNomorPelangganTagihan.text.toString(),
-                ProductCode.PLN_PREPAID,
+                ProductCode.PLN_POSTPAID,
                 "", {
                     progressDialog.dismiss()
                 }, {

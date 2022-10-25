@@ -22,6 +22,8 @@ class PascaBayarActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
     lateinit var progressDialog: ProgressDialog
 
+    //no test 0812102305001
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pascabayar)
@@ -57,7 +59,7 @@ class PascaBayarActivity : AppCompatActivity() {
             FinpaySDK.ppobInquiry(
                 this@PascaBayarActivity,
                 txtNomorPelanggan.text.toString(),
-                ProductCode.TELKOM,
+                ProductCode.TELKOM_PASCABAYAR,
                 "", {
                     progressDialog.dismiss()
                 }, {
