@@ -14,6 +14,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.utilities.Utils
 import lib.finpay.sdk.uikit.view.ppob.pln.PLNResultActivity
 
 class TelkomActivity : AppCompatActivity() {
@@ -100,7 +101,7 @@ class TelkomActivity : AppCompatActivity() {
                 if (cursor != null && cursor.moveToNext()) {
                     val value: String = cursor.getString(0)
                     if(value.length>=9) {
-                        txtNomorPelanggan.setText(value)
+                        txtNomorPelanggan.setText(Utils.validateMobileNumber(value))
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
                         ButtonUtils.checkButtonState(btnNext)
                     } else {

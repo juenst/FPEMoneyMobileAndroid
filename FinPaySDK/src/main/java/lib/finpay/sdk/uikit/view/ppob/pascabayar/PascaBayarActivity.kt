@@ -14,6 +14,8 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.utilities.Utils
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomResultActivity
 
 class PascaBayarActivity : AppCompatActivity() {
     lateinit var txtNomorPelanggan: EditText
@@ -61,6 +63,20 @@ class PascaBayarActivity : AppCompatActivity() {
                 txtNomorPelanggan.text.toString(),
                 ProductCode.PASCABAYAR,
                 "", {
+                    val intent = Intent(this, PascaBayarResultActivity::class.java)
+                    intent.putExtra("noPelanggan", txtNomorPelanggan.text.toString())
+                    intent.putExtra("customerName", it.bit61Parse?.customerName)
+                    intent.putExtra("customerId", it.bit61Parse?.customerId)
+                    intent.putExtra("tagihan", it.tagihan.toString())
+                    intent.putExtra("nomorReferensi", it.bit61Parse?.billRef)
+                    var fee: String = "0"
+                    for (data in it.fee) {
+                        if (data.sof == "mc") {
+                            fee = data.fee.toString()
+                        }
+                    }
+                    intent.putExtra("fee", fee)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
@@ -85,7 +101,7 @@ class PascaBayarActivity : AppCompatActivity() {
                 if (cursor != null && cursor.moveToNext()) {
                     val value: String = cursor.getString(0)
                     if(value.length>=9) {
-                        txtNomorPelanggan.setText(value)
+                        txtNomorPelanggan.setText(Utils.validateMobileNumber(value))
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
                         ButtonUtils.checkButtonState(btnNext)
                     } else {
