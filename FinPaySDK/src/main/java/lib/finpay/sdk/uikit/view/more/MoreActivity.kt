@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.model.Product
 import lib.finpay.sdk.uikit.view.ppob.alfamart.AlfamartActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
 import lib.finpay.sdk.uikit.view.ppob.telkomsel.BestTelkomselPackageActivity
 import lib.finpay.sdk.uikit.view.ppob.finpay.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.instalment.InstalmentActivity
@@ -73,6 +75,11 @@ class MoreActivity : AppCompatActivity() {
 
         btnFinpay.setOnClickListener {
             val intent = Intent(this, FinpayActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        btnMenuBpjs.setOnClickListener {
+            val intent = Intent(this, BpjsKesehatanActivity::class.java)
             this.startActivity(intent)
         }
 

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="FinPaySDK/src/main/res/layout/activity_angsuran_mikro.xml" value="0.2375" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_bpjs_kesehatan.xml" value="0.15806159420289856" />
         <entry key="FinPaySDK/src/main/res/layout/activity_cicil_gadai.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_credit_transaction.xml" value="0.4556615193684896" />
         <entry key="FinPaySDK/src/main/res/layout/activity_gadai_tebus.xml" value="0.2375" />
