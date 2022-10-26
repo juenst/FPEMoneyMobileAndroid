@@ -121,11 +121,11 @@ class PLNActivity : AppCompatActivity() {
                 nominal, {
                     val intent = Intent(this, PLNResultActivity::class.java)
 //                    intent.putExtra("result", it)
-                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text)
+                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text.toString())
                     intent.putExtra("customerName", it.bit61Parse?.customerName)
                     intent.putExtra("customerId", it.bit61Parse?.customerId)
                     intent.putExtra("tagihan", it.tagihan.toString())
-                    intent.putExtra("nomorReferensi", it.bit61Parse?.billInfo1?.nomorReferensi)
+                    intent.putExtra("nomorReferensi", it.bit61Parse?.plnRef)
                     var fee: String = "0"
                     for (data in it.fee) {
                         if (data.sof == "mc") {

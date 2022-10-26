@@ -69,4 +69,36 @@ class Bit61ParsePPob {
     var billRef: String? = null
     @SerializedName("billAmount")
     var billAmount: String? = null
+    @SerializedName("plnReferenceNumber")
+    var plnRef : String? = null
+    @SerializedName("swReferenceNumber")
+    var swRef : String? = null
+    @SerializedName("meterId")
+    var meterId : String? = null
+    @SerializedName("subscriberId")
+    var subscriberId : String? = null
+    @SerializedName("subscriberSegmen")
+    var subscriberSegmen : String? = null
+    @SerializedName("power")
+    var power : String? = null
+    @SerializedName("distCode")
+    var distCode : Int? = null
+    @SerializedName("upCode")
+    var upCode : String? = null
+    @SerializedName("upPhone")
+    var upPhone : String? = null
+    @SerializedName("kwhMaximum")
+    var kwhMaximum : String? = null
+    @SerializedName("electricityBill")
+    var electricityBill : String? = null
+    @SerializedName("electricityBillTotal")
+    var electricityBillTotal : String? = null
+    @SerializedName("feeTotal")
+    var feeTotal : String? = null
+    @SerializedName("unsold")
+    var unsold : String? = null
+    @SerializedName("unsold1")
+    var unsold1 : String? = null
+    @SerializedName("unsold2")
+    var unsold2 : String? = null
 }
