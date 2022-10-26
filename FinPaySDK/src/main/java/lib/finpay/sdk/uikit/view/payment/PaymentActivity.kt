@@ -69,14 +69,14 @@ class PaymentActivity : AppCompatActivity() {
                 // page finishes loading
                 progressDialog.dismiss()
                 val webUrl: String = webview.getUrl()!!
-                if(webUrl.contains("sukses")) {
+                if (webUrl.contains("sukses")) {
                     toolbar.visibility = View.GONE
                     val pinToken = webUrl.split("/").toTypedArray().last()
                     progressDialog.setTitle("Mohon Menunggu")
                     progressDialog.setMessage("Sedang Memuat ...")
                     progressDialog.setCancelable(false) // blocks UI interaction
                     progressDialog.show()
-                    if(paymentType == PaymentType.paymentQRIS) {
+                    if (paymentType == PaymentType.paymentQRIS) {
                         FinpaySDK.qrisPayment(
                             this@PaymentActivity,
                             sof!!,
@@ -85,7 +85,10 @@ class PaymentActivity : AppCompatActivity() {
                             reffFlag!!,
                             pinToken, {
                                 progressDialog.dismiss()
-                                val intent = Intent(this@PaymentActivity, TransactionDetailQrisActivity::class.java)
+                                val intent = Intent(
+                                    this@PaymentActivity,
+                                    TransactionDetailQrisActivity::class.java
+                                )
 //                                intent.putExtra("result", it)
                                 intent.putExtra("merchantName", it.bit61Parse!!.merchantName)
                                 intent.putExtra("merchantId", it.bit61Parse!!.merchantId)
@@ -97,7 +100,10 @@ class PaymentActivity : AppCompatActivity() {
                                 intent.putExtra("tipsAmount", it.bit61Parse!!.tipsAmount)
                                 intent.putExtra("tipsPercentage", it.bit61Parse!!.tipsPercentage)
                                 intent.putExtra("acquirerName", it.bit61Parse!!.acquirerName)
-                                intent.putExtra("merchantLocation", it.bit61Parse!!.merchantLocation)
+                                intent.putExtra(
+                                    "merchantLocation",
+                                    it.bit61Parse!!.merchantLocation
+                                )
                                 intent.putExtra("merchantPAN", it.bit61Parse!!.merchantPAN)
                                 intent.putExtra("terminalID", it.bit61Parse!!.terminalID)
                                 intent.putExtra("isOnUs", it.bit61Parse!!.isOnUs)
@@ -113,7 +119,7 @@ class PaymentActivity : AppCompatActivity() {
                                 DialogUtils.showDialogError(this@PaymentActivity, "", it)
                             }
                         )
-                    } else if(paymentType == PaymentType.paymentPPOB) {
+                    } else if (paymentType == PaymentType.paymentPPOB) {
                         FinpaySDK.ppobPayment(
                             this@PaymentActivity,
                             phoneNumber!!,
@@ -126,12 +132,21 @@ class PaymentActivity : AppCompatActivity() {
                             reffFlag!!,
                             activationDate!!, pinToken, {
                                 progressDialog.dismiss()
-                                val intent = Intent(this@PaymentActivity, TransactionDetailPpobActivity::class.java)
-                                intent.putExtra("amountDpp", it.pajak!!.amountDpp.toString())
-                                intent.putExtra("amountPpn", it.pajak!!.amountPpn.toString())
-                                intent.putExtra("ppn", it.pajak!!.ppn)
-                                intent.putExtra("nomorReferensi", it.bit61Parse!!.billInfo1!!.nomorReferensi)
-                                intent.putExtra("nilaiTagihan", it.bit61Parse!!.billInfo1!!.nilaiTagihan)
+                                val intent = Intent(
+                                    this@PaymentActivity,
+                                    TransactionDetailPpobActivity::class.java
+                                )
+                                intent.putExtra("amountDpp", "0")
+                                intent.putExtra("amountPpn", "0")
+                                intent.putExtra("ppn", "0%")
+                                intent.putExtra(
+                                    "nomorReferensi",
+                                    it.bit61Parse!!.billInfo1!!.nomorReferensi
+                                )
+                                intent.putExtra(
+                                    "nilaiTagihan",
+                                    it.bit61Parse!!.billInfo1!!.nilaiTagihan
+                                )
                                 intent.putExtra("customerId", it.bit61Parse!!.customerId)
                                 intent.putExtra("customerName", it.bit61Parse!!.customerName)
                                 intent.putExtra("npwp", it.bit61Parse!!.npwp)
@@ -142,7 +157,7 @@ class PaymentActivity : AppCompatActivity() {
 
                                 startActivity(intent)
                                 this@PaymentActivity.finish()
-                            },{
+                            }, {
                                 progressDialog.dismiss()
                                 DialogUtils.showDialogError(this@PaymentActivity, "", it)
                             }
@@ -162,11 +177,15 @@ class PaymentActivity : AppCompatActivity() {
 
                 // runs when there's a failure in loading page
                 progressDialog.dismiss()
-                Toast.makeText(this@PaymentActivity, "Failure on loading web page", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@PaymentActivity,
+                    "Failure on loading web page",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
 
-        btnBack.setOnClickListener{
+        btnBack.setOnClickListener {
             onBackPressed()
         }
     }

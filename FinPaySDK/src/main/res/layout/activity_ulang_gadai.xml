@@ -58,7 +58,7 @@
                 android:paddingHorizontal="8dp"
                 android:id="@+id/noKreditField"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
+                android:background="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
             <ImageView
@@ -67,6 +67,65 @@
                 android:src="@drawable/ic_contact"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="16dp"/>
+        <TextView
+            android:text="Jumlah Pembelian"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="8dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/shape_edittext_outline"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <EditText
+                android:paddingHorizontal="8dp"
+                android:id="@+id/jumlahField"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="6dp"/>
+        <TextView
+            android:text="Minimal pembelian Rp 50.000"
+            android:layout_width="wrap_content"
+            android:textColor="#FF0000"
+            android:textSize="10sp"
+            android:layout_height="wrap_content"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="16dp"/>
+        <LinearLayout
+            android:background="@drawable/shape_edittext_outline"
+            android:layout_width="match_parent"
+            android:layout_height="28dp">
+            <LinearLayout
+                android:padding="4dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="#94EBF3"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Cek harga emas saat ini. "
+                    android:layout_width="wrap_content"
+                    android:textSize="10sp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="klik disini"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="10sp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <Space

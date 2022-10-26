@@ -54,13 +54,15 @@
             android:background="@drawable/shape_edittext_outline"
             android:layout_width="match_parent"
             android:layout_height="40dp">
+
             <EditText
-                android:paddingHorizontal="8dp"
                 android:id="@+id/noKreditField"
-                android:layout_weight="1"
-                android:background="#FFFFFF"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:paddingHorizontal="8dp" />
+
             <ImageView
                 android:id="@+id/btnContact"
                 android:layout_marginRight="8dp"

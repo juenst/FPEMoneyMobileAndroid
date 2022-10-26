@@ -58,7 +58,7 @@
                 android:paddingHorizontal="8dp"
                 android:id="@+id/noKreditField"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
+                android:background="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
             <ImageView

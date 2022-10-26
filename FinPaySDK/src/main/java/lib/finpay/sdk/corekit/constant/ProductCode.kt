@@ -5,7 +5,7 @@ class ProductCode {
     // Product Code -> 6 Digit Angka
     companion object {
         var QRIS: String = "001104"
-        var BPJS_KESEHATAN: String = "80003"
+        var BPJS_KESEHATAN: String = "080003"
         var PLN_POSTPAID: String = "070001" //tagihan
         var PLN_PREPAID: String = "070002" //token
         var PDAM: String = "503000"
