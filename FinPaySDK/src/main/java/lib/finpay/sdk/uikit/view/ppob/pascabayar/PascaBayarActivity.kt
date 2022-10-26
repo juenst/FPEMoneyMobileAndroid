@@ -68,7 +68,7 @@ class PascaBayarActivity : AppCompatActivity() {
                     intent.putExtra("customerName", it.bit61Parse?.customerName)
                     intent.putExtra("customerId", it.bit61Parse?.customerId)
                     intent.putExtra("tagihan", it.tagihan.toString())
-                    intent.putExtra("nomorReferensi", it.bit61Parse?.billRef)
+                    intent.putExtra("nomorReferensi", it.conf)
                     var fee: String = "0"
                     for (data in it.fee) {
                         if (data.sof == "mc") {
