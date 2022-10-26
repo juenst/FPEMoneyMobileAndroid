@@ -44,21 +44,22 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
             android:name=".uikit.view.ppob.pegadaian.TabunganEmasActivity"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pegadaian.AngsuranMikroActivity"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pegadaian.GadaiTebusActivity"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pegadaian.CicilGadaiActivity"
-            android:theme="@style/AppTheme.finpayTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.insurance.CarLifeActivity"
             android:exported="false">
