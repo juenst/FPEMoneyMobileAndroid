@@ -20,7 +20,7 @@ import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.ppob.pln.adapter.NominalAdapter
 
-class PLNActivity: AppCompatActivity() {
+class PLNActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
     lateinit var txtNomorPelangganToken: EditText
     lateinit var txtNomorPelangganTagihan: EditText
@@ -85,11 +85,11 @@ class PLNActivity: AppCompatActivity() {
         ButtonUtils.checkButtonState(btnNextToken)
         ButtonUtils.checkButtonState(btnNextTagihan)
         txtNomorPelangganToken.doOnTextChanged { text, start, before, count ->
-            btnNextToken.isEnabled = (!text.isNullOrBlank() && text.length>=9 && nominal != "0")
+            btnNextToken.isEnabled = (!text.isNullOrBlank() && text.length >= 9 && nominal != "0")
             ButtonUtils.checkButtonState(btnNextToken)
         }
         txtNomorPelangganTagihan.doOnTextChanged { text, start, before, count ->
-            btnNextTagihan.isEnabled = (!text.isNullOrBlank() && text.length>=9)
+            btnNextTagihan.isEnabled = (!text.isNullOrBlank() && text.length >= 9)
             ButtonUtils.checkButtonState(btnNextTagihan)
         }
 
@@ -121,18 +121,18 @@ class PLNActivity: AppCompatActivity() {
                 nominal, {
                     val intent = Intent(this, PLNResultActivity::class.java)
 //                    intent.putExtra("result", it)
-                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text)
+                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text.toString())
                     intent.putExtra("customerName", it.bit61Parse?.customerName)
                     intent.putExtra("customerId", it.bit61Parse?.customerId)
-                    intent.putExtra("tagihan", it.tagihan)
-                    intent.putExtra("nomorReferensi", it.bit61Parse?.billInfo1?.nomorReferensi)
+                    intent.putExtra("tagihan", it.tagihan.toString())
+                    intent.putExtra("nomorReferensi", it.conf)
                     var fee: String = "0"
                     for (data in it.fee) {
                         if (data.sof == "mc") {
                             fee = data.fee.toString()
                         }
                     }
-                    intent.putExtra("fee", it.fee)
+                    intent.putExtra("fee", fee)
                     startActivity(intent)
                     progressDialog.dismiss()
                 }, {
@@ -152,6 +152,20 @@ class PLNActivity: AppCompatActivity() {
                 txtNomorPelangganTagihan.text.toString(),
                 ProductCode.PLN_POSTPAID,
                 "", {
+                    val intent = Intent(this, PLNResultActivity::class.java)
+                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text.toString())
+                    intent.putExtra("customerName", it.bit61Parse?.customerName)
+                    intent.putExtra("customerId", it.bit61Parse?.customerId)
+                    intent.putExtra("tagihan", it.tagihan.toString())
+                    intent.putExtra("nomorReferensi", it.conf)
+                    var fee: String = "0"
+                    for (data in it.fee) {
+                        if (data.sof == "mc") {
+                            fee = data.fee.toString()
+                        }
+                    }
+                    intent.putExtra("fee", fee)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
@@ -175,9 +189,10 @@ class PLNActivity: AppCompatActivity() {
                 )
                 if (cursor != null && cursor.moveToNext()) {
                     val value: String = cursor.getString(0)
-                    if(value.length>=9) {
+                    if (value.length >= 9) {
                         txtNomorPelangganToken.setText(value)
-                        btnNextToken.isEnabled = (!value.isNullOrBlank() && value.length>=9 && nominal != "0")
+                        btnNextToken.isEnabled =
+                            (!value.isNullOrBlank() && value.length >= 9 && nominal != "0")
                         ButtonUtils.checkButtonState(btnNextToken)
                     } else {
                         DialogUtils.showDialogError(this, "", "Format nomor tidak sesuai")
@@ -199,9 +214,9 @@ class PLNActivity: AppCompatActivity() {
                 )
                 if (cursor != null && cursor.moveToNext()) {
                     val value: String = cursor.getString(0)
-                    if(value.length>=9) {
+                    if (value.length >= 9) {
                         txtNomorPelangganTagihan.setText(value)
-                        btnNextTagihan.isEnabled = (!value.isNullOrBlank() && value.length>=9)
+                        btnNextTagihan.isEnabled = (!value.isNullOrBlank() && value.length >= 9)
                         ButtonUtils.checkButtonState(btnNextTagihan)
                     } else {
                         DialogUtils.showDialogError(this, "", "Format nomor tidak sesuai")
@@ -231,7 +246,8 @@ class PLNActivity: AppCompatActivity() {
             val selectedItem = adapter.getItemAtPosition(position) as String
             selectedNominal.text = TextUtils.formatRupiah(selectedItem.toDouble()).replace("Rp", "")
             nominal = selectedItem
-            btnNextToken.isEnabled = (!txtNomorPelangganToken.text.isNullOrBlank() && txtNomorPelangganToken.text.length>=9 && nominal != "")
+            btnNextToken.isEnabled =
+                (!txtNomorPelangganToken.text.isNullOrBlank() && txtNomorPelangganToken.text.length >= 9 && nominal != "")
             ButtonUtils.checkButtonState(btnNextToken)
             dialog.dismiss()
         }
