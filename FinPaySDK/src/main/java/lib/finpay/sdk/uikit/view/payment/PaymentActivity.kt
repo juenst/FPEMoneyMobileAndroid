@@ -33,6 +33,7 @@ class PaymentActivity : AppCompatActivity() {
     val billingId: String? by lazy { intent.getStringExtra("billingId") }
     val activationDate: String? by lazy { intent.getStringExtra("activationDate") }
     val payType: String? by lazy { intent.getStringExtra("payType") }
+    val phoneNumber: String? by lazy { intent.getStringExtra("phoneNumber") }
 
     lateinit var progressDialog: ProgressDialog
 
@@ -115,6 +116,7 @@ class PaymentActivity : AppCompatActivity() {
                     } else if(paymentType == PaymentType.paymentPPOB) {
                         FinpaySDK.ppobPayment(
                             this@PaymentActivity,
+                            phoneNumber!!,
                             sof!!,
                             payType!!,
                             denom!!,

@@ -6,10 +6,11 @@ class ProductCode {
     companion object {
         var QRIS: String = "001104"
         var BPJS_KESEHATAN: String = "80003"
-        var PLN_POSTPAID: String = "070015"
-        var PLN_PREPAID: String = "070016"
+        var PLN_POSTPAID: String = "070001" //tagihan
+        var PLN_PREPAID: String = "070002" //token
         var PDAM: String = "503000"
         var TELKOM: String = "001001"
+        var PASCABAYAR: String = "010001"
         var INDIHOME: String = ""
         var REVENUE_PNBP: String = "050017"
         var REVENUE_ONLINE: String = "050017"

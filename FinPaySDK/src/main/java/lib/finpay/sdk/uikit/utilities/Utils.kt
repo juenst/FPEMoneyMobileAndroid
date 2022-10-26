@@ -213,13 +213,18 @@ object Utils {
             phoneNumber.substring(0,4) == "0819" ||
             phoneNumber.substring(0,4) == "0859" ||
             phoneNumber.substring(0,4) == "0877" ||
-            phoneNumber.substring(0,4) == "0878"
+            phoneNumber.substring(0,4) == "0878" ||
+            phoneNumber.substring(0,4) == "0879"
         ) {
             provider = "XL"
         } else if(
             phoneNumber.substring(0,4) == "0811" ||
             phoneNumber.substring(0,4) == "0812" ||
             phoneNumber.substring(0,4) == "0813" ||
+            phoneNumber.substring(0,4) == "0821" ||
+            phoneNumber.substring(0,4) == "0822" ||
+            phoneNumber.substring(0,4) == "0823" ||
+            phoneNumber.substring(0,4) == "0851" ||
             phoneNumber.substring(0,4) == "0852" ||
             phoneNumber.substring(0,4) == "0853"
         ) {
@@ -237,24 +242,33 @@ object Utils {
         } else if(
             phoneNumber.substring(0,4) == "0831" ||
             phoneNumber.substring(0,4) == "0832" ||
+            phoneNumber.substring(0,4) == "0833" ||
             phoneNumber.substring(0,4) == "0838"
         ) {
 //            provider = "AXIS"
             provider = "XL"
         } else if (
+            phoneNumber.substring(0,4) == "0895" ||
+            phoneNumber.substring(0,4) == "0896" ||
+            phoneNumber.substring(0,4) == "0897" ||
             phoneNumber.substring(0,4) == "0898" ||
             phoneNumber.substring(0,4) == "0899"
         ){
             provider = "THREE"
         } else if (
-            phoneNumber.substring(0,4) == "0888" ||
-            phoneNumber.substring(0,4) == "0889" ||
             phoneNumber.substring(0,4) == "0881" ||
-            phoneNumber.substring(0,4) == "0887"
+            phoneNumber.substring(0,4) == "0882" ||
+            phoneNumber.substring(0,4) == "0883" ||
+            phoneNumber.substring(0,4) == "0884" ||
+            phoneNumber.substring(0,4) == "0885" ||
+            phoneNumber.substring(0,4) == "0886" ||
+            phoneNumber.substring(0,4) == "0887" ||
+            phoneNumber.substring(0,4) == "0888" ||
+            phoneNumber.substring(0,4) == "0889"
         ){
             provider = "SMARTFREN"
         }else {
-            provider = "UNKNOWN"
+            provider = "TELKOMSEL"
         }
 
         return provider

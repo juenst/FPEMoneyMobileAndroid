@@ -9,6 +9,7 @@
         android:required="true" />
 
     <application>
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <activity
             android:name=".uikit.view.ppob.revenue.PajakOnlineActivity"
             android:exported="false">
@@ -97,36 +98,56 @@
         </activity>
         <activity
             android:name=".uikit.view.ppob.instalment.InstalmentActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".uikit.view.upgrade.CitizenshipActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".uikit.view.ppob.internettvcable.InternetTvCableActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.internettvcable.IndihomeActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.internettvcable.MNCActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.bpjs.BpjsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.bpjs.BpjsKesehatanActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.telkom.TelkomActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.telkom.TelkomResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pulsa_data.PulsaDataResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pegadaian.PegadaianActivity"
             android:exported="false"
@@ -263,19 +284,14 @@
             android:label="Alfamart"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.ppob.best.telkomsel.package.BestTelkomselPackageActivity"
+            android:name=".uikit.view.ppob.telkomsel.BestTelkomselPackageActivity"
             android:exported="false"
             android:label="Paket Terbaik Telkomsel"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
-            android:name=".uikit.view.ppob.best.telkomsel.package.BestTelkomselPackageDetailActivity"
+            android:name=".uikit.view.ppob.telkomsel.BestTelkomselPackageDetailActivity"
             android:exported="false"
             android:label="Paket Terbaik Telkomsel"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".uikit.view.ppob.internet.tv.cable.InternetTvCableActivity"
-            android:exported="false"
-            android:label="Internet &amp; Tv Cable"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.internet.tv.cable.InternetTvCableDetailActivity"

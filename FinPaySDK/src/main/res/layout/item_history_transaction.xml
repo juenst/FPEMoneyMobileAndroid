@@ -11,7 +11,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/grey_300"
+        android:background="#EEE"
         android:paddingBottom="16dp" />
 
     <LinearLayout
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pulsa XL"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="20 September 2022 20:51:18 WIB"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

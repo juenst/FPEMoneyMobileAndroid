@@ -97,7 +97,7 @@
                         android:padding="8dp"
                         android:singleLine="true"
                         android:textColor="#121926"
-                        android:textColorHint="@color/md_grey_300"
+                        android:textColorHint="#EEE"
                         android:textSize="14sp" />
 
                 </androidx.cardview.widget.CardView>
@@ -141,7 +141,7 @@
                         android:padding="8dp"
                         android:singleLine="true"
                         android:textColor="#121926"
-                        android:textColorHint="@color/md_grey_300"
+                        android:textColorHint="#EEE"
                         android:textSize="14sp" />
 
                 </androidx.cardview.widget.CardView>
@@ -186,7 +186,7 @@
                         android:padding="8dp"
                         android:singleLine="true"
                         android:textColor="#121926"
-                        android:textColorHint="@color/md_grey_300"
+                        android:textColorHint="#EEE"
                         android:textSize="14sp" />
 
                 </androidx.cardview.widget.CardView>
@@ -230,7 +230,7 @@
                         android:padding="8dp"
                         android:singleLine="true"
                         android:textColor="#121926"
-                        android:textColorHint="@color/md_grey_300"
+                        android:textColorHint="#EEE"
                         android:textSize="14sp" />
 
                 </androidx.cardview.widget.CardView>

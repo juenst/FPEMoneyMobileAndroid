@@ -17,18 +17,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+<!--        <com.rd.PageIndicatorView-->
+<!--            android:id="@+id/indicator"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            app:piv_animationType="scale"-->
+<!--            app:piv_dynamicCount="true"-->
+<!--            app:piv_selectedColor="@color/colorPrimary"-->
+<!--            app:piv_unselectedColor="#CCC"-->
+<!--            attrs:piv_padding="12dp"-->
+<!--            attrs:piv_radius="8dp"-->
+<!--            attrs:ignore="MissingClass" />-->
+
         <com.rd.PageIndicatorView
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            app:piv_animationType="scale"
-            app:piv_dynamicCount="true"
-            app:piv_selectedColor="@color/colorPrimary"
-            app:piv_unselectedColor="#CCC"
-            attrs:piv_padding="12dp"
-            attrs:piv_radius="8dp"
             attrs:ignore="MissingClass" />
 
         <Button

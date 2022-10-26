@@ -87,7 +87,7 @@
                     android:layout_height="4dp"/>
 
                 <androidx.cardview.widget.CardView
-                    app:cardBackgroundColor="@color/md_grey_100"
+                    app:cardBackgroundColor="#EEE"
                     android:outlineSpotShadowColor="@color/transparent"
                     android:layout_width="match_parent"
                     app:cardCornerRadius="4dp"
@@ -106,7 +106,7 @@
                         android:lines="1"
                         android:singleLine="true"
                         android:background="@android:color/transparent"
-                        android:textColorHint="@color/md_grey_300" />
+                        android:textColorHint="#EEE" />
 
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -136,7 +136,7 @@
                         android:layout_height="4dp"/>
 
                     <androidx.cardview.widget.CardView
-                        app:cardBackgroundColor="@color/md_grey_100"
+                        app:cardBackgroundColor="#EEE"
                         android:outlineSpotShadowColor="@color/transparent"
                         android:layout_width="75dp"
                         app:cardCornerRadius="4dp"
@@ -189,7 +189,7 @@
                         android:layout_height="4dp"/>
 
                     <androidx.cardview.widget.CardView
-                        app:cardBackgroundColor="@color/md_grey_100"
+                        app:cardBackgroundColor="#EEE"
                         android:outlineSpotShadowColor="@color/transparent"
                         android:layout_width="match_parent"
                         app:cardCornerRadius="4dp"
@@ -206,7 +206,7 @@
                             android:inputType="number"
                             android:textColor="#121926"
                             android:background="@android:color/transparent"
-                            android:textColorHint="@color/md_grey_300" />
+                            android:textColorHint="#EEE" />
 
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
