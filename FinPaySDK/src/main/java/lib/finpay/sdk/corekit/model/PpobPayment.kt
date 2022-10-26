@@ -9,8 +9,8 @@ class PpobPayment {
     var statusDesc: String? = null
     @SerializedName("bit61")
     var bit61: String? = null
-    @SerializedName("pajak")
-    var pajak: Pajak? = Pajak()
+//    @SerializedName("pajak")
+//    var pajak: Pajak? = Pajak()
     @SerializedName("bit61Parse")
     var bit61Parse: Bit61ParsePaymentPpob? = Bit61ParsePaymentPpob()
     @SerializedName("syslogno")
