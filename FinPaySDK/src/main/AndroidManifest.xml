@@ -9,7 +9,10 @@
         android:required="true" />
 
     <application>
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".uikit.view.ppob.revenue.PajakOnlineActivity"
             android:exported="false">
@@ -99,7 +102,7 @@
         <activity
             android:name=".uikit.view.ppob.instalment.InstalmentActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" >
+            android:theme="@style/AppTheme.finpayTheme">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -107,7 +110,7 @@
         <activity
             android:name=".uikit.view.upgrade.CitizenshipActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme" >
+            android:theme="@style/AppTheme.finpayTheme">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -292,11 +295,6 @@
             android:name=".uikit.view.ppob.telkomsel.BestTelkomselPackageDetailActivity"
             android:exported="false"
             android:label="Paket Terbaik Telkomsel"
-            android:theme="@style/AppTheme.finpayTheme" />
-        <activity
-            android:name=".uikit.view.ppob.internet.tv.cable.InternetTvCableDetailActivity"
-            android:exported="false"
-            android:label="Internet &amp; Tv Cable"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.pdam.PDAMActivity"
