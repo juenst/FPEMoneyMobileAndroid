@@ -125,7 +125,7 @@ class PLNActivity : AppCompatActivity() {
                     intent.putExtra("customerName", it.bit61Parse?.customerName)
                     intent.putExtra("customerId", it.bit61Parse?.customerId)
                     intent.putExtra("tagihan", it.tagihan.toString())
-                    intent.putExtra("nomorReferensi", it.bit61Parse?.plnRef)
+                    intent.putExtra("nomorReferensi", it.conf)
                     var fee: String = "0"
                     for (data in it.fee) {
                         if (data.sof == "mc") {
@@ -152,6 +152,20 @@ class PLNActivity : AppCompatActivity() {
                 txtNomorPelangganTagihan.text.toString(),
                 ProductCode.PLN_POSTPAID,
                 "", {
+                    val intent = Intent(this, PLNResultActivity::class.java)
+                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text.toString())
+                    intent.putExtra("customerName", it.bit61Parse?.customerName)
+                    intent.putExtra("customerId", it.bit61Parse?.customerId)
+                    intent.putExtra("tagihan", it.tagihan.toString())
+                    intent.putExtra("nomorReferensi", it.conf)
+                    var fee: String = "0"
+                    for (data in it.fee) {
+                        if (data.sof == "mc") {
+                            fee = data.fee.toString()
+                        }
+                    }
+                    intent.putExtra("fee", fee)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

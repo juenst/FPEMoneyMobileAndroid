@@ -48,6 +48,26 @@ class BillInfo1 {
     var nomorReferensi: String? = null
     @SerializedName("nilaiTagihan")
     var nilaiTagihan: String? = null
+    @SerializedName("period")
+    var period: String? = null
+    @SerializedName("periodEndDate")
+    var periodEndDate: String? = null
+    @SerializedName("meterReadDate")
+    var meterReadDate: String? = null
+    @SerializedName("electricityBill")
+    var electricityBill: String? = null
+    @SerializedName("incentive")
+    var incentive: String? = null
+    @SerializedName("ppn")
+    var ppn: String? = null
+    @SerializedName("penalty")
+    var penalty: String? = null
+    @SerializedName("pastMeter")
+    var pastMeter: String? = null
+    @SerializedName("presentMeter")
+    var presentMeter: String? = null
+    @SerializedName("total")
+    var total: String? = null
 }
 
 class Bit61ParsePPob {
