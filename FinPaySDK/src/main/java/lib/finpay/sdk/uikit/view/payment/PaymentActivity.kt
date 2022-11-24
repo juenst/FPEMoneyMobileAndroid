@@ -100,10 +100,7 @@ class PaymentActivity : AppCompatActivity() {
                                 intent.putExtra("tipsAmount", it.bit61Parse!!.tipsAmount)
                                 intent.putExtra("tipsPercentage", it.bit61Parse!!.tipsPercentage)
                                 intent.putExtra("acquirerName", it.bit61Parse!!.acquirerName)
-                                intent.putExtra(
-                                    "merchantLocation",
-                                    it.bit61Parse!!.merchantLocation
-                                )
+                                intent.putExtra("merchantLocation", it.bit61Parse!!.merchantLocation)
                                 intent.putExtra("merchantPAN", it.bit61Parse!!.merchantPAN)
                                 intent.putExtra("terminalID", it.bit61Parse!!.terminalID)
                                 intent.putExtra("isOnUs", it.bit61Parse!!.isOnUs)
@@ -139,14 +136,8 @@ class PaymentActivity : AppCompatActivity() {
                                 intent.putExtra("amountDpp", "0")
                                 intent.putExtra("amountPpn", "0")
                                 intent.putExtra("ppn", "0%")
-                                intent.putExtra(
-                                    "nomorReferensi",
-                                    it.bit61Parse!!.billInfo1!!.nomorReferensi
-                                )
-                                intent.putExtra(
-                                    "nilaiTagihan",
-                                    it.bit61Parse!!.billInfo1!!.nilaiTagihan
-                                )
+                                intent.putExtra("nomorReferensi", it.bit61Parse!!.billInfo1!!.nomorReferensi)
+                                intent.putExtra("nilaiTagihan", it.bit61Parse!!.billInfo1!!.nilaiTagihan)
                                 intent.putExtra("customerId", it.bit61Parse!!.customerId)
                                 intent.putExtra("customerName", it.bit61Parse!!.customerName)
                                 intent.putExtra("npwp", it.bit61Parse!!.npwp)

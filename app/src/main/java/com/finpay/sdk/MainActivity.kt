@@ -82,9 +82,9 @@ class MainActivity : AppCompatActivity() {
 
     fun credential(): Credential {
         val cd = Credential()
-        cd.setUsername(Constant.userName)
-        cd.setPassword(Constant.password)
-        cd.setSecretKey(Constant.secretKey)
+        cd.setUsername("MT77764DKM83N")
+        cd.setPassword("YJV3AM0y")
+        cd.setSecretKey("daYumnMb")
         cd.setPhoneNumber("083815613839")
         cd.setCustName("Widiyanto Ramadhan")
         return cd

@@ -1,0 +1,506 @@
+[
+    {
+        "code": "503001",
+        "name": "PDAM AETRA Jakarta"
+    },
+    {
+        "code": "503002",
+        "name": "PDAM AETRA Tangerang"
+    },
+    {
+        "code": "503003",
+        "name": "PDAM KAB Bekasi"
+    },
+    {
+        "code": "503004",
+        "name": "PDAM KAB Cianjur"
+    },
+    {
+        "code": "503005",
+        "name": "PDAM KAB Cirebon"
+    },
+    {
+        "code": "503006",
+        "name": "PDAM KAB Indramayu"
+    },
+    {
+        "code": "503007",
+        "name": "PDAM KAB Kuningan"
+    },
+    {
+        "code": "503008",
+        "name": "PDAM KAB Majalengka"
+    },
+    {
+        "code": "503009",
+        "name": "PDAM KAB Subang"
+    },
+    {
+        "code": "503010",
+        "name": "PDAM KAB Serang"
+    },
+    {
+        "code": "503011",
+        "name": "PDAM KAB Sukabumi"
+    },
+    {
+        "code": "503012",
+        "name": "PDAM KAB Tasikmalaya"
+    },
+    {
+        "code": "503013",
+        "name": "PDAM KAB Bandung"
+    },
+    {
+        "code": "503014",
+        "name": "PDAM KAB Bandung Barat"
+    },
+    {
+        "code": "503015",
+        "name": "PDAM KAB Bogor"
+    },
+    {
+        "code": "503016",
+        "name": "PDAM KAB Ciamis"
+    },
+    {
+        "code": "503017",
+        "name": "PDAM KAB Garut"
+    },
+    {
+        "code": "503018",
+        "name": "PDAM KAB Purwakarta"
+    },
+    {
+        "code": "503019",
+        "name": "PDAM KAB Sumedang"
+    },
+    {
+        "code": "503020",
+        "name": "PDAM KAB Tangerang (Banten)"
+    },
+    {
+        "code": "503021",
+        "name": "PDAM Kota Bandung"
+    },
+    {
+        "code": "503022",
+        "name": "PDAM Kota Banjar"
+    },
+    {
+        "code": "503023",
+        "name": "PDAM Kota Bekasi"
+    },
+    {
+        "code": "503024",
+        "name": "PDAM Kota Bogor"
+    },
+    {
+        "code": "503025",
+        "name": "PDAM Kota Depok"
+    },
+    {
+        "code": "503026",
+        "name": "PDAM Kota Sukabumi"
+    },
+    {
+        "code": "503027",
+        "name": "PDAM PALYJA"
+    },
+    {
+        "code": "503028",
+        "name": "PDAM KAB. Tegal"
+    },
+    {
+        "code": "503029",
+        "name": "PDAM KAB. Banyumas"
+    },
+    {
+        "code": "503030",
+        "name": "PDAM KAB. Batang"
+    },
+    {
+        "code": "503031",
+        "name": "PDAM KAB. Blora"
+    },
+    {
+        "code": "503032",
+        "name": "PDAM KAB. Boyolali"
+    },
+    {
+        "code": "503033",
+        "name": "PDAM KAB. Brebes"
+    },
+    {
+        "code": "503034",
+        "name": "PDAM KAB. Cilacap"
+    },
+    {
+        "code": "503035",
+        "name": "PDAM KAB. Grobogan"
+    },
+    {
+        "code": "503036",
+        "name": "PDAM KAB. Gunung Kidul"
+    },
+    {
+        "code": "503037",
+        "name": "PDAM KAB. Jepara"
+    },
+    {
+        "code": "503038",
+        "name": "PDAM KAB. Karanganyar"
+    },
+    {
+        "code": "503039",
+        "name": "PDAM KAB. Kebumen"
+    },
+    {
+        "code": "503040",
+        "name": "PDAM KAB. Kendal"
+    },
+    {
+        "code": "503041",
+        "name": "PDAM KAB. Kulon Progo"
+    },
+    {
+        "code": "503042",
+        "name": "PDAM KAB. Magelang"
+    },
+    {
+        "code": "503043",
+        "name": "PDAM KAB. Pekalongan"
+    },
+    {
+        "code": "503044",
+        "name": "PDAM KAB. Purbalingga"
+    },
+    {
+        "code": "503045",
+        "name": "PDAM KAB. Purworejo"
+    },
+    {
+        "code": "503046",
+        "name": "PDAM KAB. Rembang"
+    },
+    {
+        "code": "503047",
+        "name": "PDAM KAB. Semarang"
+    },
+    {
+        "code": "503048",
+        "name": "PDAM KAB. Sleman (DIY)"
+    },
+    {
+        "code": "503049",
+        "name": "PDAM KAB. Sragen"
+    },
+    {
+        "code": "503050",
+        "name": "PDAM KAB. Sukoharjo"
+    },
+    {
+        "code": "503051",
+        "name": "PDAM KAB. Temanggung"
+    },
+    {
+        "code": "503052",
+        "name": "PDAM KAB. Wonogiri"
+    },
+    {
+        "code": "503053",
+        "name": "PDAM KAB. Wonosobo"
+    },
+    {
+        "code": "503054",
+        "name": "PDAM Kota Salatiga"
+    },
+    {
+        "code": "503055",
+        "name": "PDAM Kota Semarang"
+    },
+    {
+        "code": "503056",
+        "name": "PDAM Kota Surakarta"
+    },
+    {
+        "code": "503057",
+        "name": "PDAM Kota Surakarta/Kota Solo"
+    },
+    {
+        "code": "503058",
+        "name": "PDAM KAB Gresik"
+    },
+    {
+        "code": "503059",
+        "name": "PDAM KAB Malang Rekening Non Air"
+    },
+    {
+        "code": "503060",
+        "name": "PDAM KAB. Bangkalan"
+    },
+    {
+        "code": "503061",
+        "name": "PDAM KAB. Banyuwangi"
+    },
+    {
+        "code": "503062",
+        "name": "PDAM KAB. Bojonegoro"
+    },
+    {
+        "code": "503063",
+        "name": "PDAM KAB. Bondowoso"
+    },
+    {
+        "code": "503064",
+        "name": "PDAM KAB. Jember"
+    },
+    {
+        "code": "503065",
+        "name": "PDAM KAB. Jombang"
+    },
+    {
+        "code": "503066",
+        "name": "PDAM KAB. Lumajang"
+    },
+    {
+        "code": "503067",
+        "name": "PDAM KAB. Magetan"
+    },
+    {
+        "code": "503068",
+        "name": "PDAM KAB. Malang"
+    },
+    {
+        "code": "503069",
+        "name": "PDAM KAB. Mojokerto"
+    },
+    {
+        "code": "503070",
+        "name": "PDAM KAB. Ngawi"
+    },
+    {
+        "code": "503071",
+        "name": "PDAM KAB. Pasuruan"
+    },
+    {
+        "code": "503072",
+        "name": "PDAM KAB. Probolinggo"
+    },
+    {
+        "code": "503073",
+        "name": "PDAM KAB. Sampang"
+    },
+    {
+        "code": "503074",
+        "name": "PDAM KAB. Sidoarjo"
+    },
+    {
+        "code": "503075",
+        "name": "PDAM KAB. Situbondo"
+    },
+    {
+        "code": "503076",
+        "name": "PDAM KAB. Trenggalek"
+    },
+    {
+        "code": "503077",
+        "name": "PDAM KAB. Tulungagung"
+    },
+    {
+        "code": "503078",
+        "name": "PDAM KAB. Pacitan"
+    },
+    {
+        "code": "503079",
+        "name": "PDAM Kota Kediri"
+    },
+    {
+        "code": "503080",
+        "name": "PDAM Kota Madiun"
+    },
+    {
+        "code": "503081",
+        "name": "PDAM Kota Malang"
+    },
+    {
+        "code": "503082",
+        "name": "PDAM Kota Pasuruan"
+    },
+    {
+        "code": "503083",
+        "name": "PDAM Kota Probolinggo"
+    },
+    {
+        "code": "503084",
+        "name": "PDAM Kota Surabaya"
+    },
+    {
+        "code": "503085",
+        "name": "PDAM Pamekasan"
+    },
+    {
+        "code": "503086",
+        "name": "PDAM Ponorogo"
+    },
+    {
+        "code": "503087",
+        "name": "PDAM Sumenep"
+    },
+    {
+        "code": "503088",
+        "name": "PDAM Kab. Badung"
+    },
+    {
+        "code": "503089",
+        "name": "PDAM Kab. Buleleng"
+    },
+    {
+        "code": "503090",
+        "name": "PDAM KAB. Klungkung"
+    },
+    {
+        "code": "503091",
+        "name": "PDAM Kota Denpasar"
+    },
+    {
+        "code": "503092",
+        "name": "PDAM Barabai"
+    },
+    {
+        "code": "503093",
+        "name": "PDAM Intan Banjar"
+    },
+    {
+        "code": "503094",
+        "name": "PDAM KAB. Paser"
+    },
+    {
+        "code": "503095",
+        "name": "PDAM KAB. Balangan"
+    },
+    {
+        "code": "503096",
+        "name": "PDAM KAB. Berau"
+    },
+    {
+        "code": "503097",
+        "name": "PDAM KAB. Hulu Sungai Utara"
+    },
+    {
+        "code": "503098",
+        "name": "PDAM KAB. Kubu Raya"
+    },
+    {
+        "code": "503099",
+        "name": "PDAM KAB. Kutai Timur"
+    },
+    {
+        "code": "503100",
+        "name": "PDAM KAB. Tapin"
+    },
+    {
+        "code": "503101",
+        "name": "PDAM Kota Balikpapan"
+    },
+    {
+        "code": "503102",
+        "name": "PDAM Kota Pontianak"
+    },
+    {
+        "code": "503103",
+        "name": "PDAM Kota Samarinda"
+    },
+    {
+        "code": "503104",
+        "name": "PDAM Pangkalan Bun"
+    },
+    {
+        "code": "503105",
+        "name": "PAM ATS Palembang"
+    },
+    {
+        "code": "503106",
+        "name": "PDAM Batam"
+    },
+    {
+        "code": "503107",
+        "name": "PDAM Muaro Jambi"
+    },
+    {
+        "code": "503108",
+        "name": "PDAM KAB. Kisaran"
+    },
+    {
+        "code": "503109",
+        "name": "PDAM KAB. Nias"
+    },
+    {
+        "code": "503110",
+        "name": "PDAM KABUPATEN TEBO"
+    },
+    {
+        "code": "503111",
+        "name": "PDAM Kota Bandar Lampung"
+    },
+    {
+        "code": "503112",
+        "name": "PDAM Kota Medan"
+    },
+    {
+        "code": "503113",
+        "name": "PDAM Kota Palembang"
+    },
+    {
+        "code": "503114",
+        "name": "PDAM Kota Pematang Siantar"
+    },
+    {
+        "code": "503115",
+        "name": "PDAM Simalungun"
+    },
+    {
+        "code": "503116",
+        "name": "PDAM Tirta Kepri"
+    },
+    {
+        "code": "503117",
+        "name": "PDAM Tirta KHAYANGAN (Kota Sungai Penuh)"
+    },
+    {
+        "code": "503118",
+        "name": "PDAM KAB. Lombok Tengah"
+    },
+    {
+        "code": "503119",
+        "name": "PDAM KAB. Takalar"
+    },
+    {
+        "code": "503120",
+        "name": "PDAM Kendari"
+    },
+    {
+        "code": "503121",
+        "name": "PDAM Kota Jayapura"
+    },
+    {
+        "code": "503122",
+        "name": "PDAM Kota Makassar"
+    },
+    {
+        "code": "503123",
+        "name": "PDAM Kota Mataram (NTB)"
+    },
+    {
+        "code": "503124",
+        "name": "PDAM KAB. Gowa"
+    },
+    {
+        "code": "503125",
+        "name": "PDAM Polewali Mandar"
+    },
+    {
+        "code": "503126",
+        "name": "PT Air Manado"
+    }
+]
