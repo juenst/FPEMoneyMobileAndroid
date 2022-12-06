@@ -30,8 +30,8 @@ class TokenRepository() {
                 val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "getToken",
-                    "reqDtime" to "20221206211010",//currentDate,
-                    "transNumber" to "20221206211010"
+                    "reqDtime" to "20221206211020",//currentDate,
+                    "transNumber" to "20221206211020"
                 )
                 FinpaySDK.signature = Signature()
                 val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -45,8 +45,8 @@ class TokenRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "getToken"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = "20221206211010"
-                requestBody["transNumber"] = "20221206211010"
+                requestBody["reqDtime"] = "20221206211020"
+                requestBody["transNumber"] = "20221206211020"
 
                 val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
                 request.getToken(requestBody).enqueue(object : Callback<Token> {

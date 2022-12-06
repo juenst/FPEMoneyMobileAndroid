@@ -31,8 +31,8 @@ class CustomerRepository() {
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "reqActivation",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to "20221206211020",
+                "transNumber" to "20221206211020",
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID
             )
@@ -48,8 +48,8 @@ class CustomerRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "reqActivation"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = "20221206211020"
+            requestBody["transNumber"] = "20221206211020"
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 
@@ -87,8 +87,8 @@ class CustomerRepository() {
                 val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "reqConfirmation",
-                    "reqDtime" to currentDate,
-                    "transNumber" to currentDate,
+                    "reqDtime" to "20221206211020",
+                    "transNumber" to "20221206211020",
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "custName" to custName,
@@ -107,8 +107,8 @@ class CustomerRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "reqConfirmation"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = currentDate
-                requestBody["transNumber"] = currentDate
+                requestBody["reqDtime"] = "20221206211020"
+                requestBody["transNumber"] = "20221206211020"
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["custName"] = custName
@@ -145,8 +145,8 @@ class CustomerRepository() {
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "checkProfile",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to "20221206211020",
+                "transNumber" to "20221206211020",
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
             )
@@ -162,8 +162,8 @@ class CustomerRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "checkProfile"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = "20221206211020"
+            requestBody["transNumber"] = "20221206211020"
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 
