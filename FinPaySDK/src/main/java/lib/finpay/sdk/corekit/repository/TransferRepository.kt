@@ -30,7 +30,7 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
                 val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "trfSesamaInquiry",
@@ -89,7 +89,7 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "trfBankInquiry",
@@ -153,7 +153,7 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "trfSesamaPayment",
@@ -222,7 +222,7 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "trfBankPayment",
@@ -288,7 +288,7 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "getBank",

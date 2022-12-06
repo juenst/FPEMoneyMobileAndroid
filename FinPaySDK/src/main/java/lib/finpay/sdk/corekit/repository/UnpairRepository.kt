@@ -30,7 +30,7 @@ class UnpairRepository() {
             onFailed: (String) -> Unit
         )  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
                 val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "unpair",

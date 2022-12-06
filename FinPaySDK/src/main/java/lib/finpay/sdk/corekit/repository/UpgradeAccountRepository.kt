@@ -26,7 +26,7 @@ class UpgradeAccountRepository() {
 
         fun upgradeAccount(imageIdentity: String, imageSelfie: String, motherName: String, noKK: String, nationality: String, email: String, onSuccess: (UpgradeAccount) -> Unit, onFailed: (String) -> Unit)  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
             val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "upgradeAccount",

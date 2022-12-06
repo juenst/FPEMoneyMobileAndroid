@@ -115,7 +115,7 @@ class PascaBayarResultActivity : AppCompatActivity() {
                 progressDialog.setMessage("Sedang Memuat ...")
                 progressDialog.setCancelable(false) // blocks UI interaction
                 progressDialog.show()
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss")
+                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
                 val currentDate = sdf.format(Date())
                 FinpaySDK.authPin(
                     this@PascaBayarResultActivity,
