@@ -81,7 +81,7 @@ class PLNResultActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK.getUserBallance(this@PLNResultActivity, {
+        FinpaySDK.getUserBallance(java.util.UUID.randomUUID().toString(), this@PLNResultActivity, {
             saldo = it.amount!!
             progressDialog.dismiss()
         }, {
@@ -124,9 +124,10 @@ class PLNResultActivity : AppCompatActivity() {
                 progressDialog.setMessage("Sedang Memuat ...")
                 progressDialog.setCancelable(false) // blocks UI interaction
                 progressDialog.show()
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
+                val sdf = SimpleDateFormat("yyyyMMddHHmmss")
                 val currentDate = sdf.format(Date())
                 FinpaySDK.authPin(
+                    java.util.UUID.randomUUID().toString(),
                     this@PLNResultActivity,
                     tagihan!!.toString(), ProductCode.PLN_POSTPAID, {
                         progressDialog.dismiss()

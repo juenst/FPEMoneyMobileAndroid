@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.PinAuth
 import lib.finpay.sdk.corekit.model.PinChange
 import lib.finpay.sdk.corekit.model.PinReset
@@ -25,17 +27,16 @@ class PinRepository {
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun authPin(
+            transNumber: String,
             amount: String,
             productCode: String,
             onSuccess: (PinAuth) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "authPin",
-                    "reqDtime" to currentDate,
-                    "transNumber" to currentDate,
+                    "reqDtime" to DateHelper.getCurrentDate(),
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "amount" to amount,
@@ -53,8 +54,8 @@ class PinRepository {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "authPin"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = currentDate
-                requestBody["transNumber"] = currentDate
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["amount"] = amount
@@ -83,16 +84,15 @@ class PinRepository {
         }
 
         fun resetPin(
+            transNumber: String,
             deviceId: String,
             onSuccess: (PinReset) -> Unit,
             onFailed: (String) -> Unit)  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "resetPin",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
                 "deviceId" to deviceId,
@@ -109,8 +109,8 @@ class PinRepository {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "resetPin"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["deviceId"] = deviceId
@@ -138,15 +138,14 @@ class PinRepository {
         }
 
         fun changePin(
+            transNumber: String,
             onSuccess: (PinChange) -> Unit,
             onFailed: (String) -> Unit)  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "widgetChangePin",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
             )
@@ -162,8 +161,8 @@ class PinRepository {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "widgetChangePin"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 

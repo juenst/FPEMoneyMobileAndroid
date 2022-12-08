@@ -49,6 +49,7 @@ class GadaiTebusActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this,
                 txtNoKredit.text.toString(),
                 ProductCode.GADAI_TEBUS,

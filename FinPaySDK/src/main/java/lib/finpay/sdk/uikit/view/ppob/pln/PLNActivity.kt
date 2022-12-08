@@ -115,6 +115,7 @@ class PLNActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@PLNActivity,
                 txtNomorPelangganToken.text.toString(),
                 ProductCode.PLN_PREPAID,
@@ -148,6 +149,7 @@ class PLNActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@PLNActivity,
                 txtNomorPelangganTagihan.text.toString(),
                 ProductCode.PLN_POSTPAID,

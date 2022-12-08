@@ -73,7 +73,9 @@ class PascaBayarResultActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK.getUserBallance(this@PascaBayarResultActivity, {
+        FinpaySDK.getUserBallance(
+            java.util.UUID.randomUUID().toString(),
+            this@PascaBayarResultActivity, {
             saldo = it.amount!!
             progressDialog.dismiss()
         },{
@@ -109,15 +111,16 @@ class PascaBayarResultActivity : AppCompatActivity() {
 
         btnPay?.setOnClickListener {
             if(saldo.toInt() < (tagihan!!.toInt() + fee!!.toInt())){
-                FinpaySDKUI.openTopup(this, Credential())
+                FinpaySDKUI.topupUIBuilder("", this, Credential())
             } else {
                 progressDialog.setTitle("Mohon Menunggu")
                 progressDialog.setMessage("Sedang Memuat ...")
                 progressDialog.setCancelable(false) // blocks UI interaction
                 progressDialog.show()
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
+                val sdf = SimpleDateFormat("yyyyMMddHHmmss")
                 val currentDate = sdf.format(Date())
                 FinpaySDK.authPin(
+                    java.util.UUID.randomUUID().toString(),
                     this@PascaBayarResultActivity,
                     tagihan!!.toString(), ProductCode.PASCABAYAR,{
                         progressDialog.dismiss()

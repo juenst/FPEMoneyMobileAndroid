@@ -31,10 +31,7 @@ class AppActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_app)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_qris, R.id.navigation_notifications
-            )
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.navigation_home, R.id.navigation_qris, R.id.navigation_notifications)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -50,7 +47,7 @@ class AppActivity : AppCompatActivity() {
         val btnQris = findViewById<ImageButton>(R.id.btnQris)
 
         btnQris.setOnClickListener {
-            FinpaySDKUI.openQris(this@AppActivity, Credential.credential())
+            FinpaySDKUI.qrisUIBuilder("", this@AppActivity, Credential.credential())
         }
     }
 }

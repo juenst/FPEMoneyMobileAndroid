@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.Token
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
@@ -24,14 +26,12 @@ class TokenRepository() {
         var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
-        fun getToken(onSuccess: (Token) -> Unit, onFailed: (String) -> Unit)  {
+        fun getToken(transNumber: String, onSuccess: (Token) -> Unit, onFailed: (String) -> Unit)  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "getToken",
-                    "reqDtime" to "20221206211020",//currentDate,
-                    "transNumber" to "20221206211020"
+                    "reqDtime" to DateHelper.getCurrentDate(),
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber)
                 )
                 FinpaySDK.signature = Signature()
                 val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -45,8 +45,8 @@ class TokenRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "getToken"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = "20221206211020"
-                requestBody["transNumber"] = "20221206211020"
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
 
                 val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
                 request.getToken(requestBody).enqueue(object : Callback<Token> {
@@ -59,11 +59,28 @@ class TokenRepository() {
                     ) {
                         if (response.code() == 200) {
                             if (response.body()?.statusCode == "000") {
-                                FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, response.body()!!.tokenID.toString())
+                                FinpaySDK.prefHelper.setStringToShared(
+                                    SharedPrefKeys.TOKEN_ID,
+                                    response.body()!!.tokenID.toString()
+                                )
                                 onSuccess(response.body()!!)
+                            } else if (response.body()?.statusCode == "A1004") {
+                                onFailed(response.body()?.statusDesc.toString())
+                            } else if (response.body()?.statusCode == "A1003") {
+                                onFailed(response.body()?.statusDesc.toString())
                             } else {
                                 onFailed(response.body()?.statusDesc.toString())
                             }
+//                        } else if(response.code() == 401) {
+//                            println("test => "+response.code().toString())
+//                            println("test => "+ response.message())
+//                            if (response.body()?.statusCode == "A1004") {
+//                                onFailed(response.body()?.statusDesc.toString())
+//                            } else if (response.body()?.statusCode == "A1003") {
+//                                onFailed(response.body()?.statusDesc.toString())
+//                            } else {
+//                                onFailed(response.body()?.statusDesc.toString())
+//                            }
                         } else {
                             onFailed(Constant.defaultErrorMessage)
                         }

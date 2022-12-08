@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.Unpair
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
@@ -25,17 +27,16 @@ class UnpairRepository() {
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun unpair(
+            transNumber: String,
             transType: String,
             onSuccess: (Unpair) -> Unit,
             onFailed: (String) -> Unit
         )  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "unpair",
-                    "reqDtime" to currentDate,
-                    "transNumber" to currentDate,
+                    "reqDtime" to DateHelper.getCurrentDate(),
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "transType" to transType,
@@ -52,8 +53,8 @@ class UnpairRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "unpair"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = currentDate
-                requestBody["transNumber"] = currentDate
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["transType"] = transType

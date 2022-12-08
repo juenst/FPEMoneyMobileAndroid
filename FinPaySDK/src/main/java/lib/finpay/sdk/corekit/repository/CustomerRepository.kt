@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.Customer
 import lib.finpay.sdk.corekit.model.Profile
 import lib.finpay.sdk.corekit.service.BaseServices
@@ -25,14 +27,12 @@ class CustomerRepository() {
         var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
-        fun reqActivation(phoneNumber: String, onSuccess: (Customer) -> Unit, onFailed: (String) -> Unit)  {
+        fun reqActivation(phoneNumber: String, transNumber: String, onSuccess: (Customer) -> Unit, onFailed: (String) -> Unit)  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "reqActivation",
-                "reqDtime" to "20221206211020",
-                "transNumber" to "20221206211020",
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID
             )
@@ -48,8 +48,8 @@ class CustomerRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "reqActivation"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = "20221206211020"
-            requestBody["transNumber"] = "20221206211020"
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 
@@ -77,18 +77,17 @@ class CustomerRepository() {
 
         fun reqConfirmation(
             phoneNumber: String,
+            transNumber: String,
             custName: String,
             otp: String,
             custStatusCode: String,
             onSuccess: (Customer) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "reqConfirmation",
-                    "reqDtime" to "20221206211020",
-                    "transNumber" to "20221206211020",
+                    "reqDtime" to DateHelper.getCurrentDate(),
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "custName" to custName,
@@ -107,8 +106,8 @@ class CustomerRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "reqConfirmation"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = "20221206211020"
-                requestBody["transNumber"] = "20221206211020"
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["custName"] = custName
@@ -138,15 +137,14 @@ class CustomerRepository() {
         }
 
         fun checkProfile(
+            transNumber: String,
             onSuccess: (Profile) -> Unit,
             onFailed: (String) -> Unit)  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "checkProfile",
-                "reqDtime" to "20221206211020",
-                "transNumber" to "20221206211020",
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
             )
@@ -162,8 +160,8 @@ class CustomerRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "checkProfile"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = "20221206211020"
-            requestBody["transNumber"] = "20221206211020"
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 

@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.*
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
@@ -25,17 +27,16 @@ class TransferRepository() {
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun inquiryOthers(
+            transNumber: String,
             phoneNumberDest: String,
             onSuccess: (TransferOtherInquiry) -> Unit,
             onFailed: (String) ->Unit
         )  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "trfSesamaInquiry",
-                    "reqDtime" to currentDate,
-                    "transNumber" to currentDate,
+                    "reqDtime" to DateHelper.getCurrentDate(),
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
                     "phoneNumber" to phoneNumber,
                     "phoneNumberDest" to phoneNumberDest,
                     "tokenID" to tokenID,
@@ -52,8 +53,8 @@ class TransferRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "transaction"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = currentDate
-                requestBody["transNumber"] = currentDate
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["phoneNumberDest"] = phoneNumberDest
                 requestBody["tokenID"] = tokenID
@@ -82,6 +83,7 @@ class TransferRepository() {
         }
 
         fun inquiryBank(
+            transNumber: String,
             bankCode: String,
             bankNo: String,
             amount: String,
@@ -89,12 +91,10 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "trfBankInquiry",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "bankCode" to bankCode,
                 "bankNo" to bankNo,
@@ -113,8 +113,8 @@ class TransferRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "transaction"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["bankCode"] = bankCode
             requestBody["bankNo"] = bankNo
@@ -145,6 +145,7 @@ class TransferRepository() {
         }
 
         fun paymentOthers(
+            transNumber: String,
             phoneNumberDest: String,
             amount: String,
             desc: String,
@@ -153,12 +154,10 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "trfSesamaPayment",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "phoneNumberDest" to phoneNumberDest,
                 "amount" to amount,
@@ -178,8 +177,8 @@ class TransferRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "trfSesamaPayment"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["phoneNumberDest"] = phoneNumberDest
             requestBody["amount"] = amount
@@ -212,6 +211,7 @@ class TransferRepository() {
 
 
         fun paymentBank(
+            transNumber: String,
             phoneNumberDest: String,
             reffFlag: String,
             reffTrx: String,
@@ -222,12 +222,10 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "trfBankPayment",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "phoneNumberDest" to phoneNumberDest,
                 "reffFlag" to reffFlag,
@@ -249,8 +247,8 @@ class TransferRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "trfBankPayment"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["phoneNumberDest"] = phoneNumberDest
             requestBody["reffFlag"] = reffFlag
@@ -284,16 +282,15 @@ class TransferRepository() {
         }
 
         fun getListBank(
+            transNumber: String,
             onSuccess: (Bank) -> Unit,
             onFailed: (String) ->Unit
         )  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "getBank",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "tokenID" to tokenID,
             )
             FinpaySDK.signature = Signature()
@@ -308,8 +305,8 @@ class TransferRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "getBank"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["tokenID"] = tokenID
 
             val request = BaseServices.getRetrofitInstance().create(Api::class.java)

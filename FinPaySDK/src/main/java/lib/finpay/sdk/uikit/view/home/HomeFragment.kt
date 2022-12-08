@@ -152,7 +152,8 @@ class HomeFragment : Fragment() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false)
         progressDialog.show()
-        FinpaySDK.getUserBallance(requireContext(), {
+        FinpaySDK.getUserBallance(
+            java.util.UUID.randomUUID().toString(), requireContext(), {
             saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
             txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
             progressDialog.dismiss()
@@ -194,11 +195,11 @@ class HomeFragment : Fragment() {
         }
 
         btnWallet.setOnClickListener {
-            FinpaySDKUI.openWallet(requireContext(), Credential.credential(requireContext()))
+            FinpaySDKUI.walletUIBuilder(java.util.UUID.randomUUID().toString(), requireContext(), Credential.credential(requireContext()))
         }
 
         btnHistoryTransaction.setOnClickListener {
-            FinpaySDKUI.openHistoryTransaction(requireContext(), Credential.credential(requireContext()))
+            FinpaySDKUI.historyTransactionUIBuilder(java.util.UUID.randomUUID().toString(), requireContext(), Credential.credential(requireContext()))
         }
 
         btnMore.setOnClickListener {
@@ -232,7 +233,7 @@ class HomeFragment : Fragment() {
         }
 
         sectionUpgradeAccount.setOnClickListener {
-            FinpaySDKUI.openUpgradeAccount(requireContext(), Credential.credential(requireContext()))
+            FinpaySDKUI.upgradeAccountUIBuilder(java.util.UUID.randomUUID().toString(), requireContext(), Credential.credential(requireContext()))
         }
     }
 

@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.UserBalance
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
@@ -24,14 +26,15 @@ class UserBallanceRepository() {
         var password: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_PASSWORD)!!
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
-        fun getUserBallance(onSuccess: (UserBalance) -> Unit, onFailed: (String) -> Unit)  {
+        fun getUserBallance(
+            transNumber: String,
+            onSuccess: (UserBalance) -> Unit,
+            onFailed: (String) -> Unit)  {
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMddHHmmss")
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "getBalance",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID
             )
@@ -47,8 +50,8 @@ class UserBallanceRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "getBalance"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 

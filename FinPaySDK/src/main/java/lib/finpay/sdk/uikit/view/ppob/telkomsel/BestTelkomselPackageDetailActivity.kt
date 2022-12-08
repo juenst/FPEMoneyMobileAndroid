@@ -30,7 +30,7 @@ class BestTelkomselPackageDetailActivity : AppCompatActivity() {
         billingCode = findViewById(R.id.txt_kode_bayar)
         btnNext = findViewById(R.id.btn_next)
 
-        FinpaySDK.getListProduct(this, {
+        FinpaySDK.getListProduct(java.util.UUID.randomUUID().toString(), this, {
             listProduct = it
         }, {
             Toast.makeText(this@BestTelkomselPackageDetailActivity, it, Toast.LENGTH_LONG)
@@ -51,6 +51,7 @@ class BestTelkomselPackageDetailActivity : AppCompatActivity() {
                     it.productDesc!!.uppercase(Locale.getDefault()).contains("menuTitle.text")
                 } as ArrayList<DetailProductModel>
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this,
                 billingCode.text.toString(),
                 currentProduct.first().productCode!!,

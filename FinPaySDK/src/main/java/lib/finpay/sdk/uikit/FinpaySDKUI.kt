@@ -28,6 +28,7 @@ class FinpaySDKUI {
     companion object {
         lateinit var progressDialog: ProgressDialog
         fun connectAccount(
+            transNumber: String,
             context: Context,
             credential: Credential
         ) {
@@ -41,7 +42,8 @@ class FinpaySDKUI {
             FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_PASSWORD, credential.getPassword()!!)
             FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_SECRET_KEY, credential.getSecretKey()!!)
             FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.USER_PHONE_NUMBER, credential.getPhoneNumber()!!)
-            FinpaySDK.getToken (context, {
+            FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, "finpay")
+            FinpaySDK.getToken (transNumber, context, {
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, it.tokenID!!)
 
                 if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
@@ -53,7 +55,7 @@ class FinpaySDKUI {
                 } else {
                     FinpaySDK.reqActivation(
                         context,
-                        credential.getPhoneNumber()!!, {
+                        credential.getPhoneNumber()!!, transNumber, {
                             if(it.custStatusCode == "003") {
                                 progressDialog.dismiss()
                                 FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
@@ -61,7 +63,7 @@ class FinpaySDKUI {
                                     context, "Aktivasi Sukses",
                                     "Aktivasi akun berhasil, silahkan hubungkan kembali",
                                     {
-                                        openWallet(context, credential)
+                                        walletUIBuilder(transNumber, context, credential)
                                     }
                                 )
                             } else {
@@ -90,91 +92,90 @@ class FinpaySDKUI {
             FinpaySDK.prefHelper.clearDataLogout()
             if(FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT) != true) {
                 onSuccess()
-                println("masuk sini")
                 println(FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID))
             }
         }
 
 
-        fun openApplication(context: Context, credential: Credential) {
+        fun applicationUIBuilder(transNumber: String, context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, AppActivity::class.java)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
             }
         }
 
-        fun openQris(context: Context, credential: Credential) {
+        fun qrisUIBuilder(transNumber: String, context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, QRISActivity::class.java)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
             }
         }
 
-        fun openWallet(context: Context, credential: Credential) {
+        fun walletUIBuilder(transNumber: String, context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, WalletSDKActivity::class.java)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
             }
         }
 
-        fun openTopup(context: Context, credential: Credential) {
+        fun topupUIBuilder(transNumber: String, context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, TopupActivity::class.java)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
             }
         }
 
-        fun openTransfer(context: Context, credential: Credential) {
+        fun transferUIBuilder(transNumber: String, context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val upgradeAccount: Boolean = false
                 if(upgradeAccount == false) {
-                    DialogUtils.showDialogUpgradeAccount(context, credential)
+                    DialogUtils.showDialogUpgradeAccount(transNumber, context, credential)
                 } else {
                     val intent = Intent(context, TransferActivity::class.java)
                     context.startActivity(intent)
                 }
             } else {
-                DialogUtils.showDialogConnectAccount(context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
             }
         }
 
-        fun openUpgradeAccount(context: Context, credential: Credential) {
+        fun upgradeAccountUIBuilder(transNumber: String, context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, UpgradeAccountActivity::class.java)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
             }
         }
 
-        fun openHistoryTransaction(context: Context, credential: Credential) {
+        fun historyTransactionUIBuilder(transNumber: String, context: Context, credential: Credential) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, TransactionHistoryActivity::class.java)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
             }
         }
     }

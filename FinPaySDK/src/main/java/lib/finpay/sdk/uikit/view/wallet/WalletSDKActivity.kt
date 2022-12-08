@@ -103,7 +103,7 @@ class WalletSDKActivity : AppCompatActivity() {
         }
 
         txtSeeAll.setOnClickListener {
-            FinpaySDKUI.openHistoryTransaction(this@WalletSDKActivity, Credential.credential(this@WalletSDKActivity))
+            FinpaySDKUI.historyTransactionUIBuilder(java.util.UUID.randomUUID().toString(), this@WalletSDKActivity, Credential.credential(this@WalletSDKActivity))
         }
 
         val showPopUp = PopupMenu(
@@ -142,7 +142,7 @@ class WalletSDKActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK.checkProfile(this, {
+        FinpaySDK.checkProfile("1234567890", this, {
             saldo = TextUtils.formatRupiah(it.data!!.balance!!.toDouble())
             txtSaldo.text = TextUtils.formatRupiah(it.data!!.balance!!.toDouble())
             txtUsername.text = it.data!!.nama

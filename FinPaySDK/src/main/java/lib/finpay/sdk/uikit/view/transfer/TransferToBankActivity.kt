@@ -60,6 +60,7 @@ class TransferToBankActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.transferToOtherInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@TransferToBankActivity,
                 txtNomorPenerima.text.toString(), {
                     progressDialog.dismiss()

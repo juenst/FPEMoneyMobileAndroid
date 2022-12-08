@@ -71,6 +71,7 @@ class CarLifeActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@CarLifeActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.INSURANCE_CAR,

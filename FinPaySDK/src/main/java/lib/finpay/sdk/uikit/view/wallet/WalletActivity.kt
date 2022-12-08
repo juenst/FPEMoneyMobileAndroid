@@ -90,12 +90,12 @@ class WalletActivity : AppCompatActivity() {
         }
 
         txtSeeAll.setOnClickListener {
-            FinpaySDKUI.openHistoryTransaction(this@WalletActivity, Credential.credential(this@WalletActivity))
+            FinpaySDKUI.historyTransactionUIBuilder(java.util.UUID.randomUUID().toString(), this@WalletActivity, Credential.credential(this@WalletActivity))
         }
     }
 
     fun getBalance() {
-        FinpaySDK.getUserBallance(this@WalletActivity, {
+        FinpaySDK.getUserBallance(java.util.UUID.randomUUID().toString(), this@WalletActivity, {
             _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
             textSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
         },{
@@ -104,7 +104,7 @@ class WalletActivity : AppCompatActivity() {
     }
 
     fun getHistoryTransaction(startDate: String, endDate: String) {
-        FinpaySDK.getHistoryTransaction(this@WalletActivity, startDate, endDate, {
+        FinpaySDK.getHistoryTransaction(java.util.UUID.randomUUID().toString(), this@WalletActivity, startDate, endDate, {
             if(it.getListHistory().isEmpty() || it.getListHistory().count() == 0) {
                 listHistoryTransaction.visibility = View.GONE
                 emptyState.visibility = View.VISIBLE

@@ -76,6 +76,7 @@ class PDAMActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@PDAMActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.PDAM,

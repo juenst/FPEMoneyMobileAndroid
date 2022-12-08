@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.*
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
@@ -26,18 +28,17 @@ class PpobRepository() {
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun inquiry(
+            transNumber: String,
             billingId: String,
             productCode: String,
             billingAmount: String,
             onSuccess: (PpobInquiry) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "inqBill",
-                    "reqDtime" to currentDate,
-                    "transNumber" to currentDate,
+                    "reqDtime" to DateHelper.getCurrentDate(),
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "billingId" to billingId,
@@ -56,8 +57,8 @@ class PpobRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "inqBill"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = currentDate
-                requestBody["transNumber"] = currentDate
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["billingId"] = billingId
@@ -87,6 +88,7 @@ class PpobRepository() {
         }
 
         fun payment(
+            transNumber: String,
             phoneNumber: String,
             sof: String,
             payType: String,
@@ -100,12 +102,10 @@ class PpobRepository() {
             onSuccess: (PpobPayment) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "paymentConf",
-                    "reqDtime" to currentDate,
-                    "transNumber" to currentDate,
+                    "reqDtime" to DateHelper.getCurrentDate(),
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "sof" to sof,
@@ -130,8 +130,8 @@ class PpobRepository() {
                 val requestBody : HashMap<String, String> = hashMapOf()
                 requestBody["requestType"] = "paymentConf"
                 requestBody["signature"] = signatureID
-                requestBody["reqDtime"] = currentDate
-                requestBody["transNumber"] = currentDate
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["sof"] = sof
@@ -167,6 +167,7 @@ class PpobRepository() {
         }
 
         fun getFeePpob(
+            transNumber: String,
             phoneNumber: String,
             payType: String,
             billingId: String,
@@ -176,12 +177,10 @@ class PpobRepository() {
             onFailed: (String) -> Unit
         ){
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "getFee",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
                 "payType" to payType,
@@ -201,8 +200,8 @@ class PpobRepository() {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "getFee"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["payType"] = payType

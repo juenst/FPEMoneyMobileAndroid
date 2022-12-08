@@ -63,6 +63,7 @@ class QRISResultActivity : AppCompatActivity() {
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
         FinpaySDK.qrisInquiry(
+            java.util.UUID.randomUUID().toString(),
             this@QRISResultActivity,
             stringQris!!, {
                 var fee: String = "0"
@@ -84,7 +85,7 @@ class QRISResultActivity : AppCompatActivity() {
             }
         )
 
-        FinpaySDK.getUserBallance(this@QRISResultActivity, {
+        FinpaySDK.getUserBallance(java.util.UUID.randomUUID().toString(), this@QRISResultActivity, {
             txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
             _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
         },{
@@ -139,6 +140,7 @@ class QRISResultActivity : AppCompatActivity() {
             progressDialog.setCancelable(false) // blocks UI interaction
             progressDialog.show()
             FinpaySDK.authPin(
+                java.util.UUID.randomUUID().toString(),
                 this@QRISResultActivity,
                 txtAmount.text.toString(), ProductCode.QRIS,{
                     progressDialog.dismiss()

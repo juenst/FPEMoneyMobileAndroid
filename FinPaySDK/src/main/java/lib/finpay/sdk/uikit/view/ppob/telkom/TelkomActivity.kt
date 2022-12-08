@@ -59,6 +59,7 @@ class TelkomActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@TelkomActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.TELKOM,

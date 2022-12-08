@@ -57,6 +57,7 @@ class PajakOnlineActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@PajakOnlineActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.REVENUE_ONLINE,

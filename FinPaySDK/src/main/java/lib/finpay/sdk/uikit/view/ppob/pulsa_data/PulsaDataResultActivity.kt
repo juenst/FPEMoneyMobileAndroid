@@ -120,7 +120,7 @@ class PulsaDataResultActivity : AppCompatActivity() {
     }
 
     fun getUserBallance() {
-        FinpaySDK.getUserBallance(this@PulsaDataResultActivity, {
+        FinpaySDK.getUserBallance(java.util.UUID.randomUUID().toString(),this@PulsaDataResultActivity, {
             saldo = it.amount!!
         },{
             Toast.makeText(this@PulsaDataResultActivity, it, Toast.LENGTH_LONG)
@@ -179,6 +179,7 @@ class PulsaDataResultActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
         FinpaySDK.getListSubProduct(
+            java.util.UUID.randomUUID().toString(),
             this@PulsaDataResultActivity,
             phoneNumber!!, listOpr, {
                 listDenom.adapter = PulsaDataAdapter(this, R.layout.item_pulsa_data, it.dataSubProduct)
@@ -231,9 +232,10 @@ class PulsaDataResultActivity : AppCompatActivity() {
                 progressDialog.setMessage("Sedang Memuat ...")
                 progressDialog.setCancelable(false) // blocks UI interaction
                 progressDialog.show()
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
+                val sdf = SimpleDateFormat("yyyyMMddHHmmss")
                 val currentDate = sdf.format(Date())
                 FinpaySDK.authPin(
+                    java.util.UUID.randomUUID().toString(),
                     this@PulsaDataResultActivity,
                     price, subProductCode,{
                         progressDialog.dismiss()

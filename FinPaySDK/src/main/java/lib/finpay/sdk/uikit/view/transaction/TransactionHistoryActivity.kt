@@ -98,7 +98,7 @@ class TransactionHistoryActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        FinpaySDK.getHistoryTransaction(this@TransactionHistoryActivity, startDate, endDate, {
+        FinpaySDK.getHistoryTransaction(java.util.UUID.randomUUID().toString(), this@TransactionHistoryActivity, startDate, endDate, {
             if(it.getListHistory().isEmpty() || it.getListHistory().count() == 0) {
                 listHistoryTransaction.visibility = View.GONE
                 emptyState.visibility = View.VISIBLE

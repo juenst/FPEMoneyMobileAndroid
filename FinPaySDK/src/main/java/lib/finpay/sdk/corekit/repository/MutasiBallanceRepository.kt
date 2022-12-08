@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.MutasiBallance
 import lib.finpay.sdk.corekit.service.BaseServices
 import lib.finpay.sdk.corekit.service.network.Api
@@ -25,6 +27,7 @@ class MutasiBallanceRepository() {
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun mutasiBallance(
+            transNumber: String,
             pin: String,
             custName: String,
             otp: String,
@@ -38,17 +41,15 @@ class MutasiBallanceRepository() {
             onFailed: (String) -> Unit
         )  {
                 //create signature
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-                val currentDate = sdf.format(Date())
                 val mapJson = mapOf(
                     "requestType" to "mutasiBalance",
                     "phoneNumber" to phoneNumber,
                     "pin" to pin,
-                    "reqDtime" to currentDate,
+                    "reqDtime" to DateHelper.getCurrentDate(),
                     "custName" to custName,
                     "otp" to otp,
                     "custStatusCode" to custStatusCode,
-                    "transNumber" to currentDate,
+                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
                     "transAmount" to transAmount,
                     "transType" to transType,
                     "transDesc" to transDesc,
@@ -69,11 +70,11 @@ class MutasiBallanceRepository() {
                 requestBody["requestType"] = "mutasiBalance"
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["pin"] = pin
-                requestBody["reqDtime"] = currentDate
+                requestBody["reqDtime"] = DateHelper.getCurrentDate()
                 requestBody["custName"] = custName
                 requestBody["otp"] = otp
                 requestBody["custStatusCode"] = custStatusCode
-                requestBody["transNumber"] = currentDate
+                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
                 requestBody["transAmount"] = transAmount
                 requestBody["transType"] = transType
                 requestBody["transDesc"] = transDesc

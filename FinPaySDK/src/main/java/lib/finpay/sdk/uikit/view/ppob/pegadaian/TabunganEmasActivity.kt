@@ -49,6 +49,7 @@ class TabunganEmasActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this,
                 txtNoKredit.text.toString(),
                 ProductCode.TABUNGAN_EMAS,

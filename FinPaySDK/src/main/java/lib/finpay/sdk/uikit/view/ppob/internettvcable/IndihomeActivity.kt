@@ -55,6 +55,7 @@ class IndihomeActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
+                java.util.UUID.randomUUID().toString(),
                 this@IndihomeActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.INDIHOME,

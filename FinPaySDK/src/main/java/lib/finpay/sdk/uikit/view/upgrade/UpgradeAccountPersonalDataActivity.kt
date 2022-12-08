@@ -84,6 +84,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
             var imageSelfie: String = Utils.encodeImage(imgResultSelfie!!)!!
 
             FinpaySDK.upgradeAccount(
+                java.util.UUID.randomUUID().toString(),
                 this@UpgradeAccountPersonalDataActivity,
                 imageIdentity,//imgResultIdentityBase64!!,
                 imageSelfie,//imgResultSelfieBase64!!,

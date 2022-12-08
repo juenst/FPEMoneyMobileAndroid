@@ -3,6 +3,8 @@ package lib.finpay.sdk.corekit.repository
 import lib.finpay.sdk.corekit.helper.Signature
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.Constant
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.helper.TransactionHelper
 import lib.finpay.sdk.corekit.model.OprProduct
 import lib.finpay.sdk.corekit.model.Product
 import lib.finpay.sdk.corekit.model.SubProduct
@@ -28,16 +30,15 @@ class ProductRepository()  {
         var secretKey: String = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.MERCHANT_SECRET_KEY)!!
 
         fun getListProduct(
+            transNumber: String,
             onSuccess: (Product) -> Unit,
             onFailed: (String) -> Unit
         ){
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "getProduk",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber)
             )
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -51,8 +52,8 @@ class ProductRepository()  {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "getProduk"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
 
             val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getListProduct(requestBody).enqueue(object :
@@ -78,18 +79,17 @@ class ProductRepository()  {
         }
 
         fun getListSubProduct(
+            transNumber: String,
             phoneNumber: String,
             listOpr: ArrayList<String>,
             onSuccess: (SubProduct) -> Unit,
             onFailed: (String) -> Unit
         ){
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "getDenom",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate,
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber),
                 "tokenID" to tokenID,
                 "phoneNumber" to phoneNumber,
                 "opr" to listOpr.toJson()
@@ -108,8 +108,8 @@ class ProductRepository()  {
             val requestBody : HashMap<String, Any> = hashMapOf()
             requestBody["requestType"] = "getDenom"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["opr"] = listOpr
@@ -138,16 +138,15 @@ class ProductRepository()  {
         }
 
         fun getListOprProduct(
+            transNumber: String,
             onSuccess: (OprProduct) -> Unit,
             onFailed: (String) -> Unit
         ){
             //create signature
-            val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
-            val currentDate = sdf.format(Date())
             val mapJson = mapOf(
                 "requestType" to "getOprProduk",
-                "reqDtime" to currentDate,
-                "transNumber" to currentDate
+                "reqDtime" to DateHelper.getCurrentDate(),
+                "transNumber" to TransactionHelper.getTransNumber(transNumber)
             )
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -158,8 +157,8 @@ class ProductRepository()  {
             val requestBody : HashMap<String, String> = hashMapOf()
             requestBody["requestType"] = "getOprProduk"
             requestBody["signature"] = signatureID
-            requestBody["reqDtime"] = currentDate
-            requestBody["transNumber"] = currentDate
+            requestBody["reqDtime"] = DateHelper.getCurrentDate()
+            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
 
             val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getListOprProduct(requestBody).enqueue(object :

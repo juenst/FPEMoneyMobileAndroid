@@ -78,6 +78,7 @@ class PaymentActivity : AppCompatActivity() {
                     progressDialog.show()
                     if (paymentType == PaymentType.paymentQRIS) {
                         FinpaySDK.qrisPayment(
+                            java.util.UUID.randomUUID().toString(),
                             this@PaymentActivity,
                             sof!!,
                             amount!!,
@@ -118,6 +119,7 @@ class PaymentActivity : AppCompatActivity() {
                         )
                     } else if (paymentType == PaymentType.paymentPPOB) {
                         FinpaySDK.ppobPayment(
+                            java.util.UUID.randomUUID().toString(),
                             this@PaymentActivity,
                             phoneNumber!!,
                             sof!!,

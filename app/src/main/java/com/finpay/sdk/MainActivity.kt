@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.getToken(
+                "1234567890",
                 this,
                 {
                     textTokenId.setText(it.tokenID)
@@ -59,11 +60,11 @@ class MainActivity : AppCompatActivity() {
 
 
         btnPairing.setOnClickListener {
-            FinpaySDKUI.openApplication(this@MainActivity, credential())
+            FinpaySDKUI.applicationUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
         }
 
         btnUpgradeAccount.setOnClickListener {
-            FinpaySDKUI.openUpgradeAccount(this@MainActivity, credential())
+            FinpaySDKUI.upgradeAccountUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
         }
 
         btnLogout.setOnClickListener {
@@ -71,11 +72,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnQris.setOnClickListener {
-            FinpaySDKUI.openQris(this@MainActivity, credential())
+            FinpaySDKUI.qrisUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
         }
 
         btnTransfer.setOnClickListener {
-            FinpaySDKUI.openTransfer(this@MainActivity, credential())
+            FinpaySDKUI.transferUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
         }
 
     }

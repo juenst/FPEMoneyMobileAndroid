@@ -78,7 +78,7 @@ class TelkomResultActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK.getUserBallance(this@TelkomResultActivity, {
+        FinpaySDK.getUserBallance(java.util.UUID.randomUUID().toString(), this@TelkomResultActivity, {
             saldo = it.amount!!
             progressDialog.dismiss()
         },{
@@ -114,15 +114,16 @@ class TelkomResultActivity : AppCompatActivity() {
 
         btnPay?.setOnClickListener {
             if(saldo.toInt() < (tagihan!!.toInt() + fee!!.toInt())){
-                FinpaySDKUI.openTopup(this, Credential())
+                FinpaySDKUI.topupUIBuilder("", this, Credential())
             } else {
                 progressDialog.setTitle("Mohon Menunggu")
                 progressDialog.setMessage("Sedang Memuat ...")
                 progressDialog.setCancelable(false) // blocks UI interaction
                 progressDialog.show()
-                val sdf = SimpleDateFormat("yyyyMMdHHmmss", Locale.ENGLISH)
+                val sdf = SimpleDateFormat("yyyyMMddHHmmss")
                 val currentDate = sdf.format(Date())
                 FinpaySDK.authPin(
+                    java.util.UUID.randomUUID().toString(),
                     this@TelkomResultActivity,
                     tagihan!!.toString(), ProductCode.TELKOM,{
                         progressDialog.dismiss()

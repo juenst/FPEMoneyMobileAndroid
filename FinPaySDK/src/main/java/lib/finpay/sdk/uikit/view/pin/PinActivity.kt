@@ -127,6 +127,7 @@ class PinActivity : AppCompatActivity() {
 //                }
 //            )
             FinpaySDK.qrisPayment(
+                java.util.UUID.randomUUID().toString(),
                 this@PinActivity,
                 sof!!,
                 amount!!,
@@ -156,6 +157,7 @@ class PinActivity : AppCompatActivity() {
         FinpaySDK.reqConfirmation(
             this@PinActivity,
             phoneNumber!!,
+            "1234567890",
             custName!!,
             pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5],
             custStatusCode!!, {
