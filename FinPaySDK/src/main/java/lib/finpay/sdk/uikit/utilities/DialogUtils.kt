@@ -49,7 +49,7 @@ class DialogUtils {
             val btnUpgrade = dialog.findViewById<Button>(R.id.btnUpgrade)
 
             btnUpgrade?.setOnClickListener {
-                FinpaySDKUI.openUpgradeAccount(transNumber, context, credential)
+                FinpaySDKUI.upgradeAccountUIBuilder(transNumber, context, credential)
             }
             dialog.show()
         }
