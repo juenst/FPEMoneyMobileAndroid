@@ -1,15 +1,17 @@
 package lib.finpay.sdk.corekit.helper
 
 class TransactionHelper {
-    companion object{
+    companion object {
         fun getTransNumber(transNumber: String): String {
-            var transactionNumber: String
-            if(transNumber == "") {
-                transactionNumber = java.util.UUID.randomUUID().toString()
+            val transactionNumber: String
+            if (transNumber == "") {
+                var temp = java.util.UUID.randomUUID().toString()
+                val re = Regex("[^A-Za-z0-9]")
+                temp = re.replace(temp, "")
+                transactionNumber = temp
             } else {
                 transactionNumber = transNumber
             }
-
             return transactionNumber
         }
 
