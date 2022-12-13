@@ -35,10 +35,11 @@ class RegisAccMerchantRepository() {
             onFailed: (String) -> Unit
         )  {
                 //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "regisAccMerchant",
                     "reqDtime" to DateHelper.getCurrentDate(),
-                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                    "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "custName" to custName,
@@ -57,7 +58,7 @@ class RegisAccMerchantRepository() {
                 requestBody["requestType"] = "regisAccMerchant"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
-                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+                requestBody["transNumber"] = transactionNumber
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["custName"] = custName

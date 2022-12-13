@@ -34,10 +34,11 @@ class HistoryTransactionRepository() {
             onFailed: (String) -> Unit
         )  {
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "getHist",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
                 "startDate" to startDate,
@@ -56,7 +57,7 @@ class HistoryTransactionRepository() {
             requestBody["requestType"] = "getHist"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["startDate"] = startDate
@@ -93,10 +94,11 @@ class HistoryTransactionRepository() {
             onFailed: (String) -> Unit
         )  {
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "getHistMaster",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
                 "transType" to transType,
@@ -116,7 +118,7 @@ class HistoryTransactionRepository() {
             requestBody["requestType"] = "getHistMaster"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["transType"] = transType

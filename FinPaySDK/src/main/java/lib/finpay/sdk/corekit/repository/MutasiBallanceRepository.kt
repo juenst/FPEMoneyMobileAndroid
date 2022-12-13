@@ -41,6 +41,7 @@ class MutasiBallanceRepository() {
             onFailed: (String) -> Unit
         )  {
                 //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "mutasiBalance",
                     "phoneNumber" to phoneNumber,
@@ -49,7 +50,7 @@ class MutasiBallanceRepository() {
                     "custName" to custName,
                     "otp" to otp,
                     "custStatusCode" to custStatusCode,
-                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                    "transNumber" to transactionNumber,
                     "transAmount" to transAmount,
                     "transType" to transType,
                     "transDesc" to transDesc,
@@ -74,7 +75,7 @@ class MutasiBallanceRepository() {
                 requestBody["custName"] = custName
                 requestBody["otp"] = otp
                 requestBody["custStatusCode"] = custStatusCode
-                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+                requestBody["transNumber"] = transactionNumber
                 requestBody["transAmount"] = transAmount
                 requestBody["transType"] = transType
                 requestBody["transDesc"] = transDesc

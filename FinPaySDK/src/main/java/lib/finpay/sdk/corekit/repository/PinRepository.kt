@@ -33,10 +33,11 @@ class PinRepository {
             onSuccess: (PinAuth) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "authPin",
                     "reqDtime" to DateHelper.getCurrentDate(),
-                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                    "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "amount" to amount,
@@ -55,7 +56,7 @@ class PinRepository {
                 requestBody["requestType"] = "authPin"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
-                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+                requestBody["transNumber"] = transactionNumber
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["amount"] = amount
@@ -89,10 +90,11 @@ class PinRepository {
             onSuccess: (PinReset) -> Unit,
             onFailed: (String) -> Unit)  {
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "resetPin",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
                 "deviceId" to deviceId,
@@ -110,7 +112,7 @@ class PinRepository {
             requestBody["requestType"] = "resetPin"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["deviceId"] = deviceId
@@ -142,10 +144,11 @@ class PinRepository {
             onSuccess: (PinChange) -> Unit,
             onFailed: (String) -> Unit)  {
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "widgetChangePin",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
             )
@@ -162,7 +165,7 @@ class PinRepository {
             requestBody["requestType"] = "widgetChangePin"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 

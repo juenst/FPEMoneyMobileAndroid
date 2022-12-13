@@ -32,10 +32,11 @@ class WidgetProfileRepository() {
             onFailed: (String) -> Unit
         )  {
                 //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "widgetProfile",
                     "reqDtime" to DateHelper.getCurrentDate(),
-                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                    "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID
                 )
@@ -52,7 +53,7 @@ class WidgetProfileRepository() {
                 requestBody["requestType"] = "widgetProfile"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
-                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+                requestBody["transNumber"] = transactionNumber
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
 

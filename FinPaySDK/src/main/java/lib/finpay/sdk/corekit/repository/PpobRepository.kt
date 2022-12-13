@@ -35,10 +35,11 @@ class PpobRepository() {
             onSuccess: (PpobInquiry) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "inqBill",
                     "reqDtime" to DateHelper.getCurrentDate(),
-                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                    "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "billingId" to billingId,
@@ -58,7 +59,7 @@ class PpobRepository() {
                 requestBody["requestType"] = "inqBill"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
-                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+                requestBody["transNumber"] = transactionNumber
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["billingId"] = billingId
@@ -102,10 +103,11 @@ class PpobRepository() {
             onSuccess: (PpobPayment) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "paymentConf",
                     "reqDtime" to DateHelper.getCurrentDate(),
-                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                    "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "sof" to sof,
@@ -131,7 +133,7 @@ class PpobRepository() {
                 requestBody["requestType"] = "paymentConf"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
-                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+                requestBody["transNumber"] = transactionNumber
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["sof"] = sof
@@ -177,10 +179,11 @@ class PpobRepository() {
             onFailed: (String) -> Unit
         ){
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "getFee",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
                 "payType" to payType,
@@ -201,7 +204,7 @@ class PpobRepository() {
             requestBody["requestType"] = "getFee"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["payType"] = payType

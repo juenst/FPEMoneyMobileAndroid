@@ -29,10 +29,11 @@ class CustomerRepository() {
 
         fun reqActivation(phoneNumber: String, transNumber: String, onSuccess: (Customer) -> Unit, onFailed: (String) -> Unit)  {
             //create signature
+            var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "reqActivation",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID
             )
@@ -49,7 +50,7 @@ class CustomerRepository() {
             requestBody["requestType"] = "reqActivation"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 
@@ -84,10 +85,11 @@ class CustomerRepository() {
             onSuccess: (Customer) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "reqConfirmation",
                     "reqDtime" to DateHelper.getCurrentDate(),
-                    "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                    "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
                     "tokenID" to tokenID,
                     "custName" to custName,
@@ -107,7 +109,7 @@ class CustomerRepository() {
                 requestBody["requestType"] = "reqConfirmation"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
-                requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+                requestBody["transNumber"] = transactionNumber
                 requestBody["phoneNumber"] = phoneNumber
                 requestBody["tokenID"] = tokenID
                 requestBody["custName"] = custName
@@ -141,10 +143,11 @@ class CustomerRepository() {
             onSuccess: (Profile) -> Unit,
             onFailed: (String) -> Unit)  {
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "checkProfile",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
             )
@@ -161,7 +164,7 @@ class CustomerRepository() {
             requestBody["requestType"] = "checkProfile"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
 

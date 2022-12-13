@@ -35,10 +35,11 @@ class ProductRepository()  {
             onFailed: (String) -> Unit
         ){
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "getProduk",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber)
+                "transNumber" to transactionNumber
             )
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -53,7 +54,7 @@ class ProductRepository()  {
             requestBody["requestType"] = "getProduk"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
 
             val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getListProduct(requestBody).enqueue(object :
@@ -86,10 +87,11 @@ class ProductRepository()  {
             onFailed: (String) -> Unit
         ){
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "getDenom",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "tokenID" to tokenID,
                 "phoneNumber" to phoneNumber,
                 "opr" to listOpr.toJson()
@@ -109,7 +111,7 @@ class ProductRepository()  {
             requestBody["requestType"] = "getDenom"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["opr"] = listOpr
@@ -143,10 +145,11 @@ class ProductRepository()  {
             onFailed: (String) -> Unit
         ){
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "getOprProduk",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber)
+                "transNumber" to transactionNumber
             )
             FinpaySDK.signature = Signature()
             val signatureID = FinpaySDK.signature.createSignature(mapJson, secretKey)
@@ -158,7 +161,7 @@ class ProductRepository()  {
             requestBody["requestType"] = "getOprProduk"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
 
             val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
             request.getListOprProduct(requestBody).enqueue(object :

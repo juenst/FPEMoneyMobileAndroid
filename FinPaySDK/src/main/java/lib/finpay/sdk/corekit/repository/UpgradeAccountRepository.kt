@@ -37,10 +37,11 @@ class UpgradeAccountRepository() {
             onSuccess: (UpgradeAccount) -> Unit,
             onFailed: (String) -> Unit)  {
             //create signature
+var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "upgradeAccount",
                 "reqDtime" to DateHelper.getCurrentDate(),
-                "transNumber" to TransactionHelper.getTransNumber(transNumber),
+                "transNumber" to transactionNumber,
                 "phoneNumber" to phoneNumber,
                 "tokenID" to tokenID,
                 "imgIdentitas" to imageIdentity,
@@ -64,7 +65,7 @@ class UpgradeAccountRepository() {
             requestBody["requestType"] = "upgradeAccount"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
-            requestBody["transNumber"] = TransactionHelper.getTransNumber(transNumber)
+            requestBody["transNumber"] = transactionNumber
             requestBody["phoneNumber"] = phoneNumber
             requestBody["tokenID"] = tokenID
             requestBody["imgIdentitas"] = imageIdentity
