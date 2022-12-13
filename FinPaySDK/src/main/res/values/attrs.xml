@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="FinpayMoneyAttrs">
+
+        <!-- Default Android attrs -->
+        <attr name="android:enabled" />
+        <attr name="android:text" />
+        <attr name="android:textSize" />
+        <attr name="android:textAllCaps" />
+
+        <attr name="fm_defaultColor" format="color" />
+        <attr name="fm_text" format="string" />
+
+        <attr name="fm_textColor" format="color" />
+        <attr name="fm_iconColor" format="color" />
+
+        <attr name="fm_textFont" format="string" />
+        <attr name="fm_iconFont" format="string" />
+
+        <attr name="fm_textSize" format="dimension" />
+        <attr name="fm_iconResource" format="integer" />
+        <attr name="fm_fontIconResource" format="string" />
+        <attr name="fm_fontIconSize" format="dimension" />
+        <attr name="fm_iconPosition" format="enum">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="top" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+
+        <attr name="fm_textPosition" format="enum">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="top" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+
+        <attr name="fm_textGravity" format="enum">
+            <enum name="top" value="0x30" />
+            <enum name="bottom" value="0x50" />
+            <enum name="left" value="0x03" />
+            <enum name="right" value="0x05" />
+            <enum name="center_vertical" value="0x10" />
+            <enum name="fill_vertical" value="0x70" />
+            <enum name="center_horizontal" value="0x01" />
+            <enum name="fill_horizontal" value="0x07" />
+            <enum name="center" value="0x11" />
+            <enum name="fill" value="0x77" />
+            <enum name="clip_vertical" value="0x80" />
+            <enum name="clip_horizontal" value="0x08" />
+            <enum name="start" value="0x00800003" />
+            <enum name="end" value="0x00800005" />
+        </attr>
+
+        <attr name="fm_iconPaddingLeft" format="dimension" />
+        <attr name="fm_iconPaddingRight" format="dimension" />
+        <attr name="fm_iconPaddingTop" format="dimension" />
+        <attr name="fm_iconPaddingBottom" format="dimension" />
+
+        <attr name="fm_borderColor" format="color" />
+        <attr name="fm_borderWidth" format="dimension" />
+        <attr name="fm_focusColor" format="color" />
+        <attr name="fm_disabledColor" format="color" />
+        <attr name="fm_disabledTextColor" format="color" />
+        <attr name="fm_disabledBorderColor" format="color" />
+        <attr name="fm_radius" format="dimension" />
+        <attr name="fm_textAllCaps" format="boolean" />
+
+        <attr name="fm_ghost" format="boolean" />
+        <attr name="fm_useSystemFont" format="boolean" />
+    </declare-styleable>
+
+
     <declare-styleable name="SpinnerWithSearch">
         <attr name="defaultChoice" format="string" />
     </declare-styleable>

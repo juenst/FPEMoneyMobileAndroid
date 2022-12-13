@@ -10,7 +10,10 @@ class TransactionHelper {
                 temp = re.replace(temp, "")
                 transactionNumber = temp
             } else {
-                transactionNumber = transNumber
+//                transactionNumber = transNumber
+                val re = Regex("[^A-Za-z0-9]")
+                var temp = re.replace(transNumber, "")
+                transactionNumber = temp
             }
             return transactionNumber
         }

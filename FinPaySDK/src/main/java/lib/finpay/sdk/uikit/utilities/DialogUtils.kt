@@ -89,29 +89,6 @@ class DialogUtils {
             descriptionDialog: String,
             onTap: () -> Unit
         ) {
-//            val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//            val builder = AlertDialog.Builder(context,R.style.CustomAlertDialog).create()
-//            val view = layoutInflater.inflate(R.layout.dialog_alert, null)
-//            val img = view.findViewById<ImageView>(R.id.img)
-//            val title = view.findViewById<TextView>(R.id.txtTitle)
-//            val desc = view.findViewById<TextView>(R.id.txtDesc)
-//            val button = view.findViewById<CardView>(R.id.btnClose)
-//
-//            img.setImageDrawable(context.resources.getDrawable(R.drawable.ic_success))
-//            if(titleDialog == "") {
-//                title.visibility = View.GONE
-//            } else {
-//                title.visibility = View.VISIBLE
-//                title.text = titleDialog
-//            }
-//            desc.text = descriptionDialog
-//            builder.setView(view)
-//            button.setOnClickListener {
-//                builder.dismiss()
-//                onTap()
-//            }
-//            builder.setCanceledOnTouchOutside(false)
-//            builder.show()
             val dialog = BottomSheetDialog(context)
             dialog.setContentView(R.layout.dialog_alert)
             val bottomSheetInternal: FrameLayout = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet)!!
@@ -132,6 +109,7 @@ class DialogUtils {
 
             button?.setOnClickListener {
                 onTap()
+                dialog.dismiss()
             }
             dialog.show()
         }
