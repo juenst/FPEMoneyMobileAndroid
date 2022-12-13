@@ -15,6 +15,7 @@ import lib.finpay.sdk.uikit.utilities.PrefHelper
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.view.AppActivity
 import lib.finpay.sdk.uikit.view.pin.PinActivity
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
 import lib.finpay.sdk.uikit.view.qris.QRISActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
@@ -173,6 +174,17 @@ class FinpaySDKUI {
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, TransactionHistoryActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun telkomUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, TelkomActivity::class.java)
                 context.startActivity(intent)
             } else {
                 DialogUtils.showDialogConnectAccount(transNumber, context, credential)
