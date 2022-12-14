@@ -85,7 +85,7 @@ class CustomerRepository() {
             onSuccess: (Customer) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+                var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "reqConfirmation",
                     "reqDtime" to DateHelper.getCurrentDate(),

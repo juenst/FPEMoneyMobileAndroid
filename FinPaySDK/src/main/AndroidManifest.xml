@@ -111,9 +111,6 @@
             android:name=".uikit.view.upgrade.CitizenshipActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <activity
             android:name=".uikit.view.ppob.internettvcable.InternetTvCableActivity"

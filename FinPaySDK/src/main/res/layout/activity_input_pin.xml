@@ -180,14 +180,14 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="20dp"/>
-        <TextView
-            android:id="@+id/buttonForgotPin"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lupa PIN?"
-            android:textColor="#00ACBA"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/buttonForgotPin"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Lupa PIN?"-->
+<!--            android:textColor="#00ACBA"-->
+<!--            android:textSize="14sp" />-->
     </LinearLayout>
     <LinearLayout
         android:gravity="bottom"
@@ -315,13 +315,17 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/pinFingerprint"
-                android:gravity="center"
-                android:layout_weight="1"
+<!--            <ImageView-->
+<!--                android:id="@+id/pinFingerprint"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_fingerprint_new"/>-->
+            <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fingerprint_new"/>
+                android:layout_weight="1"/>
             <TextView
                 android:id="@+id/pinButton0Input"
                 android:gravity="center"

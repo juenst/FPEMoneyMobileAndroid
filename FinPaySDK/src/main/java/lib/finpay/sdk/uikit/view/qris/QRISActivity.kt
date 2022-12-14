@@ -80,7 +80,7 @@ class QRISActivity : AppCompatActivity() {
 //            .setRequestedPreviewSize(1920, 1080)
 //            .setAutoFocusEnabled(true) //you should add this feature
 //            .build()
-
+//
 //        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
 //            @SuppressLint("MissingPermission")
 //            override fun surfaceCreated(holder: SurfaceHolder) {
@@ -110,8 +110,8 @@ class QRISActivity : AppCompatActivity() {
 //                cameraSource.stop()
 //            }
 //        })
-
-
+//
+//
 //        barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
 //            override fun release() {
 //                Toast.makeText(applicationContext, "Scanner has been closed", Toast.LENGTH_SHORT).show()
@@ -227,10 +227,14 @@ class QRISActivity : AppCompatActivity() {
             val result: com.google.zxing.Result = reader.decode(bitmap)
             contents = result.text
             println("QR code -> ${contents}")
-            val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
-            intent.putExtra("resultQR", "${contents}")
-            startActivity(intent)
-            this@QRISActivity.finish()
+            if(contents.contains("QRIS")) {
+                val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
+                intent.putExtra("resultQR", "${contents}")
+                startActivity(intent)
+                this@QRISActivity.finish()
+            } else {
+                DialogUtils.showDialogError(this, "", "Invalid QR Format")
+            }
         } catch (e: Exception) {
             Log.e("QrTest", "Error decoding qr code", e)
             DialogUtils.showDialogError(this, "", "Error decoding QR Code, Mohon pilih gambar QR Code yang benar!")

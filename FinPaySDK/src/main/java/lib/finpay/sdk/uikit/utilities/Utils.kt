@@ -280,6 +280,6 @@ object Utils {
         val number: String = String.format("%.1f %c", count / 1000.0.pow(exp.toDouble()), "kMGTPE"[exp - 1])
         val split = number.split(",")
         //return number
-        return split[0]+"rb"
+        return split[0].replace(".0","")
     }
 }

@@ -102,7 +102,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pagi makan ketan, malam dikejar setan"
+            android:text="Jalan-jalan bareng si kokom"
             android:gravity="center"
             android:textFontWeight="600"
             android:textSize="18sp"
@@ -115,7 +115,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bayar BPJS Kesehatan? yuk masukin nomor pelanggan"
+            android:text="Yuk masukin nomor pelanggan Telkom"
             android:gravity="center"
             android:textFontWeight="400"
             android:textSize="14sp"

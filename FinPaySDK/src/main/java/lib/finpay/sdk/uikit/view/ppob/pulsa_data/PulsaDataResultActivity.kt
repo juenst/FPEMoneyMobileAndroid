@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
-import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.corekit.model.DataSubProduct
 import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
@@ -22,7 +21,6 @@ import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.adapter.PulsaDataAdapter
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class PulsaDataResultActivity : AppCompatActivity() {
@@ -78,10 +76,14 @@ class PulsaDataResultActivity : AppCompatActivity() {
             subProductCode = selectedItem.provider.split("/")[1]
             denom = selectedItem.denom.split("/")[0]
             price = selectedItem.denom.split("/")[1]
-            for ((index, value) in dataSubProduct.withIndex()) {
-                listDenom.getChildAt(index).setBackgroundColor(Color.TRANSPARENT)
+
+//            for ((index, value) in dataSubProduct.withIndex()) {
+//                listDenom.getChildAt(index).setBackgroundColor(Color.TRANSPARENT)
+//            }
+            for (i in 0 until adapter.childCount) {
+                listDenom.getChildAt(i).setBackgroundColor(Color.TRANSPARENT)
             }
-            listDenom.getChildAt(listDenom.getItemIdAtPosition(position).toInt()).setBackgroundColor(Color.parseColor("#CCEEF1"))
+            listDenom.getChildAt(position).setBackgroundColor(Color.parseColor("#CCEEF1"))
 
             btnNext.isEnabled = subProductCode != null
             ButtonUtils.checkButtonState(btnNext)

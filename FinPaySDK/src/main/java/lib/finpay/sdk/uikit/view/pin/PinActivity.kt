@@ -9,7 +9,11 @@ import android.widget.TextView
 import android.widget.Toast
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.constant.Credential
 import lib.finpay.sdk.uikit.constant.PaymentType
+import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.view.AppActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailQrisActivity
 
@@ -149,6 +153,7 @@ class PinActivity : AppCompatActivity() {
         val phoneNumber: String? by lazy { intent.getStringExtra("phoneNumber") }
         val custName: String? by lazy { intent.getStringExtra("custName") }
         val custStatusCode: String? by lazy { intent.getStringExtra("custStatusCode") }
+        val transNumber: String? by lazy { intent.getStringExtra("transNumber") }
 
         progressDialog.setTitle("Mohon Menunggu")
         progressDialog.setMessage("Sedang Memuat ...")
@@ -157,18 +162,21 @@ class PinActivity : AppCompatActivity() {
         FinpaySDK.reqConfirmation(
             this@PinActivity,
             phoneNumber!!,
-            "1234567890",
+            transNumber!!,
             custName!!,
             pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5],
             custStatusCode!!, {
-                if(it.statusCode == "000") {
-                    println("OK")
-                    Toast.makeText(this@PinActivity, "Aktifasi akun berhasil, silahkan hubungkan kembali", Toast.LENGTH_LONG)
-                    progressDialog.dismiss()
-                    this@PinActivity.finish()
-                }
+                DialogUtils.showDialogSuccess(
+                    this@PinActivity, "Activation Successful",
+                    "Account activation successful, please reconnect",
+                    {
+                        progressDialog.dismiss()
+                        this@PinActivity.finish()
+                        FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
+                    }
+                )
             }, {
-                Toast.makeText(this@PinActivity, it, Toast.LENGTH_LONG)
+                DialogUtils.showDialogError(this, "", it)
                 progressDialog.dismiss()
             }
         )

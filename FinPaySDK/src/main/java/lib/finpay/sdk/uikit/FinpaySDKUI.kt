@@ -15,7 +15,22 @@ import lib.finpay.sdk.uikit.utilities.PrefHelper
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.view.AppActivity
 import lib.finpay.sdk.uikit.view.pin.PinActivity
+import lib.finpay.sdk.uikit.view.ppob.alfamart.AlfamartActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsActivity
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
+import lib.finpay.sdk.uikit.view.ppob.finpay.FinpayActivity
+import lib.finpay.sdk.uikit.view.ppob.instalment.InstalmentActivity
+import lib.finpay.sdk.uikit.view.ppob.insurance.InsuranceActivity
+import lib.finpay.sdk.uikit.view.ppob.internettvcable.InternetTvCableActivity
+import lib.finpay.sdk.uikit.view.ppob.pascabayar.PascaBayarActivity
+import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
+import lib.finpay.sdk.uikit.view.ppob.pegadaian.PegadaianActivity
+import lib.finpay.sdk.uikit.view.ppob.pln.PLNActivity
+import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
+import lib.finpay.sdk.uikit.view.ppob.revenue.RevenueActivity
 import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
+import lib.finpay.sdk.uikit.view.ppob.telkomsel.BestTelkomselPackageActivity
+import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherTVCableActivity
 import lib.finpay.sdk.uikit.view.qris.QRISActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionHistoryActivity
@@ -47,11 +62,22 @@ class FinpaySDKUI {
             FinpaySDK.getToken (transNumber, context, {
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, it.tokenID!!)
 
-                if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null) {
+                if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null || credential.getUsername() == "" || credential.getPassword() == "" || credential.getSecretKey() == "") {
                     DialogUtils.showDialogError(context, "Credential Error", "Client key, username, or password cannot be null or empty. Please set the client key, username, or password")
                     progressDialog.dismiss()
-                } else if(credential.getPhoneNumber() == null) {
-                    DialogUtils.showDialogError(context, "Required", "Phone number cannot be null or empty")
+                } else if(credential.getPhoneNumber() == null || credential.getPhoneNumber() == "") {
+                    DialogUtils.showDialogError(
+                        context,
+                        "Required",
+                        "Phone number cannot be null or empty"
+                    )
+                    progressDialog.dismiss()
+                } else if(credential.getPhoneNumber().toString().length < 10 || credential.getPhoneNumber().toString().length > 15) {
+                    DialogUtils.showDialogError(
+                        context,
+                        "",
+                        "The phone number must be between 10 and 15 digit"
+                    )
                     progressDialog.dismiss()
                 } else {
                     FinpaySDK.reqActivation(
@@ -61,10 +87,10 @@ class FinpaySDKUI {
                                 progressDialog.dismiss()
                                 FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
                                 DialogUtils.showDialogSuccess(
-                                    context, "Aktivasi Sukses",
-                                    "Aktivasi akun berhasil, silahkan hubungkan kembali",
+                                    context, "Activation Successful",
+                                    "Account activation successful, please reconnect",
                                     {
-                                        walletUIBuilder(transNumber, context, credential)
+                                        //walletUIBuilder(transNumber, context, credential)
                                     }
                                 )
                             } else {
@@ -74,6 +100,7 @@ class FinpaySDKUI {
                                 intent.putExtra("phoneNumber", credential.getPhoneNumber())
                                 intent.putExtra("custName", credential.getCustName())
                                 intent.putExtra("custStatusCode", it.custStatusCode.toString())
+                                intent.putExtra("transNumber", transNumber)
                                 context.startActivity(intent)
                             }
                         }, {
@@ -185,6 +212,160 @@ class FinpaySDKUI {
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, TelkomActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun alfamartUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, AlfamartActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun bpjsUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, BpjsKesehatanActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun finpayUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, FinpayActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun instalmentUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, InstalmentActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun insuranceUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, InsuranceActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun internetTvCableUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, InternetTvCableActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun pascaBayarUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, PascaBayarActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun pdamUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, PDAMActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun pegadaianUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, PegadaianActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun plnUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, PLNActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun pulsaDataUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, PulsaDataActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun revenueUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, RevenueActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun telkomselUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, BestTelkomselPackageActivity::class.java)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun voucherTvCableUIBuilder(transNumber: String, context: Context, credential: Credential) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, VoucherTVCableActivity::class.java)
                 context.startActivity(intent)
             } else {
                 DialogUtils.showDialogConnectAccount(transNumber, context, credential)

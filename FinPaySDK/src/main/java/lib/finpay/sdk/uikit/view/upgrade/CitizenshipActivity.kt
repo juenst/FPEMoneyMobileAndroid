@@ -22,6 +22,8 @@ class CitizenshipActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_citizenship)
+        supportActionBar!!.hide()
+
         txtWni = findViewById(R.id.txtWni)
         recyclerViewCountry = findViewById(R.id.rvCountry)
         searchViewNationality = findViewById(R.id.searchNationality)
