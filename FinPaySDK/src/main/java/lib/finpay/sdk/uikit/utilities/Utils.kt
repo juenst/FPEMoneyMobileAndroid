@@ -196,6 +196,24 @@ object Utils {
         return ""
     }
 
+    fun getFileToByte(filePath: String?): String? {
+        var bmp: Bitmap? = null
+        var bos: ByteArrayOutputStream? = null
+        var bt: ByteArray? = null
+        var encodeString: String? = null
+        var filePath = File(filePath!!.replace("file://", ""))
+        try {
+            bmp = BitmapFactory.decodeFile(filePath.toString())
+            bos = ByteArrayOutputStream()
+            bmp.compress(Bitmap.CompressFormat.JPEG, 50, bos)
+            bt = bos.toByteArray()
+            encodeString = Base64.encodeToString(bt, Base64.DEFAULT)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return encodeString
+    }
+
     fun validateMobileNumber(phoneNumber: String): String {
         val regex = Regex("[^0-9]")
        var number:String = regex.replace(phoneNumber, "")

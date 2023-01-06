@@ -34,6 +34,11 @@ class PaymentActivity : AppCompatActivity() {
     val activationDate: String? by lazy { intent.getStringExtra("activationDate") }
     val payType: String? by lazy { intent.getStringExtra("payType") }
     val phoneNumber: String? by lazy { intent.getStringExtra("phoneNumber") }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+    val phoneNumberDest: String? by lazy { intent.getStringExtra("phoneNumberDest") }
+    val reffTrx: String? by lazy { intent.getStringExtra("reffTrx") }
+    val category: String? by lazy { intent.getStringExtra("category") }
+    val desc: String? by lazy { intent.getStringExtra("desc") }
 
     lateinit var progressDialog: ProgressDialog
 
@@ -119,7 +124,7 @@ class PaymentActivity : AppCompatActivity() {
                         )
                     } else if (paymentType == PaymentType.paymentPPOB) {
                         FinpaySDK.ppobPayment(
-                            java.util.UUID.randomUUID().toString(),
+                            transNumber!!,
                             this@PaymentActivity,
                             phoneNumber!!,
                             sof!!,
@@ -155,6 +160,29 @@ class PaymentActivity : AppCompatActivity() {
                                 DialogUtils.showDialogError(this@PaymentActivity, "", it)
                             }
                         )
+                    } else if (paymentType == PaymentType.transferToOther) {
+                        FinpaySDK.transferToBankPayment(
+                            transNumber!!,
+                            this@PaymentActivity,
+                            phoneNumberDest!!,
+                            reffFlag!!,
+                            reffTrx!!,
+                            category!!,
+                            pinToken,
+                            desc!!,
+                            {
+                                progressDialog.dismiss()
+                                DialogUtils.showDialogSuccess(this@PaymentActivity, "Transfer Berhasil", "Anda berhasil transfer ke ${phoneNumberDest}", {
+                                    this@PaymentActivity.finish()
+                                })
+
+                            }, {
+                                progressDialog.dismiss()
+                                DialogUtils.showDialogError(this@PaymentActivity, "", it)
+                            }
+                        )
+                    } else if (paymentType == PaymentType.transferToBank) {
+
                     } else {
                         progressDialog.dismiss()
                     }

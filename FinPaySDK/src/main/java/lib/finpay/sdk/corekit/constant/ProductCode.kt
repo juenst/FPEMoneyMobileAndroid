@@ -28,5 +28,8 @@ class ProductCode {
         var CICIL_GADAI: String = "020019"
         var GADAI_TEBUS: String = "020020"
         var TABUNGAN_EMAS: String = "021001"
+
+        var TRANSFER_OTHER: String = ""
+        var TRANSFER_BANK: String = ""
     }
 }

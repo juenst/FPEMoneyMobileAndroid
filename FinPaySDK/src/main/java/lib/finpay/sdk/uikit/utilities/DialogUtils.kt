@@ -46,10 +46,11 @@ class DialogUtils {
         ) {
             val dialog = BottomSheetDialog(context)
             dialog.setContentView(R.layout.dialog_upgrade_account)
-            val btnUpgrade = dialog.findViewById<Button>(R.id.btnUpgrade)
+            val btnUpgrade = dialog.findViewById<CardView>(R.id.btnUpgrade)
 
             btnUpgrade?.setOnClickListener {
                 FinpaySDKUI.upgradeAccountUIBuilder(transNumber, context, credential)
+                dialog.dismiss()
             }
             dialog.show()
         }

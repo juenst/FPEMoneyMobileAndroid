@@ -4,10 +4,12 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -21,6 +23,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import lib.finpay.sdk.R
 import lib.finpay.sdk.uikit.constant.Constant
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.Utils
 import java.io.File
 import java.text.SimpleDateFormat
@@ -28,28 +31,37 @@ import java.util.*
 
 
 class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     private lateinit var btnBack: ImageView
     private lateinit var btnTakePicture: CardView
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraView: PreviewView
     lateinit var progressDialog: ProgressDialog
-    var activity: Activity? = null
 
     val imgResultIdentity: String? by lazy { intent.getStringExtra("imgResultIdentity") }
     val imgResultIdentityBase64: String? by lazy { intent.getStringExtra("imgResultIdentityBase64") }
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { intent.getStringExtra("transNumber")}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upgrade_account_selfie_camera)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         outputDirectory = getOutputDirectory()
         progressDialog = ProgressDialog(this)
         btnTakePicture = findViewById(R.id.btnTakePicture)
         btnBack = findViewById(R.id.btnBack)
         cameraView = findViewById(R.id.cameraView)
-        activity = this@UpgradeAccountSelfieCameraActivity
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -98,6 +110,8 @@ class UpgradeAccountSelfieCameraActivity : AppCompatActivity() {
 //                    intent.putExtra("imgResultSelfieBase64", Utils.encodeImage(saveUri.toString()))
                     intent.putExtra("imgResultIdentity", imgResultIdentity)
 //                    intent.putExtra("imgResultIdentityBase64", imgResultIdentityBase64)
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
                     progressDialog.dismiss()
                     startActivity(intent)
                     this@UpgradeAccountSelfieCameraActivity.finish()

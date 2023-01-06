@@ -2,6 +2,7 @@ package com.finpay.sdk
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +13,7 @@ import com.finpay.sdk.constant.Constant
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
@@ -60,6 +62,7 @@ class MainActivity : AppCompatActivity() {
 
 
         btnPairing.setOnClickListener {
+            FinpaySDKUI.upgradeAccountUIBuilder("", this, credential())
             FinpaySDKUI.applicationUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
         }
 
@@ -76,9 +79,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTransfer.setOnClickListener {
-            FinpaySDKUI.transferUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
+            FinpaySDKUI.transferUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential(), theme())
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun theme(): FinpayTheme {
+        val theme = FinpayTheme()
+        theme.setPrimaryColor(Color.parseColor("#333333"))
+        theme.setSecondaryColor(Color.parseColor("#AAAAAA"))
+        theme.setAppBarBackgroundColor(Color.parseColor("#FFFFFF"))
+        theme.setAppBarTextColor(Color.parseColor("#333333"))
+        return theme
     }
 
     fun credential(): Credential {

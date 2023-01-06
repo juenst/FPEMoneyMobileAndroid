@@ -33,7 +33,7 @@ class TransactionDetailPpobActivity : AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transaction_detail_qris)
+        setContentView(R.layout.activity_transaction_detail_ppob)
         supportActionBar!!.hide()
 
         btnBack = findViewById(R.id.btnBack)
@@ -51,8 +51,8 @@ class TransactionDetailPpobActivity : AppCompatActivity()  {
         txtPrice.text = TextUtils.formatRupiah((if(nilaiTagihan == null || nilaiTagihan == "") "0" else nilaiTagihan)!!.toDouble())
         txtTanggal.text = ": -"
         txtNoTrans.text = ": -"
-        txtSerialNumber.text = ": "+customerId
-        txtNomorTujuan.text = ": -"
+        txtSerialNumber.text = ": -"
+        txtNomorTujuan.text = ": "+customerId
         txtBiayaLayanan.text = "Rp0"
 
         btnBack.setOnClickListener{

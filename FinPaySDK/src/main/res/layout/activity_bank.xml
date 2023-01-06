@@ -48,7 +48,7 @@
         app:cardCornerRadius="4dp">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchNationality"
+            android:id="@+id/searchBank"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_edittext_outline"
@@ -75,29 +75,8 @@
             android:layout_height="5dp"
             android:background="#EEE" />
 
-        <TextView
-            android:id="@+id/txtWni"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="INDONESIA"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="#EEE" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingHorizontal="16dp"
-            android:text="WNA:"
-            android:textSize="16sp" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCountry"
+            android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"

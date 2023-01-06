@@ -236,6 +236,9 @@ class PulsaDataResultActivity : AppCompatActivity() {
                 progressDialog.show()
                 val sdf = SimpleDateFormat("yyyyMMddHHmmss")
                 val currentDate = sdf.format(Date())
+                println("testing")
+                println(price)
+                println(subProductCode)
                 FinpaySDK.authPin(
                     java.util.UUID.randomUUID().toString(),
                     this@PulsaDataResultActivity,
@@ -249,7 +252,7 @@ class PulsaDataResultActivity : AppCompatActivity() {
                         intent.putExtra("reffFlag", reffId)
                         intent.putExtra("billingId", phoneNumber)
                         intent.putExtra("productCode", subProductCode)
-                        intent.putExtra("activationDate", currentDate)
+                        intent.putExtra("activationDate", "")
                         intent.putExtra("payType", "billpayment")
                         intent.putExtra("widgetURL", it.widgetURL)
                         intent.putExtra("phoneNumber", phoneNumber)

@@ -8,13 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.Utils
+import lib.finpay.sdk.uikit.view.upgrade.CitizenshipActivity
 
 class TransferToBankActivity : AppCompatActivity() {
     lateinit var txtNomorPenerima: EditText
@@ -24,18 +27,32 @@ class TransferToBankActivity : AppCompatActivity() {
     lateinit var btnChooseBank: LinearLayout
     lateinit var selectedBank:TextView
     lateinit var progressDialog: ProgressDialog
-    var bank:String = ""
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { intent.getStringExtra("transNumber")}
+
+    private val resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            result.data?.getStringExtra("bankSelectedResult")?.let {
+                selectedBank.setText(it.uppercase())
+            }
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transfer_to_other)
+        setContentView(R.layout.activity_transfer_to_bank)
         supportActionBar!!.hide()
 
         txtNomorPenerima = findViewById(R.id.txtNomorPenerima)
         btnContact = findViewById(R.id.btnContact)
         btnNext = findViewById(R.id.btnNext)
         btnBack = findViewById(R.id.btnBack)
+        selectedBank = findViewById(R.id.selectedBank)
+        btnChooseBank = findViewById(R.id.chooseBank)
         progressDialog = ProgressDialog(this@TransferToBankActivity)
 
         ButtonUtils.checkButtonState(btnNext)
@@ -71,7 +88,14 @@ class TransferToBankActivity : AppCompatActivity() {
                 }
             )
         }
+
+        btnChooseBank.setOnClickListener {
+            val intent = Intent(this, BankActivity::class.java)
+            intent.putExtra("theme", finpayTheme)
+            resultLauncher.launch(intent)
+        }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 1 && resultCode == RESULT_OK) {

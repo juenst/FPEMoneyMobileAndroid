@@ -1,4 +1,4 @@
-package lib.finpay.sdk.uikit.view.upgrade
+package lib.finpay.sdk.uikit.view.transfer
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,32 +11,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import lib.finpay.sdk.R
-import lib.finpay.sdk.corekit.model.Country
+import lib.finpay.sdk.corekit.model.DataBank
 import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.Utils.getJsonFromRaw
 
-class CitizenshipActivity : AppCompatActivity() {
+class BankActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
     lateinit var appbarTitle: TextView
     private lateinit var btnBack: ImageView
-    private lateinit var searchViewNationality: SearchView
-    private lateinit var txtWni: TextView
-    private lateinit var recyclerViewCountry: RecyclerView
+    private lateinit var searchViewBank: SearchView
+    private lateinit var recyclerView: RecyclerView
     val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
 
-    private var filteredCountry: ArrayList<Country> = arrayListOf()
+    private var filteredBank: ArrayList<DataBank> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_citizenship)
+        setContentView(R.layout.activity_bank)
         supportActionBar!!.hide()
 
         appbar = findViewById(R.id.appbar)
         appbarTitle = findViewById(R.id.appbar_title)
-        txtWni = findViewById(R.id.txtWni)
         btnBack = findViewById(R.id.btnBack)
-        recyclerViewCountry = findViewById(R.id.rvCountry)
-        searchViewNationality = findViewById(R.id.searchNationality)
+        recyclerView = findViewById(R.id.rv)
+        searchViewBank = findViewById(R.id.searchBank)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
@@ -50,34 +48,34 @@ class CitizenshipActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        txtWni.setOnClickListener {
-            val intent = Intent()
-            intent.putExtra("countrySelectedResult", "Indonesia")
-            intent.putExtra("theme", finpayTheme)
-            setResult(RESULT_OK, intent)
-            finish()
-        }
+//        txtWni.setOnClickListener {
+//            val intent = Intent()
+//            intent.putExtra("countrySelectedResult", "Indonesia")
+//            intent.putExtra("theme", finpayTheme)
+//            setResult(RESULT_OK, intent)
+//            finish()
+//        }
     }
 
     private fun setupRecycler() {
-        val countryString: String = this.getJsonFromRaw(R.raw.country_data)
-        val countryList = Gson().fromJson(countryString, Array<Country>::class.java).toList()
-        filteredCountry.addAll(countryList)
+        val bankString: String = this.getJsonFromRaw(R.raw.bank_data)
+        val bankList = Gson().fromJson(bankString, Array<DataBank>::class.java).toList()
+        filteredBank.addAll(bankList)
 
-        val cListAdapter = CitizenshipListAdapter(filteredCountry, onClickListener = { country ->
+        val cListAdapter = BankListAdapter(filteredBank, onClickListener = { bank ->
             val intent = Intent()
-            intent.putExtra("countrySelectedResult", country.name)
+            intent.putExtra("bankSelectedResult", bank.bank)
             setResult(RESULT_OK, intent)
             finish()
         })
-        recyclerViewCountry.setHasFixedSize(true)
-        recyclerViewCountry.apply {
-            recyclerViewCountry.layoutManager = LinearLayoutManager(this@CitizenshipActivity)
-            recyclerViewCountry.adapter = cListAdapter
+        recyclerView.setHasFixedSize(true)
+        recyclerView.apply {
+            recyclerView.layoutManager = LinearLayoutManager(this@BankActivity)
+            recyclerView.adapter = cListAdapter
         }
 
-        searchViewNationality.setIconifiedByDefault(false)
-        searchViewNationality.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchViewBank.setIconifiedByDefault(false)
+        searchViewBank.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -85,17 +83,17 @@ class CitizenshipActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val searchText = newText!!.lowercase()
                 if (searchText.isNotEmpty()) {
-                    filteredCountry.clear()
-                    countryList.forEach { data ->
-                        if (data.name!!.lowercase().contains(searchText)) {
-                            filteredCountry.add(data)
+                    filteredBank.clear()
+                    bankList.forEach { data ->
+                        if (data.bank!!.lowercase().contains(searchText)) {
+                            filteredBank.add(data)
                         }
                     }
-                    recyclerViewCountry.adapter!!.notifyDataSetChanged()
+                    recyclerView.adapter!!.notifyDataSetChanged()
                 } else {
-                    filteredCountry.clear()
-                    filteredCountry.addAll(countryList)
-                    recyclerViewCountry.adapter!!.notifyDataSetChanged()
+                    filteredBank.clear()
+                    filteredBank.addAll(bankList)
+                    recyclerView.adapter!!.notifyDataSetChanged()
                 }
                 return false
             }

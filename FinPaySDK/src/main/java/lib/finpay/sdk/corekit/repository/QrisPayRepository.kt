@@ -34,9 +34,9 @@ class QrisPayRepository() {
             onSuccess: (QrisInquiry) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+                var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
-                    "requestType" to "inquiryQrisMPM",
+                    "requestType" to "inquiryQris",
                     "reqDtime" to DateHelper.getCurrentDate(),
                     "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
@@ -53,7 +53,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
 
                 //request body
                 val requestBody : HashMap<String, String> = hashMapOf()
-                requestBody["requestType"] = "inquiryQrisMPM"
+                requestBody["requestType"] = "inquiryQris"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
                 requestBody["transNumber"] = transactionNumber
@@ -93,9 +93,9 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             onSuccess: (QrisPayment) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+            var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
-                    "requestType" to "inquiryQrisMPM",
+                    "requestType" to "inquiryQris",
                     "reqDtime" to DateHelper.getCurrentDate(),
                     "transNumber" to transactionNumber,
                     "phoneNumber" to phoneNumber,
@@ -116,7 +116,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
 
                 //request body
                 val requestBody : HashMap<String, String> = hashMapOf()
-                requestBody["requestType"] = "inquiryQrisMPM"
+                requestBody["requestType"] = "inquiryQris"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
                 requestBody["transNumber"] = transactionNumber

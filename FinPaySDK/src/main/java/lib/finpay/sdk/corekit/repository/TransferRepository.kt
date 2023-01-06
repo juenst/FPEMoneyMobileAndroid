@@ -33,7 +33,7 @@ class TransferRepository() {
             onFailed: (String) ->Unit
         )  {
                 //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+                var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "trfSesamaInquiry",
                     "reqDtime" to DateHelper.getCurrentDate(),
@@ -52,7 +52,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
 
                 //request body
                 val requestBody : HashMap<String, String> = hashMapOf()
-                requestBody["requestType"] = "transaction"
+                requestBody["requestType"] = "trfSesamaInquiry"
                 requestBody["signature"] = signatureID
                 requestBody["reqDtime"] = DateHelper.getCurrentDate()
                 requestBody["transNumber"] = transactionNumber
@@ -60,7 +60,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 requestBody["phoneNumberDest"] = phoneNumberDest
                 requestBody["tokenID"] = tokenID
 
-                val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+                val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
 
                 request.transferOtherInquiry(requestBody).enqueue(object : Callback<TransferOtherInquiry> {
                     override fun onFailure(call: Call<TransferOtherInquiry>, t: Throwable) {
@@ -92,7 +92,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             onFailed: (String) ->Unit
         )  {
             //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+            var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "trfBankInquiry",
                 "reqDtime" to DateHelper.getCurrentDate(),
@@ -113,7 +113,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
 
             //request body
             val requestBody : HashMap<String, String> = hashMapOf()
-            requestBody["requestType"] = "transaction"
+            requestBody["requestType"] = "trfBankInquiry"
             requestBody["signature"] = signatureID
             requestBody["reqDtime"] = DateHelper.getCurrentDate()
             requestBody["transNumber"] = transactionNumber
@@ -123,7 +123,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             requestBody["amount"] = amount
             requestBody["tokenID"] = tokenID
 
-            val request = BaseServices.getRetrofitInstance().create(Api::class.java)
+            val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
 
             request.transferBankInquiry(requestBody).enqueue(object : Callback<TransferBankInquiry> {
                 override fun onFailure(call: Call<TransferBankInquiry>, t: Throwable) {
@@ -225,7 +225,7 @@ var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             onFailed: (String) ->Unit
         )  {
             //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+            var transactionNumber = TransactionHelper.getTransNumber(transNumber)
             val mapJson = mapOf(
                 "requestType" to "trfBankPayment",
                 "reqDtime" to DateHelper.getCurrentDate(),

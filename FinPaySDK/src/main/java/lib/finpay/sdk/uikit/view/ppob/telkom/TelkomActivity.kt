@@ -3,6 +3,7 @@ package lib.finpay.sdk.uikit.view.ppob.telkom
 import android.app.ProgressDialog
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,17 +13,23 @@ import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.Utils
 import lib.finpay.sdk.uikit.view.ppob.pln.PLNResultActivity
 
 class TelkomActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var txtNomorPelanggan: EditText
     lateinit var btnContact: ImageView
     lateinit var btnNext: Button
     lateinit var btnBack: ImageView
     lateinit var progressDialog: ProgressDialog
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme}
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     //nomor test 0122527200001
 
@@ -31,11 +38,20 @@ class TelkomActivity : AppCompatActivity() {
         setContentView(R.layout.activity_telkom)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         txtNomorPelanggan = findViewById(R.id.txtNomorPelanggan)
         btnContact = findViewById(R.id.btnContact)
         btnNext = findViewById(R.id.btnNext)
         btnBack = findViewById(R.id.btnBack)
         progressDialog = ProgressDialog(this@TelkomActivity)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
+        btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         ButtonUtils.checkButtonState(btnNext)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
@@ -59,7 +75,7 @@ class TelkomActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@TelkomActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.TELKOM,
@@ -77,6 +93,8 @@ class TelkomActivity : AppCompatActivity() {
                         }
                     }
                     intent.putExtra("fee", fee)
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
                     startActivity(intent)
                     progressDialog.dismiss()
                 }, {

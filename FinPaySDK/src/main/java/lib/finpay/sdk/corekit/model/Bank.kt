@@ -8,7 +8,7 @@ class Bank {
     @SerializedName("statusDesc")
     var statusDesc: String? = null
     @SerializedName("data")
-    var data: ArrayList<DataBank> = arrayListOf()
+    var dataBank: ArrayList<DataBank> = arrayListOf()
     @SerializedName("processingTime")
     var processingTime: Double? = null
 }
@@ -17,5 +17,5 @@ class DataBank {
     @SerializedName("kodeBank")
     var kodeBank: String? = null
     @SerializedName("Bank")
-    var Bank: String? = null
+    var bank: String? = null
 }

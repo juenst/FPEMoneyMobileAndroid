@@ -17,6 +17,7 @@ import lib.finpay.sdk.corekit.model.DataSubProduct
 import lib.finpay.sdk.corekit.model.PpobInquiry
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.PaymentType
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.*
 import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 import lib.finpay.sdk.uikit.view.ppob.pulsa_data.adapter.PulsaDataAdapter
@@ -32,6 +33,11 @@ class TelkomResultActivity : AppCompatActivity() {
     val tagihan: String? by lazy { intent.getStringExtra("tagihan") }
     val nomorReferensi: String? by lazy { intent.getStringExtra("nomorReferensi") }
     val fee: String? by lazy { intent.getStringExtra("fee") }
+    val transNumber: String? by lazy { intent.getStringExtra("transNumber")}
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var txtCustName: TextView
     lateinit var txtCustPhoneNumber: TextView
     lateinit var txtCustId: TextView
@@ -48,6 +54,8 @@ class TelkomResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_telkom_result)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         txtCustName = findViewById(R.id.txtCustName)
         txtCustPhoneNumber = findViewById(R.id.txtCustPhoneNumber)
         txtCustId = findViewById(R.id.txtCustId)
@@ -61,6 +69,12 @@ class TelkomResultActivity : AppCompatActivity() {
         txtCustPhoneNumber.text = FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.USER_PHONE_NUMBER)
         txtCustId.text = customerId
         txtTagihan.text = TextUtils.formatRupiah(tagihan!!.toDouble())
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnConfirm.setBackgroundColor(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -78,7 +92,7 @@ class TelkomResultActivity : AppCompatActivity() {
         progressDialog.setMessage("Sedang Memuat ...")
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
-        FinpaySDK.getUserBallance(java.util.UUID.randomUUID().toString(), this@TelkomResultActivity, {
+        FinpaySDK.getUserBallance(transNumber!!, this@TelkomResultActivity, {
             saldo = it.amount!!
             progressDialog.dismiss()
         },{
@@ -111,6 +125,8 @@ class TelkomResultActivity : AppCompatActivity() {
         txtBiayaLayanan!!.text = TextUtils.formatRupiah(fee!!.toDouble())
         txtTotalBayar!!.text = TextUtils.formatRupiah((tagihan!!.toInt() + fee!!.toInt()).toDouble())
         txtSaldo!!.text = TextUtils.formatRupiah(saldo.toDouble())
+
+        btnPay?.setBackgroundColor(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
 
         btnPay?.setOnClickListener {
             if(saldo.toInt() < (tagihan!!.toInt() + fee!!.toInt())){

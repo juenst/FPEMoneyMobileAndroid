@@ -35,7 +35,7 @@ class PpobRepository() {
             onSuccess: (PpobInquiry) -> Unit,
             onFailed: (String) -> Unit)  {
                 //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+                var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "inqBill",
                     "reqDtime" to DateHelper.getCurrentDate(),

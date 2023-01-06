@@ -40,10 +40,11 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/imgSuccess"
                 android:layout_width="256dp"
                 android:layout_height="256dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img_upgrade_success"/>
+                android:src="@drawable/img_upgrade_success" />
 
             <Space
                 android:layout_width="wrap_content"

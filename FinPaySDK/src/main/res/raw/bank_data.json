@@ -1,0 +1,394 @@
+[
+  {
+    "kodeBank": "002",
+    "Bank": "BRI"
+  },
+  {
+    "kodeBank": "008",
+    "Bank": "MANDIRI"
+  },
+  {
+    "kodeBank": "009",
+    "Bank": "BNI"
+  },
+  {
+    "kodeBank": "011",
+    "Bank": "DANAMON"
+  },
+  {
+    "kodeBank": "013",
+    "Bank": "PERMATA"
+  },
+  {
+    "kodeBank": "014",
+    "Bank": "BCA"
+  },
+  {
+    "kodeBank": "016",
+    "Bank": "BII"
+  },
+  {
+    "kodeBank": "019",
+    "Bank": "PANIN"
+  },
+  {
+    "kodeBank": "022",
+    "Bank": "NIAGA"
+  },
+  {
+    "kodeBank": "023",
+    "Bank": "UOB INDONESIA"
+  },
+  {
+    "kodeBank": "028",
+    "Bank": "NISP"
+  },
+  {
+    "kodeBank": "030",
+    "Bank": "AMERICANEXP"
+  },
+  {
+    "kodeBank": "031",
+    "Bank": "CITIBANK"
+  },
+  {
+    "kodeBank": "033",
+    "Bank": "Bank Of America NA"
+  },
+  {
+    "kodeBank": "036",
+    "Bank": "BANK WINDU KENCANA"
+  },
+  {
+    "kodeBank": "037",
+    "Bank": "Bank Artha Graha International"
+  },
+  {
+    "kodeBank": "041",
+    "Bank": "HSBC"
+  },
+  {
+    "kodeBank": "042",
+    "Bank": "BOT"
+  },
+  {
+    "kodeBank": "046",
+    "Bank": "DBS BANK (Development Bank of Singapore)"
+  },
+  {
+    "kodeBank": "050",
+    "Bank": "SCB"
+  },
+  {
+    "kodeBank": "052",
+    "Bank": "ABNAMRO / RBS"
+  },
+  {
+    "kodeBank": "054",
+    "Bank": "CAPITAL"
+  },
+  {
+    "kodeBank": "061",
+    "Bank": "ANZPanin"
+  },
+  {
+    "kodeBank": "069",
+    "Bank": "Bank of China (Hong Kong) Limited"
+  },
+  {
+    "kodeBank": "076",
+    "Bank": "BANK BUMI ARTA"
+  },
+  {
+    "kodeBank": "085",
+    "Bank": "BANK ARTA GRAHA"
+  },
+  {
+    "kodeBank": "087",
+    "Bank": "EKONOMI"
+  },
+  {
+    "kodeBank": "089",
+    "Bank": "HAGA KITA"
+  },
+  {
+    "kodeBank": "095",
+    "Bank": "Bank Mutiara"
+  },
+  {
+    "kodeBank": "097",
+    "Bank": "MAYAPADA"
+  },
+  {
+    "kodeBank": "110",
+    "Bank": "BPD JABAR"
+  },
+  {
+    "kodeBank": "111",
+    "Bank": "BPD DKI"
+  },
+  {
+    "kodeBank": "112",
+    "Bank": "BPD DIY"
+  },
+  {
+    "kodeBank": "113",
+    "Bank": "BPD JATENG"
+  },
+  {
+    "kodeBank": "114",
+    "Bank": "BPD JATIM"
+  },
+  {
+    "kodeBank": "115",
+    "Bank": "BPD JAMBI"
+  },
+  {
+    "kodeBank": "116",
+    "Bank": "BPD ACEH"
+  },
+  {
+    "kodeBank": "117",
+    "Bank": "BPD SUMUT"
+  },
+  {
+    "kodeBank": "118",
+    "Bank": "NAGARI"
+  },
+  {
+    "kodeBank": "119",
+    "Bank": "BPD RIAU"
+  },
+  {
+    "kodeBank": "120",
+    "Bank": "BPD SUMSEL"
+  },
+  {
+    "kodeBank": "121",
+    "Bank": "BPD LAMPUNG"
+  },
+  {
+    "kodeBank": "122",
+    "Bank": "BPD KALSEL"
+  },
+  {
+    "kodeBank": "123",
+    "Bank": "BPD KALBAR"
+  },
+  {
+    "kodeBank": "124",
+    "Bank": "BPD KALTIM"
+  },
+  {
+    "kodeBank": "125",
+    "Bank": "BPD KALTENG"
+  },
+  {
+    "kodeBank": "126",
+    "Bank": "BPD Sulawesi Selatan"
+  },
+  {
+    "kodeBank": "127",
+    "Bank": "BPD SULUT"
+  },
+  {
+    "kodeBank": "128",
+    "Bank": "BPD NTB"
+  },
+  {
+    "kodeBank": "129",
+    "Bank": "BPD BALI"
+  },
+  {
+    "kodeBank": "130",
+    "Bank": "BPD NTT"
+  },
+  {
+    "kodeBank": "131",
+    "Bank": "BPD MALUKU"
+  },
+  {
+    "kodeBank": "132",
+    "Bank": "BPD PAPUA"
+  },
+  {
+    "kodeBank": "133",
+    "Bank": "Bank Bengkulu"
+  },
+  {
+    "kodeBank": "134",
+    "Bank": "BPD SULTENG"
+  },
+  {
+    "kodeBank": "135",
+    "Bank": "BPD Sulawesi Tenggara"
+  },
+  {
+    "kodeBank": "145",
+    "Bank": "BNP"
+  },
+  {
+    "kodeBank": "146",
+    "Bank": "Bank Swadesi"
+  },
+  {
+    "kodeBank": "147",
+    "Bank": "MUAMALAT"
+  },
+  {
+    "kodeBank": "151",
+    "Bank": "MESTIKA"
+  },
+  {
+    "kodeBank": "153",
+    "Bank": "SINARMAS"
+  },
+  {
+    "kodeBank": "157",
+    "Bank": "MASPION"
+  },
+  {
+    "kodeBank": "161",
+    "Bank": "GANESHA"
+  },
+  {
+    "kodeBank": "164",
+    "Bank": "Bank ICBC Indonesia"
+  },
+  {
+    "kodeBank": "167",
+    "Bank": "Bank Kesawan"
+  },
+  {
+    "kodeBank": "200",
+    "Bank": "BTN"
+  },
+  {
+    "kodeBank": "212",
+    "Bank": "BHS"
+  },
+  {
+    "kodeBank": "213",
+    "Bank": "BTPN"
+  },
+  {
+    "kodeBank": "425",
+    "Bank": "BJB SYARIAH"
+  },
+  {
+    "kodeBank": "426",
+    "Bank": "MEGA"
+  },
+  {
+    "kodeBank": "441",
+    "Bank": "BUKOPIN"
+  },
+  {
+    "kodeBank": "451",
+    "Bank": "BSM"
+  },
+  {
+    "kodeBank": "472",
+    "Bank": "Bank Jasa Jakarta"
+  },
+  {
+    "kodeBank": "484",
+    "Bank": "BANK HANA"
+  },
+  {
+    "kodeBank": "485",
+    "Bank": "BUMIPUTERA"
+  },
+  {
+    "kodeBank": "490",
+    "Bank": "Bank Neo Commerce"
+  },
+  {
+    "kodeBank": "494",
+    "Bank": "AGRO"
+  },
+  {
+    "kodeBank": "498",
+    "Bank": "BANK INDOMONEX"
+  },
+  {
+    "kodeBank": "501",
+    "Bank": "BANK ROYAL INDONESIA"
+  },
+  {
+    "kodeBank": "503",
+    "Bank": "BANK NOBU"
+  },
+  {
+    "kodeBank": "506",
+    "Bank": "BSMI"
+  },
+  {
+    "kodeBank": "513",
+    "Bank": "BANK INA"
+  },
+  {
+    "kodeBank": "523",
+    "Bank": "Bank Sahabat Sampoerna"
+  },
+  {
+    "kodeBank": "525",
+    "Bank": "BARCLAYS"
+  },
+  {
+    "kodeBank": "535",
+    "Bank": "BANK EKONOMI"
+  },
+  {
+    "kodeBank": "536",
+    "Bank": "BANK UIB"
+  },
+  {
+    "kodeBank": "542",
+    "Bank": "Bank Artos Indonesia"
+  },
+  {
+    "kodeBank": "548",
+    "Bank": "Bank Multi Artha Sentosa"
+  },
+  {
+    "kodeBank": "553",
+    "Bank": "Mayora"
+  },
+  {
+    "kodeBank": "555",
+    "Bank": "Bank Index"
+  },
+  {
+    "kodeBank": "558",
+    "Bank": "PUNDI"
+  },
+  {
+    "kodeBank": "564",
+    "Bank": "BSHB"
+  },
+  {
+    "kodeBank": "566",
+    "Bank": "BANK VICTORIA"
+  },
+  {
+    "kodeBank": "567",
+    "Bank": "BANK HARDA"
+  },
+  {
+    "kodeBank": "867",
+    "Bank": "BPR EKA LAMPUNG"
+  },
+  {
+    "kodeBank": "900",
+    "Bank": "KSEI"
+  },
+  {
+    "kodeBank": "949",
+    "Bank": "Bank CTBC Indonesia"
+  },
+  {
+    "kodeBank": "950",
+    "Bank": "AP SCB"
+  }
+]
