@@ -156,6 +156,8 @@ class TelkomResultActivity : AppCompatActivity() {
                         intent.putExtra("payType", "billpayment")
                         intent.putExtra("widgetURL", it.widgetURL)
                         intent.putExtra("phoneNumber", txtCustPhoneNumber.text.toString())
+                        intent.putExtra("transNumber", transNumber!!)
+                        intent.putExtra("theme", finpayTheme)
                         startActivity(intent)
                     }, {
                         progressDialog.dismiss()

@@ -3,6 +3,7 @@ package lib.finpay.sdk.uikit.view.ppob.pln
 import android.app.ProgressDialog
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -15,6 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
@@ -36,6 +38,11 @@ class PLNActivity : AppCompatActivity() {
     lateinit var btnContactTagihan: ImageView
     lateinit var progressDialog: ProgressDialog
     var nominal: String = "0"
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     //nomor testing token 512233350020
 
@@ -44,6 +51,8 @@ class PLNActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pln)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         txtNomorPelangganToken = findViewById(R.id.txtNomorPelangganToken)
         txtNomorPelangganTagihan = findViewById(R.id.txtNomorPelangganTagihan)
         btnNextToken = findViewById(R.id.btnNext)
@@ -63,6 +72,13 @@ class PLNActivity : AppCompatActivity() {
         cardTagihan.setBackgroundColor(Integer.parseUnsignedInt("FFEEF2F6", 16))
         contentToken.visibility = View.VISIBLE
         contentTagihan.visibility = View.GONE
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
+        btnNextToken.setBackgroundColor(if(btnNextToken.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         btnBack.setOnClickListener {
             finish()
@@ -160,6 +176,8 @@ class PLNActivity : AppCompatActivity() {
                     intent.putExtra("customerId", it.bit61Parse?.customerId)
                     intent.putExtra("tagihan", it.tagihan.toString())
                     intent.putExtra("nomorReferensi", it.conf)
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
                     var fee: String = "0"
                     for (data in it.fee) {
                         if (data.sof == "mc") {

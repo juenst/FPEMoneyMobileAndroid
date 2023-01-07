@@ -22,6 +22,7 @@ class BankActivity : AppCompatActivity() {
     private lateinit var searchViewBank: SearchView
     private lateinit var recyclerView: RecyclerView
     val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     private var filteredBank: ArrayList<DataBank> = arrayListOf()
 

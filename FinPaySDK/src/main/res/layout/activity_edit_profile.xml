@@ -11,8 +11,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:translationZ="5dp"
             android:background="#00ACBA">
 
             <RelativeLayout
@@ -21,6 +23,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/appbar_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

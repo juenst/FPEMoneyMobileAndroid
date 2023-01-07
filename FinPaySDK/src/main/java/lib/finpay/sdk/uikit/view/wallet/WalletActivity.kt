@@ -10,6 +10,7 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.Credential
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
@@ -19,6 +20,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WalletActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var textSaldo: TextView
     lateinit var txtId: TextView
     lateinit var txtSeeAll: TextView
@@ -31,6 +34,9 @@ class WalletActivity : AppCompatActivity() {
     lateinit var emptyState: LinearLayout
     lateinit var progressDialog: ProgressDialog
     var _saldo: String = ""
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

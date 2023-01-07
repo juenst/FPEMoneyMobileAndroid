@@ -6,9 +6,11 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#00ACBA"
+        android:translationZ="5dp"
         android:paddingLeft="20dp">
 
         <FrameLayout
@@ -22,8 +24,9 @@
                 android:src="@drawable/ic_left" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/appbar_title"
+                android:layout_width="386dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="BAYAR ALFAMART"
                 android:textColor="@color/white"

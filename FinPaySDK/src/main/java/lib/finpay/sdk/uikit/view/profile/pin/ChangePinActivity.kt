@@ -14,15 +14,26 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_change_pin.*
 import lib.finpay.sdk.R
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import java.util.*
 
 class ChangePinActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     val oldPin = mutableListOf("", "", "", "", "", "", "")
     val newPin = mutableListOf("", "", "", "", "", "", "")
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+
     override fun onCreate(savedInstanceState: Bundle?) {
 //        supportActionBar!!.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_pin)
+        supportActionBar!!.hide()
+
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
 
         val oldPinView = findViewById(R.id.oldPin) as LinearLayout
         val newPinView = findViewById(R.id.newPin) as LinearLayout
@@ -58,6 +69,11 @@ class ChangePinActivity : AppCompatActivity() {
         val btnConfirm = findViewById(R.id.confirmButton) as Button
 
         val buttonViewPin = findViewById(R.id.buttonViewPin) as TextView
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        backButton.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
 
         val pins = listOf(pinButton0,pinButton1,pinButton2,pinButton3,pinButton4,pinButton5,pinButton6,pinButton7,pinButton8,pinButton9)
         val texts = listOf(firstPin, secondPin, thirdPin, fourthPin, fifthPin, sixthPin)

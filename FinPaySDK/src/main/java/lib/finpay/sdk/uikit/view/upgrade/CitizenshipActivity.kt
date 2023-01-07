@@ -23,6 +23,7 @@ class CitizenshipActivity : AppCompatActivity() {
     private lateinit var txtWni: TextView
     private lateinit var recyclerViewCountry: RecyclerView
     val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     private var filteredCountry: ArrayList<Country> = arrayListOf()
 
@@ -53,6 +54,7 @@ class CitizenshipActivity : AppCompatActivity() {
         txtWni.setOnClickListener {
             val intent = Intent()
             intent.putExtra("countrySelectedResult", "Indonesia")
+            intent.putExtra("transNumber", transNumber)
             intent.putExtra("theme", finpayTheme)
             setResult(RESULT_OK, intent)
             finish()

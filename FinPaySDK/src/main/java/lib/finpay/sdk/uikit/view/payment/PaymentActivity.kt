@@ -3,16 +3,19 @@ package lib.finpay.sdk.uikit.view.payment
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.webkit.*
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.uikit.constant.PaymentType
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailPpobActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailQrisActivity
@@ -21,7 +24,8 @@ import lib.finpay.sdk.uikit.view.transaction.TransactionDetailQrisActivity
 class PaymentActivity : AppCompatActivity() {
     lateinit var webview: WebView
     lateinit var btnBack: ImageView
-    lateinit var toolbar: Toolbar
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     val widgetUrl: String? by lazy { intent.getStringExtra("widgetURL") }
     val paymentType: String? by lazy { intent.getStringExtra("paymentType") }
     val sof: String? by lazy { intent.getStringExtra("sof") }
@@ -42,16 +46,24 @@ class PaymentActivity : AppCompatActivity() {
 
     lateinit var progressDialog: ProgressDialog
 
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         progressDialog = ProgressDialog(this)
         btnBack = findViewById(R.id.btnBack)
-        toolbar = findViewById(R.id.toolbar)
         webview = findViewById(R.id.webview)
         webview.loadUrl(widgetUrl!!)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
 
         // Enable Javascript
         val webSettings: WebSettings = webview.getSettings()
@@ -75,7 +87,7 @@ class PaymentActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 val webUrl: String = webview.getUrl()!!
                 if (webUrl.contains("sukses")) {
-                    toolbar.visibility = View.GONE
+                    appbar.visibility = View.GONE
                     val pinToken = webUrl.split("/").toTypedArray().last()
                     progressDialog.setTitle("Mohon Menunggu")
                     progressDialog.setMessage("Sedang Memuat ...")

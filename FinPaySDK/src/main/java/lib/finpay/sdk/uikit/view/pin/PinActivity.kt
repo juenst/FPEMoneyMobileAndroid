@@ -2,6 +2,7 @@ package lib.finpay.sdk.uikit.view.pin
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -12,12 +13,17 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.Credential
 import lib.finpay.sdk.uikit.constant.PaymentType
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.view.AppActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailQrisActivity
 
 class PinActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
     val pinType: String? by lazy {
         intent.getStringExtra("pinType")
     }
@@ -29,6 +35,8 @@ class PinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_input_pin)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         progressDialog = ProgressDialog(this@PinActivity)
         val backButton = findViewById<ImageView>(R.id.backButton)
 
@@ -60,6 +68,8 @@ class PinActivity : AppCompatActivity() {
                 if(pin[5]!=""){
                     if(pinType == "login") {
                         val intent = Intent(this, AppActivity::class.java)
+                        intent.putExtra("transNumber", transNumber!!)
+                        intent.putExtra("theme", finpayTheme)
                         startActivity(intent)
                     } else if(pinType == PaymentType.paymentQRIS) {
                         paymenQris()
@@ -69,6 +79,11 @@ class PinActivity : AppCompatActivity() {
                 }
             }
         }
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        backButton.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
 
         pinButtonDel.setOnClickListener {
             onDeleted(pin, texts)
@@ -140,6 +155,8 @@ class PinActivity : AppCompatActivity() {
                 pin[0] + pin[1] + pin[2] + pin[3] + pin[4] + pin[5], {
                     progressDialog.dismiss()
                     val intent = Intent(this@PinActivity, TransactionDetailQrisActivity::class.java)
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
                     startActivity(intent)
                 }, {
                     progressDialog.dismiss()

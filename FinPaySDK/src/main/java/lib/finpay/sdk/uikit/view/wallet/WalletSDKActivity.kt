@@ -24,6 +24,7 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.Credential
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.utilities.TextUtils
@@ -53,6 +54,9 @@ class WalletSDKActivity : AppCompatActivity() {
     var saldo: String = "0"
     var name: String = ""
 
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wallet_sdk)
@@ -76,6 +80,8 @@ class WalletSDKActivity : AppCompatActivity() {
         emptyState = findViewById(R.id.emptyState)
         progressDialog = ProgressDialog(this@WalletSDKActivity)
         listHistoryTransaction.setNestedScrollingEnabled(true)
+
+        txtSeeAll.setTextColor(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getPrimaryColor()!!)
 
         FinpaySDK.init(this)
         checkProfile()

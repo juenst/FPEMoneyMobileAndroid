@@ -89,11 +89,13 @@ class FinpaySDKUI {
                             } else {
                                 progressDialog.dismiss()
                                 val intent = Intent(context, PinActivity::class.java)
+                                val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
                                 intent.putExtra("pinType", "otp_connect")
                                 intent.putExtra("phoneNumber", credential.getPhoneNumber())
                                 intent.putExtra("custName", credential.getCustName())
                                 intent.putExtra("custStatusCode", it.custStatusCode.toString())
                                 intent.putExtra("transNumber", transNumber)
+                                intent.putExtra("theme", finpayTheme)
                                 context.startActivity(intent)
                             }
                         }, {
@@ -118,11 +120,14 @@ class FinpaySDKUI {
             }
         }
 
-        fun applicationUIBuilder(transNumber: String, context: Context, credential: Credential) {
+        fun applicationUIBuilder(transNumber: String, context: Context, credential: Credential, theme: FinpayTheme? = null) {
             FinpaySDK.init(context)
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, AppActivity::class.java)
+                intent.putExtra("transNumber", transNumber)
+                intent.putExtra("theme", theme)
+                println(if (theme == null) "kosong" else "tidak")
                 context.startActivity(intent)
             } else {
                 DialogUtils.showDialogConnectAccount(transNumber, context, credential)
@@ -141,6 +146,7 @@ class FinpaySDKUI {
                 val intent = Intent(context, QRISActivity::class.java)
                 intent.putExtra("transNumber", transNumber)
                 intent.putExtra("theme", theme)
+                println(if (theme == null) "kosong" else "tidak")
                 context.startActivity(intent)
             } else {
                 DialogUtils.showDialogConnectAccount(transNumber, context, credential)

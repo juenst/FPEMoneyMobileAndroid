@@ -26,6 +26,7 @@ import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.databinding.FragmentHomeBinding
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.constant.Credential
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
 import lib.finpay.sdk.uikit.view.more.MoreActivity
@@ -71,6 +72,7 @@ class HomeFragment : Fragment() {
     var saldo: String = "Rp0"
 
     private var groupAdapter = GroupAdapter<ViewHolder>()
+
 
 
     override fun onCreateView(
@@ -185,50 +187,86 @@ class HomeFragment : Fragment() {
         btnTopUp.setOnClickListener {
             //FinPaySDK().openTopUp(requireContext())
             val intent = Intent(requireContext(), TopupActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnTransfer.setOnClickListener {
             //FinPaySDK().openHistoryTransaction(requireContext())
             val intent = Intent(requireContext(), TransferActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnWallet.setOnClickListener {
-            FinpaySDKUI.walletUIBuilder(java.util.UUID.randomUUID().toString(), requireContext(), Credential.credential(requireContext()))
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            FinpaySDKUI.walletUIBuilder(transNumber!!, requireContext(), Credential.credential(requireContext()),finpayTheme)
         }
 
         btnHistoryTransaction.setOnClickListener {
-            FinpaySDKUI.historyTransactionUIBuilder(java.util.UUID.randomUUID().toString(), requireContext(), Credential.credential(requireContext()))
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            FinpaySDKUI.historyTransactionUIBuilder(transNumber!!, requireContext(), Credential.credential(requireContext()),finpayTheme)
         }
+
+
 
         btnMore.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
+//            val extra = requireActivity().intent.getSerializableExtra("theme")
             val intent = Intent(requireContext(), MoreActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
+
             this.startActivity(intent)
         }
 
         btnPulsaData.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
             val intent = Intent(requireContext(), PulsaDataActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnPascaBayar.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
             val intent = Intent(requireContext(), PascaBayarActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnPLN.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
             val intent = Intent(requireContext(), PLNActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnBpjs.setOnClickListener {
             //FinPaySDK().openMore(requireContext())
             val intent = Intent(requireContext(), BpjsKesehatanActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 

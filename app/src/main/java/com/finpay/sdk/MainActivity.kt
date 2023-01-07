@@ -62,12 +62,13 @@ class MainActivity : AppCompatActivity() {
 
 
         btnPairing.setOnClickListener {
-            FinpaySDKUI.upgradeAccountUIBuilder("", this, credential())
-            FinpaySDKUI.applicationUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
+//            FinpaySDKUI.upgradeAccountUIBuilder("", this, credential())
+            println("klik ini")
+            FinpaySDKUI.applicationUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential(),theme())
         }
 
         btnUpgradeAccount.setOnClickListener {
-            FinpaySDKUI.upgradeAccountUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
+            FinpaySDKUI.upgradeAccountUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential(),theme())
         }
 
         btnLogout.setOnClickListener {
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnQris.setOnClickListener {
-            FinpaySDKUI.qrisUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential())
+            FinpaySDKUI.qrisUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential(),theme())
         }
 
         btnTransfer.setOnClickListener {

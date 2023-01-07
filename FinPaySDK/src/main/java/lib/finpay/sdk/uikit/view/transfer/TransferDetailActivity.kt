@@ -2,6 +2,7 @@ package lib.finpay.sdk.uikit.view.transfer
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -24,6 +25,8 @@ import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 
 
 class TransferDetailActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var billName: TextView
     lateinit var txtAmount: EditText
     lateinit var txtNote: EditText
@@ -48,11 +51,19 @@ class TransferDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transfer_detail)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         billName = findViewById(R.id.billName)
         txtAmount = findViewById(R.id.txtAmount)
         txtNote = findViewById(R.id.txtNote)
         btnBayar = findViewById(R.id.btnBayar)
         btnBack = findViewById(R.id.btnBack)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setBackgroundColor(if(btnBack.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         progressDialog = ProgressDialog(this@TransferDetailActivity)
         _tagihan = "0"
@@ -122,6 +133,7 @@ class TransferDetailActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                     val intent = Intent(this@TransferDetailActivity, PaymentActivity::class.java)
                     intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", finpayTheme)
                     intent.putExtra("paymentType", PaymentType.transferToOther)
                     intent.putExtra("amount", totalBayar.replace("Rp", "").replace(",",""))
                     intent.putExtra("desc", txtNote.text.toString())
