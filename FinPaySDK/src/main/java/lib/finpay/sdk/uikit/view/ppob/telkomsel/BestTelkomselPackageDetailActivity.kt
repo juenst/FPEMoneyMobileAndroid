@@ -17,6 +17,7 @@ class BestTelkomselPackageDetailActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
     lateinit var appbarTitle: TextView
     lateinit var btnBack: ImageView
+    lateinit var btnContact: ImageView
     private lateinit var billingCode: EditText
     private lateinit var btnNext: Button
     private lateinit var listProduct: Product
@@ -34,11 +35,13 @@ class BestTelkomselPackageDetailActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         billingCode = findViewById(R.id.txt_kode_bayar)
         btnNext = findViewById(R.id.btn_next)
+        btnContact = findViewById(R.id.btnContact)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         FinpaySDK.getListProduct(java.util.UUID.randomUUID().toString(), this, {

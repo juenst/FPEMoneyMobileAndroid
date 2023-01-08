@@ -42,11 +42,15 @@ class InstalmentActivity : AppCompatActivity() {
 
         lnBussanAF.setOnClickListener {
             val intent = Intent(this, BussanAutoFinanceActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
 
         lnSmartF.setOnClickListener {
             val intent = Intent(this, SmartFinanceActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
     }

@@ -43,11 +43,15 @@ class InsuranceActivity : AppCompatActivity() {
 
         lnTokioMarineI.setOnClickListener {
             val intent = Intent(this, TokioMarineActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
 
         lnCarLifeI.setOnClickListener {
             val intent = Intent(this, CarLifeActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
     }

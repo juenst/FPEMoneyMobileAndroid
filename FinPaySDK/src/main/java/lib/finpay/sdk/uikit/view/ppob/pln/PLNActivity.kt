@@ -35,6 +35,7 @@ class PLNActivity : AppCompatActivity() {
     lateinit var contentToken: LinearLayout
     lateinit var contentTagihan: LinearLayout
     lateinit var btnContact: ImageView
+    lateinit var icDropdown: ImageView
     lateinit var btnContactTagihan: ImageView
     lateinit var progressDialog: ProgressDialog
     var nominal: String = "0"
@@ -67,6 +68,7 @@ class PLNActivity : AppCompatActivity() {
         btnContactTagihan = findViewById(R.id.btnContactTagihan)
         progressDialog = ProgressDialog(this@PLNActivity)
         btnBack = findViewById(R.id.btnBack)
+        icDropdown = findViewById(R.id.icDropdown)
 
         cardToken.setBackgroundColor(Integer.parseUnsignedInt("FFFFFFFF", 16))
         cardTagihan.setBackgroundColor(Integer.parseUnsignedInt("FFEEF2F6", 16))
@@ -77,7 +79,9 @@ class PLNActivity : AppCompatActivity() {
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
+        btnContactTagihan.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNextToken.setBackgroundColor(if(btnNextToken.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         btnBack.setOnClickListener {

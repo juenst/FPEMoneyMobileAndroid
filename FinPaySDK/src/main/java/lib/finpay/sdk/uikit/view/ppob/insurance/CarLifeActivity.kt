@@ -26,6 +26,7 @@ class CarLifeActivity : AppCompatActivity() {
     private lateinit var btnContact: ImageView
     private lateinit var btnNext: Button
     private lateinit var btnBack: ImageView
+    private lateinit var icDropdown: ImageView
     private lateinit var progressDialog: ProgressDialog
 
     lateinit var txtPeriode: TextView
@@ -47,7 +48,7 @@ class CarLifeActivity : AppCompatActivity() {
         btnContact = findViewById(R.id.btnContact)
         btnNext = findViewById(R.id.btnNext)
         btnBack = findViewById(R.id.btnBack)
-
+        icDropdown = findViewById(R.id.icDropdown)
         btnChoosePeriodeTime = findViewById(R.id.choosePeriodeTime)
         txtPeriode = findViewById(R.id.selectedPeriodeMonth)
 
@@ -58,6 +59,7 @@ class CarLifeActivity : AppCompatActivity() {
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 

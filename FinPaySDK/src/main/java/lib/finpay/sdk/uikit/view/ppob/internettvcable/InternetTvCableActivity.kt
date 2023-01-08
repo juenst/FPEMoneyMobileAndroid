@@ -42,11 +42,15 @@ class InternetTvCableActivity : AppCompatActivity() {
 
         lnIndihome.setOnClickListener {
             val intent = Intent(this, IndihomeActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
 
         lnMNCVision.setOnClickListener {
             val intent = Intent(this, MNCActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
     }

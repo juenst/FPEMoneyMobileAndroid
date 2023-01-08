@@ -43,26 +43,36 @@ class PegadaianActivity : AppCompatActivity() {
 
         btnUlangGadai.setOnClickListener {
             val intent = Intent(this, UlangGadaiActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnCicilGadai.setOnClickListener {
             val intent = Intent(this, CicilGadaiActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnGadaiTebus.setOnClickListener {
             val intent = Intent(this, GadaiTebusActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnAngsuranMikro.setOnClickListener {
             val intent = Intent(this, AngsuranMikroActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
 
         btnTabunganEmas.setOnClickListener {
             val intent = Intent(this, TabunganEmasActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             this.startActivity(intent)
         }
     }

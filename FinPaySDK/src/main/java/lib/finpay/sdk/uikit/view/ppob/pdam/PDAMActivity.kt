@@ -31,6 +31,7 @@ class PDAMActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
     lateinit var appbarTitle: TextView
     lateinit var btnBack: ImageView
+    lateinit var icDropdown: ImageView
     private lateinit var txtNomorPelanggan: EditText
     private lateinit var btnNext: Button
     private lateinit var btnContact: ImageView
@@ -56,11 +57,13 @@ class PDAMActivity : AppCompatActivity() {
         chooseWilayah = findViewById(R.id.chooseWilayah)
         selectedWilayah = findViewById(R.id.selectedWilayah)
         progressDialog = ProgressDialog(this@PDAMActivity)
+        icDropdown = findViewById(R.id.icDropdown)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
@@ -70,6 +73,8 @@ class PDAMActivity : AppCompatActivity() {
 
         chooseWilayah.setOnClickListener {
             val intent = Intent(this, PDAMSearchActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivityForResult(intent, 2)
         }
 

@@ -34,6 +34,7 @@ class BpjsKesehatanActivity : AppCompatActivity() {
     lateinit var btnChoosePeriodeTime: LinearLayout
     lateinit var txtPeriode:TextView
     lateinit var btnBack: ImageView
+    lateinit var icDropdown: ImageView
     lateinit var progressDialog: ProgressDialog
     var periodeTime:String = ""
 
@@ -56,6 +57,7 @@ class BpjsKesehatanActivity : AppCompatActivity() {
         btnChoosePeriodeTime = findViewById(R.id.choosePeriodeTime)
         txtPeriode = findViewById(R.id.selectedPeriodeMonth)
         progressDialog = ProgressDialog(this@BpjsKesehatanActivity)
+        icDropdown = findViewById(R.id.icDropdown)
 
         ButtonUtils.checkButtonState(btnNext)
 
@@ -63,6 +65,7 @@ class BpjsKesehatanActivity : AppCompatActivity() {
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 

@@ -46,16 +46,22 @@ class RevenueActivity : AppCompatActivity() {
 
         lnPnbp.setOnClickListener {
             val intent = Intent(this, PnbpActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
 
         lnBeaCukai.setOnClickListener {
             val intent = Intent(this, BeaCukaiActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
 
         lnPajakOnline.setOnClickListener {
             val intent = Intent(this, PajakOnlineActivity::class.java)
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
     }
