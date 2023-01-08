@@ -15,6 +15,7 @@ import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
 import lib.finpay.sdk.uikit.view.ppob.finpay.FinpayActivity
 import lib.finpay.sdk.uikit.view.ppob.instalment.InstalmentActivity
 import lib.finpay.sdk.uikit.view.ppob.insurance.InsuranceActivity
+import lib.finpay.sdk.uikit.view.ppob.internettvcable.IndihomeActivity
 import lib.finpay.sdk.uikit.view.ppob.internettvcable.InternetTvCableActivity
 import lib.finpay.sdk.uikit.view.ppob.pascabayar.PascaBayarActivity
 import lib.finpay.sdk.uikit.view.ppob.pdam.PDAMActivity
@@ -24,6 +25,7 @@ import lib.finpay.sdk.uikit.view.ppob.pulsa_data.PulsaDataActivity
 import lib.finpay.sdk.uikit.view.ppob.revenue.RevenueActivity
 import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomActivity
 import lib.finpay.sdk.uikit.view.ppob.telkomsel.BestTelkomselPackageActivity
+import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherDealsActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.VoucherTVCableActivity
 import lib.finpay.sdk.uikit.view.qris.QRISActivity
 import lib.finpay.sdk.uikit.view.topup.TopupActivity
@@ -418,6 +420,33 @@ class FinpaySDKUI {
             var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
             if(isConnect == true) {
                 val intent = Intent(context, VoucherTVCableActivity::class.java)
+                intent.putExtra("transNumber", transNumber)
+                intent.putExtra("theme", theme)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+        fun indihomeUIBuilder(transNumber: String, context: Context, credential: Credential, theme: FinpayTheme? = null) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, IndihomeActivity::class.java)
+                intent.putExtra("transNumber", transNumber)
+                intent.putExtra("theme", theme)
+                context.startActivity(intent)
+            } else {
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+            }
+        }
+
+
+        fun voucherDealsUIBuilder(transNumber: String, context: Context, credential: Credential, theme: FinpayTheme? = null) {
+            FinpaySDK.init(context)
+            var isConnect: Boolean = FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT)
+            if(isConnect == true) {
+                val intent = Intent(context, VoucherDealsActivity::class.java)
                 intent.putExtra("transNumber", transNumber)
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)

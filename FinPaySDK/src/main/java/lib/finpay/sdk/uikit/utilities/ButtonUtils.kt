@@ -3,17 +3,22 @@ package lib.finpay.sdk.uikit.utilities
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.widget.Button
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 
 class ButtonUtils {
     companion object {
-        fun checkButtonState(button: Button){
+        fun checkButtonState(button: Button, finpayTheme: FinpayTheme? = null){
             // Create a color state list programmatically
             val states = arrayOf(
                 intArrayOf(android.R.attr.state_enabled), // enabled
                 intArrayOf(-android.R.attr.state_enabled) // disabled
             )
             val bgColors = intArrayOf(
-                Color.parseColor("#00ACBA"), // enabled color
+                if(finpayTheme?.getPrimaryColor() == null) {
+                    Color.parseColor("#00ACBA") // enabled color
+                } else {
+                    finpayTheme.getPrimaryColor()!!
+                },
                 Color.parseColor("#d5d5d5") // disabled color
             )
             val textColors = intArrayOf(
