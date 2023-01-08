@@ -1,26 +1,29 @@
 package lib.finpay.sdk.uikit.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageButton
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import lib.finpay.sdk.R
-import lib.finpay.sdk.databinding.ActivityAppBinding
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import lib.finpay.sdk.R
+import lib.finpay.sdk.databinding.ActivityAppBinding
 import lib.finpay.sdk.uikit.FinpaySDKUI
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.Credential
-import lib.finpay.sdk.uikit.view.qris.QRISActivity
+import lib.finpay.sdk.uikit.view.home.HomeFragment
 
 class AppActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAppBinding
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme}
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,7 @@ class AppActivity : AppCompatActivity() {
         val btnQris = findViewById<ImageButton>(R.id.btnQris)
 
         btnQris.setOnClickListener {
-            FinpaySDKUI.qrisUIBuilder("", this@AppActivity, Credential.credential())
+            FinpaySDKUI.qrisUIBuilder(transNumber!!, this@AppActivity, Credential.credential(),finpayTheme)
         }
     }
 }

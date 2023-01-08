@@ -8,8 +8,10 @@
     android:id="@+id/mainParentLogin"
     >
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:translationZ="5dp"
         android:background="#00ACBA">
         <RelativeLayout
             android:paddingHorizontal="8dp"
@@ -23,12 +25,13 @@
                 android:textColor="@color/white"
                 android:textFontWeight="600"
                 android:textSize="18dp" />
+
             <ImageView
                 android:id="@+id/backButtonLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="false"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_baseline_arrow_back_24" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>

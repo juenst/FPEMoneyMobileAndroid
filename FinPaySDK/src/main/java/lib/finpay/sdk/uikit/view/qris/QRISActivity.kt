@@ -31,6 +31,7 @@ import com.google.zxing.MultiFormatReader
 import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 import lib.finpay.sdk.databinding.ActivityQrisBinding
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import java.io.BufferedInputStream
 import java.io.File
@@ -229,6 +230,10 @@ class QRISActivity : AppCompatActivity() {
             println("QR code -> ${contents}")
             if(contents.contains("QRIS")) {
                 val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
+                val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+                val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+                intent.putExtra("transNumber", transNumber!!)
+                intent.putExtra("theme", finpayTheme)
                 intent.putExtra("resultQR", "${contents}")
                 startActivity(intent)
                 this@QRISActivity.finish()

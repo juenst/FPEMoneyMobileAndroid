@@ -1,21 +1,22 @@
 package lib.finpay.sdk.uikit.view.transaction
 
 import android.app.ProgressDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.view.transaction.adapter.TransactionHistoryAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
 class TransactionHistoryActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var listHistoryTransaction: ListView
     lateinit var emptyState: LinearLayout
     lateinit var btnBack: ImageView
@@ -24,12 +25,16 @@ class TransactionHistoryActivity : AppCompatActivity() {
     lateinit var btn3motnh: CardView
     lateinit var progressDialog: ProgressDialog
 
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history_transaction)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         listHistoryTransaction = findViewById(R.id.list_history_transaction)
         emptyState = findViewById(R.id.emptyState)
         btnBack = findViewById(R.id.btnBack)
@@ -37,6 +42,11 @@ class TransactionHistoryActivity : AppCompatActivity() {
         btn30days = findViewById(R.id.one_month)
         btn3motnh = findViewById(R.id.thirty_month)
         progressDialog = ProgressDialog(this@TransactionHistoryActivity)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
 
         btnBack.setOnClickListener{
             finish()

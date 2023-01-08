@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.multidex.BuildConfig.VERSION_CODE
 import lib.finpay.sdk.R
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.view.onboarding.OnboardingActivity
 
 @Suppress("DEPRECATION")
@@ -34,6 +35,10 @@ class SplashActivity : AppCompatActivity() {
         appVersion.text = versionCode.toString()
         Handler().postDelayed({
             val intent = Intent(this, OnboardingActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
             finish()
         }, 3000) // 3000 is the delayed time in milliseconds.

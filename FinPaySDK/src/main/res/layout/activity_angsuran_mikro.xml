@@ -8,9 +8,11 @@
     android:background="#F5F5F5"
     tools:context=".uikit.view.ppob.pegadaian.AngsuranMikroActivity">
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingLeft="20dp"
+        android:translationZ="5dp"
         android:background="#00ACBA">
         <FrameLayout
             android:layout_width="match_parent"
@@ -21,6 +23,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/ic_left" />
             <TextView
+                android:id="@+id/appbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"

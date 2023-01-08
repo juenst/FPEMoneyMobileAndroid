@@ -2,6 +2,7 @@ package lib.finpay.sdk.uikit.view.ppob.pln
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -14,6 +15,7 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.constant.PaymentType
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.utilities.TextUtils
@@ -24,6 +26,9 @@ import java.util.*
 
 class PLNResultActivity : AppCompatActivity() {
     //    val inquiry = intent.getSerializableExtra("result") as? PpobInquiry
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
+
     val noPelanggan: String? by lazy { intent.getStringExtra("noPelanggan") }
     val customerName: String? by lazy { intent.getStringExtra("customerName") }
     val customerId: String? by lazy { intent.getStringExtra("customerId") }
@@ -41,12 +46,16 @@ class PLNResultActivity : AppCompatActivity() {
 
     var saldo: String = "0"
 
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pln_result)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         txtCustName = findViewById(R.id.txtCustName)
         txtCustPhoneNumber = findViewById(R.id.txtCustPhoneNumber)
         txtCustId = findViewById(R.id.txtCustId)
@@ -64,6 +73,12 @@ class PLNResultActivity : AppCompatActivity() {
         txtCustId.text = customerId
         txtDaya.text = "-"
         txtTagihan.text = TextUtils.formatRupiah(tagihan!!.toDouble())
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnConfirm.setBackgroundColor(if(btnConfirm.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -143,6 +158,8 @@ class PLNResultActivity : AppCompatActivity() {
                         intent.putExtra("payType", "billpayment")
                         intent.putExtra("widgetURL", it.widgetURL)
                         intent.putExtra("phoneNumber", txtCustPhoneNumber.text.toString())
+                        intent.putExtra("transNumber", transNumber!!)
+                        intent.putExtra("theme", finpayTheme)
                         startActivity(intent)
                     }, {
                         progressDialog.dismiss()

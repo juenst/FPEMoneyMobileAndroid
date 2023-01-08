@@ -13,6 +13,7 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.DataSubProduct
 import lib.finpay.sdk.uikit.constant.PaymentType
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
@@ -24,8 +25,11 @@ import java.util.*
 
 
 class PulsaDataResultActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var txtPhoneNumber: TextView
     lateinit var btnNext: Button
+    lateinit var btnBack: ImageView
     lateinit var listDenom: GridView
     lateinit var cardPulsa: CardView
     lateinit var cardData: CardView
@@ -40,11 +44,16 @@ class PulsaDataResultActivity : AppCompatActivity() {
     var saldo: String = "0"
     var subProductCode: String = ""
 
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pulsa_data_result)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         txtPhoneNumber = findViewById(R.id.txtPhoneNumber)
         btnNext = findViewById(R.id.btnNext)
         logo = findViewById(R.id.logoProvider)
@@ -52,8 +61,15 @@ class PulsaDataResultActivity : AppCompatActivity() {
         cardPulsa = findViewById(R.id.cardPulsa)
         cardData = findViewById(R.id.cardData)
         content = findViewById(R.id.lnContent)
+        btnBack = findViewById(R.id.btnBack)
         emptyState = findViewById(R.id.emptyState)
         progressDialog = ProgressDialog(this@PulsaDataResultActivity)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         cardPulsa.setBackgroundColor(Integer.parseUnsignedInt("FFFFFFFF", 16))
         cardData.setBackgroundColor(Integer.parseUnsignedInt("FFEEF2F6", 16))

@@ -3,6 +3,7 @@ package lib.finpay.sdk.uikit.view.transfer
 import android.app.ProgressDialog
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,8 @@ import lib.finpay.sdk.uikit.utilities.Utils
 import lib.finpay.sdk.uikit.view.upgrade.CitizenshipActivity
 
 class TransferToBankActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var txtNomorPenerima: EditText
     lateinit var btnContact: ImageView
     lateinit var btnNext: Button
@@ -47,6 +50,8 @@ class TransferToBankActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transfer_to_bank)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         txtNomorPenerima = findViewById(R.id.txtNomorPenerima)
         btnContact = findViewById(R.id.btnContact)
         btnNext = findViewById(R.id.btnNext)
@@ -54,6 +59,13 @@ class TransferToBankActivity : AppCompatActivity() {
         selectedBank = findViewById(R.id.selectedBank)
         btnChooseBank = findViewById(R.id.chooseBank)
         progressDialog = ProgressDialog(this@TransferToBankActivity)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
+        btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         ButtonUtils.checkButtonState(btnNext)
         txtNomorPenerima.doOnTextChanged { text, start, before, count ->

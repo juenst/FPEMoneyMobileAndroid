@@ -1,7 +1,9 @@
 package lib.finpay.sdk.uikit.view.ppob.pdam
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -11,22 +13,37 @@ import com.google.gson.Gson
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.model.Country
 import lib.finpay.sdk.corekit.model.PDAMRegion
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.Utils.getJsonFromRaw
 import lib.finpay.sdk.uikit.view.ppob.pdam.adapter.PDAMAdapter
 
 class PDAMSearchActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
+    lateinit var btnBack: ImageView
     private lateinit var txtSearchPDAM: SearchView
     private lateinit var rvWilayah: RecyclerView
 
     private var filteredPDAM: ArrayList<PDAMRegion> = arrayListOf()
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pdam_search)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         rvWilayah = findViewById(R.id.rvWilayah)
+        btnBack = findViewById(R.id.btnBack)
         txtSearchPDAM = findViewById(R.id.txtSearchPDAM)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
 
         setupRecycler()
     }

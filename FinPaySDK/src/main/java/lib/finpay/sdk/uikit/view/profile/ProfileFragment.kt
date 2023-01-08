@@ -20,6 +20,8 @@ import lib.finpay.sdk.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.databinding.FragmentProfileBinding
+import lib.finpay.sdk.uikit.helper.FinpayTheme
+import lib.finpay.sdk.uikit.view.ppob.bpjs.BpjsKesehatanActivity
 import lib.finpay.sdk.uikit.view.profile.edit_profile.EditProfileActivity
 import lib.finpay.sdk.uikit.view.profile.pin.ChangePinActivity
 
@@ -64,6 +66,10 @@ class ProfileFragment : Fragment() {
 
         buttonUbahPin.setOnClickListener {
             val intent = Intent(context, ChangePinActivity::class.java)
+            val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+            val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+            intent.putExtra("transNumber", transNumber!!)
+            intent.putExtra("theme", finpayTheme)
             startActivity(intent)
         }
 

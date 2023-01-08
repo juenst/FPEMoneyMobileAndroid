@@ -9,9 +9,11 @@
     tools:context=".uikit.view.ppob.pdam.PDAMActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#00ACBA"
+        android:translationZ="5dp"
         android:paddingLeft="20dp">
 
         <FrameLayout
@@ -25,6 +27,7 @@
                 android:src="@drawable/ic_left" />
 
             <TextView
+                android:id="@+id/appbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

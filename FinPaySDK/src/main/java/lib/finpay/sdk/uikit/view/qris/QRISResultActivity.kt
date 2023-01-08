@@ -2,6 +2,7 @@ package lib.finpay.sdk.uikit.view.qris
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -14,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.constant.PaymentType
+import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.TextUtils
@@ -22,6 +24,8 @@ import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 
 
 class QRISResultActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     val stringQris: String? by lazy {
         intent.getStringExtra("resultQR")
     }
@@ -39,17 +43,28 @@ class QRISResultActivity : AppCompatActivity() {
     lateinit var _saldo: String
     lateinit var _reffFlag: String
 
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qris_result)
         supportActionBar!!.hide()
 
+        appbar = findViewById(R.id.appbar)
+        appbarTitle = findViewById(R.id.appbar_title)
         merchantName = findViewById(R.id.merchantName)
         txtTotalBayar = findViewById(R.id.txtTotalBayar)
         txtSaldo = findViewById(R.id.txtSaldo)
         txtAmount = findViewById(R.id.txtAmount)
         btnBayar = findViewById(R.id.btnBayar)
         btnBack = findViewById(R.id.btnBack)
+
+        //theming
+        appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        btnBayar.setBackgroundColor(if(btnBayar.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
         progressDialog = ProgressDialog(this@QRISResultActivity)
         _tagihan = "0"
@@ -151,6 +166,8 @@ class QRISResultActivity : AppCompatActivity() {
                     intent.putExtra("amountTips", "0")
                     intent.putExtra("reffFlag", _reffFlag)
                     intent.putExtra("widgetURL", it.widgetURL)
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
                     startActivity(intent)
                 }, {
                     progressDialog.dismiss()
