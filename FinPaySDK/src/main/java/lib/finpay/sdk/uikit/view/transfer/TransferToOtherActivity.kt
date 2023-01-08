@@ -76,7 +76,7 @@ class TransferToOtherActivity : AppCompatActivity() {
                 this@TransferToOtherActivity,
                 txtDestinationNo.text.toString(), {
                     progressDialog.dismiss()
-                    val intent = Intent(this, TransferToOtherActivity::class.java)
+                    val intent = Intent(this, TransferDetailActivity::class.java)
                     intent.putExtra("billName", it.billname)
                     intent.putExtra("type", "other")
                     intent.putExtra("phoneDest", txtDestinationNo.text.toString())

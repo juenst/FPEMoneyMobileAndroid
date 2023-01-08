@@ -79,7 +79,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTransfer.setOnClickListener {
-            FinpaySDKUI.transferUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential(), theme())
+//            FinpaySDKUI.transferUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential(), theme())
+            FinpaySDKUI.telkomUIBuilder(java.util.UUID.randomUUID().toString(), this@MainActivity, credential(), theme())
         }
 
     }
