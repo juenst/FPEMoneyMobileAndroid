@@ -49,11 +49,10 @@ class TabunganEmasActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        ButtonUtils.checkButtonState(btnLanjut)
-
+        ButtonUtils.checkButtonState(btnLanjut, finpayTheme)
         txtNoKredit.doOnTextChanged { text, start, before, count ->
             btnLanjut.isEnabled = (!text.isNullOrBlank() && text.length>=7)
-            ButtonUtils.checkButtonState(btnLanjut)
+            ButtonUtils.checkButtonState(btnLanjut, finpayTheme)
         }
 
         btnContact.setOnClickListener {
@@ -76,7 +75,7 @@ class TabunganEmasActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this, "", it)
+                    DialogUtils.showDialogError(this, "", it, finpayTheme)
                 }
             )
         }

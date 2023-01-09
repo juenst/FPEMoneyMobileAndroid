@@ -56,7 +56,7 @@ class BestTelkomselPackageDetailActivity : AppCompatActivity() {
 
         billingCode.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length >= 7)
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnNext.setOnClickListener {

@@ -9,7 +9,10 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -66,6 +69,15 @@ class PDAMActivity : AppCompatActivity() {
         icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         btnBack.setOnClickListener {
             onBackPressed()
@@ -78,10 +90,10 @@ class PDAMActivity : AppCompatActivity() {
             startActivityForResult(intent, 2)
         }
 
-        ButtonUtils.checkButtonState(btnNext)
+        ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9 && region != "")
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnContact.setOnClickListener {
@@ -104,7 +116,7 @@ class PDAMActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@PDAMActivity, "", it)
+                    DialogUtils.showDialogError(this@PDAMActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -127,9 +139,9 @@ class PDAMActivity : AppCompatActivity() {
                     if(value.length>=9) {
                         txtNomorPelanggan.setText(value)
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9 && region != "")
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this@PDAMActivity, "", "Format Nomor tidak sesuai")
+                        DialogUtils.showDialogError(this@PDAMActivity, "", "Format Nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {
@@ -140,7 +152,7 @@ class PDAMActivity : AppCompatActivity() {
                 selectedWilayah.setText(it.uppercase())
                 region = it.uppercase()
                 btnNext.isEnabled = (!txtNomorPelanggan.text.isNullOrBlank() && txtNomorPelanggan.text.length>=9 && region != "")
-                ButtonUtils.checkButtonState(btnNext)
+                ButtonUtils.checkButtonState(btnNext, finpayTheme)
             }
         }
     }

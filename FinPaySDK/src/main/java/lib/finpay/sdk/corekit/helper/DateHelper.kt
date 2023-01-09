@@ -12,5 +12,12 @@ class DateHelper {
 
             return currentDate
         }
+
+        fun getCurrentDateTransaction(): String {
+            val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.getDefault())
+            val currentDate = sdf.format(Date())
+
+            return currentDate
+        }
     }
 }

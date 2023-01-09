@@ -77,17 +77,17 @@ class TransferDetailActivity : AppCompatActivity() {
         FinpaySDK.getUserBallance(transNumber!!, this@TransferDetailActivity, {
             _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
         },{
-            DialogUtils.showDialogError(this@TransferDetailActivity, "", it)
+            DialogUtils.showDialogError(this@TransferDetailActivity, "", it, finpayTheme)
         })
 
         txtAmount.doOnTextChanged { text, start, before, count ->
             _totalBayar = txtAmount.text.toString()
             _tagihan = txtAmount.text.toString()
             btnBayar.isEnabled = (!text.isNullOrBlank() && text.length>=1 && text != "0")
-            ButtonUtils.checkButtonState(btnBayar)
+            ButtonUtils.checkButtonState(btnBayar, finpayTheme)
         }
 
-        ButtonUtils.checkButtonState(btnBayar)
+        ButtonUtils.checkButtonState(btnBayar, finpayTheme)
         btnBayar.setOnClickListener {
             showDialogConfirmPayment(
                 _tagihan,
@@ -147,7 +147,7 @@ class TransferDetailActivity : AppCompatActivity() {
                 }, {
                     progressDialog.dismiss()
                     println(it)
-                    DialogUtils.showDialogError(this@TransferDetailActivity, "", it)
+                    DialogUtils.showDialogError(this@TransferDetailActivity, "", it, finpayTheme)
                 }
             )
         }

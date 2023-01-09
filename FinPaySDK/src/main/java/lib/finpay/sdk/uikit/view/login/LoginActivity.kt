@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         val mainparent = findViewById<LinearLayout>(R.id.mainParentLogin)
 
         val numberField = findViewById<EditText>(R.id.phoneNumberField)
-        ButtonUtils.checkButtonState(btnMasuk)
+        ButtonUtils.checkButtonState(btnMasuk, finpayTheme)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
         numberField.doOnTextChanged { text, start, before, count ->
             btnMasuk.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            ButtonUtils.checkButtonState(btnMasuk)
+            ButtonUtils.checkButtonState(btnMasuk, finpayTheme)
         }
 
         mainparent.setOnClickListener {

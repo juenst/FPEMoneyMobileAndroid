@@ -5,9 +5,12 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
@@ -52,11 +55,20 @@ class TelkomActivity : AppCompatActivity() {
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
-        ButtonUtils.checkButtonState(btnNext)
+        ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnBack.setOnClickListener {
@@ -99,7 +111,7 @@ class TelkomActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@TelkomActivity, "", it)
+                    DialogUtils.showDialogError(this@TelkomActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -122,9 +134,9 @@ class TelkomActivity : AppCompatActivity() {
                     if(value.length>=9) {
                         txtNomorPelanggan.setText(Utils.validateMobileNumber(value))
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this@TelkomActivity, "", "Format Nomor tidak sesuai")
+                        DialogUtils.showDialogError(this@TelkomActivity, "", "Format Nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {

@@ -167,7 +167,7 @@ class WalletSDKActivity : AppCompatActivity() {
             progressDialog.dismiss()
         }, {
             progressDialog.dismiss()
-            DialogUtils.showDialogError(this@WalletSDKActivity, "", it)
+            DialogUtils.showDialogError(this@WalletSDKActivity, "", it, finpayTheme)
         })
     }
 

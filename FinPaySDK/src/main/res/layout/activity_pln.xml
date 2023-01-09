@@ -121,124 +121,144 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nomor Pelanggan"
-                android:textColor="@color/black" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="12dp" />
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_edittext_outline"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="10dp">
-
-                <EditText
-                    android:id="@+id/txtNomorPelangganToken"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:digits="0123456789"
-                    android:inputType="phone"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
-
-                <ImageView
-                    android:id="@+id/btnContact"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_contact" />
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nominal Token" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="12dp" />
-
-            <LinearLayout
-                android:id="@+id/chooseNominal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_edittext_outline"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="10dp">
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="20dp">
 
                 <TextView
-                    android:id="@+id/selectedNominal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="14sp"
-                    android:text="Pilih Nominal" />
+                    android:text="Nomor Pelanggan"
+                    android:textColor="@color/black" />
 
                 <Space
-                    android:layout_width="12dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp" />
 
-                <ImageView
-                    android:id="@+id/icDropdown"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_chevron_down"
-                    app:tint="#00ACBA" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="20dp"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/img_history_empty" />
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tukang kusen makan kedondong"
-                    android:gravity="center"
-                    android:textFontWeight="600"
-                    android:textSize="18sp"
-                    android:textColor="#121926" />
+                    android:background="@drawable/shape_edittext_outline"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <EditText
+                        android:id="@+id/txtNomorPelangganToken"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:digits="0123456789"
+                        android:inputType="phone"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/btnContact"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_contact" />
+
+                </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nominal Token" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp" />
+
+                <LinearLayout
+                    android:id="@+id/chooseNominal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bayar PLN, masukin nomor pelanggan dulu dong"
-                    android:gravity="center"
-                    android:textFontWeight="400"
-                    android:textSize="14sp"
-                    android:textColor="#4B5565" />
+                    android:background="@drawable/shape_edittext_outline"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/selectedNominal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:text="Pilih Nominal" />
+
+                    <Space
+                        android:layout_width="12dp"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/icDropdown"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_down"
+                        app:tint="#00ACBA" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                app:cardBackgroundColor="#EEE" />
+
+            <LinearLayout
+                android:id="@+id/emptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_ppob_transaction"/>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="yuk mulai bertransaksi"
+                            android:textStyle="bold"
+                            android:textSize="16dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nikmati kemudahan transaksi bersama kami"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -246,6 +266,8 @@
                 android:layout_alignParentBottom="true"
                 android:id="@+id/btnNext"
                 android:enabled="false"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="20dp"
                 android:text="Lanjut"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"/>
@@ -258,81 +280,100 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:visibility="gone"
-            android:paddingVertical="10dp">
+            android:visibility="gone">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nomor Pelanggan"
-                android:textColor="@color/black" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="12dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_edittext_outline"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="10dp">
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="20dp"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/txtNomorPelangganTagihan"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:digits="0123456789"
-                    android:inputType="phone"
-                    android:textSize="14sp"
+                    android:text="Nomor Pelanggan"
                     android:textColor="@color/black" />
 
-                <ImageView
-                    android:id="@+id/btnContactTagihan"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_contact" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edittext_outline"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <EditText
+                        android:id="@+id/txtNomorPelangganTagihan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:digits="0123456789"
+                        android:inputType="phone"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/btnContactTagihan"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_contact" />
+
+                </LinearLayout>
             </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                app:cardBackgroundColor="#EEE" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="20dp"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/img_history_empty" />
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tukang kusen makan kedondong"
-                    android:gravity="center"
-                    android:textFontWeight="600"
-                    android:textSize="18sp"
-                    android:textColor="#121926" />
+                    android:orientation="horizontal">
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_ppob_transaction"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Bayar PLN, masukin nomor pelanggan dulu dong"
-                    android:gravity="center"
-                    android:textFontWeight="400"
-                    android:textSize="14sp"
-                    android:textColor="#4B5565" />
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="yuk mulai bertransaksi"
+                            android:textStyle="bold"
+                            android:textSize="16dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nikmati kemudahan transaksi bersama kami"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -341,6 +382,8 @@
                 android:id="@+id/btnNextTagihan"
                 android:enabled="false"
                 android:text="Lanjut"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"/>
 

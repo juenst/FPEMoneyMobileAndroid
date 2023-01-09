@@ -118,7 +118,7 @@ class UpgradeAccountPersonalDataActivity : AppCompatActivity() {
                     DialogUtils.showDialogError(
                         this@UpgradeAccountPersonalDataActivity,
                         "Error",
-                        it
+                        it, finpayTheme
                     )
                 }
             )

@@ -184,8 +184,8 @@ class PinActivity : AppCompatActivity() {
             pin[0]+pin[1]+pin[2]+pin[3]+pin[4]+pin[5],
             custStatusCode!!, {
                 DialogUtils.showDialogSuccess(
-                    this@PinActivity, "Activation Successful",
-                    "Account activation successful, please reconnect",
+                    this@PinActivity, "Pairing Successful",
+                    "Pairing account successful",
                     {
                         progressDialog.dismiss()
                         this@PinActivity.finish()
@@ -193,7 +193,7 @@ class PinActivity : AppCompatActivity() {
                     }
                 )
             }, {
-                DialogUtils.showDialogError(this, "", it)
+                DialogUtils.showDialogError(this, "", it, finpayTheme)
                 progressDialog.dismiss()
             }
         )

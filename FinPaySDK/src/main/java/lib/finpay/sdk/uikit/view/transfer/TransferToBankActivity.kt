@@ -67,10 +67,10 @@ class TransferToBankActivity : AppCompatActivity() {
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
-        ButtonUtils.checkButtonState(btnNext)
+        ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPenerima.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnBack.setOnClickListener {
@@ -96,7 +96,7 @@ class TransferToBankActivity : AppCompatActivity() {
                     println("call another activity")
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@TransferToBankActivity, "", it)
+                    DialogUtils.showDialogError(this@TransferToBankActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -126,9 +126,9 @@ class TransferToBankActivity : AppCompatActivity() {
                     if(value.length>=9) {
                         txtNomorPenerima.setText(Utils.validateMobileNumber(value))
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this@TransferToBankActivity, "", "Format Nomor tidak sesuai")
+                        DialogUtils.showDialogError(this@TransferToBankActivity, "", "Format Nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {

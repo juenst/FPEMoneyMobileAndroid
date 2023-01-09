@@ -3,6 +3,8 @@ package com.finpay.sdk.example
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -52,6 +54,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homes)
         supportActionBar!!.hide()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.setStatusBarColor(Color.parseColor("#e60000"))
+        }
 
         btnTopUp = findViewById(R.id.btnTopup)
         btnTransfer = findViewById(R.id.btnTransfer)
@@ -152,7 +159,7 @@ class HomeActivity : AppCompatActivity() {
     fun theme(): FinpayTheme {
         val theme = FinpayTheme()
         theme.setPrimaryColor(Color.parseColor("#e60000"))
-        theme.setSecondaryColor(Color.parseColor("#e60000"))
+        theme.setSecondaryColor(Color.parseColor("#e6dddd"))
         theme.setAppBarBackgroundColor(Color.parseColor("#e60000"))
         theme.setAppBarTextColor(Color.parseColor("#FFFFFF"))
         return theme

@@ -5,9 +5,12 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -46,6 +49,7 @@ class PLNActivity : AppCompatActivity() {
     val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     //nomor testing token 512233350020
+    //nomor testing tagihan 512233350072
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,10 +83,19 @@ class PLNActivity : AppCompatActivity() {
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
-        icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        icDropdown.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnContactTagihan.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNextToken.setBackgroundColor(if(btnNextToken.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         btnBack.setOnClickListener {
             finish()
@@ -102,15 +115,15 @@ class PLNActivity : AppCompatActivity() {
             contentTagihan.visibility = View.VISIBLE
         }
 
-        ButtonUtils.checkButtonState(btnNextToken)
-        ButtonUtils.checkButtonState(btnNextTagihan)
+        ButtonUtils.checkButtonState(btnNextToken, finpayTheme)
+        ButtonUtils.checkButtonState(btnNextTagihan, finpayTheme)
         txtNomorPelangganToken.doOnTextChanged { text, start, before, count ->
             btnNextToken.isEnabled = (!text.isNullOrBlank() && text.length >= 9 && nominal != "0")
-            ButtonUtils.checkButtonState(btnNextToken)
+            ButtonUtils.checkButtonState(btnNextToken, finpayTheme)
         }
         txtNomorPelangganTagihan.doOnTextChanged { text, start, before, count ->
             btnNextTagihan.isEnabled = (!text.isNullOrBlank() && text.length >= 9)
-            ButtonUtils.checkButtonState(btnNextTagihan)
+            ButtonUtils.checkButtonState(btnNextTagihan, finpayTheme)
         }
 
         chooseNominal.setOnClickListener {
@@ -129,36 +142,28 @@ class PLNActivity : AppCompatActivity() {
             startActivityForResult(intent, 2)
         }
 
+
         btnNextToken.setOnClickListener {
             progressDialog.setTitle("Mohon Menunggu")
             progressDialog.setMessage("Sedang Memuat ...")
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@PLNActivity,
                 txtNomorPelangganToken.text.toString(),
                 ProductCode.PLN_PREPAID,
                 nominal, {
                     val intent = Intent(this, PLNResultActivity::class.java)
-//                    intent.putExtra("result", it)
-                    intent.putExtra("noPelanggan", txtNomorPelangganToken.text.toString())
-                    intent.putExtra("customerName", it.bit61Parse?.customerName)
-                    intent.putExtra("customerId", it.bit61Parse?.customerId)
-                    intent.putExtra("tagihan", it.tagihan.toString())
-                    intent.putExtra("nomorReferensi", it.conf)
-                    var fee: String = "0"
-                    for (data in it.fee) {
-                        if (data.sof == "mc") {
-                            fee = data.fee.toString()
-                        }
-                    }
-                    intent.putExtra("fee", fee)
+                    intent.putExtra("result", it)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", finpayTheme)
+                    intent.putExtra("productCode", ProductCode.PLN_PREPAID)
                     startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@PLNActivity, "", it)
+                    DialogUtils.showDialogError(this@PLNActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -169,17 +174,14 @@ class PLNActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@PLNActivity,
                 txtNomorPelangganTagihan.text.toString(),
                 ProductCode.PLN_POSTPAID,
                 "", {
                     val intent = Intent(this, PLNResultActivity::class.java)
                     intent.putExtra("noPelanggan", txtNomorPelangganToken.text.toString())
-                    intent.putExtra("customerName", it.bit61Parse?.customerName)
-                    intent.putExtra("customerId", it.bit61Parse?.customerId)
-                    intent.putExtra("tagihan", it.tagihan.toString())
-                    intent.putExtra("nomorReferensi", it.conf)
+                    intent.putExtra("result", it)
                     intent.putExtra("transNumber", transNumber!!)
                     intent.putExtra("theme", finpayTheme)
                     var fee: String = "0"
@@ -189,11 +191,13 @@ class PLNActivity : AppCompatActivity() {
                         }
                     }
                     intent.putExtra("fee", fee)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", finpayTheme)
                     startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@PLNActivity, "", it)
+                    DialogUtils.showDialogError(this@PLNActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -217,9 +221,9 @@ class PLNActivity : AppCompatActivity() {
                         txtNomorPelangganToken.setText(value)
                         btnNextToken.isEnabled =
                             (!value.isNullOrBlank() && value.length >= 9 && nominal != "0")
-                        ButtonUtils.checkButtonState(btnNextToken)
+                        ButtonUtils.checkButtonState(btnNextToken, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this, "", "Format nomor tidak sesuai")
+                        DialogUtils.showDialogError(this, "", "Format nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {
@@ -241,9 +245,9 @@ class PLNActivity : AppCompatActivity() {
                     if (value.length >= 9) {
                         txtNomorPelangganTagihan.setText(value)
                         btnNextTagihan.isEnabled = (!value.isNullOrBlank() && value.length >= 9)
-                        ButtonUtils.checkButtonState(btnNextTagihan)
+                        ButtonUtils.checkButtonState(btnNextTagihan, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this, "", "Format nomor tidak sesuai")
+                        DialogUtils.showDialogError(this, "", "Format nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {
@@ -272,7 +276,7 @@ class PLNActivity : AppCompatActivity() {
             nominal = selectedItem
             btnNextToken.isEnabled =
                 (!txtNomorPelangganToken.text.isNullOrBlank() && txtNomorPelangganToken.text.length >= 9 && nominal != "")
-            ButtonUtils.checkButtonState(btnNextToken)
+            ButtonUtils.checkButtonState(btnNextToken, finpayTheme)
             dialog.dismiss()
         }
         dialog.show()

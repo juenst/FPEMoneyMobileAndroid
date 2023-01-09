@@ -64,10 +64,10 @@ class TokioMarineActivity : AppCompatActivity() {
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
-        ButtonUtils.checkButtonState(btnNext)
+        ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length >= 9 && periodeTime != "")
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnBack.setOnClickListener {
@@ -98,7 +98,7 @@ class TokioMarineActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@TokioMarineActivity, "", it)
+                    DialogUtils.showDialogError(this@TokioMarineActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -121,12 +121,12 @@ class TokioMarineActivity : AppCompatActivity() {
                     if (value.length >= 9) {
                         txtNomorPelanggan.setText(value)
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length >= 9)
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
                         DialogUtils.showDialogError(
                             this@TokioMarineActivity,
                             "",
-                            "Format Nomor tidak sesuai"
+                            "Format Nomor tidak sesuai", finpayTheme
                         )
                     }
                 }
@@ -153,7 +153,7 @@ class TokioMarineActivity : AppCompatActivity() {
             periodeTime = selectedItem
             btnNext.isEnabled =
                 (!txtNomorPelanggan.text.isNullOrBlank() && txtNomorPelanggan.text.length >= 9 && periodeTime != "")
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
             dialog.dismiss()
         }
 

@@ -97,7 +97,7 @@ class TelkomResultActivity : AppCompatActivity() {
             progressDialog.dismiss()
         },{
             progressDialog.dismiss()
-            DialogUtils.showDialogError(this@TelkomResultActivity, "", it)
+            DialogUtils.showDialogError(this@TelkomResultActivity, "", it, finpayTheme)
         })
     }
 
@@ -161,7 +161,7 @@ class TelkomResultActivity : AppCompatActivity() {
                         startActivity(intent)
                     }, {
                         progressDialog.dismiss()
-                        DialogUtils.showDialogError(this@TelkomResultActivity, "", it)
+                        DialogUtils.showDialogError(this@TelkomResultActivity, "", it, finpayTheme)
                     }
                 )
             }

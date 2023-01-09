@@ -4,8 +4,11 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.webkit.*
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,9 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
+import lib.finpay.sdk.corekit.helper.DateHelper
+import lib.finpay.sdk.corekit.model.PinAuth
+import lib.finpay.sdk.corekit.model.PpobInquiry
 import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.utilities.SharedPrefKeys
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailPpobActivity
 import lib.finpay.sdk.uikit.view.transaction.TransactionDetailQrisActivity
 
@@ -26,27 +33,32 @@ class PaymentActivity : AppCompatActivity() {
     lateinit var btnBack: ImageView
     lateinit var appbar: androidx.appcompat.widget.Toolbar
     lateinit var appbarTitle: TextView
-    val widgetUrl: String? by lazy { intent.getStringExtra("widgetURL") }
-    val paymentType: String? by lazy { intent.getStringExtra("paymentType") }
-    val sof: String? by lazy { intent.getStringExtra("sof") }
+//    val widgetUrl: String? by lazy { intent.getStringExtra("widgetURL") }
+//    val sof: String? by lazy { intent.getStringExtra("sof") }
     val amount: String? by lazy { intent.getStringExtra("amount") }
-    val amountTips: String? by lazy { intent.getStringExtra("amountTips") }
+//    val amountTips: String? by lazy { intent.getStringExtra("amountTips") }
     val reffFlag: String? by lazy { intent.getStringExtra("reffFlag") }
-    val denom: String? by lazy { intent.getStringExtra("denom") }
+    val denom: String? by lazy { if(intent.getStringExtra("denom") == null) "0" else intent.getStringExtra("denom") }
     val productCode: String? by lazy { intent.getStringExtra("productCode") }
-    val billingId: String? by lazy { intent.getStringExtra("billingId") }
-    val activationDate: String? by lazy { intent.getStringExtra("activationDate") }
-    val payType: String? by lazy { intent.getStringExtra("payType") }
-    val phoneNumber: String? by lazy { intent.getStringExtra("phoneNumber") }
+    val billingId: String? by lazy { if(intent.getStringExtra("billingId") == null) "" else intent.getStringExtra("billingId") }
+//    val activationDate: String? by lazy { intent.getStringExtra("activationDate") }
+//    val payType: String? by lazy { intent.getStringExtra("payType") }
+    val transactionType: String? by lazy { if(intent.getStringExtra("transactionType") == null) "" else intent.getStringExtra("transactionType")}
+//    val phoneNumberDest: String? by lazy { intent.getStringExtra("phoneNumberDest") }
+//    val reffTrx: String? by lazy { intent.getStringExtra("reffTrx") }
+//    val category: String? by lazy { intent.getStringExtra("category") }
+//    val desc: String? by lazy { intent.getStringExtra("desc") }
+    val price: String? by lazy { intent.getStringExtra("price") }
+    val fee: String? by lazy { intent.getStringExtra("fee") }
+
+    val phoneNumber: String? by lazy { if(intent.getStringExtra("phoneNumber") == null) FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.USER_PHONE_NUMBER) else intent.getStringExtra("phoneNumber")}
+    val paymentType: String? by lazy { intent.getStringExtra("paymentType") }
+    val result: PpobInquiry? by lazy { if(intent.getSerializableExtra("result") == null) null else intent.getSerializableExtra("result") as PpobInquiry }
+    val pinResult: PinAuth? by lazy { if(intent.getSerializableExtra("pinResult") == null) null else intent.getSerializableExtra("pinResult") as PinAuth }
     val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
-    val phoneNumberDest: String? by lazy { intent.getStringExtra("phoneNumberDest") }
-    val reffTrx: String? by lazy { intent.getStringExtra("reffTrx") }
-    val category: String? by lazy { intent.getStringExtra("category") }
-    val desc: String? by lazy { intent.getStringExtra("desc") }
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
 
     lateinit var progressDialog: ProgressDialog
-
-    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +70,21 @@ class PaymentActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         btnBack = findViewById(R.id.btnBack)
         webview = findViewById(R.id.webview)
-        webview.loadUrl(widgetUrl!!)
+        webview.loadUrl(pinResult?.widgetURL!!)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         // Enable Javascript
         val webSettings: WebSettings = webview.getSettings()
@@ -95,12 +116,12 @@ class PaymentActivity : AppCompatActivity() {
                     progressDialog.show()
                     if (paymentType == PaymentType.paymentQRIS) {
                         FinpaySDK.qrisPayment(
-                            java.util.UUID.randomUUID().toString(),
+                            transNumber!!,
                             this@PaymentActivity,
-                            sof!!,
-                            amount!!,
-                            amountTips!!,
-                            reffFlag!!,
+                            "mc",
+                            "",
+                            "",
+                            "",
                             pinToken, {
                                 progressDialog.dismiss()
                                 val intent = Intent(
@@ -111,7 +132,9 @@ class PaymentActivity : AppCompatActivity() {
                                 intent.putExtra("merchantName", it.bit61Parse!!.merchantName)
                                 intent.putExtra("merchantId", it.bit61Parse!!.merchantId)
                                 intent.putExtra("nevaNumber", it.bit61Parse!!.nevaNumber)
-                                intent.putExtra("amount", it.bit61Parse!!.amount)
+                                intent.putExtra("amount", "0")//it.bit61Parse!!.amount)
+                                intent.putExtra("price", "0")
+                                intent.putExtra("fee", "0")
                                 intent.putExtra("paymentCode", it.bit61Parse!!.paymentCode)
                                 intent.putExtra("pointOfMethod", it.bit61Parse!!.pointOfMethod)
                                 intent.putExtra("tipsType", it.bit61Parse!!.tipsType)
@@ -124,14 +147,15 @@ class PaymentActivity : AppCompatActivity() {
                                 intent.putExtra("isOnUs", it.bit61Parse!!.isOnUs)
                                 intent.putExtra("customerPAN", it.bit61Parse!!.customerPAN)
                                 intent.putExtra("invoice", it.bit61Parse!!.invoice)
-                                intent.putExtra("reffID", reffFlag)
+                                intent.putExtra("reffID", "")
                                 intent.putExtra("statusDesc", it.statusDesc)
+                                intent.putExtra("transactionDate", DateHelper.getCurrentDateTransaction())
+                                intent.putExtra("theme", finpayTheme!!)
                                 startActivity(intent)
                                 this@PaymentActivity.finish()
                             }, {
                                 progressDialog.dismiss()
-                                Toast.makeText(this@PaymentActivity, it, Toast.LENGTH_LONG)
-                                DialogUtils.showDialogError(this@PaymentActivity, "", it)
+                                DialogUtils.showDialogError(this@PaymentActivity, "", it, finpayTheme)
                             }
                         )
                     } else if (paymentType == PaymentType.paymentPPOB) {
@@ -139,60 +163,55 @@ class PaymentActivity : AppCompatActivity() {
                             transNumber!!,
                             this@PaymentActivity,
                             phoneNumber!!,
-                            sof!!,
-                            payType!!,
+                            "mc",
+                            "billpayment",
                             denom!!,
                             amount!!,
                             billingId!!,
                             productCode!!,
                             reffFlag!!,
-                            activationDate!!, pinToken, {
+                            "",
+                            pinToken,
+                            {
                                 progressDialog.dismiss()
-                                val intent = Intent(
-                                    this@PaymentActivity,
-                                    TransactionDetailPpobActivity::class.java
-                                )
-                                intent.putExtra("amountDpp", "0")
-                                intent.putExtra("amountPpn", "0")
-                                intent.putExtra("ppn", "0%")
-                                intent.putExtra("nomorReferensi", it.bit61Parse!!.billInfo1!!.nomorReferensi)
-                                intent.putExtra("nilaiTagihan", it.bit61Parse!!.billInfo1!!.nilaiTagihan)
-                                intent.putExtra("customerId", it.bit61Parse!!.customerId)
-                                intent.putExtra("customerName", it.bit61Parse!!.customerName)
-                                intent.putExtra("npwp", it.bit61Parse!!.npwp)
-                                intent.putExtra("kodeDivre", it.bit61Parse!!.kodeDivre)
-                                intent.putExtra("kodeDatel", it.bit61Parse!!.kodeDatel)
-                                intent.putExtra("jumlahBill", it.bit61Parse!!.jumlahBill)
-                                intent.putExtra("statusDesc", it.statusDesc)
+                                val intent = Intent(this@PaymentActivity, TransactionDetailPpobActivity::class.java)
+                                intent.putExtra("amount", amount)
+                                intent.putExtra("price", price)
+                                intent.putExtra("fee", fee)
+                                intent.putExtra("result", it)
+                                intent.putExtra("transNumber", transNumber!!)
+                                intent.putExtra("transactionType", transactionType!!)
+                                intent.putExtra("transactionDate", DateHelper.getCurrentDateTransaction())
+                                intent.putExtra("theme", finpayTheme!!)
 
                                 startActivity(intent)
                                 this@PaymentActivity.finish()
                             }, {
                                 progressDialog.dismiss()
-                                DialogUtils.showDialogError(this@PaymentActivity, "", it)
+                                DialogUtils.showDialogError(this@PaymentActivity, "", it, finpayTheme)
                             }
                         )
                     } else if (paymentType == PaymentType.transferToOther) {
-                        FinpaySDK.transferToBankPayment(
-                            transNumber!!,
-                            this@PaymentActivity,
-                            phoneNumberDest!!,
-                            reffFlag!!,
-                            reffTrx!!,
-                            category!!,
-                            pinToken,
-                            desc!!,
-                            {
-                                progressDialog.dismiss()
-                                DialogUtils.showDialogSuccess(this@PaymentActivity, "Transfer Berhasil", "Anda berhasil transfer ke ${phoneNumberDest}", {
-                                    this@PaymentActivity.finish()
-                                })
-
-                            }, {
-                                progressDialog.dismiss()
-                                DialogUtils.showDialogError(this@PaymentActivity, "", it)
-                            }
-                        )
+//                        FinpaySDK.transferToBankPayment(
+//                            transNumber!!,
+//                            this@PaymentActivity,
+//                            phoneNumberDest!!,
+//                            reffFlag!!,
+//                            reffTrx!!,
+//                            category!!,
+//                            pinToken,
+//                            desc!!,
+//                            {
+//                                progressDialog.dismiss()
+//                                DialogUtils.showDialogSuccess(this@PaymentActivity, "Transfer Berhasil", "Anda berhasil transfer ke ${phoneNumberDest}", {
+//                                    this@PaymentActivity.finish()
+//                                })
+//
+//                            }, {
+//                                progressDialog.dismiss()
+//                                DialogUtils.showDialogError(this@PaymentActivity, "", it, finpayTheme)
+//                            }
+//                        )
                     } else if (paymentType == PaymentType.transferToBank) {
 
                     } else {

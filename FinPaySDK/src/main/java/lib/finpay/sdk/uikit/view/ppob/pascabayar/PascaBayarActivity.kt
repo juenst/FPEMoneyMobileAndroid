@@ -5,9 +5,12 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
@@ -52,11 +55,20 @@ class PascaBayarActivity : AppCompatActivity() {
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
-        ButtonUtils.checkButtonState(btnNext)
+        ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnBack.setOnClickListener {
@@ -75,31 +87,32 @@ class PascaBayarActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@PascaBayarActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.PASCABAYAR,
                 "", {
                     val intent = Intent(this, PascaBayarResultActivity::class.java)
-                    intent.putExtra("noPelanggan", txtNomorPelanggan.text.toString())
-                    intent.putExtra("customerName", it.bit61Parse?.customerName)
-                    intent.putExtra("customerId", it.bit61Parse?.customerId)
-                    intent.putExtra("tagihan", it.tagihan.toString())
-                    intent.putExtra("nomorReferensi", it.conf)
-                    var fee: String = "0"
-                    for (data in it.fee) {
-                        if (data.sof == "mc") {
-                            fee = data.fee.toString()
-                        }
-                    }
-                    intent.putExtra("fee", fee)
+//                    intent.putExtra("noPelanggan", txtNomorPelanggan.text.toString())
+//                    intent.putExtra("customerName", it.bit61Parse?.customerName)
+//                    intent.putExtra("customerId", it.bit61Parse?.customerId)
+//                    intent.putExtra("tagihan", it.tagihan.toString())
+//                    intent.putExtra("nomorReferensi", it.conf)
+//                    var fee: String = "0"
+//                    for (data in it.fee) {
+//                        if (data.sof == "mc") {
+//                            fee = data.fee.toString()
+//                        }
+//                    }
+//                    intent.putExtra("fee", fee)
+                    intent.putExtra("result", it)
                     intent.putExtra("transNumber", transNumber!!)
                     intent.putExtra("theme", finpayTheme)
                     startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@PascaBayarActivity, "", it)
+                    DialogUtils.showDialogError(this@PascaBayarActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -122,9 +135,9 @@ class PascaBayarActivity : AppCompatActivity() {
                     if(value.length>=9) {
                         txtNomorPelanggan.setText(Utils.validateMobileNumber(value))
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this@PascaBayarActivity, "", "Format Nomor tidak sesuai")
+                        DialogUtils.showDialogError(this@PascaBayarActivity, "", "Format Nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {

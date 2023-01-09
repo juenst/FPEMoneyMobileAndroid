@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:paddingLeft="20dp"
@@ -24,6 +25,7 @@
                 android:src="@drawable/ic_left" />
 
             <TextView
+                android:id="@+id/appbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -45,6 +47,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/bg"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:background="#00ACBA"/>
@@ -71,35 +74,6 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="20dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="10sp"
-                        android:text="24 Okt 2022 - 15:06" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:textSize="10sp"
-                        android:text="Finpay ID 083815613839" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#CCC" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -132,7 +106,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="#CCEEF1"
+                    app:cardBackgroundColor="#EEE"
                     app:cardCornerRadius="5dp"
                     android:padding="8dp" >
 
@@ -277,6 +251,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/transactionType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=": -"
@@ -312,10 +287,12 @@
                 </LinearLayout>
 
                 <Space
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="10dp" />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

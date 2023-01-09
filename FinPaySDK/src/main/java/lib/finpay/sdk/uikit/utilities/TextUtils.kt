@@ -10,5 +10,10 @@ public class TextUtils {
             val numberFormat = NumberFormat.getCurrencyInstance(localeID)
             return numberFormat.format(number).toString().replace(",00", "")
         }
+
+        public fun clearFormat(text: String): String {
+            var string: String = text.replace("Rp", "").replace(",","").replace(".","")
+            return string
+        }
     }
 }

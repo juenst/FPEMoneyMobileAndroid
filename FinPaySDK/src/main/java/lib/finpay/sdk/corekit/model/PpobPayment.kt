@@ -2,7 +2,7 @@ package lib.finpay.sdk.corekit.model
 
 import com.google.gson.annotations.SerializedName
 
-class PpobPayment {
+class PpobPayment : java.io.Serializable {
     @SerializedName("statusCode")
     var statusCode: String? = null
     @SerializedName("statusDesc")
@@ -19,7 +19,7 @@ class PpobPayment {
     var processingTime: Double? = null
 }
 
-class Pajak {
+class Pajak : java.io.Serializable {
     @SerializedName("amountDpp")
     var amountDpp: Int? = null
     @SerializedName("amountPpn")
@@ -28,14 +28,14 @@ class Pajak {
     var ppn: String? = null
 }
 
-class BillInfo1PaymentPpob {
+class BillInfo1PaymentPpob : java.io.Serializable {
     @SerializedName("nomorReferensi")
     var nomorReferensi: String? = null
     @SerializedName("nilaiTagihan")
     var nilaiTagihan: String? = null
 }
 
-class Bit61ParsePaymentPpob {
+class Bit61ParsePaymentPpob : java.io.Serializable {
     @SerializedName("kodeDivre")
     var kodeDivre: String? = null
     @SerializedName("kodeDatel")

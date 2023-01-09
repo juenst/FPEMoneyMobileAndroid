@@ -2,7 +2,7 @@ package lib.finpay.sdk.corekit.model
 
 import com.google.gson.annotations.SerializedName
 
-class PinAuth {
+class PinAuth : java.io.Serializable {
     @SerializedName("statusCode")
     var statusCode: String? = null
     @SerializedName("statusDesc")

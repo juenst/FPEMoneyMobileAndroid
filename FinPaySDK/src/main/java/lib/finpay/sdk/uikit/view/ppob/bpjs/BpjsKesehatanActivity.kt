@@ -5,8 +5,11 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
@@ -20,6 +23,7 @@ import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.view.ppob.bpjs.adapter.BPJSAdapter
 import lib.finpay.sdk.uikit.view.ppob.bpjs.adapter.MonthAdapter
+import lib.finpay.sdk.uikit.view.ppob.pascabayar.PascaBayarResultActivity
 import java.text.SimpleDateFormat
 import java.time.YearMonth
 import java.time.ZoneId
@@ -59,19 +63,28 @@ class BpjsKesehatanActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this@BpjsKesehatanActivity)
         icDropdown = findViewById(R.id.icDropdown)
 
-        ButtonUtils.checkButtonState(btnNext)
+        ButtonUtils.checkButtonState(btnNext, finpayTheme)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
-        icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        icDropdown.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9 && periodeTime != "")
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnContact.setOnClickListener {
@@ -90,15 +103,32 @@ class BpjsKesehatanActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@BpjsKesehatanActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.BPJS_KESEHATAN,
                 "", {
+                    val intent = Intent(this, BpjsResultActivity::class.java)
+                    intent.putExtra("noPelanggan", txtNomorPelanggan.text.toString())
+                    intent.putExtra("customerName", it.bit61Parse?.customerName)
+                    intent.putExtra("customerId", it.bit61Parse?.customerId)
+                    intent.putExtra("tagihan", it.tagihan.toString())
+                    intent.putExtra("nomorReferensi", it.conf)
+                    var fee: String = "0"
+                    for (data in it.fee) {
+                        if (data.sof == "mc") {
+                            fee = data.fee.toString()
+                        }
+                    }
+                    intent.putExtra("fee", fee)
+                    intent.putExtra("periode", txtPeriode.text.toString())
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", it)
+                    DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -122,9 +152,9 @@ class BpjsKesehatanActivity : AppCompatActivity() {
                     if(value.length>=9) {
                         txtNomorPelanggan.setText(value)
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9 && periodeTime != "")
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", "Format Nomor tidak sesuai")
+                        DialogUtils.showDialogError(this@BpjsKesehatanActivity, "", "Format Nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {
@@ -153,7 +183,7 @@ class BpjsKesehatanActivity : AppCompatActivity() {
             txtPeriode.text = selectedItem
             periodeTime = selectedItem
             btnNext.isEnabled = (!txtNomorPelanggan.text.isNullOrBlank() && txtNomorPelanggan.text.length>=9 && periodeTime != "")
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
             dialog.dismiss()
         }
         dialog.show()

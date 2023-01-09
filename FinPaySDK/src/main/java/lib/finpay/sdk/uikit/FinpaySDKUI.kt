@@ -41,7 +41,9 @@ class FinpaySDKUI {
         fun connectAccount(
             transNumber: String,
             context: Context,
-            credential: Credential
+            credential: Credential,
+            theme: FinpayTheme? = null,
+            onSuccess: () -> Unit
         ) {
             progressDialog = ProgressDialog(context)
             progressDialog.setTitle("Mohon Menunggu")
@@ -49,20 +51,22 @@ class FinpaySDKUI {
             progressDialog.setCancelable(false)
             progressDialog.show()
             if(credential.getUsername() == null || credential.getPassword() == null || credential.getSecretKey() == null || credential.getUsername() == "" || credential.getPassword() == "" || credential.getSecretKey() == "") {
-                DialogUtils.showDialogError(context, "Credential Error", "Client key, username, or password cannot be null or empty. Please set the client key, username, or password")
+                DialogUtils.showDialogError(context, "Credential Error", "Client key, username, or password cannot be null or empty. Please set the client key, username, or password", theme)
                 progressDialog.dismiss()
             } else if(credential.getPhoneNumber() == null || credential.getPhoneNumber() == "") {
                 DialogUtils.showDialogError(
                     context,
                     "Required",
-                    "Phone number cannot be null or empty"
+                    "Phone number cannot be null or empty",
+                    theme
                 )
                 progressDialog.dismiss()
             } else if(credential.getPhoneNumber().toString().length < 10 || credential.getPhoneNumber().toString().length > 15) {
                 DialogUtils.showDialogError(
                     context,
                     "",
-                    "The phone number must be between 10 and 15 digit"
+                    "The phone number must be between 10 and 15 digit",
+                    theme
                 )
                 progressDialog.dismiss()
             } else {
@@ -70,7 +74,11 @@ class FinpaySDKUI {
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_USERNAME, credential.getUsername()!!)
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_PASSWORD, credential.getPassword()!!)
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.MERCHANT_SECRET_KEY, credential.getSecretKey()!!)
-                FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.USER_PHONE_NUMBER, credential.getPhoneNumber()!!)
+                if(credential.getPhoneNumber()!!.substring(0,1) != "0") {
+                    FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.USER_PHONE_NUMBER, "0"+credential.getPhoneNumber()!!)
+                } else {
+                    FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.USER_PHONE_NUMBER, credential.getPhoneNumber()!!)
+                }
                 FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, "finpay")
                 FinpaySDK.getToken (transNumber, context, {
                     FinpaySDK.prefHelper.setStringToShared(SharedPrefKeys.TOKEN_ID, it.tokenID!!)
@@ -82,33 +90,37 @@ class FinpaySDKUI {
                                 progressDialog.dismiss()
                                 FinpaySDK.prefHelper.setBooleanToShared(SharedPrefKeys.IS_CONNECT, true)
                                 DialogUtils.showDialogSuccess(
-                                    context, "Activation Successful",
-                                    "Account activation successful, please reconnect",
+                                    context, "Pairing Successful",
+                                    "Pairing acount successful",
                                     {
-                                        //walletUIBuilder(transNumber, context, credential)
-                                    }
+                                        onSuccess()
+                                    },
+                                    theme
                                 )
                             } else {
                                 progressDialog.dismiss()
                                 val intent = Intent(context, PinActivity::class.java)
-                                val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
                                 intent.putExtra("pinType", "otp_connect")
                                 intent.putExtra("phoneNumber", credential.getPhoneNumber())
                                 intent.putExtra("custName", credential.getCustName())
                                 intent.putExtra("custStatusCode", it.custStatusCode.toString())
                                 intent.putExtra("transNumber", transNumber)
-                                intent.putExtra("theme", finpayTheme)
+                                intent.putExtra("theme", theme)
                                 context.startActivity(intent)
                             }
                         }, {
-//                            println("masuk sini 2")
-                            progressDialog.dismiss()
-                            DialogUtils.showDialogError(context, "Error", it)
+                            if(FinpaySDK.prefHelper.getBoolFromShared(SharedPrefKeys.IS_CONNECT) != true) {
+                                progressDialog.dismiss()
+                                onSuccess()
+                            } else {
+                                progressDialog.dismiss()
+                                DialogUtils.showDialogError(context, "Error", it, theme)
+                            }
                         }
                     )
                 }, {
                   progressDialog.dismiss()
-                    DialogUtils.showDialogError(context, "Error", it)
+                    DialogUtils.showDialogError(context, "Error", it, theme)
                 })
             }
         }
@@ -129,10 +141,14 @@ class FinpaySDKUI {
                 val intent = Intent(context, AppActivity::class.java)
                 intent.putExtra("transNumber", transNumber)
                 intent.putExtra("theme", theme)
-                println(if (theme == null) "kosong" else "tidak")
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, AppActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -148,10 +164,14 @@ class FinpaySDKUI {
                 val intent = Intent(context, QRISActivity::class.java)
                 intent.putExtra("transNumber", transNumber)
                 intent.putExtra("theme", theme)
-                println(if (theme == null) "kosong" else "tidak")
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, QRISActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -169,7 +189,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, WalletSDKActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -182,7 +207,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, TopupActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -195,7 +225,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, TransferActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -212,7 +247,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, UpgradeAccountActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -225,7 +265,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, TransactionHistoryActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -242,7 +287,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, TelkomActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -255,7 +305,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, AlfamartActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -268,7 +323,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, BpjsKesehatanActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -281,7 +341,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, FinpayActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -294,7 +359,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, InstalmentActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -307,7 +377,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, InsuranceActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -320,7 +395,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, InternetTvCableActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -333,7 +413,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, PascaBayarActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -346,7 +431,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, PDAMActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -359,7 +449,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, PegadaianActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -372,7 +467,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, PLNActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -385,7 +485,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, PulsaDataActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -398,7 +503,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, RevenueActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -411,7 +521,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, BestTelkomselPackageActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -424,7 +539,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, VoucherTVCableActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -437,7 +557,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, IndihomeActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
 
@@ -451,7 +576,12 @@ class FinpaySDKUI {
                 intent.putExtra("theme", theme)
                 context.startActivity(intent)
             } else {
-                DialogUtils.showDialogConnectAccount(transNumber, context, credential)
+                DialogUtils.showDialogConnectAccount(transNumber, context, credential, theme, {
+                    val intent = Intent(context, VoucherDealsActivity::class.java)
+                    intent.putExtra("transNumber", transNumber)
+                    intent.putExtra("theme", theme)
+                    context.startActivity(intent)
+                })
             }
         }
     }

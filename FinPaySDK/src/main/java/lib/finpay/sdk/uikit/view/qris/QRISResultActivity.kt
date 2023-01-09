@@ -3,7 +3,10 @@ package lib.finpay.sdk.uikit.view.qris
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -26,9 +29,9 @@ import lib.finpay.sdk.uikit.view.payment.PaymentActivity
 class QRISResultActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
     lateinit var appbarTitle: TextView
-    val stringQris: String? by lazy {
-        intent.getStringExtra("resultQR")
-    }
+    val stringQris: String? by lazy { intent.getStringExtra("resultQR") }
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     lateinit var merchantName: TextView
     lateinit var txtTotalBayar: TextView
@@ -36,15 +39,15 @@ class QRISResultActivity : AppCompatActivity() {
     lateinit var txtAmount: CurrencyEditText
     lateinit var btnBayar: Button
     lateinit var btnBack: ImageView
+    lateinit var imgMerchant: ImageView
+
     lateinit var progressDialog: ProgressDialog
+
     lateinit var _tagihan: String
     lateinit var _biayaLayanan: String
     lateinit var _totalBayar: String
     lateinit var _saldo: String
     lateinit var _reffFlag: String
-
-    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
-    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,12 +62,23 @@ class QRISResultActivity : AppCompatActivity() {
         txtAmount = findViewById(R.id.txtAmount)
         btnBayar = findViewById(R.id.btnBayar)
         btnBack = findViewById(R.id.btnBack)
+        imgMerchant = findViewById(R.id.imgMerchant)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        imgMerchant.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnBayar.setBackgroundColor(if(btnBayar.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         progressDialog = ProgressDialog(this@QRISResultActivity)
         _tagihan = "0"
@@ -78,7 +92,7 @@ class QRISResultActivity : AppCompatActivity() {
         progressDialog.setCancelable(false) // blocks UI interaction
         progressDialog.show()
         FinpaySDK.qrisInquiry(
-            java.util.UUID.randomUUID().toString(),
+            transNumber!!,
             this@QRISResultActivity,
             stringQris!!, {
                 var fee: String = "0"
@@ -96,86 +110,74 @@ class QRISResultActivity : AppCompatActivity() {
                 progressDialog.dismiss()
             }, {
                 progressDialog.dismiss()
-                DialogUtils.showDialogError(this@QRISResultActivity, "", it)
+                DialogUtils.showDialogError(this@QRISResultActivity, "", it, finpayTheme)
             }
         )
 
-        FinpaySDK.getUserBallance(java.util.UUID.randomUUID().toString(), this@QRISResultActivity, {
-            txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
-            _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
-        },{
-            DialogUtils.showDialogError(this@QRISResultActivity, "", it)
-        })
+        FinpaySDK.getUserBallance(
+            transNumber!!,
+            this@QRISResultActivity,
+            {
+                txtSaldo.text = TextUtils.formatRupiah(it.amount!!.toDouble())
+                _saldo = TextUtils.formatRupiah(it.amount!!.toDouble())
+            },{
+                DialogUtils.showDialogError(this@QRISResultActivity, "", it, finpayTheme)
+            }
+        )
 
         txtAmount.doOnTextChanged { text, start, before, count ->
             txtTotalBayar.text = txtAmount.text
             _totalBayar = txtAmount.text.toString()
             _tagihan = txtAmount.text.toString()
             btnBayar.isEnabled = (!text.isNullOrBlank() && text.length>=1 && text != "0")
-            ButtonUtils.checkButtonState(btnBayar)
+            ButtonUtils.checkButtonState(btnBayar, finpayTheme)
         }
 
-        ButtonUtils.checkButtonState(btnBayar)
+        ButtonUtils.checkButtonState(btnBayar, finpayTheme)
         btnBayar.setOnClickListener {
-            showDialogConfirmPayment(
-                _tagihan,
-                _biayaLayanan,
-                _totalBayar,
-                _saldo
+            DialogUtils.showDialogConfirmPayment(
+                this,
+                transNumber!!,
+                "Transaksi",
+                "Pembayaran QRIS",
+                TextUtils.clearFormat(_saldo),
+                TextUtils.clearFormat(_tagihan),
+                TextUtils.clearFormat(_biayaLayanan),
+                {
+                    progressDialog.setTitle("Mohon Menunggu")
+                    progressDialog.setMessage("Sedang Memuat ...")
+                    progressDialog.setCancelable(false)
+                    progressDialog.show()
+                    FinpaySDK.authPin(
+                        transNumber!!,
+                        this@QRISResultActivity,
+                        TextUtils.clearFormat(_totalBayar),
+                        ProductCode.QRIS,{
+                            progressDialog.dismiss()
+                            val intent = Intent(this@QRISResultActivity, PaymentActivity::class.java)
+                            intent.putExtra("paymentType", PaymentType.paymentQRIS)
+                            intent.putExtra("sof", "mc")
+                            intent.putExtra("amount",TextUtils.clearFormat(_totalBayar))
+                            intent.putExtra("amountTips", "0")
+                            intent.putExtra("reffFlag", _reffFlag)
+                            intent.putExtra("widgetURL", it.widgetURL)
+                            intent.putExtra("price",TextUtils.clearFormat(_tagihan))
+                            intent.putExtra("fee",TextUtils.clearFormat(_biayaLayanan))
+                            intent.putExtra("transNumber", transNumber!!)
+                            intent.putExtra("theme", finpayTheme)
+                            startActivity(intent)
+                        }, {
+                            progressDialog.dismiss()
+                            DialogUtils.showDialogError(this@QRISResultActivity, "", it, finpayTheme)
+                        }
+                    )
+                },
+                finpayTheme
             )
         }
 
         btnBack.setOnClickListener {
             onBackPressed()
         }
-    }
-
-    fun showDialogConfirmPayment(
-        tagihan: String,
-        biayaLayanan: String,
-        totalBayar: String,
-        saldo: String
-    ) {
-        val dialog = BottomSheetDialog(this)
-        dialog.setContentView(R.layout.dialog_confirm_payment)
-        val btnPay = dialog.findViewById<Button>(R.id.btnPay)
-        val txtTagihan = dialog.findViewById<TextView>(R.id.tagihan)
-        val txtBiayaLayanan= dialog.findViewById<TextView>(R.id.biayaLayanan)
-        val txtTotalBayar= dialog.findViewById<TextView>(R.id.totalBayar)
-        val txtSaldo= dialog.findViewById<TextView>(R.id.saldo)
-
-        txtTagihan!!.text = tagihan
-        txtBiayaLayanan!!.text = biayaLayanan
-        txtTotalBayar!!.text = totalBayar
-        txtSaldo!!.text = saldo
-
-        btnPay?.setOnClickListener {
-            progressDialog.setTitle("Mohon Menunggu")
-            progressDialog.setMessage("Sedang Memuat ...")
-            progressDialog.setCancelable(false) // blocks UI interaction
-            progressDialog.show()
-            FinpaySDK.authPin(
-                java.util.UUID.randomUUID().toString(),
-                this@QRISResultActivity,
-                txtAmount.text.toString(), ProductCode.QRIS,{
-                    progressDialog.dismiss()
-                    val intent = Intent(this@QRISResultActivity, PaymentActivity::class.java)
-                    intent.putExtra("paymentType", PaymentType.paymentQRIS)
-                    intent.putExtra("sof", "mc")
-                    intent.putExtra("amount", totalBayar.replace("Rp", "").replace(",",""))
-                    intent.putExtra("amountTips", "0")
-                    intent.putExtra("reffFlag", _reffFlag)
-                    intent.putExtra("widgetURL", it.widgetURL)
-                    intent.putExtra("transNumber", transNumber!!)
-                    intent.putExtra("theme", finpayTheme)
-                    startActivity(intent)
-                }, {
-                    progressDialog.dismiss()
-                    println(it)
-                    DialogUtils.showDialogError(this@QRISResultActivity, "", it)
-                }
-            )
-        }
-        dialog.show()
     }
 }

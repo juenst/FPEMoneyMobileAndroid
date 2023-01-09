@@ -49,10 +49,10 @@ class IndihomeActivity : AppCompatActivity() {
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
 
-        ButtonUtils.checkButtonState(btnNext)
+        ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnBack.setOnClickListener {
@@ -79,7 +79,7 @@ class IndihomeActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@IndihomeActivity, "", it)
+                    DialogUtils.showDialogError(this@IndihomeActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -102,9 +102,9 @@ class IndihomeActivity : AppCompatActivity() {
                     if(value.length>=9) {
                         txtNomorPelanggan.setText(value)
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length>=9)
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this@IndihomeActivity, "", "Format Nomor tidak sesuai")
+                        DialogUtils.showDialogError(this@IndihomeActivity, "", "Format Nomor tidak sesuai", finpayTheme)
                     }
                 }
             } catch (e: Exception) {

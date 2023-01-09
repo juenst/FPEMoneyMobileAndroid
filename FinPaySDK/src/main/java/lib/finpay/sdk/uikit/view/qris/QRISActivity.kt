@@ -7,11 +7,15 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.SurfaceHolder
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
@@ -42,6 +46,8 @@ import java.io.Reader
 import java.util.*
 
 class QRISActivity : AppCompatActivity() {
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     lateinit var progressDialog: ProgressDialog
     lateinit var btnBack: ImageView
     lateinit var btnGallery: Button
@@ -49,6 +55,9 @@ class QRISActivity : AppCompatActivity() {
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector
     private var scannedValue = ""
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     private lateinit var binding: ActivityQrisBinding
 
@@ -58,6 +67,22 @@ class QRISActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         supportActionBar!!.hide()
+
+        //theming
+        binding.appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        binding.appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        binding.btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        binding.btnGallery.setBackgroundColor(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
+        binding.cameraOverlay.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         progressDialog = ProgressDialog(this@QRISActivity)
         binding.btnGallery.setOnClickListener {
@@ -79,7 +104,7 @@ class QRISActivity : AppCompatActivity() {
 //        barcodeDetector = BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build()
 //        cameraSource = CameraSource.Builder(this, barcodeDetector)
 //            .setRequestedPreviewSize(1920, 1080)
-//            .setAutoFocusEnabled(true) //you should add this feature
+//            .setAutoFocusEnabled(true)
 //            .build()
 //
 //        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
@@ -230,8 +255,6 @@ class QRISActivity : AppCompatActivity() {
             println("QR code -> ${contents}")
             if(contents.contains("QRIS")) {
                 val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
-                val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
-                val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
                 intent.putExtra("transNumber", transNumber!!)
                 intent.putExtra("theme", finpayTheme)
                 intent.putExtra("resultQR", "${contents}")

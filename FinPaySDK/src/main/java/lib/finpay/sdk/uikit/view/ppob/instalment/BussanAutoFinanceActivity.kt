@@ -55,7 +55,7 @@ class BussanAutoFinanceActivity : AppCompatActivity() {
         ButtonUtils.checkButtonState(btnNext)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length >= 9)
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnBack.setOnClickListener {
@@ -82,7 +82,7 @@ class BussanAutoFinanceActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()
-                    DialogUtils.showDialogError(this@BussanAutoFinanceActivity, "", it)
+                    DialogUtils.showDialogError(this@BussanAutoFinanceActivity, "", it, finpayTheme)
                 }
             )
         }
@@ -105,12 +105,12 @@ class BussanAutoFinanceActivity : AppCompatActivity() {
                     if (value.length >= 9) {
                         txtNomorPelanggan.setText(value)
                         btnNext.isEnabled = (!value.isNullOrBlank() && value.length >= 9)
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
                         DialogUtils.showDialogError(
                             this@BussanAutoFinanceActivity,
                             "",
-                            "Format Nomor tidak sesuai"
+                            "Format Nomor tidak sesuai", finpayTheme
                         )
                     }
                 }

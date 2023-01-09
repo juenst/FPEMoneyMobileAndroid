@@ -5,9 +5,13 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds
 import android.provider.ContactsContract.Contacts
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -15,12 +19,15 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
+import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.model.DataSubProduct
 import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.utilities.Utils
+import lib.finpay.sdk.uikit.view.ppob.pulsa_data.adapter.PulsaDataAdapter
 import lib.finpay.sdk.uikit.view.upgrade.UpgradeAccountSuccessActivity
+import java.util.ArrayList
 
 
 class PulsaDataActivity : AppCompatActivity() {
@@ -54,11 +61,20 @@ class PulsaDataActivity : AppCompatActivity() {
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         ButtonUtils.checkButtonState(btnNext)
         txtPhoneNumber.doOnTextChanged { text, start, before, count ->
             btnNext.isEnabled = (!text.isNullOrBlank() && text.length>=9)
-            ButtonUtils.checkButtonState(btnNext)
+            ButtonUtils.checkButtonState(btnNext, finpayTheme)
         }
 
         btnContact.setOnClickListener {
@@ -68,11 +84,31 @@ class PulsaDataActivity : AppCompatActivity() {
         }
 
         btnNext.setOnClickListener {
-            val intent = Intent(this, PulsaDataResultActivity::class.java)
-            intent.putExtra("transNumber", transNumber!!)
-            intent.putExtra("theme", finpayTheme)
-            intent.putExtra("phoneNumber", txtPhoneNumber.text.toString())
-            startActivity(intent)
+            progressDialog.setTitle("Mohon Menunggu")
+            progressDialog.setMessage("Sedang Memuat ...")
+            progressDialog.setCancelable(false) // blocks UI interaction
+            progressDialog.show()
+
+            val listOpr: ArrayList<String> = ArrayList<String>()
+            val provider: String = Utils.getProviderMobile(txtPhoneNumber.text.toString())
+            listOpr.add(provider)
+            FinpaySDK.getListSubProduct(
+                transNumber!!,
+                this,
+                txtPhoneNumber.text.toString(),
+                listOpr, {
+                    progressDialog.dismiss()
+                    val intent = Intent(this, PulsaDataResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    intent.putExtra("phoneNumber", txtPhoneNumber.text.toString())
+                    startActivity(intent)
+                }, {
+                    progressDialog.dismiss()
+                    DialogUtils.showDialogError(this, "", it, finpayTheme)
+                }
+            )
         }
     }
 
@@ -89,13 +125,13 @@ class PulsaDataActivity : AppCompatActivity() {
                     null
                 )
                 if (cursor != null && cursor.moveToNext()) {
-                    val phone: String = cursor.getString(0)
+                    val phone: String = "0"+cursor.getString(0).trimStart('0')
                     if(phone.length>=9) {
                         txtPhoneNumber.setText(Utils.validateMobileNumber(phone))
                         btnNext.isEnabled = (!phone.isNullOrBlank() && phone.length>=9)
-                        ButtonUtils.checkButtonState(btnNext)
+                        ButtonUtils.checkButtonState(btnNext, finpayTheme)
                     } else {
-                        DialogUtils.showDialogError(this@PulsaDataActivity, "", "Nomor telepon minimal 9 karakter")
+                        DialogUtils.showDialogError(this@PulsaDataActivity, "", "Nomor telepon minimal 9 karakter", finpayTheme)
                     }
                 }
             } catch (e: Exception) {

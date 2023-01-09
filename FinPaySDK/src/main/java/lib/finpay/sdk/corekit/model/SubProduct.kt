@@ -2,7 +2,7 @@ package lib.finpay.sdk.corekit.model
 
 import com.google.gson.annotations.SerializedName
 
-class SubProduct {
+class SubProduct : java.io.Serializable{
     @SerializedName("statusCode")
     var statusCode: String? = null
     @SerializedName("statusDesc")
@@ -28,4 +28,4 @@ class SubProduct {
 //    var subInfo2: String? = null
 //}
 
-class DataSubProduct(val denom:String, val provider:String, val info:String)
+class DataSubProduct(val denom:String, val provider:String, val info:String) : java.io.Serializable
