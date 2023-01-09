@@ -35,11 +35,16 @@ class ProfileFragment : Fragment() {
     private lateinit var txtUserName: TextView
     private lateinit var txtPhoneNumber: TextView
     private lateinit var txtStatus: TextView
+    private lateinit var appbar: androidx.appcompat.widget.Toolbar
+    private lateinit var appbarTitle: TextView
 
     //    private lateinit var imgProfile: ImageView
     private lateinit var finPaySDK: FinpaySDK
     private lateinit var changeProfile: LinearLayout
     private lateinit var buttonUbahPin: LinearLayout
+
+    val finpayTheme: FinpayTheme? by lazy { if(requireActivity().intent.getSerializableExtra("theme") == null) null else requireActivity().intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(requireActivity().intent.getStringExtra("transNumber") == null) "" else requireActivity().intent.getStringExtra("transNumber")}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +62,9 @@ class ProfileFragment : Fragment() {
         txtStatus = binding.txtStatus
         changeProfile = binding.changeProfile
         buttonUbahPin = binding.buttonUbahPin
+
+        binding.appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        binding.appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
 //        imgProfile = binding.imgProfile
         //getBalance()
 
@@ -66,8 +74,7 @@ class ProfileFragment : Fragment() {
 
         buttonUbahPin.setOnClickListener {
             val intent = Intent(context, ChangePinActivity::class.java)
-            val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
-            val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
+
             intent.putExtra("transNumber", transNumber!!)
             intent.putExtra("theme", finpayTheme)
             startActivity(intent)

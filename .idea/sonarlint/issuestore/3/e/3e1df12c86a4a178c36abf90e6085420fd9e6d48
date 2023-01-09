@@ -1,0 +1,16 @@
+
+Jkotlin:S1172k"2Use "_" instead of these unused lambda parameters.(îÛ­ß
+Jkotlin:S1172o"2Use "_" instead of these unused lambda parameters.(ÛÜøù
+Kkotlin:S1172"2Use "_" instead of these unused lambda parameters.(òèÅÓ
+fkotlin:S1192O"HDefine a constant instead of duplicating this literal "#00ACBA" 4 times.(±‰ó>8¼îéÙØ0
+fkotlin:S1192P"HDefine a constant instead of duplicating this literal "#FFFFFF" 3 times.(ºªÆ8‡Ğï‡Ù0
+@kotlin:S1874E"#Deprecated code should not be used.(Îç½Šùÿÿÿÿ
+;kotlin:S1874{"#Deprecated code should not be used.(ğÆÊ
+Akotlin:S1874"#Deprecated code should not be used.(‹Õˆûÿÿÿÿ
+Akotlin:S1874†"#Deprecated code should not be used.(úºµªúÿÿÿÿ
+Akotlin:S1874¨"#Deprecated code should not be used.(úºµªúÿÿÿÿ
+@kotlin:S1874"#Deprecated code should not be used.(·•¥¦ûÿÿÿÿ
+@kotlin:S1874("#Deprecated code should not be used.(ù¢íüÿÿÿÿ
+@kotlin:S1874E"#Deprecated code should not be used.(Îç½Šùÿÿÿÿ
+okotlin:S37762"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(¶Á»¬şÿÿÿÿ
+pkotlin:S3776Ê"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ËÖéäøÿÿÿÿ

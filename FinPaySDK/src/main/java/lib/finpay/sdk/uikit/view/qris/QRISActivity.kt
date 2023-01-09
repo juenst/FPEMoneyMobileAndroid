@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -45,10 +46,15 @@ class QRISActivity : AppCompatActivity() {
     lateinit var progressDialog: ProgressDialog
     lateinit var btnBack: ImageView
     lateinit var btnGallery: Button
+    lateinit var appbar: androidx.appcompat.widget.Toolbar
+    lateinit var appbarTitle: TextView
     private val requestCodeCameraPermission = 1001
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector
     private var scannedValue = ""
+
+    val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
+    val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
 
     private lateinit var binding: ActivityQrisBinding
 
@@ -60,6 +66,15 @@ class QRISActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
         progressDialog = ProgressDialog(this@QRISActivity)
+
+        //theming
+        binding.appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
+        binding.appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        binding.btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        binding.btnFlash.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+        binding.btnGallery.setBackgroundColor(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getPrimaryColor()!!)
+        binding.btnGallery.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
+
         binding.btnGallery.setOnClickListener {
             openGallery()
         }
@@ -76,81 +91,81 @@ class QRISActivity : AppCompatActivity() {
 
 
     private fun setupControls() {
-//        barcodeDetector = BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build()
-//        cameraSource = CameraSource.Builder(this, barcodeDetector)
-//            .setRequestedPreviewSize(1920, 1080)
-//            .setAutoFocusEnabled(true) //you should add this feature
-//            .build()
-//
-//        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
-//            @SuppressLint("MissingPermission")
-//            override fun surfaceCreated(holder: SurfaceHolder) {
-//                try {
-//                    //Start preview after 1s delay
-//                    cameraSource.start(holder)
-//                } catch (e: IOException) {
-//                    e.printStackTrace()
-//                }
-//            }
-//
-//            @SuppressLint("MissingPermission")
-//            override fun surfaceChanged(
-//                holder: SurfaceHolder,
-//                format: Int,
-//                width: Int,
-//                height: Int
-//            ) {
-//                try {
-//                    cameraSource.start(holder)
-//                } catch (e: IOException) {
-//                    e.printStackTrace()
-//                }
-//            }
-//
-//            override fun surfaceDestroyed(holder: SurfaceHolder) {
-//                cameraSource.stop()
-//            }
-//        })
-//
-//
-//        barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
-//            override fun release() {
-//                Toast.makeText(applicationContext, "Scanner has been closed", Toast.LENGTH_SHORT).show()
-//            }
-//
-//            override fun receiveDetections(detections: Detections<Barcode>) {
-//                val barcodes = detections.detectedItems
-//                if (barcodes.size() == 1) {
-////                    progressDialog.setTitle("Mohon Menunggu")
-////                    progressDialog.setMessage("Sedang Memuat ...")
-////                    progressDialog.setCancelable(false) // blocks UI interaction
-////                    progressDialog.show()
-//
-//                    scannedValue = barcodes.valueAt(0).rawValue
-//                    if(scannedValue.contains("QRIS")) {
-//                        runOnUiThread {
-//                            cameraSource.stop()
-//                            println(scannedValue)
-////                            progressDialog.dismiss()
-//                            val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
-//                            intent.putExtra("resultQR", "${scannedValue}")
-//                            startActivity(intent)
-//                            this@QRISActivity.finish()
-//                        }
-//                    } else {
-////                        progressDialog.dismiss()
-//                        cameraSource.stop()
-//                        this@QRISActivity.finish()
-//                        DialogUtils.showDialogError(this@QRISActivity, "", "Format QRIS salah")
-//                    }
-//                }else {
-////                    progressDialog.dismiss()
-//                    cameraSource.stop()
-//                    this@QRISActivity.finish()
-//                    DialogUtils.showDialogError(this@QRISActivity, "", "value- else")
-//                }
-//            }
-//        })
+        barcodeDetector = BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build()
+        cameraSource = CameraSource.Builder(this, barcodeDetector)
+            .setRequestedPreviewSize(1920, 1080)
+            .setAutoFocusEnabled(true) //you should add this feature
+            .build()
+
+        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
+            @SuppressLint("MissingPermission")
+            override fun surfaceCreated(holder: SurfaceHolder) {
+                try {
+                    //Start preview after 1s delay
+                    cameraSource.start(holder)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+
+            @SuppressLint("MissingPermission")
+            override fun surfaceChanged(
+                holder: SurfaceHolder,
+                format: Int,
+                width: Int,
+                height: Int
+            ) {
+                try {
+                    cameraSource.start(holder)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun surfaceDestroyed(holder: SurfaceHolder) {
+                cameraSource.stop()
+            }
+        })
+
+
+        barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
+            override fun release() {
+                Toast.makeText(applicationContext, "Scanner has been closed", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun receiveDetections(detections: Detections<Barcode>) {
+                val barcodes = detections.detectedItems
+                if (barcodes.size() == 1) {
+//                    progressDialog.setTitle("Mohon Menunggu")
+//                    progressDialog.setMessage("Sedang Memuat ...")
+//                    progressDialog.setCancelable(false) // blocks UI interaction
+//                    progressDialog.show()
+
+                    scannedValue = barcodes.valueAt(0).rawValue
+                    if(scannedValue.contains("QRIS")) {
+                        runOnUiThread {
+                            cameraSource.stop()
+                            println(scannedValue)
+//                            progressDialog.dismiss()
+                            val intent = Intent(this@QRISActivity, QRISResultActivity::class.java)
+                            intent.putExtra("resultQR", "${scannedValue}")
+                            startActivity(intent)
+                            this@QRISActivity.finish()
+                        }
+                    } else {
+//                        progressDialog.dismiss()
+                        cameraSource.stop()
+                        this@QRISActivity.finish()
+                        DialogUtils.showDialogError(this@QRISActivity, "", "Format QRIS salah")
+                    }
+                }else {
+//                    progressDialog.dismiss()
+                    cameraSource.stop()
+                    this@QRISActivity.finish()
+                    DialogUtils.showDialogError(this@QRISActivity, "", "value- else")
+                }
+            }
+        })
     }
 
     private fun askForCameraPermission() {
