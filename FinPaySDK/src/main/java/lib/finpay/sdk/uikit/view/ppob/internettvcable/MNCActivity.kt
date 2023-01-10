@@ -5,9 +5,12 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
@@ -47,6 +50,16 @@ class MNCActivity : AppCompatActivity() {
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
+
         progressDialog = ProgressDialog(this@MNCActivity)
 
         ButtonUtils.checkButtonState(btnNext, finpayTheme)
@@ -71,11 +84,18 @@ class MNCActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@MNCActivity,
                 txtNomorPelanggan.text.toString(),
-                ProductCode.INDIHOME,
+                ProductCode.MNC_VISION,
                 "", {
+                    progressDialog.dismiss()
+                    val intent = Intent(this, InternetTvCableResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("type", "mnc_vision")
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

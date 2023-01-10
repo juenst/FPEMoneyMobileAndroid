@@ -168,7 +168,7 @@ class PLNResultActivity : AppCompatActivity() {
                                 intent.putExtra("fee",  fee)
                                 intent.putExtra("denom", result?.tagihan!!.toString())
                                 intent.putExtra("reffFlag", result?.conf)
-                                intent.putExtra("billingId", result?.bit61Parse!!.plnRef)
+                                intent.putExtra("billingId", result?.bit61Parse!!.customerId)
                                 intent.putExtra("productCode", ProductCode.PLN_POSTPAID)
                                 intent.putExtra("pinResult", it)
                                 intent.putExtra("result", result)

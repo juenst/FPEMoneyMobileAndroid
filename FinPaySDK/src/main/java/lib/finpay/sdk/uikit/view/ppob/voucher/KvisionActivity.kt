@@ -5,9 +5,12 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -18,6 +21,7 @@ import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 import lib.finpay.sdk.uikit.view.ppob.bpjs.adapter.MonthAdapter
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomResultActivity
 import lib.finpay.sdk.uikit.view.ppob.voucher.adapter.VoucherAdapter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -58,6 +62,15 @@ class KvisionActivity : AppCompatActivity() {
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
@@ -81,12 +94,17 @@ class KvisionActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@KvisionActivity,
                 txtNomorPelanggan.text.toString(),
-                ProductCode.BPJS_KESEHATAN,
+                ProductCode.KVISION,
                 "", {
                     progressDialog.dismiss()
+                    val intent = Intent(this, KvisionResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    startActivity(intent)
                 }, {
                     progressDialog.dismiss()
                     DialogUtils.showDialogError(this@KvisionActivity, "", it, finpayTheme)
@@ -130,9 +148,9 @@ class KvisionActivity : AppCompatActivity() {
         val listVoucher = dialog.findViewById<ListView>(R.id.listVoucher)
 
         val list = arrayListOf<String>()
-        list.add("KVISION 50 (Rp50.000")
-        list.add("KVISION 75 (Rp75.000")
-        list.add("KVISION 100 (Rp100.000")
+        list.add("KVISION 50 (Rp50.000)")
+        list.add("KVISION 75 (Rp75.000)")
+        list.add("KVISION 100 (Rp100.000)")
         listVoucher!!.adapter = VoucherAdapter(this@KvisionActivity, R.layout.item_voucher, list)
         listVoucher.setOnItemClickListener { adapter, view, position, id ->
             val selectedItem = adapter.getItemAtPosition(position) as String

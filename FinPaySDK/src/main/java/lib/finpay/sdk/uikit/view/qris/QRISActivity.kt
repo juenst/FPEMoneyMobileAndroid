@@ -51,8 +51,6 @@ class QRISActivity : AppCompatActivity() {
     lateinit var progressDialog: ProgressDialog
     lateinit var btnBack: ImageView
     lateinit var btnGallery: Button
-    lateinit var appbar: androidx.appcompat.widget.Toolbar
-    lateinit var appbarTitle: TextView
     private val requestCodeCameraPermission = 1001
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector

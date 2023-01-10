@@ -5,17 +5,22 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
+import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.view.ppob.telkom.TelkomResultActivity
 
 class IndihomeActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
@@ -48,6 +53,15 @@ class IndihomeActivity : AppCompatActivity() {
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
@@ -71,11 +85,18 @@ class IndihomeActivity : AppCompatActivity() {
             progressDialog.setCancelable(false)
             progressDialog.show()
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this@IndihomeActivity,
                 txtNomorPelanggan.text.toString(),
                 ProductCode.INDIHOME,
                 "", {
+                    progressDialog.dismiss()
+                    val intent = Intent(this, InternetTvCableResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("type", "indihome")
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

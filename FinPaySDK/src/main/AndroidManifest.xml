@@ -124,6 +124,10 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
+            android:name=".uikit.view.ppob.internettvcable.InternetTvCableResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
             android:name=".uikit.view.ppob.internettvcable.IndihomeActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
@@ -317,6 +321,10 @@
             android:exported="false"
             android:label="Voucher Deals" />
         <activity
+            android:name=".uikit.view.ppob.voucher.VoucherTVCableActivity"
+            android:exported="false"
+            android:label="Voucher Deals" />
+        <activity
             android:name=".uikit.view.payment.PaymentActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
@@ -342,6 +350,14 @@
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.transaction.TransactionDetailPpobActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.voucher.KvisionActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
+            android:name=".uikit.view.ppob.voucher.KvisionResultActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
     </application>

@@ -11,7 +11,8 @@ class ProductCode {
         var PDAM: String = "503000"
         var TELKOM: String = "001001"
         var PASCABAYAR: String = "010001"
-        var INDIHOME: String = ""
+        var INDIHOME: String = "001001"
+        var MNC_VISION: String = "090001"
         var REVENUE_PNBP: String = "050017"
         var REVENUE_ONLINE: String = "050017"
         var REVENUE_CUKAI: String = "050017"
@@ -28,6 +29,8 @@ class ProductCode {
         var CICIL_GADAI: String = "020019"
         var GADAI_TEBUS: String = "020020"
         var TABUNGAN_EMAS: String = "021001"
+        var KVISION: String = ""
+        var FINPAY: String = "100001"
 
         var TRANSFER_OTHER: String = ""
         var TRANSFER_BANK: String = ""
