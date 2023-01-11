@@ -1,10 +1,6 @@
 
-V
-&FinPaySDK/src/main/AndroidManifest.xml,d/3/d373e0ce2512c32d06d242bb96a6bb5323238274
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-k
-;FinPaySDK/src/main/java/lib/finpay/sdk/corekit/FinpaySDK.kt,6/b/6b61e51d241814d87fc21d242b400ec1539e57b6
 Ç
 RFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/bpjs/adapter/BPJSAdapter.kt,b/b/bb846bb324c0e54738c8f9dbeb5eaa286076e108
 É
@@ -19,8 +15,6 @@ QFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/voucher/KvisionActivity.
 VFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/voucher/VoucherDealsActivity.kt,c/3/c3e18c9d64aab102f91562bd52463612006e3147
 à
 XFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/voucher/VoucherTVCableActivity.kt,1/9/1982f08b323b1a4b159321aa1e6955a609249c9d
-É
-SFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/alfamart/AlfamartActivity.kt,1/3/133d17007c814b209b1a7718a7f1d9ee68bc327a
 ç
 ]FinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/pascabayar/PascaBayarResultActivity.kt,1/2/122178cba825cc52a6eebaee2b07ccac01602092
 
@@ -29,8 +23,6 @@ OFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/pln/PLNResultActivity.kt
 VFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/pulsa_data/PulsaDataActivity.kt,1/2/1212109279f284898fd006e0d940ab519a3a6535
 Ö
 UFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/telkom/TelkomResultActivity.kt,6/5/65365fce35a9d3e2076e83ffb65d78e113cde8d4
-x
-HFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/topup/TopupActivity.kt,5/8/58091fd19b509fcdbed569a03e7abcf8b2cd340a
 }
 MFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/transfer/BankListAdapter.kt,a/c/acbd2bafaf04f68d8ff49249f73df930d100c3aa
 Ñ
@@ -97,14 +89,10 @@ FFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/qris/QRISFragment.kt,9/7/977
 LFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/qris/QRISResultActivity.kt,a/1/a1101852e30db5c33b1ede581d7c79f94805b50c
 w
 GFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/qris/QRISViewModel.kt,5/a/5a9bcf26848a5a43a91de400f6b38a79e67173a5
-h
-8app/src/main/java/com/finpay/sdk/example/HomeActivity.kt,6/4/643a100425aaa0d4651b884efa47271c1165ba11
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 `
 0app/src/main/java/com/finpay/sdk/MainActivity.kt,4/a/4aae36d1986ca580467c6127be70e4cb534a7f31
-ë
-aFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/internettvcable/InternetTvCableActivity.kt,8/6/869610d3e3481f1e96a4d1a5c4f9458f46758a97
 
 OFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/telkom/TelkomActivity.kt,7/b/7bd05f81f1c2cc385160b39a3e11d43e1ca64f12
 Å
@@ -141,14 +129,6 @@ YFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/instalment/SmartFinanceA
 WFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/instalment/InstalmentActivity.kt,5/a/5aad743ad5cdea1903a7ee602a81ded1f660884b
 é
 ^FinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/instalment/BussanAutoFinanceActivity.kt,0/9/090a23106623b38c03b2534e5879bfe2415390dd
-ä
-ZFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/internettvcable/IndihomeActivity.kt,b/7/b7ad5f5129bfa30cb2abae0c1febe145c39c023d
-Ö
-UFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/finpay/FinpayResultActivity.kt,d/5/d5b81928954e3ff4eda9bb876d23bd6f1a3c1df7
-ó
-gFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/internettvcable/InternetTvCableResultActivity.kt,1/3/13ecd74c6fd13f692991ee10e3d38dfa6f6a0ea8
-Ö
-UFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/insurance/InsuranceActivity.kt,c/b/cbca56457ded703ac93ae5a8c30f078063131720
 Ö
 UFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/pegadaian/PegadaianActivity.kt,d/6/d6814ee99a5e9f1e0c1a8a9a9d8b0506edfc1d92
 á
@@ -165,12 +145,8 @@ XFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/pegadaian/TabunganEmasAc
 [FinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/insurance/InsuranceResultActivity.kt,8/7/875bbf316cfbf9ae064a31515e76c5eee0fd8f13
 â
 YFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/pegadaian/AngsuranMikroActivity.kt,a/6/a6ddcd3a82b1c669f674d6e4116ba08398ef5a5d
-É
-SFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/insurance/CarLifeActivity.kt,0/5/0561989ff869f77bd857f1ad464edea978705c9f
 ê
 `FinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/telkomsel/BestTelkomselPackageActivity.kt,6/8/68f1e5d35b0d91191f20dfeab65cd2e2e2b99282
-
-OFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/finpay/FinpayActivity.kt,5/9/593d2756f25c10fdec4c319c075b2441374d9778
 Ü
 VFinPaySDK/src/main/java/lib/finpay/sdk/uikit/view/ppob/pegadaian/UlangGadaiActivity.kt,5/9/5912f941fb9e4330e7a26abae2779cc7ee931e36
 ñ

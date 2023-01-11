@@ -1,16 +1,0 @@
-
-2kotlin:S1128"Remove this unused import.(±Ğ½ø
-7kotlin:S1128"Remove this unused import.(·Ô£Ïıÿÿÿÿ
-2kotlin:S1128"Remove this unused import.(¹ê¦ş
-2kotlin:S1128"Remove this unused import.(Ñç€
-7kotlin:S1128"Remove this unused import.(—Üìéÿÿÿÿÿ
-gkotlin:S1192l"ODefine a constant instead of duplicating this literal "Mohon Menunggu" 3 times.(„©ƒı
-okotlin:S1192m"RDefine a constant instead of duplicating this literal "Sedang Memuat ..." 3 times.(úºµªúÿÿÿÿ
-@kotlin:S1874@"#Deprecated code should not be used.(Çş¸Ïüÿÿÿÿ
-@kotlin:S1874m"#Deprecated code should not be used.(úºµªúÿÿÿÿ
-Akotlin:S1874œ"#Deprecated code should not be used.(úºµªúÿÿÿÿ
-Akotlin:S1874Å"#Deprecated code should not be used.(úºµªúÿÿÿÿ
-@kotlin:S1874"#Deprecated code should not be used.(·•¥¦ûÿÿÿÿ
-@kotlin:S1874."#Deprecated code should not be used.(ù¢íüÿÿÿÿ
-@kotlin:S1874@"#Deprecated code should not be used.(Çş¸Ïüÿÿÿÿ
-okotlin:S37763"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(¶Á»¬şÿÿÿÿ

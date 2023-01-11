@@ -118,7 +118,7 @@
 
             <ImageView
                 android:id="@+id/icDropdown"
-                android:layout_width="24dp"
+                android:layout_width="15dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_chevron_down"
                 app:tint="#00ACBA" />
