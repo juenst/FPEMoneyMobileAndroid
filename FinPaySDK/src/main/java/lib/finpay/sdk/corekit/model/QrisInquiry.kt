@@ -2,7 +2,7 @@ package lib.finpay.sdk.corekit.model
 
 import com.google.gson.annotations.SerializedName
 
-class QrisInquiry {
+class QrisInquiry: java.io.Serializable {
     @SerializedName("statusCode")
     var statusCode: String? = null
 
@@ -31,7 +31,7 @@ class QrisInquiry {
     var processingTime: Double? = null
 }
 
-class Fee {
+class Fee: java.io.Serializable {
     @SerializedName("sof")
     var sof: String? = null
 
@@ -42,7 +42,7 @@ class Fee {
     var total: Int? = null
 }
 
-class Bit61Parse {
+class Bit61Parse: java.io.Serializable {
     @SerializedName("merchantName")
     var merchantName: String? = null
     @SerializedName("merchantId")

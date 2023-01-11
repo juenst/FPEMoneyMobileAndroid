@@ -22,15 +22,15 @@ public class FinpaySDK {
 
         fun getToken(transNumber: String, context: Context, onSuccess: (Token) -> Unit, onFailed: (String) -> Unit) {
             init(context)
-            if(prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID) == null || prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID) == "") {
-                onFailed("You must connect account first")
-            } else {
+//            if(prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID) == null || prefHelper.getStringFromShared(SharedPrefKeys.TOKEN_ID) == "") {
+//                onFailed("You must connect account first")
+//            } else {
                 TokenRepository.getToken( transNumber, {
                     onSuccess(it)
                 }, {
                     onFailed(it)
                 })
-            }
+//            }
         }
 
         fun reqActivation(context:Context, phoneNumber: String, transNumber: String, onSuccess: (Customer) -> Unit, onFailed: (String) -> Unit) {

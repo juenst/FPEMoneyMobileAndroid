@@ -50,6 +50,7 @@ class PaymentActivity : AppCompatActivity() {
 //    val desc: String? by lazy { intent.getStringExtra("desc") }
     val price: String? by lazy { intent.getStringExtra("price") }
     val fee: String? by lazy { intent.getStringExtra("fee") }
+    val payType: String? by lazy { if(intent.getStringExtra("payType") == null) "" else intent.getStringExtra("payType")}
 
     val phoneNumber: String? by lazy { if(intent.getStringExtra("phoneNumber") == null) FinpaySDK.prefHelper.getStringFromShared(SharedPrefKeys.USER_PHONE_NUMBER) else intent.getStringExtra("phoneNumber")}
     val paymentType: String? by lazy { intent.getStringExtra("paymentType") }
@@ -120,7 +121,7 @@ class PaymentActivity : AppCompatActivity() {
                             this@PaymentActivity,
                             "mc",
                             amount!!,
-                            "",
+                            "0",
                             reffFlag!!,
                             pinToken, {
                                 progressDialog.dismiss()
@@ -128,27 +129,27 @@ class PaymentActivity : AppCompatActivity() {
                                     this@PaymentActivity,
                                     TransactionDetailQrisActivity::class.java
                                 )
-//                                intent.putExtra("result", it)
-                                intent.putExtra("merchantName", it.bit61Parse!!.merchantName)
-                                intent.putExtra("merchantId", it.bit61Parse!!.merchantId)
-                                intent.putExtra("nevaNumber", it.bit61Parse!!.nevaNumber)
-                                intent.putExtra("amount", "0")//it.bit61Parse!!.amount)
-                                intent.putExtra("price", "0")
-                                intent.putExtra("fee", "0")
-                                intent.putExtra("paymentCode", it.bit61Parse!!.paymentCode)
-                                intent.putExtra("pointOfMethod", it.bit61Parse!!.pointOfMethod)
-                                intent.putExtra("tipsType", it.bit61Parse!!.tipsType)
-                                intent.putExtra("tipsAmount", it.bit61Parse!!.tipsAmount)
-                                intent.putExtra("tipsPercentage", it.bit61Parse!!.tipsPercentage)
-                                intent.putExtra("acquirerName", it.bit61Parse!!.acquirerName)
-                                intent.putExtra("merchantLocation", it.bit61Parse!!.merchantLocation)
-                                intent.putExtra("merchantPAN", it.bit61Parse!!.merchantPAN)
-                                intent.putExtra("terminalID", it.bit61Parse!!.terminalID)
-                                intent.putExtra("isOnUs", it.bit61Parse!!.isOnUs)
-                                intent.putExtra("customerPAN", it.bit61Parse!!.customerPAN)
-                                intent.putExtra("invoice", it.bit61Parse!!.invoice)
-                                intent.putExtra("reffID", "")
-                                intent.putExtra("statusDesc", it.statusDesc)
+                                intent.putExtra("result", it)
+//                                intent.putExtra("merchantName", it.bit61Parse!!.merchantName)
+//                                intent.putExtra("merchantId", it.bit61Parse!!.merchantId)
+//                                intent.putExtra("nevaNumber", it.bit61Parse!!.nevaNumber)
+                                intent.putExtra("amount", amount)//it.bit61Parse!!.amount)
+                                intent.putExtra("price", price)
+                                intent.putExtra("fee", fee)
+//                                intent.putExtra("paymentCode", it.bit61Parse!!.paymentCode)
+//                                intent.putExtra("pointOfMethod", it.bit61Parse!!.pointOfMethod)
+//                                intent.putExtra("tipsType", it.bit61Parse!!.tipsType)
+//                                intent.putExtra("tipsAmount", it.bit61Parse!!.tipsAmount)
+//                                intent.putExtra("tipsPercentage", it.bit61Parse!!.tipsPercentage)
+//                                intent.putExtra("acquirerName", it.bit61Parse!!.acquirerName)
+//                                intent.putExtra("merchantLocation", it.bit61Parse!!.merchantLocation)
+//                                intent.putExtra("merchantPAN", it.bit61Parse!!.merchantPAN)
+//                                intent.putExtra("terminalID", it.bit61Parse!!.terminalID)
+//                                intent.putExtra("isOnUs", it.bit61Parse!!.isOnUs)
+//                                intent.putExtra("customerPAN", it.bit61Parse!!.customerPAN)
+//                                intent.putExtra("invoice", it.bit61Parse!!.invoice)
+//                                intent.putExtra("reffID", "")
+//                                intent.putExtra("statusDesc", it.statusDesc)
                                 intent.putExtra("transactionDate", DateHelper.getCurrentDateTransaction())
                                 intent.putExtra("theme", finpayTheme!!)
                                 startActivity(intent)
@@ -164,7 +165,7 @@ class PaymentActivity : AppCompatActivity() {
                             this@PaymentActivity,
                             phoneNumber!!,
                             "mc",
-                            "billpayment",
+                            if(payType == "") "billpayment" else payType!!,
                             denom!!,
                             amount!!,
                             billingId!!,

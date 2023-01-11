@@ -12,7 +12,7 @@
         android:paddingHorizontal="20dp"
         android:background="#00ACBA">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -32,13 +32,7 @@
                 android:textColor="@color/white"
                 android:text="Foto Selfie" />
 
-            <ImageView
-                android:id="@+id/btnFlash"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_flash" />
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 

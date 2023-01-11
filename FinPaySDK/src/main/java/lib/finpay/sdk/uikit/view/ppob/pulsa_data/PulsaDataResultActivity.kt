@@ -225,6 +225,7 @@ class PulsaDataResultActivity : AppCompatActivity() {
                             intent.putExtra("phoneNumber", phoneNumber)
                             intent.putExtra("price", price)
                             intent.putExtra("fee", fee)
+                            intent.putExtra("payType", "topup")
                             intent.putExtra("pinResult", it)
                             intent.putExtra("result", result)
                             intent.putExtra("transactionType", "Pembelian Pulsa/Data")

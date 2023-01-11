@@ -1,10 +1,12 @@
 package com.finpay.sdk.example
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,7 @@ import lib.finpay.sdk.uikit.helper.FinpayTheme
 
 
 class HomeActivity : AppCompatActivity() {
+    private lateinit var btnLogout: ImageView
     private lateinit var btnTopUp: LinearLayout
     private lateinit var btnTransfer: LinearLayout
     private lateinit var btnHistoryTransaction: LinearLayout
@@ -62,6 +65,7 @@ class HomeActivity : AppCompatActivity() {
             window.setStatusBarColor(Color.parseColor("#e60000"))
         }
 
+        btnLogout = findViewById(R.id.btnLogout)
         btnTopUp = findViewById(R.id.btnTopup)
         btnTransfer = findViewById(R.id.btnTransfer)
         btnHistoryTransaction = findViewById(R.id.btnHistoryTransaction)
@@ -90,6 +94,10 @@ class HomeActivity : AppCompatActivity() {
         btnTelkomsel = findViewById(R.id.btnTelkomsel)
         btnPegadaian = findViewById(R.id.btnPegadaian)
         btnPajak = findViewById(R.id.btnPajak)
+
+        btnLogout.setOnClickListener {
+
+        }
 
         btnTopUp.setOnClickListener {
             FinpaySDKUI.topupUIBuilder("", this, credential(), theme())

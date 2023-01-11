@@ -17,6 +17,7 @@ import lib.finpay.sdk.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
+import lib.finpay.sdk.corekit.model.QrisInquiry
 import lib.finpay.sdk.uikit.constant.PaymentType
 import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
@@ -48,6 +49,7 @@ class QRISResultActivity : AppCompatActivity() {
     lateinit var _totalBayar: String
     lateinit var _saldo: String
     lateinit var _reffFlag: String
+    lateinit var result: QrisInquiry
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +97,7 @@ class QRISResultActivity : AppCompatActivity() {
             transNumber!!,
             this@QRISResultActivity,
             stringQris!!, {
+                result = it
                 var fee: String = "0"
                 for(data in it.fee) {
                     if(data.sof == "mc") {
@@ -156,11 +159,10 @@ class QRISResultActivity : AppCompatActivity() {
                             progressDialog.dismiss()
                             val intent = Intent(this@QRISResultActivity, PaymentActivity::class.java)
                             intent.putExtra("paymentType", PaymentType.paymentQRIS)
-                            intent.putExtra("sof", "mc")
                             intent.putExtra("amount",TextUtils.clearFormat(_totalBayar))
-                            intent.putExtra("amountTips", "0")
                             intent.putExtra("reffFlag", _reffFlag)
-                            intent.putExtra("widgetURL", it.widgetURL)
+                            intent.putExtra("pinResult", it)
+                            intent.putExtra("result", result)
                             intent.putExtra("price",TextUtils.clearFormat(_tagihan))
                             intent.putExtra("fee",TextUtils.clearFormat(_biayaLayanan))
                             intent.putExtra("transNumber", transNumber!!)
