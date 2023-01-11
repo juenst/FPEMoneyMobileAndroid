@@ -373,6 +373,10 @@
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
         <activity
+            android:name=".uikit.view.topup.TopupGuidanceActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.finpayTheme" />
+        <activity
             android:name=".uikit.view.test.TestActivity"
             android:exported="false"
             android:theme="@style/AppTheme.finpayTheme" />
