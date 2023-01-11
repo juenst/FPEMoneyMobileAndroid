@@ -94,6 +94,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("ATM TIDAK KOSONG")
                         cardAtm.setVisibility(View.VISIBLE)
+                        listAtm.setVisibility(View.VISIBLE)
+                        listAtm.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.post!!.atm!!)
+                        justifyListViewHeightBasedOnChildren(listAtm)
                     }
                 }else{
                     println("ATM KOSONG")
@@ -106,6 +109,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("MBANKING TIDAK KOSONG")
                         cardMbangking.setVisibility(View.VISIBLE)
+                        listMbanking.setVisibility(View.VISIBLE)
+                        listMbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.post!!.mbanking!!)
+                        justifyListViewHeightBasedOnChildren(listMbanking)
                     }
                 }else{
                     println("MBANKING KOSONG")
@@ -118,6 +124,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("IBANKING TIDAK KOSONG")
                         cardOIBanking.setVisibility(View.VISIBLE)
+                        listIbanking.setVisibility(View.VISIBLE)
+                        listIbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.post!!.ibanking!!)
+                        justifyListViewHeightBasedOnChildren(listIbanking)
                     }
                 }else{
                     println("IBANKING KOSONG")
@@ -133,6 +142,11 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("OUTLET TIDAK KOSONG")
                         cardOutlet.setVisibility(View.VISIBLE)
+                        listOutlet.setVisibility(View.VISIBLE)
+                        listOutlet.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.alfamarts!!.outlet!!)
+                        justifyListViewHeightBasedOnChildren(listOutlet)
+                        outletName.text = type
+
                         outletName.text = type
                     }
                 }else{
@@ -146,6 +160,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("ATM TIDAK KOSONG")
                         cardAtm.setVisibility(View.VISIBLE)
+                        listAtm.setVisibility(View.VISIBLE)
+                        listAtm.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.alfamarts!!.atm!!)
+                        justifyListViewHeightBasedOnChildren(listAtm)
                     }
                 }else{
                     println("ATM KOSONG")
@@ -158,6 +175,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("MBANKING TIDAK KOSONG")
                         cardMbangking.setVisibility(View.VISIBLE)
+                        listMbanking.setVisibility(View.VISIBLE)
+                        listMbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.alfamarts!!.mbanking!!)
+                        justifyListViewHeightBasedOnChildren(listMbanking)
                     }
                 }else{
                     println("MBANKING KOSONG")
@@ -170,6 +190,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("IBANKING TIDAK KOSONG")
                         cardOIBanking.setVisibility(View.VISIBLE)
+                        listIbanking.setVisibility(View.VISIBLE)
+                        listIbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.alfamarts!!.ibanking!!)
+                        justifyListViewHeightBasedOnChildren(listIbanking)
                     }
                 }else{
                     println("IBANKING KOSONG")
@@ -186,6 +209,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("ATM TIDAK KOSONG")
                         cardAtm.setVisibility(View.VISIBLE)
+                        listAtm.setVisibility(View.VISIBLE)
+                        listAtm.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.vamandiris!!.atm!!)
+                        justifyListViewHeightBasedOnChildren(listAtm)
                     }
                 }else{
                     println("ATM MANDIRI KOSONG 2")
@@ -198,6 +224,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("MBANKING TIDAK KOSONG")
                         cardMbangking.setVisibility(View.VISIBLE)
+                        listMbanking.setVisibility(View.VISIBLE)
+                        listMbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.vamandiris!!.mbanking!!)
+                        justifyListViewHeightBasedOnChildren(listMbanking)
                     }
                 }else{
                     println("MBANKING KOSONG")
@@ -210,6 +239,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("IBANKING TIDAK KOSONG")
                         cardOIBanking.setVisibility(View.VISIBLE)
+                        listIbanking.setVisibility(View.VISIBLE)
+                        listIbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.vamandiris!!.ibanking!!)
+                        justifyListViewHeightBasedOnChildren(listIbanking)
                     }
                 }else{
                     println("IBANKING KOSONG")
@@ -226,6 +258,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("ATM TIDAK KOSONG")
                         cardAtm.setVisibility(View.VISIBLE)
+                        listAtm.setVisibility(View.VISIBLE)
+                        listAtm.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.brivas!!.atm!!)
+                        justifyListViewHeightBasedOnChildren(listAtm)
                     }
                 }else{
                     println("ATM KOSONG")
@@ -238,6 +273,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("MBANKING TIDAK KOSONG")
                         cardMbangking.setVisibility(View.VISIBLE)
+                        listMbanking.setVisibility(View.VISIBLE)
+                        listMbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.brivas!!.mbanking!!)
+                        justifyListViewHeightBasedOnChildren(listMbanking)
                     }
                 }else{
                     println("MBANKING KOSONG")
@@ -250,6 +288,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("IBANKING TIDAK KOSONG")
                         cardOIBanking.setVisibility(View.VISIBLE)
+                        listIbanking.setVisibility(View.VISIBLE)
+                        listIbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.brivas!!.ibanking!!)
+                        justifyListViewHeightBasedOnChildren(listIbanking)
                     }
                 }else{
                     println("IBANKING KOSONG")
@@ -260,12 +301,15 @@ class TopupGuidanceActivity : AppCompatActivity() {
             if (result!!.guidence!!.vabcas!! != null){
                 cardOutlet.setVisibility(View.GONE)
                 if (result!!.guidence!!.vabcas!!.atm!! != null){
-                    if (result!!.guidence!!.brivas!!.atm!!.isEmpty()){
+                    if (result!!.guidence!!.vabcas!!.atm!!.isEmpty()){
                         println("ATM  KOSONG")
                         cardAtm.setVisibility(View.GONE)
                     }else{
                         println("ATM TIDAK KOSONG")
                         cardAtm.setVisibility(View.VISIBLE)
+                        listAtm.setVisibility(View.VISIBLE)
+                        listAtm.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.vabcas!!.atm!!)
+                        justifyListViewHeightBasedOnChildren(listAtm)
                     }
                 }else{
                     println("ATM KOSONG")
@@ -278,6 +322,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("MBANKING TIDAK KOSONG")
                         cardMbangking.setVisibility(View.VISIBLE)
+                        listMbanking.setVisibility(View.VISIBLE)
+                        listMbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.vabcas!!.mbanking!!)
+                        justifyListViewHeightBasedOnChildren(listMbanking)
                     }
                 }else{
                     println("MBANKING KOSONG")
@@ -290,6 +337,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("IBANKING TIDAK KOSONG")
                         cardOIBanking.setVisibility(View.VISIBLE)
+                        listIbanking.setVisibility(View.VISIBLE)
+                        listIbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.vabcas!!.ibanking!!)
+                        justifyListViewHeightBasedOnChildren(listIbanking)
                     }
                 }else{
                     println("IBANKING KOSONG")
@@ -305,6 +355,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("OUTLET TIDAK KOSONG")
                         cardOutlet.setVisibility(View.VISIBLE)
+                        listOutlet.setVisibility(View.VISIBLE)
+                        listOutlet.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.pegadaians!!.outlet!!)
+                        justifyListViewHeightBasedOnChildren(listOutlet)
                         outletName.text = type
                     }
                 }else{
@@ -318,6 +371,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("ATM TIDAK KOSONG")
                         cardAtm.setVisibility(View.VISIBLE)
+                        listAtm.setVisibility(View.VISIBLE)
+                        listAtm.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.pegadaians!!.atm!!)
+                        justifyListViewHeightBasedOnChildren(listAtm)
                     }
                 }else{
                     println("ATM KOSONG")
@@ -330,6 +386,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("MBANKING TIDAK KOSONG")
                         cardMbangking.setVisibility(View.VISIBLE)
+                        listMbanking.setVisibility(View.VISIBLE)
+                        listMbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.pegadaians!!.mbanking!!)
+                        justifyListViewHeightBasedOnChildren(listMbanking)
                     }
                 }else{
                     println("MBANKING KOSONG")
@@ -342,6 +401,9 @@ class TopupGuidanceActivity : AppCompatActivity() {
                     }else{
                         println("IBANKING TIDAK KOSONG")
                         cardOIBanking.setVisibility(View.VISIBLE)
+                        listIbanking.setVisibility(View.VISIBLE)
+                        listIbanking.adapter = TopupSubPaymentAdapter(this,R.layout.item_sub_payment_method,result!!.guidence!!.pegadaians!!.ibanking!!)
+                        justifyListViewHeightBasedOnChildren(listIbanking)
                     }
                 }else{
                     println("IBANKING KOSONG")
