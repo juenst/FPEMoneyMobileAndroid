@@ -104,11 +104,11 @@
                 android:layout_height="match_parent" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Pembayaran kode billing tagihan terakhir adalah jam 23.30 WIB setiap harinya. Pembayaran akan dibuka kembali pada jam 02.00 WIB"
-                android:textSize="8sp" />
+                android:textSize="10sp" />
 
 
         </LinearLayout>

@@ -20,7 +20,7 @@ import lib.finpay.sdk.R
 import lib.finpay.sdk.corekit.FinpaySDK
 import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.helper.FinpayTheme
-import lib.finpay.sdk.uikit.utilities.ButtonUtils
+import  lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
 
 class PnbpActivity : AppCompatActivity() {

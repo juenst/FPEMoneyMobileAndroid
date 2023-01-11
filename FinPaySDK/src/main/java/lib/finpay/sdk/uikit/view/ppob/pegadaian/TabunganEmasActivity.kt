@@ -37,6 +37,7 @@ class TabunganEmasActivity : AppCompatActivity() {
         appbarTitle = findViewById(R.id.appbar_title)
         val backButton = findViewById<ImageView>(R.id.btnBack)
         val txtNoKredit = findViewById<EditText>(R.id.noKreditField)
+        val txtNominal = findViewById<EditText>(R.id.txtNominal)
         val btnContact = findViewById<ImageView>(R.id.btnContact)
         val btnLanjut = findViewById<Button>(R.id.btnLanjut)
         val progressDialog = ProgressDialog(this)

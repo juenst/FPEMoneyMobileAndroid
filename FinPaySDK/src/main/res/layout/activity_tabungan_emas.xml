@@ -71,6 +71,55 @@
                 android:layout_width="24dp"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="20dp"/>
+        <TextView
+            android:text="Jumlah Pembelian"
+            android:textColor="#121926"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            app:cardBackgroundColor="@color/white"
+            android:outlineSpotShadowColor="@color/transparent"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="4dp"
+            android:elevation="0dp"
+            android:layout_height="48dp">
+
+            <lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText
+                android:id="@+id/txtNominal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Rp0"
+                android:padding="8dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:textColor="#121926"
+                android:maxLines="1"
+                android:lines="1"
+                android:singleLine="true"
+                android:background="@drawable/shape_edittext_outline"
+                android:textColorHint="#EEE">
+
+                <requestFocus />
+            </lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText>
+
+        </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Minimal pembelian Rp. 50.000"
+            android:textColor="#e60000" />
     </LinearLayout>
     <Space
         android:layout_width="0dp"
@@ -78,8 +127,8 @@
     <LinearLayout
         android:layout_weight="1"
         android:background="#FFFFFF"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="16dp"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="20dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

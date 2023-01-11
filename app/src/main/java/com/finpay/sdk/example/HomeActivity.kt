@@ -21,6 +21,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var btnWallet: LinearLayout
     private lateinit var btnQris: LinearLayout
 
+    private lateinit var sectionUpgradeAccount: LinearLayout
+
     private lateinit var btnPulsaData: LinearLayout
     private lateinit var btnPascaBayar: LinearLayout
     private lateinit var btnAlfamart: LinearLayout
@@ -65,7 +67,9 @@ class HomeActivity : AppCompatActivity() {
         btnHistoryTransaction = findViewById(R.id.btnHistoryTransaction)
         btnWallet = findViewById(R.id.btnWallet)
         btnQris = findViewById(R.id.btnQris)
-        
+
+        sectionUpgradeAccount = findViewById(R.id.sectionUpgradeAccount)
+
         btnPulsaData = findViewById(R.id.btnPulsaData)
         btnPascaBayar = findViewById(R.id.btnPascaBayar)
         btnAlfamart = findViewById(R.id.btnAlfamart)
@@ -101,6 +105,9 @@ class HomeActivity : AppCompatActivity() {
         }
         btnQris.setOnClickListener {
             FinpaySDKUI.qrisUIBuilder("", this, credential(), theme())
+        }
+        sectionUpgradeAccount.setOnClickListener {
+            FinpaySDKUI.upgradeAccountUIBuilder("", this, credential(), theme())
         }
         btnPulsaData.setOnClickListener {
             FinpaySDKUI.pulsaDataUIBuilder("", this, credential(), theme())

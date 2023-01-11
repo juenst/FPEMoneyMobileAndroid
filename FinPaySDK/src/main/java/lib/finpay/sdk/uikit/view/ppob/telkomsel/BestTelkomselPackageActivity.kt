@@ -12,12 +12,14 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import lib.finpay.sdk.R
 import lib.finpay.sdk.uikit.helper.FinpayTheme
+import lib.finpay.sdk.uikit.utilities.DialogUtils
 
 class BestTelkomselPackageActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
     lateinit var appbarTitle: TextView
     lateinit var btnBack: ImageView
     private lateinit var btnPaymentCodePay: LinearLayout
+    private lateinit var btnPaketData: LinearLayout
 
     val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
     val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
@@ -31,6 +33,7 @@ class BestTelkomselPackageActivity : AppCompatActivity() {
         appbarTitle = findViewById(R.id.appbar_title)
         btnBack = findViewById(R.id.btnBack)
         btnPaymentCodePay = findViewById(R.id.btn_payment_code_pay)
+        btnPaketData = findViewById(R.id.btnPaketData)
 
         //theming
         appbar.setBackgroundColor(if(finpayTheme?.getAppBarBackgroundColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getAppBarBackgroundColor()!!)
@@ -48,6 +51,10 @@ class BestTelkomselPackageActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener {
             finish()
+        }
+
+        btnPaketData.setOnClickListener {
+            DialogUtils.showDialogComingSoon(this, finpayTheme)
         }
 
         btnPaymentCodePay.setOnClickListener {

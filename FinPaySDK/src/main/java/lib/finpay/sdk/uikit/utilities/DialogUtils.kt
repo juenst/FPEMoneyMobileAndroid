@@ -176,10 +176,10 @@ class DialogUtils {
 
             //theming
             btnPay!!.setCardBackgroundColor(if(theme?.getPrimaryColor() == null) Color.parseColor("#00ACBA") else theme.getPrimaryColor()!!)
-            cardWarning!!.setCardBackgroundColor(if(theme?.getSecondaryColor() == null) Color.parseColor("#00ACBA") else theme.getSecondaryColor()!!)
+//            cardWarning!!.setCardBackgroundColor(if(theme?.getSecondaryColor() == null) Color.parseColor("#00ACBA") else theme.getSecondaryColor()!!)
 
             if(currentBalance.toInt() < (tagihan.toInt() + fee.toInt())){
-                cardWarning.visibility = View.VISIBLE
+                cardWarning!!.visibility = View.VISIBLE
                 txtBtnPay!!.text = "Isi Saldo"
             }
             txtTitle!!.text = title

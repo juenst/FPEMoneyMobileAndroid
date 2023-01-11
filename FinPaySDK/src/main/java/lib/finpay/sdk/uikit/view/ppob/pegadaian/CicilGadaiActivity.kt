@@ -20,6 +20,7 @@ import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.utilities.widget.CurrencyEditText
 
 class CicilGadaiActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
@@ -37,6 +38,7 @@ class CicilGadaiActivity : AppCompatActivity() {
         appbarTitle = findViewById(R.id.appbar_title)
         val backButton = findViewById<ImageView>(R.id.btnBack)
         val txtNoKredit = findViewById<EditText>(R.id.noKreditField)
+        val txtNominal = findViewById<CurrencyEditText>(R.id.txtNominal)
         val btnContact = findViewById<ImageView>(R.id.btnContact)
         val btnLanjut = findViewById<Button>(R.id.btnLanjut)
         val progressDialog = ProgressDialog(this)

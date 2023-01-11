@@ -50,6 +50,7 @@ class PulsaDataResultActivity : AppCompatActivity() {
     var saldo: String = "0"
     var fee: String = "0"
     var subProductCode: String = ""
+    var productCode: String = ""
 
     val phoneNumber: String? by lazy { intent.getStringExtra("phoneNumber") }
     val result: SubProduct? by lazy { if(intent.getSerializableExtra("result") == null) null else intent.getSerializableExtra("result") as SubProduct }
@@ -108,16 +109,22 @@ class PulsaDataResultActivity : AppCompatActivity() {
         val provider: String = Utils.getProviderMobile(phoneNumber!!)
         if(provider == "TELKOMSEL") {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_telkomsel))
+            productCode = ProductCode.TELKOMSEL_REGULER
         } else if(provider == "XL") {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_xl))
+            productCode = ProductCode.XL_REGULER
         } else if(provider == "AXIS") {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_axis))
+            productCode = ProductCode.XL_REGULER
         } else if(provider == "INDOSAT") {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_indosat))
+            productCode = ProductCode.INDOSAT_REGULER
         } else if(provider == "THREE") {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.ic_logo_three))
+            productCode = ProductCode.THREE_REGULER
         } else {
             logo.setImageDrawable(this@PulsaDataResultActivity.resources.getDrawable(R.drawable.transparent))
+            productCode = ""
         }
 
         listDenom.adapter = PulsaDataAdapter(this, R.layout.item_pulsa_data, result?.dataSubProduct!!)
@@ -169,14 +176,40 @@ class PulsaDataResultActivity : AppCompatActivity() {
 //                        subProductCode,
 //                        "",
 //                        {
-//                            progressDialog.dismiss()
-//                            println("success")
+//                            var reffFlag: String = it.conf!!
+//                            FinpaySDK.authPin(
+//                                transNumber!!,
+//                                this@PulsaDataResultActivity,
+//                                price, subProductCode,{
+//                                    progressDialog.dismiss()
+//                                    val intent = Intent(this@PulsaDataResultActivity, PaymentActivity::class.java)
+//                                    intent.putExtra("paymentType", PaymentType.paymentPPOB)
+//                                    intent.putExtra("amount", (price.toInt() + fee.toInt()).toString())
+//                                    intent.putExtra("denom", denom)
+//                                    intent.putExtra("reffFlag", reffFlag)
+//                                    intent.putExtra("billingId", phoneNumber)
+//                                    intent.putExtra("productCode", subProductCode)
+//                                    intent.putExtra("phoneNumber", phoneNumber)
+//                                    intent.putExtra("price", price)
+//                                    intent.putExtra("fee", fee)
+//                                    intent.putExtra("pinResult", it)
+//                                    intent.putExtra("result", result)
+//                                    intent.putExtra("transactionType", "Pembelian Pulsa/Data")
+//                                    intent.putExtra("transNumber", transNumber!!)
+//                                    intent.putExtra("theme", finpayTheme)
+//                                    startActivity(intent)
+//                                }, {
+//                                    progressDialog.dismiss()
+//                                    DialogUtils.showDialogError(this@PulsaDataResultActivity, "", it, finpayTheme)
+//                                }
+//                            )
 //                        },
 //                        {
 //                            progressDialog.dismiss()
-//                            println("failed")
+//                            DialogUtils.showDialogError(this, "", it, finpayTheme)
 //                        },
 //                    )
+                    var reffFlag: String = ""
                     FinpaySDK.authPin(
                         transNumber!!,
                         this@PulsaDataResultActivity,
@@ -186,9 +219,9 @@ class PulsaDataResultActivity : AppCompatActivity() {
                             intent.putExtra("paymentType", PaymentType.paymentPPOB)
                             intent.putExtra("amount", (price.toInt() + fee.toInt()).toString())
                             intent.putExtra("denom", denom)
-                            intent.putExtra("reffFlag", "")
+                            intent.putExtra("reffFlag", reffFlag)
                             intent.putExtra("billingId", phoneNumber)
-                            intent.putExtra("productCode", subProductCode)
+                            intent.putExtra("productCode", productCode)
                             intent.putExtra("phoneNumber", phoneNumber)
                             intent.putExtra("price", price)
                             intent.putExtra("fee", fee)

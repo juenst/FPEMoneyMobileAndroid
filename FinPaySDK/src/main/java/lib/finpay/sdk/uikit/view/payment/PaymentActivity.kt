@@ -119,9 +119,9 @@ class PaymentActivity : AppCompatActivity() {
                             transNumber!!,
                             this@PaymentActivity,
                             "mc",
+                            amount!!,
                             "",
-                            "",
-                            "",
+                            reffFlag!!,
                             pinToken, {
                                 progressDialog.dismiss()
                                 val intent = Intent(

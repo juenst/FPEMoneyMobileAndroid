@@ -36,7 +36,7 @@ class TopupRepository() {
             onFailed: (String) -> Unit
         )  {
                 //create signature
-var transactionNumber = TransactionHelper.getTransNumber(transNumber)
+                var transactionNumber = TransactionHelper.getTransNumber(transNumber)
                 val mapJson = mapOf(
                     "requestType" to "apiTopup",
                     "reqDtime" to DateHelper.getCurrentDate(),
