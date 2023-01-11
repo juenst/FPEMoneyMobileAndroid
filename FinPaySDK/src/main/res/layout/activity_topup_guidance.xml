@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingLeft="20dp"
+        android:translationZ="5dp"
+        android:background="#00ACBA">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_left" />
+
+            <TextView
+                android:id="@+id/appbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Indihome"
+                android:textColor="@color/white"
+                android:textFontWeight="600"
+                android:textSize="18sp" />
+
+        </FrameLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+<!--    -->
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="#FFFF"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="12dp"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                android:layout_margin="16dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Berikut Kode Pembayaran Anda"
+                        android:gravity="center"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"/>
+
+                    <TextView
+                        android:id="@+id/payment_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kode Pembayaran"
+                        android:gravity="center"
+                        android:textColor="#333333"
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/expired_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Expired Time"
+                        android:gravity="center"
+                        android:textColor="#333333"
+                        android:textSize="12sp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Klik nomor untuk menyalin"
+                        android:gravity="center"
+                        android:textColor="#333333"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="(Silahkan melakukan pembayaran dengan nomor diatas)"
+                        android:gravity="center"
+                        android:textColor="#333333"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                app:cardBackgroundColor="#EEE" />
+
+            <LinearLayout
+                android:id="@+id/emptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:background="#FFFFFF"
+                android:layout_marginBottom="16dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cara Pembayaran Melalui"
+                    android:textColor="#333333"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="18sp" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/outlet_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:elevation="10dp"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_marginHorizontal="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="16dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/outlet_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="OUTLET"
+                                android:textColor="#333333"
+                                android:layout_weight="1"
+                                android:textSize="12sp" />
+
+                            <Space
+                                android:layout_width="12dp"
+                                android:layout_height="1dp"/>
+
+                            <ImageView
+                                android:id="@+id/icDropdownOutlet"
+                                android:layout_width="15dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_chevron_down"
+                                app:tint="#00ACBA" />
+
+
+                        </LinearLayout>
+
+                        <Space
+                            android:id="@+id/space_outlet"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <ListView
+                            android:id="@+id/list_sub_outlet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@android:color/transparent"
+                            android:scrollbars="none"
+                           />
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/atm_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:elevation="10dp"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_marginHorizontal="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="16dp"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="ATM"
+                                android:textColor="#333333"
+                                android:layout_weight="1"
+                                android:textSize="12sp" />
+
+                            <Space
+                                android:layout_width="12dp"
+                                android:layout_height="1dp"/>
+
+                            <ImageView
+                                android:id="@+id/icDropdownAtm"
+                                android:layout_width="15dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_chevron_down"
+                                app:tint="#00ACBA" />
+
+
+                        </LinearLayout>
+
+                        <Space
+                            android:id="@+id/space_list_atm"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <ListView
+                            android:id="@+id/list_sub_atm"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:divider="@android:color/transparent"
+                            android:visibility="gone"
+                            android:dividerHeight="0dp"/>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/mbanking_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:elevation="10dp"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_marginHorizontal="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="16dp"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="M-Banking"
+                                android:textColor="#333333"
+                                android:layout_weight="1"
+                                android:textSize="12sp" />
+
+                            <Space
+                                android:layout_width="12dp"
+                                android:layout_height="1dp"/>
+
+                            <ImageView
+                                android:id="@+id/icDropdownMbanking"
+                                android:layout_width="15dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_chevron_down"
+                                app:tint="#00ACBA" />
+
+
+                        </LinearLayout>
+
+                        <Space
+                            android:id="@+id/space_list_mbanking"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <ListView
+                            android:id="@+id/list_sub_mbanking"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:divider="@android:color/transparent"
+                            android:visibility="gone"
+                            android:dividerHeight="0dp"/>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ibanking_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:elevation="10dp"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_marginHorizontal="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="16dp"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="i-Banking"
+                                android:textColor="#333333"
+                                android:layout_weight="1"
+                                android:textSize="12sp" />
+
+                            <Space
+                                android:layout_width="12dp"
+                                android:layout_height="1dp"/>
+
+                            <ImageView
+                                android:id="@+id/icDropdownIbanking"
+                                android:layout_width="15dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_chevron_down"
+                                app:tint="#00ACBA" />
+
+
+                        </LinearLayout>
+
+                        <Space
+                            android:id="@+id/space_list_ibanking"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"/>
+
+                        <ListView
+                            android:id="@+id/list_sub_ibanking"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:divider="@android:color/transparent"
+                            android:visibility="gone"
+                            android:dividerHeight="0dp"/>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnNext"
+        android:enabled="false"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Lanjut"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+</LinearLayout>
