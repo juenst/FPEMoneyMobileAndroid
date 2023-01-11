@@ -14,6 +14,7 @@ import com.finpay.sdk.R
 import lib.finpay.sdk.corekit.model.Credential
 import lib.finpay.sdk.uikit.FinpaySDKUI
 import lib.finpay.sdk.uikit.helper.FinpayTheme
+import lib.finpay.sdk.uikit.view.topup.TopupActivity
 
 
 class HomeActivity : AppCompatActivity() {
@@ -96,7 +97,10 @@ class HomeActivity : AppCompatActivity() {
         btnPajak = findViewById(R.id.btnPajak)
 
         btnLogout.setOnClickListener {
-
+            FinpaySDKUI.logout(this, {
+                val intent = Intent(this, LoginActivity::class.java)
+                this.startActivity(intent)
+            })
         }
 
         btnTopUp.setOnClickListener {

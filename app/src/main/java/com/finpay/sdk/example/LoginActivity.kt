@@ -49,9 +49,9 @@ class LoginActivity : AppCompatActivity() {
         ButtonUtils.checkButtonState(btnMasuk)
 
         btnMasuk.setOnClickListener{
-            if(_username == "" || _username == null || _password == "" || _password == null || _secretKey == "" || _secretKey == null) {
-                DialogUtils.showDialogError(this, "", "Harap masukkan credential Anda pada tombol pengaturan diatas", theme())
-            } else {
+//            if(_username == "" || _username == null || _password == "" || _password == null || _secretKey == "" || _secretKey == null) {
+//                DialogUtils.showDialogError(this, "", "Harap masukkan credential Anda pada tombol pengaturan diatas", theme())
+//            } else {
                 FinpaySDKUI.logout(this, {
                     FinpaySDKUI.connectAccount("",this, credential(), theme(), {
                         val intent = Intent(this, HomeActivity::class.java)
@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                         this.finish()
                     })
                 })
-            }
+//            }
         }
 
         phoneNumber.doOnTextChanged { text, start, before, count ->

@@ -50,7 +50,7 @@ class TokenRepository() {
                 requestBody["transNumber"] = transactionNumber
 
                 val request = BaseServices.getRetrofitInstanceCoBrand().create(Api::class.java)
-                request.getToken(requestBody).enqueue(object : Callback<Token> {
+                    request.getToken(requestBody).enqueue(object : Callback<Token> {
                     override fun onFailure(call: Call<Token>, t: Throwable) {
                         onFailed(t.message.toString())
                     }
@@ -65,6 +65,8 @@ class TokenRepository() {
                                     response.body()!!.tokenID.toString()
                                 )
                                 onSuccess(response.body()!!)
+                            } else if (response.body()?.statusCode.toString() == "A1001") {
+                                onFailed("User Not Found")
                             } else if (response.body()?.statusCode == "A1004") {
                                 onFailed(response.body()?.statusDesc.toString())
                             } else if (response.body()?.statusCode == "A1003") {
@@ -73,9 +75,10 @@ class TokenRepository() {
                                 onFailed(response.body()?.statusDesc.toString())
                             }
 //                        } else if(response.code() == 401) {
-//                            println("test => "+response.code().toString())
-//                            println("test => "+ response.message())
-//                            if (response.body()?.statusCode == "A1004") {
+//                            if (response.body()?.statusCode.toString() == "A1001") {
+//                                println("masuk sini")
+//                                onFailed("User Not Found")
+//                            } else if (response.body()?.statusCode == "A1004") {
 //                                onFailed(response.body()?.statusDesc.toString())
 //                            } else if (response.body()?.statusCode == "A1003") {
 //                                onFailed(response.body()?.statusDesc.toString())

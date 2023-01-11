@@ -3,7 +3,10 @@ package lib.finpay.sdk.uikit.view.transfer
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -64,6 +67,15 @@ class TransferDetailActivity : AppCompatActivity() {
         appbarTitle.setTextColor(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnBack.setBackgroundColor(if(btnBack.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         progressDialog = ProgressDialog(this@TransferDetailActivity)
         _tagihan = "0"
