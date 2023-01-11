@@ -91,37 +91,44 @@
         android:id="@+id/emptyState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:layout_weight="1">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/img_history_empty" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Pagi makan ketan, malam dikejar setan"
-            android:textColor="#121926"
-            android:textFontWeight="600"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_ppob_transaction"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Belum bayar Finpay? yuk masukin nomor pelanggan"
-            android:textColor="#4B5565"
-            android:textFontWeight="400"
-            android:textSize="14sp" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="yuk mulai bertransaksi"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nikmati kemudahan transaksi bersama kami"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 

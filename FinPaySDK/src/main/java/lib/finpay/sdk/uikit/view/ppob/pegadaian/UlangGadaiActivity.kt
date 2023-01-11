@@ -3,9 +3,12 @@ package lib.finpay.sdk.uikit.view.ppob.pegadaian
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -21,6 +24,7 @@ import lib.finpay.sdk.uikit.utilities.DialogUtils
 class UlangGadaiActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
     lateinit var appbarTitle: TextView
+    lateinit var txtjumlahField: EditText
 
     val finpayTheme: FinpayTheme? by lazy { if(intent.getSerializableExtra("theme") == null) null else intent.getSerializableExtra("theme") as FinpayTheme }
     val transNumber: String? by lazy { if(intent.getStringExtra("transNumber") == null) "" else intent.getStringExtra("transNumber")}
@@ -34,6 +38,7 @@ class UlangGadaiActivity : AppCompatActivity() {
         appbarTitle = findViewById(R.id.appbar_title)
         val backButton = findViewById<ImageView>(R.id.btnBack)
         val txtNoKredit = findViewById<EditText>(R.id.noKreditField)
+        txtjumlahField = findViewById(R.id.jumlahField)
         val btnContact = findViewById<ImageView>(R.id.btnContact)
         val btnLanjut = findViewById<Button>(R.id.btnLanjut)
         val progressDialog = ProgressDialog(this)
@@ -44,6 +49,15 @@ class UlangGadaiActivity : AppCompatActivity() {
         backButton.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnLanjut.setBackgroundColor(if(btnLanjut.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         backButton.setOnClickListener{
             onBackPressed()
@@ -52,7 +66,28 @@ class UlangGadaiActivity : AppCompatActivity() {
         ButtonUtils.checkButtonState(btnLanjut, finpayTheme)
 
         txtNoKredit.doOnTextChanged { text, start, before, count ->
-            btnLanjut.isEnabled = (!text.isNullOrBlank() && text.length>=7)
+            var num:Int = 0
+            if (txtjumlahField.text.toString().isNotEmpty()){
+                num = Integer.parseInt(txtjumlahField.text.toString())
+            }else{
+                num = 0
+            }
+            println("num is $num")
+            println("num is : ${!txtjumlahField.text.isNullOrBlank() && num >= 50000}")
+            btnLanjut.isEnabled = ((!text.isNullOrBlank() && text.length>=7) && (!txtjumlahField.text.isNullOrBlank() && num >= 50000))
+            ButtonUtils.checkButtonState(btnLanjut, finpayTheme)
+        }
+
+        txtjumlahField.doOnTextChanged { text, start, before, count ->
+            var num:Int = 0
+            if (text.toString().isNotEmpty()){
+               num = Integer.parseInt(text.toString())
+            }else{
+                num = 0
+            }
+            println("txtNoKredit is ${txtNoKredit.text}")
+            println("txtNoKredit is ${txtNoKredit.text.isNullOrBlank() && txtNoKredit.text.length>=7}")
+            btnLanjut.isEnabled = ((!text.isNullOrBlank() && num >= 50000) && (!txtNoKredit.text.isNullOrBlank() && txtNoKredit.text.length>=7))
             ButtonUtils.checkButtonState(btnLanjut, finpayTheme)
         }
 
@@ -73,6 +108,14 @@ class UlangGadaiActivity : AppCompatActivity() {
                 txtNoKredit.text.toString(),
                 ProductCode.ULANG_GADAI,
                 "", {
+                    progressDialog.dismiss()
+                    val intent = Intent(this, PegadaianResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("type", "ulanggadai")
+                    intent.putExtra("amountpay", txtjumlahField.text.toString())
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

@@ -18,13 +18,17 @@
         <entry key="FinPaySDK/src/main/res/layout/activity_credit_transaction.xml" value="0.4556615193684896" />
         <entry key="FinPaySDK/src/main/res/layout/activity_edit_profile.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_finpay.xml" value="0.18206521739130435" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_finpay_result.xml" value="0.1" />
         <entry key="FinPaySDK/src/main/res/layout/activity_gadai_tebus.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_history_transaction.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_indihome.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_input_pin.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_instalment.xml" value="0.18206521739130435" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_instalment_result.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_insurance.xml" value="0.18206521739130435" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_insurance_result.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_internet_tv_cable.xml" value="0.18206521739130435" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_internet_tv_cable_result.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_login.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_mains.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_menu_internet_tv_cable.xml" value="0.2375" />
@@ -41,6 +45,7 @@
         <entry key="FinPaySDK/src/main/res/layout/activity_pdam.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_pdam_search.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_pegadaian.xml" value="0.2375" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_pegadaian_result.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_pln.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_pln_result.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_pnbp.xml" value="0.2375" />
@@ -51,6 +56,7 @@
         <entry key="FinPaySDK/src/main/res/layout/activity_qris_result.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_register.xml" value="0.2375" />
         <entry key="FinPaySDK/src/main/res/layout/activity_revenue.xml" value="0.2375" />
+        <entry key="FinPaySDK/src/main/res/layout/activity_revenue_result.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_smart_finance.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_splash.xml" value="0.18206521739130435" />
         <entry key="FinPaySDK/src/main/res/layout/activity_tabungan_emas.xml" value="0.2375" />

@@ -1,8 +1,10 @@
 
-Jkotlin:S1172;"2Use "_" instead of these unused lambda parameters.(Ş®ş
-fkotlin:S11924"HDefine a constant instead of duplicating this literal "#00ACBA" 3 times.(±‰ó>8ÈöÙØ0
-;kotlin:S18741"#Deprecated code should not be used.(¡¥µ“
-;kotlin:S1874C"#Deprecated code should not be used.(ğÆÊ
+Jkotlin:S1172K"2Use "_" instead of these unused lambda parameters.(Ş®ş
+9kotlin:S1128"Remove this unused import.(±Ğ½ø8á™÷ñÙ0
+fkotlin:S1192;"HDefine a constant instead of duplicating this literal "#00ACBA" 3 times.(±‰ó>8ÈöÙØ0
+;kotlin:S18748"#Deprecated code should not be used.(¡¥µ“
+;kotlin:S1874S"#Deprecated code should not be used.(ğÆÊ
+Gkotlin:S1874X"#Deprecated code should not be used.(úºµªúÿÿÿÿ8å™÷ñÙ0
 @kotlin:S1874"#Deprecated code should not be used.(·•¥¦ûÿÿÿÿ
-@kotlin:S1874!"#Deprecated code should not be used.(ù¢íüÿÿÿÿ
-;kotlin:S18741"#Deprecated code should not be used.(¡¥µ“
+@kotlin:S1874("#Deprecated code should not be used.(ù¢íüÿÿÿÿ
+;kotlin:S18748"#Deprecated code should not be used.(¡¥µ“

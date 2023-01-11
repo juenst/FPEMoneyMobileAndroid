@@ -3,9 +3,12 @@ package lib.finpay.sdk.uikit.view.ppob.pegadaian
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -17,6 +20,7 @@ import lib.finpay.sdk.corekit.constant.ProductCode
 import lib.finpay.sdk.uikit.helper.FinpayTheme
 import lib.finpay.sdk.uikit.utilities.ButtonUtils
 import lib.finpay.sdk.uikit.utilities.DialogUtils
+import lib.finpay.sdk.uikit.view.ppob.insurance.InsuranceResultActivity
 
 class AngsuranMikroActivity : AppCompatActivity() {
     lateinit var appbar: androidx.appcompat.widget.Toolbar
@@ -43,6 +47,15 @@ class AngsuranMikroActivity : AppCompatActivity() {
         backButton.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnLanjut.setBackgroundColor(if(btnLanjut.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         backButton.setOnClickListener{
             onBackPressed()
@@ -72,6 +85,13 @@ class AngsuranMikroActivity : AppCompatActivity() {
                 txtNoKredit.text.toString(),
                 ProductCode.ANGSURAN_MIKRO,
                 "", {
+                    progressDialog.dismiss()
+                    val intent = Intent(this, PegadaianResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("type", "angsuranmikro")
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

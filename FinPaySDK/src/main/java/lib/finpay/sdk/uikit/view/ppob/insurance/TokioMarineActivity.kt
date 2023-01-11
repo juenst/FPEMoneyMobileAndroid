@@ -5,8 +5,11 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
@@ -63,6 +66,15 @@ class TokioMarineActivity : AppCompatActivity() {
         icDropdown.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
         ButtonUtils.checkButtonState(btnNext, finpayTheme)
         txtNomorPelanggan.doOnTextChanged { text, start, before, count ->
@@ -95,6 +107,14 @@ class TokioMarineActivity : AppCompatActivity() {
                 txtNomorPelanggan.text.toString(),
                 ProductCode.INSURANCE_TOKIO,
                 "", {
+                    progressDialog.dismiss()
+                    val intent = Intent(this, InsuranceResultActivity::class.java)
+                    intent.putExtra("result", it)
+                    intent.putExtra("periode" , periodeTime)
+                    intent.putExtra("type", "tokiomarine")
+                    intent.putExtra("transNumber", transNumber!!)
+                    intent.putExtra("theme", finpayTheme)
+                    startActivity(intent)
                     progressDialog.dismiss()
                 }, {
                     progressDialog.dismiss()

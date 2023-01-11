@@ -1,7 +1,10 @@
 package lib.finpay.sdk.uikit.view.ppob.telkomsel
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
@@ -43,8 +46,17 @@ class BestTelkomselPackageDetailActivity : AppCompatActivity() {
         btnBack.setColorFilter(if(finpayTheme?.getAppBarTextColor() == null)  Color.parseColor("#FFFFFF") else finpayTheme?.getAppBarTextColor()!!)
         btnContact.setColorFilter(if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!!)
         btnNext.setBackgroundColor(if(btnNext.isEnabled()) if(finpayTheme?.getPrimaryColor() == null)  Color.parseColor("#00ACBA") else finpayTheme?.getPrimaryColor()!! else Color.parseColor("#d5d5d5"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            if(finpayTheme?.getAppBarBackgroundColor() == null) {
+                window.setStatusBarColor(Color.parseColor("#333333"))
+            } else {
+                window.setStatusBarColor(finpayTheme?.getAppBarBackgroundColor()!!)
+            }
+        }
 
-        FinpaySDK.getListProduct(java.util.UUID.randomUUID().toString(), this, {
+        FinpaySDK.getListProduct(transNumber!!, this, {
             listProduct = it
         }, {
             Toast.makeText(this@BestTelkomselPackageDetailActivity, it, Toast.LENGTH_LONG)
@@ -65,7 +77,7 @@ class BestTelkomselPackageDetailActivity : AppCompatActivity() {
                     it.productDesc!!.uppercase(Locale.getDefault()).contains("menuTitle.text")
                 } as ArrayList<DetailProductModel>
             FinpaySDK.ppobInquiry(
-                java.util.UUID.randomUUID().toString(),
+                transNumber!!,
                 this,
                 billingCode.text.toString(),
                 currentProduct.first().productCode!!,

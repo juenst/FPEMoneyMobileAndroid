@@ -1,9 +1,9 @@
 
-Vkotlin:S11728"2Use "_" instead of these unused lambda parameters.(ê“±Üøÿÿÿÿ8ùÅöÀ0
-fkotlin:S11921"HDefine a constant instead of duplicating this literal "#00ACBA" 3 times.(±‰ó>8¹×ŒÚØ0
-Gkotlin:S1874."#Deprecated code should not be used.(ûõ±›ûÿÿÿÿ8ûÅöÀ0
-Bkotlin:S1874D"#Deprecated code should not be used.(ğÆÊ8üÅöÀ0
-Gkotlin:S1874I"#Deprecated code should not be used.(úºµªúÿÿÿÿ8üÅöÀ0
+Vkotlin:S1172D"2Use "_" instead of these unused lambda parameters.(ê“±Üøÿÿÿÿ8ùÅöÀ0
+fkotlin:S11924"HDefine a constant instead of duplicating this literal "#00ACBA" 3 times.(±‰ó>8¹×ŒÚØ0
+Gkotlin:S18741"#Deprecated code should not be used.(ûõ±›ûÿÿÿÿ8ûÅöÀ0
+Bkotlin:S1874P"#Deprecated code should not be used.(ğÆÊ8üÅöÀ0
+Gkotlin:S1874U"#Deprecated code should not be used.(úºµªúÿÿÿÿ8üÅöÀ0
 Gkotlin:S1874"#Deprecated code should not be used.(·•¥¦ûÿÿÿÿ8üÅöÀ0
-Bkotlin:S1874"#Deprecated code should not be used.(€Ê›×8üÅöÀ0
-Gkotlin:S1874."#Deprecated code should not be used.(ûõ±›ûÿÿÿÿ8Õú÷À0
+Bkotlin:S1874!"#Deprecated code should not be used.(€Ê›×8üÅöÀ0
+Gkotlin:S18741"#Deprecated code should not be used.(ûõ±›ûÿÿÿÿ8Õú÷À0

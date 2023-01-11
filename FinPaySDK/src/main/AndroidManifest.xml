@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,9 +15,20 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
-    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
-
     <application>
+        <activity
+            android:name=".RevenueResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PegadaianResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InsuranceResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FinpayResultActivity"
+            android:exported="false" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -117,8 +130,7 @@
         <activity
             android:name=".uikit.view.upgrade.CitizenshipActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.finpayTheme">
-        </activity>
+            android:theme="@style/AppTheme.finpayTheme" />
         <activity
             android:name=".uikit.view.ppob.internettvcable.InternetTvCableActivity"
             android:exported="false"

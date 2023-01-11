@@ -1,15 +1,16 @@
 
-Okotlin:S1172Y"2Use "_" instead of these unused lambda parameters.(ùÇş¢üÿÿÿÿ
-Nkotlin:S1481ş"0Remove this unused "currentDate" local variable.(ÕËÁ¥úÿÿÿÿ
-@kotlin:S1874B"#Deprecated code should not be used.(çß„úşÿÿÿÿ
-<kotlin:S1874µ"#Deprecated code should not be used.(£ş¼¬
-<kotlin:S1874·"#Deprecated code should not be used.(²®×
-Akotlin:S1874¹"#Deprecated code should not be used.(›¶à²ùÿÿÿÿ
-Akotlin:S1874»"#Deprecated code should not be used.(Ù‚ùÎùÿÿÿÿ
-Akotlin:S1874½"#Deprecated code should not be used.(—¿İüıÿÿÿÿ
-<kotlin:S1874¿"#Deprecated code should not be used.(©–õ
-Akotlin:S1874Ä"#Deprecated code should not be used.(úºµªúÿÿÿÿ
-Akotlin:S1874ú"#Deprecated code should not be used.(úºµªúÿÿÿÿ
+Pkotlin:S1172„"2Use "_" instead of these unused lambda parameters.(ùÇş¢üÿÿÿÿ
+9kotlin:S1128"Remove this unused import.(¹ê¦ş8¤ˆúñÙ0
+9kotlin:S1128"Remove this unused import.(Ñç€8¤ˆúñÙ0
+@kotlin:S1874K"#Deprecated code should not be used.(çß„úşÿÿÿÿ
+;kotlin:S1874n"#Deprecated code should not be used.(£ş¼¬
+;kotlin:S1874p"#Deprecated code should not be used.(²®×
+@kotlin:S1874r"#Deprecated code should not be used.(›¶à²ùÿÿÿÿ
+@kotlin:S1874t"#Deprecated code should not be used.(Ù‚ùÎùÿÿÿÿ
+@kotlin:S1874v"#Deprecated code should not be used.(—¿İüıÿÿÿÿ
+Bkotlin:S1874x"#Deprecated code should not be used.(Ì¨×ƒ8©ˆúñÙ0
+Akotlin:S1874¢"#Deprecated code should not be used.(úºµªúÿÿÿÿ
 @kotlin:S1874"#Deprecated code should not be used.(·•¥¦ûÿÿÿÿ
-@kotlin:S1874%"#Deprecated code should not be used.(ù¢íüÿÿÿÿ
-@kotlin:S1874B"#Deprecated code should not be used.(çß„úşÿÿÿÿ
+@kotlin:S1874+"#Deprecated code should not be used.(ù¢íüÿÿÿÿ
+@kotlin:S1874K"#Deprecated code should not be used.(çß„úşÿÿÿÿ
+vkotlin:S3776;"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(¶Á»¬şÿÿÿÿ8ªˆúñÙ0
